@@ -1,5 +1,5 @@
 ---
-// Auraxis 官方网站 — 单页主入口（叙事式布局）
+// Auraxis 官方网站 — 单页主入口（极简产品介绍式）
 // Hybrid 模式：首页保持预渲染为静态 HTML，API 路由动态执行
 export const prerender = true;
 
@@ -8,10 +8,7 @@ import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import DemoSection from '../components/DemoSection.astro';
-import ArchitectureSection from '../components/ArchitectureSection.astro';
-import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
 import DownloadSection from '../components/DownloadSection.astro';
-import DeveloperDocs from '../components/DeveloperDocs.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -19,13 +16,10 @@ import Footer from '../components/Footer.astro';
   <Header />
 
   <main class="relative z-10">
-    <!-- 产品介绍式结构：定位 → 核心能力 → 实况 → 内部 → 能力清单 → 扩展 → 获取 -->
+    <!-- 只展示重点：定位 → 核心能力 → 实况演示 → 下载 -->
     <HeroSection />
     <SolutionSection />
     <DemoSection />
-    <ArchitectureSection />
-    <ToolsMatrixSection />
-    <DeveloperDocs />
     <DownloadSection />
   </main>
 

@@ -1,58 +1,25 @@
 ---
-import { RefreshCw, Wrench, Workflow, Braces, ShieldCheck, Lock, Puzzle, Database, Cpu, Blocks } from 'lucide-react';
+import { RefreshCw, Wrench, Workflow, Braces, ShieldCheck, Database } from 'lucide-react';
 
-const PILLARS = [
+const CORE = [
   { icon: RefreshCw, titleKey: 'feature1_title', descKey: 'feature1_desc' },
   { icon: Wrench, titleKey: 'pillar2_title', descKey: 'pillar2_desc' },
   { icon: Workflow, titleKey: 'feature2_title', descKey: 'feature2_desc' },
   { icon: Braces, titleKey: 'feature3_title', descKey: 'feature3_desc' },
+  { icon: ShieldCheck, titleKey: 'core5_title', descKey: 'core5_desc' },
+  { icon: Database, titleKey: 'core6_title', descKey: 'core6_desc' },
 ];
-
-const ABILITIES = [
-  { icon: ShieldCheck, titleKey: 'feature4_title', descKey: 'feature4_desc' },
-  { icon: Lock, titleKey: 'feature5_title', descKey: 'feature5_desc' },
-  { icon: Puzzle, titleKey: 'feature6_title', descKey: 'feature6_desc' },
-  { icon: Database, titleKey: 'feature7_title', descKey: 'feature7_desc' },
-  { icon: Cpu, titleKey: 'feature8_title', descKey: 'feature8_desc' },
-  { icon: Blocks, titleKey: 'feature9_title', descKey: 'feature9_desc' },
-];
-
-const num = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
-<section id="solution" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+<section id="features" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Solution</div>
-      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="solution_title">一个引擎，从聊天到智能体</h2>
-      <p class="text-brand-muted mt-3" data-i18n="solution_subtitle">Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，再以工具、调度与沙箱支撑它在桌面上真实干活。</p>
-    </div>
-
-    <!-- 四大支柱 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      {PILLARS.map(({ icon: Icon, titleKey, descKey }, i) => (
-        <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-7 hover:border-brand-accent/40 transition-colors">
-          <div class="flex items-center gap-4 mb-4">
-            <div class="w-11 h-11 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent flex-shrink-0">
-              <Icon className="w-[22px] h-[22px]" aria-hidden="true" />
-            </div>
-            <span class="text-sm font-mono text-brand-faint">{num(i)}</span>
-          </div>
-          <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
-          <p class="text-sm text-brand-muted mt-2 leading-relaxed" data-i18n={descKey}></p>
-        </div>
-      ))}
-    </div>
-
-    <!-- 更多能力 -->
-    <div class="flex items-center gap-4 my-8">
-      <div class="h-px flex-1 bg-brand-hairline dark:bg-brand-border/60" aria-hidden="true"></div>
-      <span class="text-xs font-mono text-brand-faint uppercase tracking-[0.2em]" data-i18n="solution_more_label">更多能力</span>
-      <div class="h-px flex-1 bg-brand-hairline dark:bg-brand-border/60" aria-hidden="true"></div>
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="solution_title">核心能力</h2>
+      <p class="text-brand-muted mt-3" data-i18n="solution_subtitle">从理解需求到验证交付，一条可审计的执行链路。</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {ABILITIES.map(({ icon: Icon, titleKey, descKey }) => (
+      {CORE.map(({ icon: Icon, titleKey, descKey }) => (
         <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
           <div class="w-9 h-9 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
             <Icon className="w-4 h-4" aria-hidden="true" />

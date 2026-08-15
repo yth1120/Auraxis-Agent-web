@@ -1,8 +1,21 @@
 ---
 import { ArrowRight, BookOpen } from 'lucide-react';
+
+const TECH_STACK = [
+  'Electron 43',
+  'React 18',
+  'TypeScript 5.5',
+  'Vite 7',
+  'Zustand 4',
+  'SQLite + FTS5',
+  'DeepSeek',
+  'MCP',
+  'Vitest + Playwright',
+  'electron-builder',
+];
 ---
 
-<section id="top" class="relative pt-20 pb-20">
+<section id="top" class="relative pt-20 pb-0">
   <div class="max-w-4xl mx-auto px-6 text-center space-y-7 mb-16">
     <div class="inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03] mx-auto">
       <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
@@ -47,6 +60,15 @@ import { ArrowRight, BookOpen } from 'lucide-react';
         <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_sdk">2</div>
         <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_sdk_sub">TypeScript &amp; Python SDK</div>
       </div>
+    </div>
+  </div>
+
+  <!-- 技术栈徽章条 -->
+  <div class="border-y border-brand-hairline dark:border-brand-border/60">
+    <div class="max-w-6xl mx-auto px-6 py-3.5 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+      {TECH_STACK.map((item) => (
+        <span class="text-[11px] font-mono text-brand-faint tracking-wide">{item}</span>
+      ))}
     </div>
   </div>
 </section>

@@ -150,10 +150,6 @@ export interface Translations {
   pillar2_title: string;
   pillar2_desc: string;
   solution_more_label: string;
-  core5_title: string;
-  core5_desc: string;
-  core6_title: string;
-  core6_desc: string;
 
   // Demo (叙事区)
   demo_title: string;
@@ -271,7 +267,7 @@ const zh: Translations = {
   hero_description:
     'Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 在桌面上可审计地动手干活。',
   hero_cta_download: '免费下载',
-  hero_cta_docs: '查看实况演示',
+  hero_cta_docs: '查看文档',
   hero_stat_tools: '63',
   hero_stat_tools_sub: '内置 AI 工具',
   hero_stat_perms: '3',
@@ -411,20 +407,17 @@ const zh: Translations = {
   problem3_desc:
     '多个任务并行时互相踩踏工作区，临时文件、未完成改动散落一地，主分支随时可能被弄脏。',
 
-  solution_title: '核心能力',
-  solution_subtitle: '从理解需求到验证交付，一条可审计的执行链路。',
+  solution_title: '一个引擎，从聊天到智能体',
+  solution_subtitle:
+    'Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，再以工具、调度与沙箱支撑它在桌面上真实干活。',
   pillar2_title: '63 个内置工具',
   pillar2_desc:
     '从文件读写、终端与 Web 搜索，到后台调度、会话检索与子 Agent 编排，全部 63 个工具经同一条权限管线执行，11 个危险工具默认弹窗确认。',
   solution_more_label: '更多能力',
-  core5_title: '权限与原生沙箱',
-  core5_desc: 'ask / plan / afe 三模式权限门，Windows / Linux / macOS 四后端沙箱 + Git Worktree 隔离，危险操作默认弹窗确认。',
-  core6_title: '记忆与双 SDK',
-  core6_desc: 'LLM 驱动的项目记忆（SQLite + FTS5 全文搜索），TypeScript 与 Python 双 SDK 与 headless CLI 自动化接入。',
 
-  demo_title: '实况演示',
+  demo_title: '看它如何跑完一个真实任务',
   demo_subtitle:
-    '从用户输入到 <FINAL_ANSWER> 的完整 ReAct 循环：统一引擎驱动，权限看门狗把关。点击播放，遇到权限请求时会暂停等你批准。',
+    '从用户输入到 <FINAL_ANSWER> 的完整 ReAct 循环：统一引擎驱动，权限看门狗把关，Code Mode 编排工具。',
   flow1_title: '理解任务',
   flow1_desc: '解析需求、读取项目上下文，注入相关记忆与项目指令。',
   flow2_title: '生成计划',
@@ -535,7 +528,7 @@ const en: Translations = {
   hero_description:
     'Auraxis is a desktop Agentic coding assistant built on Electron. One unified ReAct step engine drives chat and agents alike — with 63 built-in tools, multi-agent scheduling, Code Mode orchestration and native sandboxing, it makes AI act on your desktop — auditably.',
   hero_cta_download: 'Download',
-  hero_cta_docs: 'Watch Demo',
+  hero_cta_docs: 'View Docs',
   hero_stat_tools: '63',
   hero_stat_tools_sub: 'Built-in AI tools',
   hero_stat_perms: '3',
@@ -674,20 +667,17 @@ const en: Translations = {
   problem3_desc:
     'Parallel tasks trample each other\u2019s working directory — temp files and half-finished changes scattered everywhere, main branch at risk.',
 
-  solution_title: 'Core Features',
-  solution_subtitle: 'From understanding a request to verifying delivery — one auditable execution chain.',
+  solution_title: 'One engine, from chat to agents',
+  solution_subtitle:
+    'Auraxis converges understand → plan → execute → verify into one auditable step engine, then backs it with tools, scheduling and sandboxing so it really works on your desktop.',
   pillar2_title: '63 Built-in Tools',
   pillar2_desc:
     'From file I/O, terminal and web search, to background scheduling, session retrieval and sub-agent orchestration — all 63 tools run through the same permission pipeline; 11 dangerous ones ask for confirmation by default.',
   solution_more_label: 'More capabilities',
-  core5_title: 'Permissions & Native Sandbox',
-  core5_desc: 'ask / plan / afe permission modes, four sandbox backends (Windows / Linux / macOS) plus Git Worktree isolation — dangerous operations ask by default.',
-  core6_title: 'Memory & Dual SDKs',
-  core6_desc: 'LLM-driven project memory (SQLite + FTS5 full-text search), plus TypeScript and Python SDKs with a headless CLI for automation.',
 
-  demo_title: 'Live Demo',
+  demo_title: 'Watch it run a real task end-to-end',
   demo_subtitle:
-    'The complete ReAct loop from user input to <FINAL_ANSWER> — one unified engine, permission watchdog at the gate. Hit play; it pauses at permission requests for your approval.',
+    'The complete ReAct loop from user input to <FINAL_ANSWER>: one unified engine, a permission watchdog at the gate, Code Mode orchestrating tools.',
   flow1_title: 'Understand',
   flow1_desc: 'Parse the request, read project context, inject relevant memory and project instructions.',
   flow2_title: 'Plan',

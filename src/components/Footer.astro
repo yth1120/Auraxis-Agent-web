@@ -1,19 +1,14 @@
 ---
-import { Github, FileText } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 
-const DOC_LINKS = [
-  { href: `${REPO_URL}/blob/main/docs/README.md`, key: 'footer_contrib_1', label: '架构文档' },
-  { href: `${REPO_URL}/blob/main/AGENTS.md`, key: 'footer_contrib_2', label: '工程规范' },
-  { href: `${REPO_URL}/blob/main/packages/auraxis-sdk/README.md`, key: 'footer_contrib_3', label: 'TypeScript SDK' },
-  { href: `${REPO_URL}/blob/main/python/auraxis_sdk/README.md`, key: 'footer_contrib_4', label: 'Python SDK' },
-];
-
 const FOOTER_LINKS = [
-  { href: '#features', key: 'nav_features', label: '核心能力' },
-  { href: '#demo', key: 'nav_demo', label: '实况演示' },
+  { href: '#features', key: 'nav_features', label: '技术特性' },
+  { href: '#react-demo', key: 'nav_demo', label: '智能体演练' },
+  { href: '#architecture', key: 'nav_architecture', label: '系统架构' },
+  { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
   { href: '#download', key: 'nav_download', label: '免费下载' },
 ];
 ---
@@ -36,14 +31,6 @@ const FOOTER_LINKS = [
         <Github className="w-3.5 h-3.5" aria-hidden="true" />GitHub
       </a>
     </nav>
-
-    <!-- 文档链接一行 -->
-    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-brand-faint">
-      <span class="inline-flex items-center gap-1.5"><FileText className="w-3 h-3 text-brand-accent" aria-hidden="true" />Docs:</span>
-      {DOC_LINKS.map(({ href, key, label }) => (
-        <a href={href} target="_blank" rel="noopener noreferrer" data-i18n={key} class="hover:text-brand-muted transition-colors">{label}</a>
-      ))}
-    </div>
 
     <div class="w-full pt-6 mt-2 border-t border-brand-hairline dark:border-brand-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-faint">
       <p data-i18n="footer_copyright">&copy; 2026 Auraxis Core Contributors. 基于 MIT License 开源.</p>

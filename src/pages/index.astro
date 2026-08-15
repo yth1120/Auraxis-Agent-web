@@ -6,11 +6,15 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
+import ScreenshotSection from '../components/ScreenshotSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import DemoSection from '../components/DemoSection.astro';
 import ArchitectureSection from '../components/ArchitectureSection.astro';
 import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
+import SafetySection from '../components/SafetySection.astro';
+import EcosystemSection from '../components/EcosystemSection.astro';
 import DownloadSection from '../components/DownloadSection.astro';
+import FaqSection from '../components/FaqSection.astro';
 import DeveloperDocs from '../components/DeveloperDocs.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -19,14 +23,18 @@ import Footer from '../components/Footer.astro';
   <Header />
 
   <main class="relative z-10">
-    <!-- 产品介绍式结构：定位 → 核心能力 → 实况 → 内部 → 能力清单 → 扩展 → 获取 -->
+    <!-- 结构：定位 → 界面截图 → 功能 → 演示 → 工具 → 安全 → 架构 → 集成 → 开发 → 获取 → FAQ -->
     <HeroSection />
+    <ScreenshotSection />
     <SolutionSection />
     <DemoSection />
-    <ArchitectureSection />
     <ToolsMatrixSection />
+    <SafetySection />
+    <ArchitectureSection />
+    <EcosystemSection />
     <DeveloperDocs />
     <DownloadSection />
+    <FaqSection />
   </main>
 
   <Footer />

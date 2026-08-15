@@ -4,566 +4,763 @@
     "description": "执行代码片段或 TypeScript 工具编排程序（隔离临时目录）",
     "category": "execution",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["language", "code", "description", "timeout_ms"]
+    "params": [
+      "language",
+      "code",
+      "description",
+      "timeout_ms"
+    ],
+    "descriptionEn": "Run model-written code. language=javascript/python/shell executes a snippet in an isolated temporary directory with a hard timeout and output cap. language=typescript runs a TypeScript program whose body can call every available tool as `await tools.ToolName(args)`; sub-calls re-enter the full permission/sandbox pipeline, overlap up to 8 concurrent safe calls, and only what you print or return is sent back."
   },
   {
     "name": "RunWorkflow",
     "description": "运行脚本化多智能体工作流（预置或内联脚本）",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["name", "projectRoot", "script"]
+    "params": [
+      "name",
+      "projectRoot",
+      "script"
+    ],
+    "descriptionEn": "Run a scripted multi-agent workflow. Two modes: (1) pass name to run a predefined workflow from .auraxis/workflows; (2) pass script to run an inline orchestration script — plain JS with top-level await, ending with `return <json>`. The script gets ctx.projectRoot, ctx.log, ctx.sleep, and ctx.agents.run/start/list/send/interrupt to fan work out across sub-agents. Returns the script result plus a transcript."
   },
   {
     "name": "ListSkills",
     "description": "列出本地技能目录中可用的技能",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List skills available in the local skills directory. Each skill packages a repeatable workflow (instructions + resources). When a task matches a skill description, use ReadSkill to load its instructions."
   },
   {
     "name": "ReadSkill",
     "description": "读取指定技能的完整说明与资源",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["name"]
+    "params": [
+      "name"
+    ],
+    "descriptionEn": "Read the full instructions and resources of a skill by name (from ListSkills). Follow the skill workflow exactly."
   },
   {
     "name": "Bash",
     "description": "在项目目录执行 Shell 命令（默认超时 120s）",
     "category": "execution",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["command", "workdir", "timeout", "description", "run_in_background", "sandbox_permissions", "justification"]
+    "params": [
+      "command",
+      "workdir",
+      "timeout",
+      "description",
+      "run_in_background",
+      "sandbox_permissions",
+      "justification"
+    ],
+    "descriptionEn": "Execute a shell command in the project directory. Returns stdout, stderr, and exit code. For long-running commands (npm install, cargo build), set a timeout value in milliseconds, or set run_in_background=true to get a task id immediately and read the output later with TaskOutput. When the command needs a wider sandbox than the current mode, set sandbox_permissions (read/workspace-write/full) together with a one-sentence justification."
   },
   {
     "name": "Read",
     "description": "读取文件内容，返回版本哈希供写入校验",
     "category": "files",
     "danger": false,
-    "summary": true,
     "concurrencySafe": true,
-    "params": ["file_path", "offset", "limit"]
+    "params": [
+      "file_path",
+      "offset",
+      "limit"
+    ],
+    "descriptionEn": "Read the contents of a file. Supports text files. The result includes a \"version\" (content hash) — pass it back to Write/Edit to avoid overwriting concurrent changes."
   },
   {
     "name": "ReadImage",
     "description": "读取图片文件并供模型查看（PNG/JPG/GIF 等）",
     "category": "files",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["file_path"]
+    "params": [
+      "file_path"
+    ],
+    "descriptionEn": "Read an image file (png/jpg/jpeg/gif/webp/bmp/svg) and make it visible to the model. Returns the image content plus a durable attachment id; the bytes are also stored content-addressed so repeated reads are cheap. Use this to inspect screenshots, diagrams, or UI mockups."
   },
   {
     "name": "Write",
     "description": "创建或覆盖文件，可携带版本号防并发覆盖",
     "category": "files",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["file_path", "content", "version"]
+    "params": [
+      "file_path",
+      "content",
+      "version"
+    ],
+    "descriptionEn": "Create or overwrite a file. If you read the file first, pass its \"version\" back to avoid clobbering concurrent edits; pass version=\"new\" to refuse overwriting an existing file."
   },
   {
     "name": "Edit",
     "description": "在文件中精确替换 old_string 为 new_string",
     "category": "files",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["file_path", "old_string", "new_string", "version"]
+    "params": [
+      "file_path",
+      "old_string",
+      "new_string",
+      "version"
+    ],
+    "descriptionEn": "Replace old_string with new_string in a file. Must match exactly once. Pass the \"version\" from your last Read to reject stale edits."
   },
   {
     "name": "StrReplaceEditor",
     "description": "单一用途文本编辑器：查看/新建/替换/插入",
     "category": "files",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["command", "path", "file_text", "old_str", "new_str", "insert_line", "view_range"]
+    "params": [
+      "command",
+      "path",
+      "file_text",
+      "old_str",
+      "new_str",
+      "insert_line",
+      "view_range"
+    ],
+    "descriptionEn": "Single-purpose text editor with unified editor semantics. Commands: view (read a file), create (write a new file, fails if it exists), str_replace (replace old_str with new_str, must match exactly once), insert (append new_str after insert_line). Use this instead of mixing Read/Write/Edit when the task is a localized file change."
   },
   {
     "name": "Grep",
     "description": "用正则表达式在项目文件中搜索",
     "category": "files",
     "danger": false,
-    "summary": true,
     "concurrencySafe": true,
-    "params": ["pattern", "path", "include"]
+    "params": [
+      "pattern",
+      "path",
+      "include"
+    ],
+    "descriptionEn": "Search for a regex pattern in project files."
   },
   {
     "name": "Glob",
     "description": "按 glob 模式查找文件",
     "category": "files",
     "danger": false,
-    "summary": true,
     "concurrencySafe": true,
-    "params": ["pattern", "path"]
+    "params": [
+      "pattern",
+      "path"
+    ],
+    "descriptionEn": "Find files matching a glob pattern."
   },
   {
     "name": "WebFetch",
     "description": "抓取 URL 内容并提取文本",
     "category": "web",
     "danger": true,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["url", "prompt"]
+    "params": [
+      "url",
+      "prompt"
+    ],
+    "descriptionEn": "Fetch content from a URL and extract text."
   },
   {
     "name": "WebSearch",
     "description": "使用 DuckDuckGo 搜索网络",
     "category": "web",
     "danger": true,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["query"]
+    "params": [
+      "query"
+    ],
+    "descriptionEn": "Search the web using DuckDuckGo."
   },
   {
     "name": "TodoWrite",
     "description": "创建并管理结构化任务清单跟踪进度",
     "category": "planning",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["todos"]
+    "params": [
+      "todos"
+    ],
+    "descriptionEn": "Create and manage a structured task list for tracking progress. Use this to plan complex multi-step tasks, track what is in progress, and mark items as completed. Always update the list as you make progress — mark items complete IMMEDIATELY after finishing."
   },
   {
     "name": "Agent",
     "description": "启动子智能体自主处理复杂多步任务",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["description", "prompt", "subagent_type", "backend", "background"]
+    "params": [
+      "description",
+      "prompt",
+      "subagent_type",
+      "backend",
+      "background"
+    ],
+    "descriptionEn": "Launch a sub-agent to handle complex, multi-step tasks autonomously. Use for research (Explore), planning (Plan), or general coding tasks (general-purpose). The sub-agent runs independently and returns a single result message. Default backend \"internal\" runs the built-in sub-agent; \"fork\" spawns a one-shot child-process fork with its own session."
   },
   {
     "name": "Replan",
     "description": "计划受阻时生成新的子计划继续执行",
     "category": "planning",
     "danger": false,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["currentPlanStatus", "blockedTasks", "reason"]
+    "params": [
+      "currentPlanStatus",
+      "blockedTasks",
+      "reason"
+    ],
+    "descriptionEn": "When the current execution plan cannot proceed (tasks are blocked or the original approach is invalid), call this tool to generate a new sub-plan for the remaining work. Provide the status of completed and blocked tasks so the planner understands the current situation."
   },
   {
     "name": "CronCreate",
     "description": "按 cron 语法创建定时或一次性任务",
     "category": "background",
     "danger": true,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["name", "prompt", "cron", "recurring"]
+    "params": [
+      "name",
+      "prompt",
+      "cron",
+      "recurring"
+    ],
+    "descriptionEn": "Schedule a recurring or one-shot task. Uses cron syntax with minute/hour/day-of-month/month/day-of-week. Tasks fire when the app is running. Use for periodic checks, reminders, or automation triggers."
   },
   {
     "name": "CronDelete",
     "description": "按 ID 取消已调度的 cron 任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["jobId"]
+    "params": [
+      "jobId"
+    ],
+    "descriptionEn": "Cancel a scheduled cron job by its ID."
   },
   {
     "name": "CronList",
     "description": "列出所有活动的 cron 任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List all active cron jobs (both recurring and one-shot)."
   },
   {
     "name": "ScheduleCreate",
     "description": "创建会话级定时跟进（延时/定点/周期）",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["prompt", "after_seconds", "at", "every_seconds"]
+    "params": [
+      "prompt",
+      "after_seconds",
+      "at",
+      "every_seconds"
+    ],
+    "descriptionEn": "Create a session-local scheduled follow-up: run a prompt after a delay (after_seconds), at an absolute time (at, epoch ms), or on a fixed interval (every_seconds, bounded repeats). Delivery is session-local and only fires while the app is running; entries do not survive a restart."
   },
   {
     "name": "ScheduleDelete",
     "description": "按 ID 取消已调度的跟进任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["id"]
+    "params": [
+      "id"
+    ],
+    "descriptionEn": "Cancel a scheduled follow-up by id."
   },
   {
     "name": "ScheduleList",
     "description": "列出会话内已调度的跟进任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List scheduled follow-ups (kind, prompt, next fire time, repeat budget)."
   },
   {
     "name": "TaskOutput",
     "description": "读取后台任务或子代理的累计输出",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["taskId"]
+    "params": [
+      "taskId"
+    ],
+    "descriptionEn": "Read accumulated output from a running background task or sub-agent. Use to check progress without blocking."
   },
   {
     "name": "TaskStop",
     "description": "按 ID 停止运行中的工具或子代理",
     "category": "background",
     "danger": true,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["taskId"]
+    "params": [
+      "taskId"
+    ],
+    "descriptionEn": "Stop a running tool or sub-agent by its ID. Use to cancel long-running operations."
   },
   {
     "name": "EnterPlanMode",
     "description": "进入规划模式，设计方案供用户审批",
     "category": "planning",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["goal", "context"]
+    "params": [
+      "goal",
+      "context"
+    ],
+    "descriptionEn": "Enter planning mode — before making changes, design an implementation plan and present it for user approval. Use for non-trivial multi-file changes. The plan will be shown to the user, who can approve or reject it."
   },
   {
     "name": "ExitPlanMode",
     "description": "用户批准计划后退出规划模式开始实施",
     "category": "planning",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["planId"]
+    "params": [
+      "planId"
+    ],
+    "descriptionEn": "Exit planning mode after the user has approved the plan. Signals that implementation can begin."
   },
   {
     "name": "NotebookEdit",
     "description": "读取或修改 Jupyter 笔记本（.ipynb）单元格",
     "category": "files",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["file_path", "cell_index", "action", "source", "cell_type", "version"]
+    "params": [
+      "file_path",
+      "cell_index",
+      "action",
+      "source",
+      "cell_type",
+      "version"
+    ],
+    "descriptionEn": "Read or modify cells in a Jupyter notebook (.ipynb) file. Supports read, write, insert, and delete operations on individual cells. Pass the \"version\" from your last Read to reject stale edits."
   },
   {
     "name": "EnterWorktree",
     "description": "创建隔离的 Git worktree 沙箱重定向后续调用",
     "category": "verify",
     "danger": true,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["task_id", "projectRoot"]
+    "params": [
+      "task_id",
+      "projectRoot"
+    ],
+    "descriptionEn": "Create an isolated Git worktree sandbox. ALL subsequent tool calls (Read, Write, Edit, Bash) will be automatically redirected to the sandbox path. This prevents the agent from modifying the main branch directly. Useful in AFE mode to isolate changes."
   },
   {
     "name": "LSP",
     "description": "代码智能：定义/引用/实现/hover/诊断",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["action", "symbol", "file_path", "line", "column"]
+    "params": [
+      "action",
+      "symbol",
+      "file_path",
+      "line",
+      "column"
+    ],
+    "descriptionEn": "Code intelligence tool. Actions: definition (find where a symbol is declared), references (find all usages), implementation (find implementors of an interface/class), hover (get type/signature info at a position), diagnostics (run TypeScript type checking). Prefers a real language server when available (AURAXIS_LSP_SERVER), otherwise falls back to regex + tsc. Provide file_path with line/column for position-aware actions."
   },
   {
     "name": "ReviewArtifact",
     "description": "运行构建/测试/类型检查/静态检查验证",
     "category": "verify",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["check_type", "projectRoot", "file_path"]
+    "params": [
+      "check_type",
+      "projectRoot",
+      "file_path"
+    ],
+    "descriptionEn": "Run build, test, typecheck, or lint verification on the current project (or active worktree sandbox). Returns the command output, error output, and exit status so you can decide how to respond."
   },
   {
     "name": "Delete",
     "description": "删除项目内的文件或目录（可递归）",
     "category": "files",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["file_path", "recursive"]
+    "params": [
+      "file_path",
+      "recursive"
+    ],
+    "descriptionEn": "Delete a file or directory within the project. For directories, must set recursive=true. The file is backed up to the undo system before deletion so it can be restored."
   },
   {
     "name": "GitCommit",
     "description": "暂存全部改动并创建 git 提交",
     "category": "verify",
     "danger": true,
-    "summary": true,
     "concurrencySafe": false,
-    "params": ["message"]
+    "params": [
+      "message"
+    ],
+    "descriptionEn": "Stage all changes and create a git commit with the given message. Returns the commit hash. Only works within a project directory that has a git repository."
   },
   {
     "name": "SessionQuery",
     "description": "搜索历史会话记录回忆过往决策",
     "category": "session",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["query", "limit"]
+    "params": [
+      "query",
+      "limit"
+    ],
+    "descriptionEn": "Search past chat and agent session transcripts for a keyword or phrase. Returns matching sessions with title, timestamp, snippet, and relevance score. Use this to recall prior decisions, previously discussed code locations, or what was already tried — before re-reading files or asking the user to repeat context."
   },
   {
     "name": "ReadSpill",
     "description": "读取溢出到磁盘的超大工具输出",
     "category": "session",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["path"]
+    "params": [
+      "path"
+    ],
+    "descriptionEn": "Read the full content of an oversized tool output that was spilled to disk (a tool result may contain \"spill_path\" when output is too large). Pass the exact spill_path value. Returns the complete original payload."
   },
   {
     "name": "AskUser",
     "description": "向用户提出澄清问题并等待回答",
     "category": "interaction",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["question", "options"]
+    "params": [
+      "question",
+      "options"
+    ],
+    "descriptionEn": "Ask the human a clarifying question and wait for their answer. Use this when the task is genuinely ambiguous — a required choice, missing preference, or a decision the user should make — instead of guessing. Provide concise options when the choice is bounded; otherwise the user can type a free-form answer. The tool result contains the user's reply."
   },
   {
     "name": "Pty",
     "description": "管理持久交互式终端会话（create/write/read/close 等）",
     "category": "execution",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["action", "session_id", "command", "cwd", "data", "enter", "timeout_ms"]
+    "params": [
+      "action",
+      "session_id",
+      "command",
+      "cwd",
+      "data",
+      "enter",
+      "timeout_ms"
+    ],
+    "descriptionEn": "Manage persistent interactive terminal (PTY) sessions that keep state across tool calls. Use for interactive programs (REPLs, dev servers, prompts) where a one-shot Bash call would lose context. Actions: create (start a session), write (send input; set enter=true to press Enter), read (return output since the last read; timeout_ms up to 30000), close (end a session), list (active sessions of this task), clear (close all sessions of this task). Sessions are scoped to the current task and are NOT visible to other tasks."
   },
   {
     "name": "TerminalOpen",
     "description": "为当前任务打开持久终端会话",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["command", "cwd", "session_id"]
+    "params": [
+      "command",
+      "cwd",
+      "session_id"
+    ],
+    "descriptionEn": "Open a persistent terminal session for the current task. Returns a session_id to use with the other Terminal* tools. The shell is default-shell + cwd=project root unless overridden."
   },
   {
     "name": "TerminalList",
     "description": "列出当前任务的终端会话",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List the current task's open terminal sessions with their ids."
   },
   {
     "name": "TerminalRead",
     "description": "读取终端会话自上次读取以来的新输出",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["session_id", "timeout_ms"]
+    "params": [
+      "session_id",
+      "timeout_ms"
+    ],
+    "descriptionEn": "Read new output from a terminal session since the last read (waits up to timeout_ms)."
   },
   {
     "name": "TerminalSend",
     "description": "向终端会话发送输入（可回车提交）",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["session_id", "data", "enter"]
+    "params": [
+      "session_id",
+      "data",
+      "enter"
+    ],
+    "descriptionEn": "Send input to a terminal session. Set enter=true to submit the line."
   },
   {
     "name": "TerminalSignal",
     "description": "向终端会话发送控制信号（SIGINT 等）",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["session_id", "signal"]
+    "params": [
+      "session_id",
+      "signal"
+    ],
+    "descriptionEn": "Send a control signal to a terminal session. SIGINT/SIGTSTP/SIGQUIT are written as control characters; SIGTERM/SIGKILL close the session."
   },
   {
     "name": "TerminalClose",
     "description": "关闭终端会话并释放 shell 进程",
     "category": "terminal",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["session_id"]
+    "params": [
+      "session_id"
+    ],
+    "descriptionEn": "Close a terminal session and release its shell process."
   },
   {
     "name": "InspectRuntime",
     "description": "检查运行时：可用工具、插件、技能（只读）",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "Inspect the live agent runtime: available tools (name + summary), installed plugins (id/name/version/enabled/capabilities), and discoverable skills. Read-only — use before deciding to extend capabilities."
   },
   {
     "name": "WriteSkill",
     "description": "创建或覆盖可复用的技能说明（Markdown）",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["name", "content"]
+    "params": [
+      "name",
+      "content"
+    ],
+    "descriptionEn": "Create or overwrite a reusable skill: a markdown instruction file that becomes discoverable by ListSkills immediately. Use for repeatable workflows (review checklists, release steps, project conventions). The skill is user-owned and can be edited later."
   },
   {
     "name": "ListAgents",
     "description": "列出活动智能体与子代理及其状态",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List live agents and sub-agents: id, name, status, type, parent link, and any reports they sent via the Report tool. Use before SendMessage / InterruptAgent to resolve a target id."
   },
   {
     "name": "SendMessage",
     "description": "向后端子代理发送后续指令",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["agentId", "message"]
+    "params": [
+      "agentId",
+      "message"
+    ],
+    "descriptionEn": "Send a follow-up instruction to a running background sub-agent (from ListAgents). The instruction is queued and delivered at the agent's next turn boundary; returns immediately. Useful for steering a long-running child without waiting for it to finish."
   },
   {
     "name": "InterruptAgent",
     "description": "按 ID 中断运行中的智能体或子代理",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["agentId", "reason"]
+    "params": [
+      "agentId",
+      "reason"
+    ],
+    "descriptionEn": "Interrupt a running agent or sub-agent by id (from ListAgents). The agent stops as soon as possible; background results can still be read with TaskOutput."
   },
   {
     "name": "Report",
     "description": "向启动你的代理发送进度报告",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["content"]
+    "params": [
+      "content"
+    ],
+    "descriptionEn": "Send a progress report to the agent that started you. Call this zero or more times for findings, blockers, or partial results. Reporting does not finish your work; your direct parent reads reports via ListAgents."
   },
   {
     "name": "GetGoal",
     "description": "读取当前持久目标的文本、阶段与轮次",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "Read the current durable goal for this run: text, phase (active/paused/completed/blocked/cleared), revision, rounds started, and round cap. Returns null when no goal exists."
   },
   {
     "name": "CreateGoal",
     "description": "为当前运行创建持久目标",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["objective", "maxRounds"]
+    "params": [
+      "objective",
+      "maxRounds"
+    ],
+    "descriptionEn": "Create a durable goal for this run. Only succeeds when no active/completed goal exists (a cleared/completed goal can be replaced). The goal is injected into the prompt and bounded by maxRounds of execution."
   },
   {
     "name": "UpdateGoal",
     "description": "更新目标修订：编辑/暂停/恢复/完成/阻塞",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["goalId", "revision", "action", "objective", "maxRounds", "reason"]
+    "params": [
+      "goalId",
+      "revision",
+      "action",
+      "objective",
+      "maxRounds",
+      "reason"
+    ],
+    "descriptionEn": "Update the current goal revision. Actions: edit (replace objective / maxRounds), pause, resume, complete, blocked (with reason). Requires the exact goalId and revision from GetGoal."
   },
   {
     "name": "MountPlugin",
     "description": "动态挂载插件，注册新工具供模型调用",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["id", "name", "version", "description", "tools"]
+    "params": [
+      "id",
+      "name",
+      "version",
+      "description",
+      "tools"
+    ],
+    "descriptionEn": "Dynamically mount a plugin into the running app: register new tools the model can call in subsequent requests. Each tool needs a name, description, optional inputSchema, and a handler as a JS function body like `(input, ctx) => ({ echo: input.value })` or `async (input, ctx) => ...`. ctx exposes projectRoot, log, sleep and agents (run/start/list/send/interrupt). Handlers run in a restricted sandbox with no require/fs/process. Use UnmountPlugin to remove the plugin."
   },
   {
     "name": "UnmountPlugin",
     "description": "移除已挂载插件并注销其全部工具",
     "category": "capability",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["id"]
+    "params": [
+      "id"
+    ],
+    "descriptionEn": "Remove a dynamically mounted plugin (id from MountPlugin or InspectRuntime) and unregister all of its tools."
   },
   {
     "name": "Ralph",
     "description": "以全新子代理迭代执行目标（Ralph 循环）",
     "category": "agent",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["objective", "maxRounds"]
+    "params": [
+      "objective",
+      "maxRounds"
+    ],
+    "descriptionEn": "Iterate toward an objective with a fresh sub-agent each round. Every round starts a brand-new agent with no conversation seed; the shared project directory is the durable memory, and each round reports progress, completion, or a blocker. Use ONLY when the user explicitly asks for a Ralph loop / fresh-agent iterative execution. For ordinary long tasks prefer goals; for bounded delegation prefer Agent or RunWorkflow."
   },
   {
     "name": "Pwsh",
     "description": "执行 PowerShell 命令（Windows 原生）",
     "category": "execution",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["command", "workdir", "timeout"]
+    "params": [
+      "command",
+      "workdir",
+      "timeout"
+    ],
+    "descriptionEn": "Execute a PowerShell command (powershell.exe on Windows, pwsh when available elsewhere). Returns stdout, stderr, and exit code. Use for PowerShell-specific work: modules, registry, pipelines, .ps1 scripts."
   },
   {
     "name": "SessionEventSearch",
     "description": "在会话事件流中搜索匹配文本或工具名",
     "category": "session",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["query", "sessionId", "limit"]
+    "params": [
+      "query",
+      "sessionId",
+      "limit"
+    ],
+    "descriptionEn": "Search the raw event stream of one session (agent run or chat) for matching text, tool names, inputs, outputs, errors, and system events. Returns matching events with sequence numbers for use with SessionEventRead."
   },
   {
     "name": "SessionEventRead",
     "description": "按序号读取会话中的原始事件（含前后邻接）",
     "category": "session",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["sessionId", "seq", "before", "after"]
+    "params": [
+      "sessionId",
+      "seq",
+      "before",
+      "after"
+    ],
+    "descriptionEn": "Read one full raw event from a session event stream by its sequence number, with optional neighboring events before/after. Use seq values from SessionEventSearch or SessionTrace."
   },
   {
     "name": "SessionTrace",
     "description": "读取会话谱系：父会话、分支、事件统计",
     "category": "session",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["sessionId"]
+    "params": [
+      "sessionId"
+    ],
+    "descriptionEn": "Read a session's lineage: its parent (branchedFrom), its children (forks), event count, and a condensed event summary. Use to understand how sessions relate before digging into events."
   },
   {
     "name": "TaskList",
     "description": "列出后台 Shell 任务与运行中的代理",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List background shell tasks (run_in_background Bash) and running agents/sub-agents with ids, status, commands, and timestamps. Use TaskOutput to read a task result and TaskStop to stop one. JobList/JobOutput/JobKill are equivalent 同一运行时的兼容命名."
   },
   {
     "name": "JobList",
     "description": "列出运行时已知的全部后台任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": []
+    "params": [],
+    "descriptionEn": "List every background job the runtime knows about: background bash commands, terminal tasks, and running sub-agents. Same source as TaskList."
   },
   {
     "name": "JobOutput",
     "description": "按 ID 读取后台任务累计输出（不阻塞）",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": true,
-    "params": ["job_id"]
+    "params": [
+      "job_id"
+    ],
+    "descriptionEn": "Read the accumulated output of a background job (bash task, terminal task, or sub-agent) by its id without blocking the turn."
   },
   {
     "name": "JobKill",
     "description": "按 ID 停止运行中的后台任务",
     "category": "background",
     "danger": false,
-    "summary": false,
     "concurrencySafe": false,
-    "params": ["job_id"]
+    "params": [
+      "job_id"
+    ],
+    "descriptionEn": "Stop a running background job (bash task, terminal task, or sub-agent) by its id."
   }
 ]

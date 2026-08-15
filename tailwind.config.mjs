@@ -17,6 +17,9 @@ export default {
         mono: ['SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       colors: {
+        // 顶层基础色：浅色主题主文字 ink / 深底正文与浅色主题底色 ivory
+        ink: '#111216',
+        ivory: '#F1F1EE',
         brand: {
           // Auraxis 品牌色板 —「Black is the Axis, White is the Structure, Purple is the Aura」
           black: '#111216', // 品牌黑：深色主题页面底色
@@ -27,7 +30,7 @@ export default {
           ink2: '#3E3D4A', // 浅色主题次级文字
           text: '#C9C8D6', // 深色主题正文
           muted: '#9B9AAE', // 次级/辅助文字（深浅主题通用）
-          faint: '#6E6D82', // 三级弱文字
+          faint: '#8F8EA3', // 三级弱文字（深色模式下保证 4.5:1 以上对比度）
           accent: '#8C8AA8', // Aura 紫灰：仅约 3% 面积强调（焦点/选中/状态点）
           ivory: '#F1F1EE', // 象牙白：浅色主题底色 / 深底上的正文色
           hairline: '#E3E2DC', // 浅色主题 hairline

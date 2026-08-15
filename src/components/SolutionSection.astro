@@ -1,66 +1,83 @@
 ---
-import { RefreshCw, Wrench, Workflow, Braces, ShieldCheck, Lock, Puzzle, Database, Cpu, Blocks } from 'lucide-react';
+import { RefreshCw, Workflow, Braces, ShieldCheck, Lock, Database } from 'lucide-react';
 
-const PILLARS = [
-  { icon: RefreshCw, titleKey: 'feature1_title', descKey: 'feature1_desc' },
-  { icon: Wrench, titleKey: 'pillar2_title', descKey: 'pillar2_desc' },
-  { icon: Workflow, titleKey: 'feature2_title', descKey: 'feature2_desc' },
-  { icon: Braces, titleKey: 'feature3_title', descKey: 'feature3_desc' },
+interface Pillar {
+  icon: typeof RefreshCw;
+  titleKey: string;
+  descKey: string;
+  title: string;
+  desc: string;
+}
+
+const FEATURES: Pillar[] = [
+  {
+    icon: RefreshCw,
+    titleKey: 'feature1_title',
+    descKey: 'feature1_desc',
+    title: '统一 ReAct 步进引擎',
+    desc: '聊天与 Agent 共用 step-engine 单一步进循环，停止策略 / 上下文压缩 / 重试均为策略钩子；业务迭代上限 200 次，安全硬上限 500 次，API 失败 3 次指数退避重试。',
+  },
+  {
+    icon: Workflow,
+    titleKey: 'feature2_title',
+    descKey: 'feature2_desc',
+    title: '多智能体调度器',
+    desc: '优先级队列（high/normal/low）、默认并发 3、状态机实时广播；三级偏差检测（L1 工具失败 / L2 连续停滞 / L3 Replan 重规划）与 5 分钟计划审批流。',
+  },
+  {
+    icon: Braces,
+    titleKey: 'feature3_title',
+    descKey: 'feature3_desc',
+    title: 'Code Mode',
+    desc: 'RunCode 将 TypeScript 程序放入 worker 线程执行，每个 tools.Name() 子调用回穿完整权限管线；并发安全工具最多 8 路重叠、变异工具串行、硬超时可强杀。',
+  },
+  {
+    icon: ShieldCheck,
+    titleKey: 'feature4_title',
+    descKey: 'feature4_desc',
+    title: '三模态权限看门狗',
+    desc: 'ask（默认）/ plan（计划审批）/ afe（全自动）三模式；规则作用域 once/session/always；只读工具（Read/Grep/Glob）自动放行，危险调用必经拦截审查。',
+  },
+  {
+    icon: Lock,
+    titleKey: 'feature5_title',
+    descKey: 'feature5_desc',
+    title: '原生沙箱',
+    desc: 'Windows restricted token / AppContainer、Linux、macOS 四后端命令级隔离，另加 Git worktree 沙箱（.auraxis-sandbox/task-<id>）为并发 Agent 提供隔离分支。',
+  },
+  {
+    icon: Database,
+    titleKey: 'feature7_title',
+    descKey: 'feature7_desc',
+    title: '持久化项目记忆',
+    desc: 'LLM 驱动的对话记忆提取（user/feedback/project/reference 四类）按项目隔离；会话统一 append-only JSONL 事件日志 + SQLite 投影缓存 + FTS5 全文搜索。',
+  },
 ];
-
-const ABILITIES = [
-  { icon: ShieldCheck, titleKey: 'feature4_title', descKey: 'feature4_desc' },
-  { icon: Lock, titleKey: 'feature5_title', descKey: 'feature5_desc' },
-  { icon: Puzzle, titleKey: 'feature6_title', descKey: 'feature6_desc' },
-  { icon: Database, titleKey: 'feature7_title', descKey: 'feature7_desc' },
-  { icon: Cpu, titleKey: 'feature8_title', descKey: 'feature8_desc' },
-  { icon: Blocks, titleKey: 'feature9_title', descKey: 'feature9_desc' },
-];
-
-const num = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <section id="solution" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Solution</div>
-      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="solution_title">一个引擎，从聊天到智能体</h2>
-      <p class="text-brand-muted mt-3" data-i18n="solution_subtitle">Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，以工具、调度与沙箱支撑它在本地执行。</p>
+    <div class="reveal text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Features</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="solution_title">核心能力</h2>
+      <p class="text-brand-muted mt-3" data-i18n="solution_subtitle">Auraxis Agent 把聊天与 Agent 执行收敛到同一套 ReAct 步进引擎，工具、调度与沙箱都在本地运行。</p>
     </div>
 
-    <!-- 四大支柱 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      {PILLARS.map(({ icon: Icon, titleKey, descKey }, i) => (
-        <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-7 hover:border-brand-accent/40 transition-colors">
-          <div class="flex items-center gap-4 mb-4">
-            <div class="w-11 h-11 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent flex-shrink-0">
-              <Icon className="w-[22px] h-[22px]" aria-hidden="true" />
-            </div>
-            <span class="text-sm font-mono text-brand-faint">{num(i)}</span>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {FEATURES.map(({ icon: Icon, titleKey, descKey, title, desc }, i) => (
+        <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors" style={`--reveal-delay: ${i * 110}ms`}>
+          <div class="w-11 h-11 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
+            <Icon className="w-5 h-5" aria-hidden="true" />
           </div>
-          <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
-          <p class="text-sm text-brand-muted mt-2 leading-relaxed" data-i18n={descKey}></p>
+          <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h3>
+          <p class="text-sm text-brand-muted mt-2 leading-relaxed" data-i18n={descKey}>{desc}</p>
         </div>
       ))}
     </div>
 
-    <!-- 更多能力 -->
-    <div class="flex items-center gap-4 my-8">
-      <div class="h-px flex-1 bg-brand-hairline dark:bg-brand-border/60" aria-hidden="true"></div>
-      <span class="text-xs font-mono text-brand-faint uppercase tracking-[0.2em]" data-i18n="solution_more_label">更多能力</span>
-      <div class="h-px flex-1 bg-brand-hairline dark:bg-brand-border/60" aria-hidden="true"></div>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {ABILITIES.map(({ icon: Icon, titleKey, descKey }) => (
-        <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
-          <div class="w-9 h-9 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
-            <Icon className="w-4 h-4" aria-hidden="true" />
-          </div>
-          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
-          <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed" data-i18n={descKey}></p>
-        </div>
-      ))}
-    </div>
+    <!-- 界面与工程细节：一行小字，避免堆叠成卡片 -->
+    <p class="reveal mt-8 text-center text-xs text-brand-muted leading-relaxed max-w-3xl mx-auto" data-i18n="ui_details">
+      界面与工程细节：终端抽屉 · PTY/SSH 会话 · 后台与定时任务 · 图片输入 · 撤销快照 · 冲突检测 · 中英双语界面 · 深浅主题（Windows 11 Acrylic）· 可选遥测
+    </p>
   </div>
 </section>

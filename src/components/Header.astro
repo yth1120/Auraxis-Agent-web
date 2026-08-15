@@ -1,28 +1,30 @@
 ---
 import ThemeToggle from '../react/ThemeToggle';
 import LanguageToggle from '../react/LanguageToggle';
-import { Github, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
+import GitHubIcon from './GitHubIcon.astro';
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
+const BASE = import.meta.env.BASE_URL;
 
 const NAV_LINKS = [
-  { href: '#solution', key: 'nav_solution', label: '核心能力' },
-  { href: '#demo', key: 'nav_demo', label: '实况演示' },
-  { href: '#architecture', key: 'nav_architecture', label: '系统架构' },
+  { href: '#solution', key: 'nav_solution', label: '功能' },
+  { href: '#demo', key: 'nav_demo', label: '演示' },
   { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
+  { href: '#download', key: 'nav_download', label: '下载' },
 ];
 ---
 
 <header class="sticky top-0 z-50 bg-white/75 dark:bg-brand-black/75 backdrop-blur-xl border-b border-brand-hairline dark:border-brand-border transition-colors">
   <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between relative">
-    <a href="#top" class="flex items-center gap-2.5 flex-shrink-0" aria-label="Auraxis 首页">
-      <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-7 w-auto" />
-      <span class="font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis</span>
-      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.1</span>
+    <a href="#top" class="flex items-center gap-2.5 flex-shrink-0" data-i18n-aria="nav_home" aria-label="Auraxis 首页">
+      <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="40" height="40" class="h-10 w-auto" />
+      <span class="font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
+      <span class="hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.0</span>
     </a>
 
     <!-- 居中导航 -->
-    <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" aria-label="主导航">
+    <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" data-i18n-aria="nav_main" aria-label="主导航">
       {NAV_LINKS.map(({ href, key, label }) => (
         <a
           href={href}
@@ -38,13 +40,13 @@ const NAV_LINKS = [
       <LanguageToggle client:idle />
       <ThemeToggle client:idle />
 
-      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors p-2" aria-label="Auraxis GitHub">
-        <Github className="w-[18px] h-[18px]" aria-hidden="true" />
+      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors p-2" aria-label="Auraxis GitHub">
+        <GitHubIcon size={16} />
       </a>
 
-      <a href="#download" data-i18n="nav_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-4 h-9 inline-flex items-center gap-1.5 rounded-md">
+      <a href="#download" data-i18n-aria="nav_download" aria-label="下载" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-3 sm:px-4 h-9 inline-flex items-center gap-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
         <Download className="w-4 h-4" aria-hidden="true" />
-        免费下载
+        <span class="hidden sm:inline" data-i18n="nav_download">下载</span>
       </a>
     </div>
   </div>

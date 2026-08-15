@@ -1,10 +1,37 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { ChevronDown, ChevronUp, AlertTriangle, ShieldCheck, Loader2, Search } from 'lucide-react';
+import { ChevronDown, ChevronUp, AlertTriangle, ShieldCheck, Search } from 'lucide-react';
 import { LanguageProvider, useLanguage } from '../i18n/LanguageContext';
-import { TOOL_CATEGORIES } from '../data/tools';
-import type { Tool, ToolType, ApiResponse, ToolsListData, ToolCategory } from '../types';
+import { ALL_TOOLS, DANGER_TOOLS, SAFE_TOOLS, TOOLS_BY_CATEGORY, TOOL_CATEGORIES } from '../data/tools';
+import type { ToolType, ToolCategory } from '../types';
 
 type FilterKey = 'all' | ToolType | ToolCategory;
+
+/** 数据驱动数字滚动（600ms ease-out；prefers-reduced-motion 时直接显示） */
+function AnimatedNumber({ value }: { value?: number }) {
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (value === undefined) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(value);
+      return;
+    }
+    const duration = 600;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(Math.round(value * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+
+  if (value === undefined) return null;
+  return <span className="opacity-60 tabular-nums">{display}</span>;
+}
 
 const FILTER_KEYS: FilterKey[] = [
   'all',
@@ -14,14 +41,10 @@ const FILTER_KEYS: FilterKey[] = [
 ];
 
 function ToolsGridInner() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
   const [query, setQuery] = useState<string>('');
   const [expandedTools, setExpandedTools] = useState<Set<string>>(new Set());
-  const [tools, setTools] = useState<Tool[]>([]);
-  const [stats, setStats] = useState<{ danger: number; safe: number } | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   const filterLabels: Record<string, string> = {
     all: t.tools_filter_all,
@@ -40,31 +63,27 @@ function ToolsGridInner() {
     interaction: t.tools_filter_interaction,
   };
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    const params = new URLSearchParams();
-    if (activeFilter === 'danger') params.set('type', 'danger');
-    else if (activeFilter === 'safe') params.set('type', 'safe');
-    else if (activeFilter !== 'all') params.set('category', activeFilter);
-    const qs = params.toString();
-    fetch(`/api/tools${qs ? `?${qs}` : ''}`)
-      .then(async (res) => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json() as Promise<ApiResponse<ToolsListData>>; })
-      .then((json) => { if (cancelled) return; if (json.success && json.data) { setTools(json.data.tools); setStats(json.data.stats); } else setError(json.error?.message ?? ''); })
-      .catch((err: Error) => { if (cancelled) return; console.error(err); setError(err.message); })
-      .finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
+  // 静态站点：工具数据随包内置，按筛选条件直接本地过滤
+  const stats = { danger: DANGER_TOOLS.length, safe: SAFE_TOOLS.length };
+
+  const filteredTools = useMemo(() => {
+    if (activeFilter === 'danger') return DANGER_TOOLS;
+    if (activeFilter === 'safe') return SAFE_TOOLS;
+    if (activeFilter !== 'all') return TOOLS_BY_CATEGORY[activeFilter] ?? ALL_TOOLS;
+    return ALL_TOOLS;
   }, [activeFilter]);
 
   // 客户端搜索过滤（名称 + 描述，大小写不敏感）
   const visibleTools = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return tools;
-    return tools.filter(
+    if (!q) return filteredTools;
+    return filteredTools.filter(
       (tool) =>
-        tool.name.toLowerCase().includes(q) || tool.description.toLowerCase().includes(q)
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        (tool.descriptionEn ?? '').toLowerCase().includes(q)
     );
-  }, [tools, query]);
+  }, [filteredTools, query]);
 
   const toggleExpand = useCallback((toolName: string) => {
     setExpandedTools((prev) => { const next = new Set(prev); if (next.has(toolName)) next.delete(toolName); else next.add(toolName); return next; });
@@ -85,47 +104,43 @@ function ToolsGridInner() {
             className="w-full h-9 pl-9 pr-3 rounded-md border border-brand-hairline dark:border-brand-border bg-white dark:bg-brand-dark text-sm text-ink dark:text-ivory placeholder:text-brand-faint focus:outline-none focus:border-brand-accent/60 focus:ring-2 focus:ring-brand-accent/20 transition-colors"
           />
         </div>
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="工具分类筛选">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label={lang === 'zh' ? '工具分类筛选' : 'Tool category filter'}>
           {FILTER_KEYS.map((key) => {
-            const count = key === 'all' ? (stats?.danger ?? 0) + (stats?.safe ?? 0) : key === 'danger' ? stats?.danger : key === 'safe' ? stats?.safe : undefined;
+            const count = key === 'all' ? stats.danger + stats.safe : key === 'danger' ? stats.danger : key === 'safe' ? stats.safe : undefined;
             return (
               <button key={key} role="tab" aria-selected={activeFilter === key} onClick={() => setActiveFilter(key)}
                 className={`inline-flex items-center gap-1.5 px-3 h-9 rounded-full text-xs font-mono font-medium transition-colors ${activeFilter === key ? 'bg-brand-accent/15 text-brand-accent border border-brand-accent/40' : 'bg-white dark:bg-brand-dark text-brand-muted hover:text-ink dark:hover:text-ivory border border-brand-hairline dark:border-brand-border'}`}>
-                {filterLabels[key] ?? key}{count !== undefined && <span className="opacity-60 tabular-nums">{count}</span>}
+                {filterLabels[key] ?? key}<AnimatedNumber value={count} />
               </button>
             );
           })}
         </div>
       </div>
 
-      {loading && (
-        <div className="flex items-center justify-center py-16 text-brand-muted" role="status">
-          <Loader2 className="w-5 h-5 animate-spin mr-2" aria-hidden="true" /><span className="text-sm font-mono">{t.tools_loading}</span>
-        </div>
-      )}
-      {error && !loading && <div className="text-center py-8 text-red-500 text-sm font-mono" role="alert">{t.tools_error}{error}</div>}
-      {!loading && !error && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" role="list" aria-label={`${visibleTools.length} 个工具`}>
+      {
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" role="list" aria-label={lang === 'zh' ? `${visibleTools.length} 个工具` : `${visibleTools.length} tools`}>
           {visibleTools.map((tool) => {
             const isDanger = tool.type === 'danger';
             const isExpanded = expandedTools.has(tool.name);
             return (
               <div key={tool.name} role="listitem" tabIndex={0} aria-expanded={isExpanded}
                 onClick={() => toggleExpand(tool.name)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(tool.name); } }}
-                className={`group relative bg-white dark:bg-brand-dark border p-4 rounded-lg flex flex-col cursor-pointer transition-colors select-none ${isDanger ? 'border-red-200 dark:border-red-900/30 hover:border-red-400/50 dark:hover:border-red-500/50' : 'border-brand-hairline dark:border-brand-border hover:border-brand-accent/40'} ${isExpanded ? (isDanger ? 'border-red-400/60 dark:border-red-500/60' : 'border-brand-accent/50') : ''}`}>
+                className={`group relative bg-white dark:bg-brand-card border p-4 rounded-lg flex flex-col cursor-pointer transition-colors select-none ${isDanger ? 'border-red-200 dark:border-red-900/30 hover:border-red-400/50 dark:hover:border-red-500/50' : 'border-brand-hairline dark:border-brand-border hover:border-brand-accent/40'} ${isExpanded ? (isDanger ? 'border-red-400/60 dark:border-red-500/60' : 'border-brand-accent/50') : ''}`}>
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-ink dark:text-ivory text-xs font-mono">{tool.name}</span>
-                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${isDanger ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-900/40' : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/40'}`}>
+                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${isDanger ? 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-900/40' : 'text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/40'}`}>
                     {isDanger ? <span className="inline-flex items-center gap-0.5"><AlertTriangle className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_danger}</span> : <span className="inline-flex items-center gap-0.5"><ShieldCheck className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_safe}</span>}
                   </span>
                 </div>
-                <p className="text-brand-muted mt-2 text-[11px] leading-tight flex-1">{tool.description}</p>
+                <p className="text-brand-muted mt-2 text-[11px] leading-tight flex-1">
+                  {lang === 'en' && tool.descriptionEn ? tool.descriptionEn : tool.description}
+                </p>
                 <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-brand-hairline dark:border-brand-border/60">
                   <span className="text-[9px] font-mono text-brand-faint">{filterLabels[tool.category] ?? tool.category}</span>
                   {isExpanded ? <ChevronUp className="w-3 h-3 text-brand-faint" aria-hidden="true" /> : <ChevronDown className="w-3 h-3 text-brand-faint" aria-hidden="true" />}
                 </div>
                 {isExpanded && (
-                  <div className="mt-3 p-2.5 bg-brand-black/95 rounded border border-brand-border font-mono text-[10px] text-brand-accent overflow-x-auto" onClick={(e) => e.stopPropagation()}>
+                  <div className="mt-3 p-2.5 code-dark-box rounded border border-brand-border font-mono text-[10px] text-brand-ivory overflow-x-auto" onClick={(e) => e.stopPropagation()}>
                     <pre className="whitespace-pre-wrap leading-relaxed">{JSON.stringify(tool.params, null, 2)}</pre>
                   </div>
                 )}
@@ -133,8 +148,8 @@ function ToolsGridInner() {
             );
           })}
         </div>
-      )}
-      {!loading && !error && visibleTools.length === 0 && <p className="text-center text-brand-muted text-sm py-8">{t.tools_empty}</p>}
+      }
+      {visibleTools.length === 0 && <p className="text-center text-brand-muted text-sm py-8">{t.tools_empty}</p>}
     </div>
   );
 }

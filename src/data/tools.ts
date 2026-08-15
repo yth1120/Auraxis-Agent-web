@@ -11,9 +11,9 @@ import rawTools from './tools-data.json';
 interface RawTool {
   name: string;
   description: string;
+  descriptionEn?: string;
   category: ToolCategory;
   danger: boolean;
-  summary: boolean;
   concurrencySafe: boolean;
   params: string[];
 }
@@ -24,9 +24,9 @@ export const ALL_TOOLS: Tool[] = RAW.map((t) => ({
   name: t.name,
   type: (t.danger ? 'danger' : 'safe') as ToolType,
   description: t.description,
+  descriptionEn: t.descriptionEn,
   category: t.category,
   params: t.params,
-  summary: t.summary,
   concurrencySafe: t.concurrencySafe,
 }));
 

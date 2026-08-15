@@ -1,74 +1,48 @@
 ---
 import { ArrowRight, BookOpen } from 'lucide-react';
-
-const TECH_STACK = [
-  'Electron 43',
-  'React 18',
-  'TypeScript 5.5',
-  'Vite 7',
-  'Zustand 4',
-  'SQLite + FTS5',
-  'DeepSeek',
-  'MCP',
-  'Vitest + Playwright',
-  'electron-builder',
-];
+const BASE = import.meta.env.BASE_URL;
 ---
 
-<section id="top" class="relative pt-20 pb-0">
-  <div class="max-w-4xl mx-auto px-6 text-center space-y-7 mb-16">
-    <div class="inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03] mx-auto">
-      <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
-      <span class="text-xs font-mono text-brand-muted" data-i18n="hero_badge">原生沙箱隔离 · 统一 ReAct 步进引擎</span>
-    </div>
-
-    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-ink dark:text-ivory">
-      <span data-i18n="hero_title_line1">让 AI 智能体在桌面上</span><br />
-      <span class="text-brand-accent" data-i18n="hero_title_line2">动手写代码</span>
-    </h1>
-
-    <p class="text-brand-muted text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" data-i18n="hero_description">
-      Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 在桌面上可审计地动手干活。
-    </p>
-
-    <div class="flex items-center justify-center gap-3 pt-2">
-      <a href="#download" data-i18n="hero_cta_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md">
-        <ArrowRight className="w-4 h-4" aria-hidden="true" />
-        免费下载
-      </a>
-      <a href="#demo" data-i18n="hero_cta_docs" class="border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md">
-        <BookOpen className="w-4 h-4" aria-hidden="true" />
-        查看实况演示
-      </a>
-    </div>
-
-    <!-- 数据条：hairline 分隔，居中 -->
-    <div class="flex items-center justify-center pt-6 max-w-2xl mx-auto">
-      <div class="flex-1 pr-6 text-center">
-        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tools">63</div>
-        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tools_sub">内置 AI 工具</div>
+<section id="top" class="relative pt-24 pb-24">
+  <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1fr_1.12fr] gap-10 lg:gap-12 items-center">
+    <div class="text-center lg:text-left space-y-7">
+      <div class="reveal inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03] mx-auto lg:mx-0">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
+        <span class="text-xs font-mono text-brand-muted" data-i18n="hero_badge">MIT 开源 · v2.0.0 · 个人开发</span>
       </div>
-      <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border text-center">
-        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_perms">3</div>
-        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_perms_sub">权限模式（ask/plan/afe）</div>
-      </div>
-      <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border text-center">
-        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tests">1347</div>
-        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tests_sub">测试用例 · 166 个文件</div>
-      </div>
-      <div class="flex-1 pl-6 border-l border-brand-hairline dark:border-brand-border text-center">
-        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_sdk">2</div>
-        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_sdk_sub">TypeScript &amp; Python SDK</div>
+
+      <h1 class="reveal text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.22] text-ink dark:text-ivory" style="--reveal-delay: 120ms">
+        <span data-i18n="hero_title_line1">Auraxis Agent</span><br />
+        <span class="block mt-2 sm:mt-3" data-i18n="hero_title_line2">桌面端编程助手</span>
+      </h1>
+
+      <p class="reveal text-brand-muted text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0" data-i18n="hero_description" style="--reveal-delay: 240ms">
+        Auraxis Agent 是一个基于 Electron 的桌面端编程助手，个人开发、MIT 开源。它提供统一的 ReAct 步进引擎、63 个内置工具、多 Agent 调度、Code Mode 与沙箱隔离，在本地项目中执行任务。
+      </p>
+
+      <div class="reveal flex items-center justify-center lg:justify-start gap-3 pt-2" style="--reveal-delay: 380ms">
+        <a href="#download" data-i18n="hero_cta_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
+          <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          下载
+        </a>
+        <a href="#demo" data-i18n="hero_cta_docs" class="border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
+          <BookOpen className="w-4 h-4" aria-hidden="true" />
+          查看演示
+        </a>
       </div>
     </div>
-  </div>
 
-  <!-- 技术栈徽章条 -->
-  <div class="border-y border-brand-hairline dark:border-brand-border/60">
-    <div class="max-w-6xl mx-auto px-6 py-3.5 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
-      {TECH_STACK.map((item) => (
-        <span class="text-[11px] font-mono text-brand-faint tracking-wide">{item}</span>
-      ))}
+    <div class="reveal" style="--reveal-delay: 300ms">
+      <div class="terminal-dark-box border border-brand-border rounded-2xl overflow-hidden shadow-[0_24px_80px_-28px_rgba(0,0,0,0.5)] dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.75)]">
+        <img
+          src={`${BASE}screenshots/auraxis-hero.jpg`}
+          alt="Auraxis Agent 桌面端界面截图"
+          data-i18n-alt="hero_image_alt"
+          width="3078"
+          height="1376"
+          class="w-full h-auto block"
+        />
+      </div>
     </div>
   </div>
 </section>

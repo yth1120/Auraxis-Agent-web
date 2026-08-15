@@ -1,0 +1,112 @@
+---
+import { ShieldCheck, GitBranch } from 'lucide-react';
+
+interface Mode {
+  titleKey: string;
+  descKey: string;
+  title: string;
+  desc: string;
+  items: { key: string; text: string }[];
+}
+
+const MODES: Mode[] = [
+  {
+    titleKey: 'perm_ask_title',
+    descKey: 'perm_ask_desc',
+    title: 'Ask · 询问模式',
+    desc: '默认模式。安全与效率的最佳平衡。',
+    items: [
+      { key: 'perm_ask_1', text: '只读工具（Read / Grep / Glob）自动放行' },
+      { key: 'perm_ask_2', text: '危险工具弹窗确认，逐次可见' },
+      { key: 'perm_ask_3', text: '规则作用域 once / session / always' },
+    ],
+  },
+  {
+    titleKey: 'perm_plan_title',
+    descKey: 'perm_plan_desc',
+    title: 'Plan · 计划审批',
+    desc: '先出计划，再动手。适合大型重构。',
+    items: [
+      { key: 'perm_plan_1', text: 'LLM 生成结构化任务计划交用户审批' },
+      { key: 'perm_plan_2', text: '计划获批准后仅执行已批准步骤；计划被拒绝则回退 Ask' },
+      { key: 'perm_plan_3', text: '审批等待 5 分钟超时，自动回退 Ask' },
+    ],
+  },
+  {
+    titleKey: 'perm_afe_title',
+    descKey: 'perm_afe_desc',
+    title: 'AFE · 全自动',
+    desc: '无人值守的自动化执行。',
+    items: [
+      { key: 'perm_afe_1', text: '所有工具自动批准，无弹窗打断' },
+      { key: 'perm_afe_2', text: '工具仍经过沙箱与路径、扩展名、URL 检查；无头流程按惯例豁免 read-before-write' },
+      { key: 'perm_afe_3', text: '适合 CI 流水线与长时间后台任务' },
+    ],
+  },
+];
+
+const SANDBOX = [
+  { icon: ShieldCheck, textKey: 'sandbox_win', text: 'Windows Restricted Token / AppContainer' },
+  { icon: ShieldCheck, textKey: 'sandbox_linux', text: 'Linux 隔离后端' },
+  { icon: ShieldCheck, textKey: 'sandbox_mac', text: 'macOS 隔离后端' },
+  { icon: GitBranch, textKey: 'sandbox_worktree', text: 'Git Worktree 沙箱（.auraxis-sandbox/task-<id>）' },
+];
+
+---
+
+<section id="safety" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Security</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="safety_title">安全模型：权限与沙箱</h2>
+      <p class="text-brand-muted mt-3" data-i18n="safety_subtitle">每次危险调用都按固定顺序经过权限模式、沙箱门、审批与执行；路径边界、read-before-write、撤销快照与冲突检测作为兜底，覆盖工具调用的全生命周期。</p>
+    </div>
+
+    <!-- 三种权限模式 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      {MODES.map(({ titleKey, descKey, title, desc, items }, i) => (
+        <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors" style={`--reveal-delay: ${i * 120}ms`}>
+          <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h3>
+          <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed" data-i18n={descKey}>{desc}</p>
+          <ul class="mt-4 space-y-2.5 border-t border-brand-hairline dark:border-brand-border/60 pt-4">
+            {items.map(({ key, text }) => (
+              <li class="flex items-start gap-2 text-[13px] text-brand-muted">
+                <span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span>
+                <span data-i18n={key}>{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- 沙箱四后端 -->
+    <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-6 mb-4">
+      <h3 class="text-sm font-medium text-ink dark:text-ivory mb-1.5" data-i18n="sandbox_title">原生沙箱，四后端隔离</h3>
+      <p class="text-[13px] text-brand-muted mb-5 leading-relaxed" data-i18n="sandbox_subtitle">命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {SANDBOX.map(({ icon: Icon, textKey, text }) => (
+          <div class="bg-ivory dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3 flex items-center gap-3">
+            <Icon className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+            <span class="text-xs text-brand-muted" data-i18n={textKey}>{text}</span>
+          </div>
+        ))}
+      </div>
+      <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="bg-ivory dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <div class="text-xs font-medium text-ink dark:text-ivory" data-i18n="safety_sandbox_levels_title">沙箱权限档位</div>
+          <div class="text-xs text-brand-muted mt-1 leading-relaxed" data-i18n="safety_sandbox_levels_desc">read（只读）/ workspace-write（工作区写入，默认）/ full（完全访问）</div>
+        </div>
+        <div class="bg-ivory dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <div class="text-xs font-medium text-ink dark:text-ivory" data-i18n="safety_profiles_title">内置权限档案</div>
+          <div class="text-xs text-brand-muted mt-1 leading-relaxed" data-i18n="safety_profiles_desc">标准（文件可写，ask）/ 只读（拒绝写，ask）/ 沙箱（文件可写、网络拒绝，afe）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 安全说明：一行概述，替代独立管线卡片 -->
+    <p class="reveal text-center text-[13px] text-brand-muted max-w-2xl mx-auto leading-relaxed" data-i18n="safety_note">
+      所有工具调用统一经过「权限模式 → 沙箱门 → 审批 → 执行」管线，并受路径边界、read-before-write、撤销快照与冲突检测约束。
+    </p>
+  </div>
+</section>

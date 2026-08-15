@@ -7,11 +7,11 @@ import releases from '../data/releases.json';
 <!-- 收尾 CTA：全宽深色横幅（任何主题下保持深色） -->
 <section id="download" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="terminal-dark-box border border-brand-border rounded-2xl px-6 py-14 sm:px-12">
+    <div class="reveal terminal-dark-box border border-brand-border rounded-2xl px-6 py-14 sm:px-12">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Download</div>
-        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-ivory" data-i18n="download_title">下载 Auraxis</h2>
-        <p class="text-brand-muted mt-3" data-i18n="download_subtitle">v2.0.1 · Electron 43 · MIT 开源。首个公开版本发布前，下载链接为占位符。</p>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-ivory" data-i18n="download_title">下载 Auraxis Agent</h2>
+        <p class="text-brand-muted mt-3" data-i18n="download_subtitle">v2.0.0 · Electron 43 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。</p>
       </div>
 
       <div class="max-w-2xl mx-auto mb-10">
@@ -34,7 +34,7 @@ import releases from '../data/releases.json';
         <div class="bg-white/[0.04] border border-brand-border rounded-xl p-5">
           <h3 class="text-sm font-medium text-ivory mb-3.5 flex items-center gap-2">
             <ListChecks className="w-4 h-4 text-brand-accent" aria-hidden="true" />
-            <span data-i18n="download_changelog_title">v2.0.1 更新内容</span>
+            <span data-i18n="download_changelog_title">v2.0.0 更新内容</span>
           </h3>
           <ul class="space-y-2.5">
             {releases.changelog.map((item) => (
@@ -47,7 +47,12 @@ import releases from '../data/releases.json';
         </div>
       </div>
 
-      <p class="text-center text-xs text-brand-faint mt-6 font-mono" data-i18n="download_placeholder_note">下载链接将在首个公开版本发布后开放。</p>
+      <p class="text-center text-xs text-brand-faint mt-6 font-mono" data-i18n="download_placeholder_note">下载遇到问题？前往 GitHub Releases 获取全部安装包（含 Apple Silicon arm64）。</p>
+      <div class="text-center mt-3">
+        <a href="https://github.com/yth1120/Auraxis-Agent/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-brand-accent hover:text-brand-ivory transition-colors font-mono">
+          GitHub Releases ↗
+        </a>
+      </div>
     </div>
   </div>
 </section>

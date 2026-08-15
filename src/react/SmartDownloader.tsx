@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Monitor, Apple, Terminal, Info, Loader2 } from 'lucide-react';
-import { detectPlatform, PLATFORM_LABELS } from '../utils/platform';
+import { detectPlatform, detectArch, PLATFORM_LABELS } from '../utils/platform';
 import { LanguageProvider, useLanguage } from '../i18n/LanguageContext';
-import type { ApiResponse, ReleaseInfo, DownloadAsset, Platform } from '../types';
+import type { ReleaseInfo, DownloadAsset, Platform } from '../types';
 
 interface DownloadButton {
   platform: Platform;
@@ -19,6 +19,7 @@ const DOWNLOAD_OPTIONS: DownloadButton[] = [
 function SmartDownloaderInner() {
   const { t } = useLanguage();
   const [detected, setDetected] = useState<Platform>('linux');
+  const [arch, setArch] = useState<'arm64' | 'x64' | 'unknown'>('unknown');
   const [release, setRelease] = useState<ReleaseInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,15 +28,20 @@ function SmartDownloaderInner() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/releases/latest')
+    detectArch().then((a) => { if (!cancelled) setArch(a); });
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${import.meta.env.BASE_URL}releases.json`)
       .then(async (res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json() as Promise<ApiResponse<ReleaseInfo>>;
+        return res.json() as Promise<ReleaseInfo>;
       })
-      .then((json) => {
+      .then((data) => {
         if (cancelled) return;
-        if (json.success && json.data) setRelease(json.data);
-        else setError(json.error?.message ?? '');
+        setRelease(data);
       })
       .catch((err: Error) => { if (!cancelled) { console.error(err); setError(err.message); } })
       .finally(() => { if (!cancelled) setLoading(false); });
@@ -43,7 +49,9 @@ function SmartDownloaderInner() {
   }, []);
 
   const handleDownload = useCallback((platform: Platform) => {
-    const asset: DownloadAsset | undefined = release?.downloads[platform];
+    const baseAsset = release?.downloads[platform];
+    const asset: DownloadAsset | undefined =
+      platform === 'mac' && arch === 'arm64' && baseAsset?.alt ? baseAsset.alt : baseAsset;
     if (asset?.url && asset.url !== '#') {
       window.open(asset.url, '_blank', 'noopener,noreferrer');
     } else {
@@ -52,7 +60,7 @@ function SmartDownloaderInner() {
       };
       window.alert(`${t.download_unavailable}${fallback[platform]}`);
     }
-  }, [release, t]);
+  }, [release, arch, t]);
 
   const isMobile = detected === 'mobile';
 
@@ -69,7 +77,7 @@ function SmartDownloaderInner() {
         </div>
       )}
       {error && !loading && (
-        <div className="text-[10px] text-amber-500 font-mono">{t.download_error}</div>
+        <div className="text-[10px] text-amber-700 dark:text-amber-400 font-mono">{t.download_error}</div>
       )}
       <div className="bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border p-4 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -83,26 +91,27 @@ function SmartDownloaderInner() {
                 {t.download_loading}
               </span>
             ) : (
-              `Auraxis ${release?.version ?? '2.0.1'}`
+              `Auraxis Agent ${release?.version ?? '2.0.0'}`
             )}
           </h3>
           {!isMobile && !loading && (
             <p className="text-[10px] text-brand-accent font-mono mt-0.5">
-              {t.download_detected} {PLATFORM_LABELS[detected]}
+              {t.download_detected} {PLATFORM_LABELS[detected]}{detected === 'mac' && arch === 'arm64' ? ' (arm64)' : ''}
             </p>
           )}
         </div>
         <div className="flex items-center gap-1.5 flex-shrink-0">
           {DOWNLOAD_OPTIONS.map(({ platform, Icon, label }) => {
             const isActive = detected === platform;
-            const asset = release?.downloads[platform];
+            const baseAsset = release?.downloads[platform];
+            const asset = platform === 'mac' && arch === 'arm64' && baseAsset?.alt ? baseAsset.alt : baseAsset;
             return (
               <button
                 key={platform}
                 onClick={() => handleDownload(platform)}
                 disabled={isMobile}
                 aria-label={platformTips[platform]}
-                title={asset ? `${asset.label} — ${asset.size}` : platformTips[platform]}
+                title={asset ? (asset.size ? `${asset.label} — ${asset.size}` : asset.label) : platformTips[platform]}
                 className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 h-9 rounded transition-colors whitespace-nowrap border ${isActive ? 'bg-brand-accent/15 text-brand-accent border-brand-accent/40 hover:bg-brand-accent/25' : 'bg-white dark:bg-brand-dark hover:bg-black/5 dark:hover:bg-white/5 text-brand-ink2 dark:text-brand-text border-brand-hairline dark:border-brand-border'} ${isMobile ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <Icon className="w-4 h-4" aria-hidden="true" />

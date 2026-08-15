@@ -1,10 +1,10 @@
-# Auraxis — 官方网站
+# Auraxis Agent — 官方网站
 
 <img width="3078" height="1376" alt="Auraxis 官网预览" src="https://github.com/user-attachments/assets/cc06146b-51a2-4b2e-a6c4-41aca0a0fb5e" />
 
 <p align="center">
-  <strong>Auraxis</strong> 的官方品牌营销站点。<br />
-  为桌面端 Agentic 编程助手 <strong>Auraxis</strong>（Electron 应用）量身打造的单页落地页。<br />
+  <strong>Auraxis Agent</strong> 的官方品牌营销站点。<br />
+  为桌面端编程助手 <strong>Auraxis Agent</strong>（Electron 应用）量身打造的单页落地页。<br />
   中英双语 · 深色/浅色主题 · 基于 Astro 4 + Hono + Cloudflare Pages。
 </p>
 
@@ -22,7 +22,7 @@
 
 ## 概述
 
-Auraxis 网站是 [Auraxis](https://github.com/yth1120/Auraxis-Agent) 桌面端 Electron 应用的品牌官网，向开发者社区展示 Auraxis 的核心能力：
+Auraxis Agent 网站是 [Auraxis Agent](https://github.com/yth1120/Auraxis-Agent) 桌面端 Electron 应用的品牌官网，向开发者社区展示 Auraxis Agent 的核心能力：
 
 - **统一 ReAct 步进引擎** — 聊天与智能体共用 step-engine 单一步进循环，停止策略/压缩/重试均为策略钩子
 - **63 个内置工具** — 11 个危险 + 52 个安全，按 10 大能力族分类
@@ -129,11 +129,16 @@ auraxis-website/
     ├── components/           # Astro 无交互组件
     │   ├── Header.astro
     │   ├── HeroSection.astro
-    │   ├── FeatureGrid.astro
+    │   ├── SolutionSection.astro    # 核心能力（6 张能力卡）
+    │   ├── DemoSection.astro        # ReAct 循环演示（终端模拟）
     │   ├── ArchitectureSection.astro
     │   ├── ToolsMatrixSection.astro
-    │   ├── DownloadSection.astro   # 下载区（版本/系统要求/更新日志）
-    │   ├── DeveloperDocs.astro
+    │   ├── SafetySection.astro      # 安全模型（权限模式 / 沙箱后端）
+    │   ├── EcosystemSection.astro   # 开发者生态（CLI / TS SDK / Python SDK / 插件）
+    │   ├── DownloadSection.astro    # 下载区（版本/系统要求/更新日志）
+    │   ├── DeveloperDocs.astro      # 二次开发指南（克隆 / 启动 / 文档链接）
+    │   ├── FaqSection.astro         # 常见问题（details/summary）
+    │   ├── GitHubIcon.astro         # GitHub 品牌图标（内联 SVG）
     │   └── Footer.astro
     │
     ├── react/                # React 交互岛屿
@@ -151,7 +156,7 @@ auraxis-website/
     ├── data/
     │   ├── tools-data.json   # ★ 63 个内置工具数据集（源自桌面端 tool-defs.ts）
     │   ├── tools.ts          # 类型化工具数据访问层
-    │   ├── releases.json     # 发布版本 & 下载资产（v2.0.1）
+    │   ├── releases.json     # 发布版本 & 下载资产（v2.0.0）
     │   └── simSteps.ts       # 终端模拟步骤序列
     │
     ├── types/
@@ -290,7 +295,8 @@ interface ApiResponse<T = unknown> {
 
 ```bash
 # 从桌面端仓库读取 TOOL_DEFINITIONS，生成 tools-data.json
-# 字段: name / description / category / danger / summary / concurrencySafe / params
+# 字段: name / description(中文翻译) / descriptionEn(桌面端原文) / category / danger / concurrencySafe / params
+# params 对应桌面端 input_schema.properties 的顶层键名
 ```
 
 ### TypeScript

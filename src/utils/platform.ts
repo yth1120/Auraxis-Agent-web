@@ -38,3 +38,34 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   linux: 'Linux',
   mobile: 'Mobile',
 };
+
+/**
+ * 尝试识别 CPU 架构（Apple Silicon / x64）
+ *
+ * 优先使用 User-Agent Client Hints（Chrome / Edge），
+ * 不可用时回退到 UA 关键字；macOS UA 无法可靠区分，默认 Intel。
+ */
+export async function detectArch(): Promise<'arm64' | 'x64' | 'unknown'> {
+  if (typeof navigator === 'undefined') return 'unknown';
+
+  try {
+    const uaData = (navigator as unknown as {
+      userAgentData?: {
+        getHighEntropyValues?: (hints: string[]) => Promise<{ architecture?: string }>;
+      };
+    }).userAgentData;
+    if (uaData?.getHighEntropyValues) {
+      const values = await uaData.getHighEntropyValues(['architecture']);
+      if (values?.architecture === 'arm') return 'arm64';
+      if (values?.architecture === 'x86') return 'x64';
+    }
+  } catch {
+    // 忽略 UA-CH 不可用的情况，继续走 UA 回退
+  }
+
+  const ua = navigator.userAgent;
+  if (/arm64|aarch64|armv8|Windows NT 10\.0; ARM64/i.test(ua)) return 'arm64';
+  if (/Win64|x86_64|amd64/i.test(ua)) return 'x64';
+  if (/Macintosh|Mac OS X/i.test(ua)) return 'x64';
+  return 'unknown';
+}

@@ -4,11 +4,13 @@ import ArchitectureFlow from '../react/ArchitectureFlow';
 
 <section id="architecture" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-14">
+    <div class="reveal text-center max-w-3xl mx-auto mb-14">
       <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Architecture</div>
-      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="arch_title">透明、干净的双进程交互架构</h2>
-      <p class="text-brand-muted mt-3" data-i18n="arch_subtitle">Auraxis 的内部运行方式：主进程与渲染进程经 IPC 双向通信，每一条数据流转都清晰可见。</p>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="arch_title">双进程架构</h2>
+      <p class="text-brand-muted mt-3" data-i18n="arch_subtitle">Auraxis Agent 的内部结构：主进程负责工具执行与调度，渲染进程负责界面，二者通过 IPC 通信。</p>
     </div>
-    <ArchitectureFlow client:visible />
+    <div class="reveal">
+      <ArchitectureFlow client:idle />
+    </div>
   </div>
 </section>

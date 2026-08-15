@@ -1,41 +1,55 @@
 ---
-import { Github } from 'lucide-react';
+import GitHubIcon from './GitHubIcon.astro';
+const BASE = import.meta.env.BASE_URL;
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 
 const FOOTER_LINKS = [
-  { href: '#features', key: 'nav_features', label: '技术特性' },
-  { href: '#react-demo', key: 'nav_demo', label: '智能体演练' },
+  { href: '#solution', key: 'nav_solution', label: '核心能力' },
+  { href: '#demo', key: 'nav_demo', label: '演示' },
   { href: '#architecture', key: 'nav_architecture', label: '系统架构' },
   { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
-  { href: '#download', key: 'nav_download', label: '免费下载' },
+  { href: '#safety', key: 'nav_safety', label: '安全模型' },
+  { href: '#faq', key: 'nav_faq', label: '常见问题' },
+  { href: '#download', key: 'nav_download', label: '下载' },
+];
+
+const SUPPORT_LINKS = [
+  { href: `${REPO_URL}/issues`, key: 'footer_support_2', label: 'GitHub Issues' },
+  { href: `${REPO_URL}/discussions`, key: 'footer_support_3', label: 'GitHub Discussions' },
+  { href: `${REPO_URL}/issues`, key: 'footer_support_1', label: '报告安全缺陷' },
 ];
 ---
 
 <footer class="border-t border-brand-hairline dark:border-brand-border bg-white dark:bg-brand-black py-14 relative z-10 transition-colors">
   <div class="max-w-6xl mx-auto px-6 flex flex-col items-center text-center gap-6">
     <div class="flex items-center gap-2.5">
-      <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-8 w-auto" />
-      <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis</span>
-      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.1</span>
+      <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="32" height="32" class="h-8 w-auto" />
+      <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
+      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.0</span>
     </div>
 
-    <p class="text-brand-muted text-sm max-w-md leading-relaxed" data-i18n="footer_brand">基于 Electron 构建的桌面端 Agentic 编程助手 — 透明、沙箱隔离、可扩展。</p>
+    <p class="text-brand-muted text-sm max-w-md leading-relaxed" data-i18n="footer_brand">Auraxis Agent —— 一个基于 Electron 的桌面端编程助手，MIT 开源，个人开发中。</p>
 
-    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px]" aria-label="页脚导航">
+    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px]" data-i18n-aria="footer_nav" aria-label="页脚导航">
       {FOOTER_LINKS.map(({ href, key, label }) => (
         <a href={href} data-i18n={key} class="text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors">{label}</a>
       ))}
       <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors inline-flex items-center gap-1">
-        <Github className="w-3.5 h-3.5" aria-hidden="true" />GitHub
+        <GitHubIcon size={14} />GitHub
       </a>
+    </nav>
+
+    <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs text-brand-faint" data-i18n-aria="footer_support" aria-label="支持与反馈">
+      {SUPPORT_LINKS.map(({ href, key, label }) => (
+        <a href={href} target="_blank" rel="noopener noreferrer" data-i18n={key} class="hover:text-brand-muted transition-colors">{label}</a>
+      ))}
     </nav>
 
     <div class="w-full pt-6 mt-2 border-t border-brand-hairline dark:border-brand-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-brand-faint">
       <p data-i18n="footer_copyright">&copy; 2026 Auraxis Core Contributors. 基于 MIT License 开源.</p>
       <div class="flex gap-5">
-        <a href="#" class="hover:text-brand-muted transition-colors" data-i18n="footer_privacy">隐私条例</a>
         <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer" class="hover:text-brand-muted transition-colors" data-i18n="footer_license">软件许可证</a>
       </div>
     </div>

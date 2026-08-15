@@ -34,7 +34,7 @@ function ArchitectureFlowInner() {
   const shouldAnimate = !prefersReduced;
 
   return (
-    <div className="bg-white dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-xl p-8 overflow-x-auto transition-colors">      <div className="min-w-[800px] flex items-stretch justify-between gap-8 font-mono text-xs">
+    <div className="bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-8 overflow-x-auto transition-colors">      <div className="min-w-[800px] flex items-stretch justify-between gap-8 font-mono text-xs">
         {/* ── 渲染进程 ── */}
         <div
           className="flex-1 border border-brand-accent/25 dark:border-brand-accent/30 bg-white dark:bg-brand-accent/5 rounded-lg p-5 transition-colors"

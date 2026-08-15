@@ -73,12 +73,12 @@ export interface Tool {
   type: ToolType;
   /** 中文简述 */
   description: string;
-  /** 入参字段名列表（对应桌面端 inputSchema 顶层 properties） */
+  /** 英文描述（桌面端 tool-defs.ts 原文，用于英文界面） */
+  descriptionEn?: string;
+  /** 入参字段名列表（对应桌面端 input_schema 顶层 properties） */
   params: string[];
   /** 功能分类 */
   category: ToolCategory;
-  /** 是否携带结构化输出摘要 */
-  summary?: boolean;
 }
 
 // ─── 平台检测 ─────────────────────────────────────
@@ -106,6 +106,8 @@ export interface DownloadAsset {
   size: string;
   /** CPU 架构，如 "arm64" | "x64" | "universal" */
   arch?: string;
+  /** 同平台备选架构资产（如 macOS Apple Silicon DMG） */
+  alt?: DownloadAsset;
 }
 
 /** 发布版本完整信息 */

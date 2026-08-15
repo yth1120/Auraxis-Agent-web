@@ -1,7 +1,0 @@
-name = "auraxis-website"
-pages_build_output_dir = "./dist"
-compatibility_date = "2026-08-16"
-
-# With _worker.js mode (Astro Cloudflare adapter default),
-# no separate functions directory is needed.
-# Routing defined by _routes.json in dist/.

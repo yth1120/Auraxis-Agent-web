@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the **Auraxis** marketing website — an Astro 4 landing page for the Auraxis desktop app (an Agentic coding assistant built on Electron with a unified ReAct step engine, multi-agent scheduling, Code Mode orchestration, native sandboxing, and MCP support). The site is bilingual (zh-CN / en), deployed to Cloudflare Pages in hybrid mode.
+This is the **Auraxis Agent** marketing website — an Astro 4 landing page for the Auraxis Agent desktop app (a desktop coding assistant built on Electron with a unified ReAct step engine, multi-agent scheduling, Code Mode orchestration, native sandboxing, and MCP support). The site is bilingual (zh-CN / en), deployed to Cloudflare Pages in hybrid mode.
 
 **Brand rule (strict):** Auraxis Black `#111216` (dark bg) / Ivory `#F1F1EE` (light bg / dark-mode text) + Aura gray-purple `#8C8AA8` used ONLY as ~3% accent (focus / selected / status dots). No blue, no large purple areas, no primary gradients. Radius tiers: 5/6/8/12/14/9999 only. Zero-movement animation: no button hover shift/scale, no modal open/close animations — only functional rotation and data-driven motion.
 
@@ -43,8 +43,8 @@ Request → Astro catch-all (src/pages/api/[...route].ts)
 
 ### Data flow
 
-- **Tool definitions** (`src/data/tools-data.json` + typed accessor `src/data/tools.ts`): 63 tools extracted from the desktop app's `electron/tool-defs.ts`. Each tool has `danger` (11 tools, aligned with `DANGEROUS_TOOLS` in `electron/ipc/tool-handlers.ts`), `category` (files/execution/terminal/web/planning/agent/background/session/capability/verify/interaction), `summary`, `concurrencySafe`, and `params` (top-level input schema property names).
-- **Release info** (`src/data/releases.json`): v2.0.1 with real changelog and per-platform download assets (currently `#` placeholders until first public release), consumed by the SmartDownloader React island via `GET /api/releases/latest`.
+- **Tool definitions** (`src/data/tools-data.json` + typed accessor `src/data/tools.ts`): 63 tools extracted from the desktop app's `electron/tool-defs.ts`. Each tool has `danger` (11 tools, aligned with `DANGEROUS_TOOLS` in `electron/ipc/tool-handlers.ts`), `category` (files/execution/terminal/web/planning/agent/background/session/capability/verify/interaction), `description` (Chinese) / `descriptionEn` (desktop original), `concurrencySafe`, and `params` (top-level `input_schema` property names).
+- **Release info** (`src/data/releases.json`): v2.0.0 with real changelog and per-platform download assets (currently `#` placeholders until first public release), consumed by the SmartDownloader React island via `GET /api/releases/latest`.
 - **Terminal simulation** (`src/data/simSteps.ts`): a sequence of `LogStep` objects modeling a full Auraxis ReAct loop (input → step-engine → plan → Glob/Read → permission → user-approved → Write → RunCode (Code Mode) → LSP → ReviewArtifact → `<FINAL_ANSWER>`).
 
 ### i18n system
@@ -67,6 +67,9 @@ Request → Astro catch-all (src/pages/api/[...route].ts)
 |---|---|
 | `src/pages/index.astro` | Single-page entry, composes all sections |
 | `src/layouts/BaseLayout.astro` | HTML shell, theme preload, i18n bootstrap, grid background |
+| `src/components/SafetySection.astro` | Security model: permission modes / sandbox backends |
+| `src/components/EcosystemSection.astro` | Developer ecosystem cards (CLI / TS SDK / Python SDK / plugins) |
+| `src/components/FaqSection.astro` | FAQ using native `<details>` disclosure |
 | `src/types/index.ts` | All shared TypeScript types (mirrors desktop `electron/contracts/` semantics) |
 | `src/data/tools-data.json` | Canonical 63-tool dataset (source of truth: desktop `electron/tool-defs.ts`) |
 | `src/data/tools.ts` | Typed accessor over the dataset (ALL_TOOLS / DANGER_TOOLS / SAFE_TOOLS / TOOL_CATEGORIES) |

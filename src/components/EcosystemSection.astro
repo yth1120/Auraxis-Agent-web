@@ -1,0 +1,61 @@
+---
+import { Terminal, Braces, Code2, Puzzle } from 'lucide-react';
+
+const ECOSYSTEM = [
+  {
+    icon: Terminal,
+    titleKey: 'eco_cli_title',
+    descKey: 'eco_cli_desc',
+    title: 'Headless CLI',
+    desc: 'npm run cli -- --run "任务" 直接跑完整 ReAct 循环，模型、权限、沙箱与 JSON 输出均可配置。',
+    command: 'npm run cli -- --run "任务"',
+  },
+  {
+    icon: Braces,
+    titleKey: 'eco_ts_title',
+    descKey: 'eco_ts_desc',
+    title: 'TypeScript SDK',
+    desc: 'packages/auraxis-sdk 通过 TCP JSON-RPC 与桌面端通信，可嵌入自己的工具链。',
+    command: 'packages/auraxis-sdk',
+  },
+  {
+    icon: Code2,
+    titleKey: 'eco_py_title',
+    descKey: 'eco_py_desc',
+    title: 'Python SDK',
+    desc: 'python/auraxis_sdk 提供同构 API，Python 自动化脚本可直接驱动会话与工具。',
+    command: 'python/auraxis_sdk',
+  },
+  {
+    icon: Puzzle,
+    titleKey: 'eco_plugin_title',
+    descKey: 'eco_plugin_desc',
+    title: '插件系统',
+    desc: 'commands / tools / hooks / ui 四类扩展点，载入前做危险模式扫描与能力确认。',
+    command: 'commands / tools / hooks / ui',
+  },
+];
+---
+
+<section id="ecosystem" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal text-center max-w-3xl mx-auto mb-12">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Ecosystem</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="eco_title">扩展与集成</h2>
+      <p class="text-brand-muted mt-3" data-i18n="eco_subtitle">Auraxis Agent 提供 MCP 协议、CLI、SDK 与插件机制，方便脚本和外部程序接入。</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {ECOSYSTEM.map(({ icon: Icon, titleKey, descKey, title, desc, command }, i) => (
+        <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors flex flex-col" style={`--reveal-delay: ${i * 110}ms`}>
+          <div class="w-9 h-9 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
+            <Icon className="w-4 h-4" aria-hidden="true" />
+          </div>
+          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h3>
+          <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed flex-1" data-i18n={descKey}>{desc}</p>
+          <code class="mt-4 block text-[10px] font-mono text-brand-ivory code-dark-box border border-brand-border rounded px-2.5 py-1.5 truncate">{command}</code>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

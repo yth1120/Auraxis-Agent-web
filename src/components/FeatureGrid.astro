@@ -22,23 +22,37 @@ const FEATURES = [
   { icon: Cpu, titleKey: 'feature8_title', descKey: 'feature8_desc' },
   { icon: Blocks, titleKey: 'feature9_title', descKey: 'feature9_desc' },
 ];
+
+const num = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
-<section id="features" class="py-16 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
-  <div class="text-center max-w-3xl mx-auto mb-14">
-    <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="features_title">外置于系统的透明能力</h2>
-    <p class="text-brand-muted mt-3" data-i18n="features_subtitle">彻底打开大模型与操作系统之间的「黑盒」。Auraxis 不仅发送 prompt，更是一整套可审计的代码执行引擎。</p>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1080px] mx-auto">
-    {FEATURES.map(({ icon: Icon, titleKey, descKey }) => (
-      <div class="group bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border p-6 rounded-lg hover:border-brand-accent/40 transition-colors">
-        <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
-          <Icon className="w-5 h-5" aria-hidden="true" />
-        </div>
-        <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
-        <p class="text-[13px] text-brand-muted mt-2 leading-relaxed" data-i18n={descKey}></p>
+<section id="features" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-14">
+    <!-- 左侧 sticky 标题 -->
+    <div class="lg:col-span-4">
+      <div class="lg:sticky lg:top-24 space-y-4">
+        <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase">Features</div>
+        <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="features_title">外置于系统的透明能力</h2>
+        <p class="text-brand-muted leading-relaxed" data-i18n="features_subtitle">彻底打开大模型与操作系统之间的「黑盒」。Auraxis 不仅发送 prompt，更是一整套可审计的代码执行引擎。</p>
       </div>
-    ))}
+    </div>
+
+    <!-- 右侧编号特性列表 -->
+    <div class="lg:col-span-8">
+      <div class="flex flex-col">
+        {FEATURES.map(({ icon: Icon, titleKey, descKey }, i) => (
+          <div class="group flex items-start gap-6 py-7 border-b border-brand-hairline dark:border-brand-border/60 transition-colors rounded-lg px-4 -mx-4 hover:bg-white dark:hover:bg-brand-dark/60 first:pt-2">
+            <span class="text-sm font-mono text-brand-faint pt-1 w-8 flex-shrink-0 group-hover:text-brand-accent transition-colors">{num(i)}</span>
+            <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent flex-shrink-0">
+              <Icon className="w-5 h-5" aria-hidden="true" />
+            </div>
+            <div class="min-w-0">
+              <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
+              <p class="text-sm text-brand-muted mt-1.5 leading-relaxed" data-i18n={descKey}></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 </section>

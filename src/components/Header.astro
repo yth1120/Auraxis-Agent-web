@@ -4,24 +4,37 @@ import LanguageToggle from '../react/LanguageToggle';
 import { Github, Download } from 'lucide-react';
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
+
+const NAV_LINKS = [
+  { href: '#features', key: 'nav_features' },
+  { href: '#react-demo', key: 'nav_demo' },
+  { href: '#architecture', key: 'nav_architecture' },
+  { href: '#tools', key: 'nav_tools' },
+];
 ---
 
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-brand-black/80 backdrop-blur-md border-b border-brand-hairline dark:border-brand-border transition-colors">
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="#top" class="flex items-center gap-2.5" aria-label="Auraxis 首页">
-      <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-8 w-auto" />
-      <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis</span>
-      <span class="text-[10px] text-brand-muted font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.1</span>
+<header class="sticky top-0 z-50 bg-white/75 dark:bg-brand-black/75 backdrop-blur-xl border-b border-brand-hairline dark:border-brand-border transition-colors">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between relative">
+    <a href="#top" class="flex items-center gap-2.5 flex-shrink-0" aria-label="Auraxis 首页">
+      <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-7 w-auto" />
+      <span class="font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis</span>
+      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.1</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-brand-muted" aria-label="主导航">
-      <a href="#features" data-i18n="nav_features" class="hover:text-ink dark:hover:text-ivory transition-colors">技术特性</a>
-      <a href="#react-demo" data-i18n="nav_demo" class="hover:text-ink dark:hover:text-ivory transition-colors">智能体演练</a>
-      <a href="#architecture" data-i18n="nav_architecture" class="hover:text-ink dark:hover:text-ivory transition-colors">系统架构</a>
-      <a href="#tools" data-i18n="nav_tools" class="hover:text-ink dark:hover:text-ivory transition-colors">工具矩阵</a>
+    <!-- 居中导航 -->
+    <nav class="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" aria-label="主导航">
+      {NAV_LINKS.map(({ href, key }) => (
+        <a
+          href={href}
+          data-i18n={key}
+          class="px-3.5 h-8 inline-flex items-center text-[13px] font-medium text-brand-muted hover:text-ink dark:hover:text-ivory rounded-full transition-colors"
+        >
+          {key === 'nav_features' ? '技术特性' : key === 'nav_demo' ? '智能体演练' : key === 'nav_architecture' ? '系统架构' : '工具矩阵'}
+        </a>
+      ))}
     </nav>
 
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center gap-2 flex-shrink-0">
       <LanguageToggle client:idle />
       <ThemeToggle client:idle />
 

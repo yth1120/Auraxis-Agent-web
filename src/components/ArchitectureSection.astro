@@ -2,10 +2,13 @@
 import ArchitectureFlow from '../react/ArchitectureFlow';
 ---
 
-<section id="architecture" class="py-16 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
-  <div class="text-center max-w-3xl mx-auto mb-14">
-    <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="arch_title">透明、干净的双进程交互架构</h2>
-    <p class="text-brand-muted mt-3" data-i18n="arch_subtitle">拒绝一切黑盒逻辑。这是 Auraxis 的内部运行方式，让每一条数据流转都在你的控制之中。</p>
+<section id="architecture" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Architecture</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="arch_title">透明、干净的双进程交互架构</h2>
+      <p class="text-brand-muted mt-3" data-i18n="arch_subtitle">拒绝一切黑盒逻辑。这是 Auraxis 的内部运行方式，让每一条数据流转都在你的控制之中。</p>
+    </div>
+    <ArchitectureFlow client:visible />
   </div>
-  <ArchitectureFlow client:visible />
 </section>

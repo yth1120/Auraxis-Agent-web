@@ -7,6 +7,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
 import FeatureGrid from '../components/FeatureGrid.astro';
+import PermissionSection from '../components/PermissionSection.astro';
+import CodeModeSection from '../components/CodeModeSection.astro';
 import ArchitectureSection from '../components/ArchitectureSection.astro';
 import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
 import DownloadSection from '../components/DownloadSection.astro';
@@ -17,9 +19,11 @@ import Footer from '../components/Footer.astro';
 <BaseLayout>
   <Header />
 
-  <main class="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-24">
+  <main class="relative z-10 max-w-7xl mx-auto px-0 pt-0 pb-0">
     <HeroSection />
     <FeatureGrid />
+    <PermissionSection />
+    <CodeModeSection />
     <ArchitectureSection />
     <ToolsMatrixSection />
     <DownloadSection />

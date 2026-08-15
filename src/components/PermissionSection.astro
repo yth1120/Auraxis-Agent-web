@@ -1,0 +1,96 @@
+---
+import { ShieldQuestion, ClipboardList, Zap, Monitor, SquareTerminal, AppWindow, GitBranch } from 'lucide-react';
+---
+
+<section id="permission" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Security</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="perm_title">三模态权限看门狗</h2>
+      <p class="text-brand-muted mt-3" data-i18n="perm_subtitle">每一次危险调用都经过权限管线：权限模式 → 沙箱门 → 审批 → 执行，顺序不可绕过。</p>
+    </div>
+
+    <!-- 三模式对比 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+            <ShieldQuestion className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div>
+            <div class="text-xs font-mono text-brand-accent">ask</div>
+            <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="perm_ask_title">Ask · 询问模式</h3>
+          </div>
+        </div>
+        <p class="text-xs text-brand-muted mb-4" data-i18n="perm_ask_desc">默认模式。安全与效率的最佳平衡。</p>
+        <ul class="space-y-2.5">
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_ask_1">只读工具（Read / Grep / Glob）自动放行</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_ask_2">危险工具弹窗确认，逐次可见</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_ask_3">规则作用域 once / session / always</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+            <ClipboardList className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div>
+            <div class="text-xs font-mono text-brand-accent">plan</div>
+            <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="perm_plan_title">Plan · 计划审批</h3>
+          </div>
+        </div>
+        <p class="text-xs text-brand-muted mb-4" data-i18n="perm_plan_desc">先出计划，再动手。适合大型重构。</p>
+        <ul class="space-y-2.5">
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_plan_1">LLM 生成结构化任务计划交用户审批</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_plan_2">计划内工具自动执行，计划外回退 Ask</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_plan_3">审批等待 5 分钟超时自动取消</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+            <Zap className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div>
+            <div class="text-xs font-mono text-brand-accent">afe</div>
+            <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="perm_afe_title">AFE · 全自动</h3>
+          </div>
+        </div>
+        <p class="text-xs text-brand-muted mb-4" data-i18n="perm_afe_desc">无人值守的自动化执行。</p>
+        <ul class="space-y-2.5">
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_afe_1">所有工具自动批准，无弹窗打断</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_afe_2">安全检查仍然生效（路径/扩展名/URL）</span></li>
+          <li class="flex items-start gap-2 text-[13px] text-brand-muted"><span class="w-1 h-1 rounded-full bg-brand-accent mt-1.5 flex-shrink-0" aria-hidden="true"></span><span data-i18n="perm_afe_3">适合 CI 流水线与长时间后台任务</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 沙箱四后端 -->
+    <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6">
+      <div class="text-center mb-6">
+        <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="sandbox_title">原生沙箱，四后端隔离</h3>
+        <p class="text-xs text-brand-muted mt-1.5" data-i18n="sandbox_subtitle">命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="flex items-center gap-3 border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <Monitor className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+          <span class="text-xs text-brand-muted" data-i18n="sandbox_win">Windows Restricted Token / AppContainer</span>
+        </div>
+        <div class="flex items-center gap-3 border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <SquareTerminal className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+          <span class="text-xs text-brand-muted" data-i18n="sandbox_linux">Linux 隔离后端</span>
+        </div>
+        <div class="flex items-center gap-3 border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <AppWindow className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+          <span class="text-xs text-brand-muted" data-i18n="sandbox_mac">macOS 隔离后端</span>
+        </div>
+        <div class="flex items-center gap-3 border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
+          <GitBranch className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+          <span class="text-xs text-brand-muted" data-i18n="sandbox_worktree">Git Worktree 沙箱（.auraxis-sandbox/task-&lt;id&gt;）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

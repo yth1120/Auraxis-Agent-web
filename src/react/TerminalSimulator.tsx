@@ -9,15 +9,19 @@ import {
   ShieldAlert,
   ShieldCheck,
   ChevronRight,
+  Folder,
+  FileCode,
 } from 'lucide-react';
 import { SIM_STEPS } from '../data/simSteps';
 import { LanguageProvider, useLanguage } from '../i18n/LanguageContext';
 import type { LogStep, PlayState, PermissionState } from '../types';
 
 /**
- * 交互式终端仿真器 (React 孤岛)
+ * 交互式 IDE 风格仿真器 (React 孤岛)
  *
- * 完全状态驱动、抗竞态的 React 终端组件，模拟 Auraxis 统一 ReAct 步进循环。
+ * 状态驱动、抗竞态。模拟 Auraxis 统一 ReAct 步进循环：
+ *   输入 → step-engine → 计划 → Glob/Read → 权限看门狗 → 批准 →
+ *   Write → Code Mode → LSP → ReviewArtifact → <FINAL_ANSWER>
  *
  * 核心状态机：
  *   PlayState:  playing | paused | finished
@@ -25,6 +29,19 @@ import type { LogStep, PlayState, PermissionState } from '../types';
  */
 
 const STEP_INTERVAL_MS = 1800;
+
+const FILE_TREE = [
+  { name: 'auraxis', folder: true, depth: 0 },
+  { name: 'src', folder: true, depth: 1 },
+  { name: 'App.tsx', folder: false, depth: 2 },
+  { name: '__tests__', folder: true, depth: 2 },
+  { name: 'App.test.tsx', folder: false, depth: 3, active: true },
+  { name: 'electron', folder: true, depth: 1 },
+  { name: 'step-engine.ts', folder: false, depth: 2 },
+  { name: 'tool-handlers.ts', folder: false, depth: 2 },
+  { name: 'package.json', folder: false, depth: 1 },
+  { name: 'vitest.config.ts', folder: false, depth: 1 },
+];
 
 /** 为各日志类型生成终端 HTML 类名 */
 function getLogClassNames(step: LogStep): { container: string; preBlock?: string } {
@@ -299,47 +316,110 @@ function TerminalSimulatorInner() {
 
   return (
     <div className="relative">
-      {/* 终端外壳 Aura 微光（仅 3% 面积强调） */}
+      {/* IDE 外壳 Aura 微光（仅 3% 面积强调） */}
       <div className="absolute -inset-1 rounded-xl bg-brand-accent/15 blur-lg opacity-60" aria-hidden="true" />
 
       <div className="relative terminal-dark-box border border-brand-border rounded-xl overflow-hidden">
-        {/* ── 标题栏 ── */}
-        <div className="bg-brand-black px-4 py-3 border-b border-brand-border flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-red-500/80" aria-hidden="true"></span>
-            <span className="w-3 h-3 rounded-full bg-yellow-500/80" aria-hidden="true"></span>
-            <span className="w-3 h-3 rounded-full bg-green-500/80" aria-hidden="true"></span>
-            <span className="text-brand-muted text-[11px] ml-2 font-mono">
-              {t.terminal_title}
-            </span>
+        {/* ── 标题栏：mac 三键 + 文件标签 + 状态 ── */}
+        <div className="bg-brand-black px-4 py-2.5 border-b border-brand-border flex items-center justify-between">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-1.5 flex-shrink-0" aria-hidden="true">
+              <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
+            </div>
+            <div className="flex items-center gap-1 min-w-0">
+              <span className="flex items-center gap-1.5 px-2.5 h-7 bg-white/5 border border-brand-border rounded-t-md text-brand-accent text-[10px] font-mono whitespace-nowrap">
+                <FileCode className="w-3 h-3" aria-hidden="true" />
+                {t.terminal_title}
+              </span>
+            </div>
           </div>
-          <div className="text-[10px] text-brand-accent font-medium font-mono flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
-            {t.terminal_status}
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+            <span className="text-[10px] text-brand-accent font-mono">{t.terminal_status}</span>
           </div>
         </div>
 
-        {/* ── 控制栏 ── */}
-        <div className="bg-brand-dark px-4 py-2 border-b border-brand-border/60 flex items-center gap-4 text-[11px] text-brand-muted font-mono">
-          <span>
-            {t.terminal_target}
-          </span>
+        {/* ── 主体：文件树侧栏 + 日志区 ── */}
+        <div className="flex">
+          {/* 文件树（移动端隐藏） */}
+          <aside className="hidden sm:block w-44 flex-shrink-0 border-r border-brand-border/60 p-2.5" aria-hidden="true">
+            <div className="text-[9px] font-mono text-brand-faint uppercase tracking-widest px-1.5 pb-2">Explorer</div>
+            <ul className="space-y-0.5">
+              {FILE_TREE.map((item) => (
+                <li
+                  key={item.name}
+                  className={`flex items-center gap-1.5 px-1.5 py-[3px] rounded font-mono text-[10px] ${
+                    item.active
+                      ? 'bg-brand-accent/10 text-brand-accent'
+                      : item.folder
+                        ? 'text-brand-muted'
+                        : 'text-brand-faint'
+                  }`}
+                  style={{ paddingLeft: `${8 + item.depth * 12}px` }}
+                >
+                  {item.folder ? (
+                    <Folder className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
+                  ) : (
+                    <FileCode className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
+                  )}
+                  <span className="truncate">{item.name}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+
+          {/* 日志区 */}
+          <div
+            ref={terminalContainerRef}
+            className="flex-1 p-4 h-[360px] overflow-y-auto space-y-3 min-w-0"
+            role="log"
+            aria-live="polite"
+            aria-label="终端模拟输出"
+          >
+            {logs.map((step, i) => (
+              <LogEntry
+                key={i}
+                step={step}
+                permissionState={
+                  i === logs.length - 1 ? permissionState : ('approved' as PermissionState)
+                }
+                onApprove={handleApprove}
+                onDeny={handleDeny}
+              />
+            ))}
+
+            {/* 滚动锚点 */}
+            <div aria-hidden="true" />
+
+            {/* 完成状态 */}
+            {isFinished && (
+              <div className="text-[11px] text-brand-faint font-mono text-center pt-2 border-t border-brand-border/60">
+                ⏹ {t.terminal_finished}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── 底部状态栏：装饰信息 + 播放控制 ── */}
+        <div className="bg-brand-black px-3 py-1.5 border-t border-brand-border flex items-center gap-3 text-[10px] font-mono text-brand-faint">
+          <span className="hidden md:inline">ReAct Loop · iter 3/200 · utf-8</span>
+          <span className="hidden sm:inline">TSX · Ln 12, Col 8</span>
 
           <div className="ml-auto flex items-center gap-1.5" role="toolbar" aria-label="终端播放控制">
             <button
               onClick={handlePlayPause}
               aria-label={isPlaying ? t.terminal_pause : isFinished ? t.terminal_replay : t.terminal_play}
               title={isPlaying ? t.terminal_pause : isFinished ? t.terminal_replay : t.terminal_play}
-              className="bg-brand-accent/10 hover:bg-brand-accent/20 text-brand-accent border border-brand-accent/30 px-2 py-1 rounded transition-colors inline-flex items-center gap-1"
+              className="bg-brand-accent/10 hover:bg-brand-accent/20 text-brand-accent border border-brand-accent/30 px-2 h-6 rounded transition-colors inline-flex items-center gap-1"
             >
               {isPlaying ? (
-                <Pause className="w-3.5 h-3.5" aria-hidden="true" />
+                <Pause className="w-3 h-3" aria-hidden="true" />
               ) : (
-                <Play className="w-3.5 h-3.5" aria-hidden="true" />
+                <Play className="w-3 h-3" aria-hidden="true" />
               )}
-              <span className="text-[10px]">
-                {isPlaying ? t.terminal_pause : isFinished ? t.terminal_replay : t.terminal_play}
-              </span>
+              <span>{isPlaying ? t.terminal_pause : isFinished ? t.terminal_replay : t.terminal_play}</span>
             </button>
 
             <button
@@ -347,53 +427,22 @@ function TerminalSimulatorInner() {
               disabled={!canSkip}
               aria-label={t.terminal_skip}
               title={t.terminal_skip}
-              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 py-1 rounded transition-colors inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 h-6 rounded transition-colors inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
             >
-              <SkipForward className="w-3.5 h-3.5" aria-hidden="true" />
-              <span className="text-[10px]">{t.terminal_skip}</span>
+              <SkipForward className="w-3 h-3" aria-hidden="true" />
+              <span>{t.terminal_skip}</span>
             </button>
 
             <button
               onClick={handleReset}
               aria-label={t.terminal_reset}
               title={t.terminal_reset}
-              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 py-1 rounded transition-colors inline-flex items-center gap-1"
+              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 h-6 rounded transition-colors inline-flex items-center gap-1"
             >
-              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span className="text-[10px]">{t.terminal_reset}</span>
+              <RotateCcw className="w-3 h-3" aria-hidden="true" />
+              <span>{t.terminal_reset}</span>
             </button>
           </div>
-        </div>
-
-        {/* ── 日志内容区 ── */}
-        <div
-          ref={terminalContainerRef}
-          className="p-4 h-[340px] overflow-y-auto space-y-3"
-          role="log"
-          aria-live="polite"
-          aria-label="终端模拟输出"
-        >
-          {logs.map((step, i) => (
-            <LogEntry
-              key={i}
-              step={step}
-              permissionState={
-                i === logs.length - 1 ? permissionState : ('approved' as PermissionState)
-              }
-              onApprove={handleApprove}
-              onDeny={handleDeny}
-            />
-          ))}
-
-          {/* 滚动锚点 */}
-          <div aria-hidden="true" />
-
-          {/* 完成状态 */}
-          {isFinished && (
-            <div className="text-[11px] text-brand-faint font-mono text-center pt-2 border-t border-brand-border/60">
-              ⏹ {t.terminal_finished}
-            </div>
-          )}
         </div>
       </div>
     </div>

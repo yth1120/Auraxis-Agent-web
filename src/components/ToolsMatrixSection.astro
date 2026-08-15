@@ -2,25 +2,28 @@
 import ToolsGrid from '../react/ToolsGrid';
 ---
 
-<section id="tools" class="py-16 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
-  <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-    <div>
+<section id="tools" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Tools</div>
       <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="tools_title">彻底解耦的内置工具矩阵</h2>
-      <p class="text-brand-muted mt-2" data-i18n="tools_subtitle">智能体在每一步 ReAct 循环中，将根据您的系统权限约束，挑选最合理的工具集进行组装。</p>
+      <p class="text-brand-muted mt-3" data-i18n="tools_subtitle">智能体在每一步 ReAct 循环中，将根据您的系统权限约束，挑选最合理的工具集进行组装。</p>
     </div>
-    <div class="mt-4 md:mt-0 flex gap-2 font-mono text-xs" aria-label="工具安全等级图例">
-      <span class="px-2.5 py-1 bg-red-50 dark:bg-red-950/40 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded inline-flex items-center gap-1">
+
+    <ToolsGrid client:visible />
+
+    <div class="mt-8 flex items-center justify-center gap-2 font-mono text-xs" aria-label="工具安全等级图例">
+      <span class="px-2.5 py-1 bg-red-50 dark:bg-red-950/40 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-900/50 rounded-full inline-flex items-center gap-1">
         <span class="w-1.5 h-1.5 rounded-full bg-red-500" aria-hidden="true"></span>
         <span data-i18n="tools_danger_label">危险工具（需审批）</span>
       </span>
-      <span class="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 rounded inline-flex items-center gap-1">
+      <span class="px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 rounded-full inline-flex items-center gap-1">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
         <span data-i18n="tools_safe_label">安全工具（静默放行）</span>
       </span>
     </div>
-  </div>
-  <ToolsGrid client:visible />
-  <div class="mt-6 text-center">
-    <span class="text-xs text-brand-muted" data-i18n="tools_footnote">全部 63 个工具均提供严格的 TypeScript 类型声明与 IPC 安全策略映射。</span>
+    <div class="mt-4 text-center">
+      <span class="text-xs text-brand-muted" data-i18n="tools_footnote">全部 63 个工具均提供严格的 TypeScript 类型声明与 IPC 安全策略映射。</span>
+    </div>
   </div>
 </section>

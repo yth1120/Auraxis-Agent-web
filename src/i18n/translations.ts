@@ -100,9 +100,42 @@ export interface Translations {
   arch_main_3: string;
   arch_main_4: string;
 
+  // Permission gate
+  perm_title: string;
+  perm_subtitle: string;
+  perm_ask_title: string;
+  perm_ask_desc: string;
+  perm_ask_1: string;
+  perm_ask_2: string;
+  perm_ask_3: string;
+  perm_plan_title: string;
+  perm_plan_desc: string;
+  perm_plan_1: string;
+  perm_plan_2: string;
+  perm_plan_3: string;
+  perm_afe_title: string;
+  perm_afe_desc: string;
+  perm_afe_1: string;
+  perm_afe_2: string;
+  perm_afe_3: string;
+  sandbox_title: string;
+  sandbox_subtitle: string;
+  sandbox_win: string;
+  sandbox_linux: string;
+  sandbox_mac: string;
+  sandbox_worktree: string;
+
+  // Code Mode
+  code_title: string;
+  code_subtitle: string;
+  code_note: string;
+  code_tab_code: string;
+  code_tab_out: string;
+
   // Tools
   tools_title: string;
   tools_subtitle: string;
+  tools_search_placeholder: string;
   tools_danger_label: string;
   tools_safe_label: string;
   tools_filter_all: string;
@@ -134,6 +167,7 @@ export interface Translations {
   dev_check1: string;
   dev_check2: string;
   dev_check3: string;
+  dev_link_cli: string;
   dev_step1_comment: string;
   dev_step2_comment: string;
   dev_step3_comment: string;
@@ -275,9 +309,44 @@ const zh: Translations = {
   arch_main_3: '原生沙箱（四后端）+ Worktree 隔离',
   arch_main_4: '统一 JSONL 事件日志 + FTS5 全文搜索',
 
+  perm_title: '三模态权限看门狗',
+  perm_subtitle:
+    '每一次危险调用都经过权限管线：权限模式 → 沙箱门 → 审批 → 执行，顺序不可绕过。',
+  perm_ask_title: 'Ask · 询问模式',
+  perm_ask_desc: '默认模式。安全与效率的最佳平衡。',
+  perm_ask_1: '只读工具（Read / Grep / Glob）自动放行',
+  perm_ask_2: '危险工具弹窗确认，逐次可见',
+  perm_ask_3: '规则作用域 once / session / always',
+  perm_plan_title: 'Plan · 计划审批',
+  perm_plan_desc: '先出计划，再动手。适合大型重构。',
+  perm_plan_1: 'LLM 生成结构化任务计划交用户审批',
+  perm_plan_2: '计划内工具自动执行，计划外回退 Ask',
+  perm_plan_3: '审批等待 5 分钟超时自动取消',
+  perm_afe_title: 'AFE · 全自动',
+  perm_afe_desc: '无人值守的自动化执行。',
+  perm_afe_1: '所有工具自动批准，无弹窗打断',
+  perm_afe_2: '安全检查仍然生效（路径/扩展名/URL）',
+  perm_afe_3: '适合 CI 流水线与长时间后台任务',
+
+  sandbox_title: '原生沙箱，四后端隔离',
+  sandbox_subtitle:
+    '命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。',
+  sandbox_win: 'Windows Restricted Token / AppContainer',
+  sandbox_linux: 'Linux 隔离后端',
+  sandbox_mac: 'macOS 隔离后端',
+  sandbox_worktree: 'Git Worktree 沙箱（.auraxis-sandbox/task-<id>）',
+
+  code_title: 'Code Mode：让模型编排工具',
+  code_subtitle:
+    'RunCode 把 TypeScript 程序放进 worker 线程，模型用 await tools.Name() 像写代码一样编排工具调用。',
+  code_note: '并发安全工具最多 8 路重叠 · 变异工具串行 · 硬超时强杀',
+  code_tab_code: 'RunCode · TypeScript 程序',
+  code_tab_out: 'worker 线程输出',
+
   tools_title: '彻底解耦的内置工具矩阵',
   tools_subtitle:
     '智能体在每一步 ReAct 循环中，将根据您的系统权限约束，挑选最合理的工具集进行组装。',
+  tools_search_placeholder: '搜索工具名称或描述…',
   tools_danger_label: '危险工具（需审批）',
   tools_safe_label: '安全工具（静默放行）',
   tools_filter_all: '全部',
@@ -309,6 +378,7 @@ const zh: Translations = {
   dev_check1: 'Vitest 覆盖率门槛：行/语句 86.20% · 分支 79.37% · 函数 84.32%',
   dev_check2: '严格 CSP 内容安全策略与原生沙箱锁保证主进程安全',
   dev_check3: '166 个测试文件 · 1347 个用例 · 13 条 Playwright E2E 链路',
+  dev_link_cli: 'headless CLI（--run / --sdk / --acp / --plugin）',
   dev_step1_comment: '// 1. 克隆底层核心仓库',
   dev_step2_comment: '// 2. 创建本地开发环境变量配置',
   dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',
@@ -447,9 +517,44 @@ const en: Translations = {
   arch_main_3: 'Native Sandbox (4 backends) + Worktree Isolation',
   arch_main_4: 'Unified JSONL Event Log + FTS5 Search',
 
+  perm_title: 'Tri-Modal Permission Gate',
+  perm_subtitle:
+    'Every dangerous call runs through the pipeline: permission profile → sandbox gate → approval → execution. The order cannot be bypassed.',
+  perm_ask_title: 'Ask · Default',
+  perm_ask_desc: 'The default mode. Best balance of safety and velocity.',
+  perm_ask_1: 'Read-only tools (Read / Grep / Glob) pass silently',
+  perm_ask_2: 'Dangerous tools prompt for confirmation, call by call',
+  perm_ask_3: 'Rule scopes: once / session / always',
+  perm_plan_title: 'Plan · Approval',
+  perm_plan_desc: 'Plan first, then act. Built for large refactors.',
+  perm_plan_1: 'LLM generates a structured task plan for user approval',
+  perm_plan_2: 'Approved plan steps auto-execute; others fall back to Ask',
+  perm_plan_3: 'Approval waits time out after 5 minutes',
+  perm_afe_title: 'AFE · Auto',
+  perm_afe_desc: 'Unattended, automated execution.',
+  perm_afe_1: 'All tools auto-approved — no modal interruptions',
+  perm_afe_2: 'Safety checks still apply (paths / extensions / URLs)',
+  perm_afe_3: 'Ideal for CI pipelines and long-running background tasks',
+
+  sandbox_title: 'Native Sandbox, Four Backends',
+  sandbox_subtitle:
+    'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',
+  sandbox_win: 'Windows Restricted Token / AppContainer',
+  sandbox_linux: 'Linux isolation backend',
+  sandbox_mac: 'macOS isolation backend',
+  sandbox_worktree: 'Git Worktree sandbox (.auraxis-sandbox/task-<id>)',
+
+  code_title: 'Code Mode: Let the Model Orchestrate Tools',
+  code_subtitle:
+    'RunCode executes TypeScript programs in a worker thread — the model writes code with await tools.Name() to orchestrate tool calls.',
+  code_note: 'Up to 8-way overlap for concurrency-safe tools · serial mutation · hard-timeout kill',
+  code_tab_code: 'RunCode · TypeScript program',
+  code_tab_out: 'worker thread output',
+
   tools_title: 'Fully Decoupled Built-in Tool Matrix',
   tools_subtitle:
     'At each ReAct step, the agent assembles the most reasonable toolset under your system permission constraints.',
+  tools_search_placeholder: 'Search tools by name or description…',
   tools_danger_label: 'Danger (requires approval)',
   tools_safe_label: 'Safe (silent pass-through)',
   tools_filter_all: 'All',
@@ -481,6 +586,7 @@ const en: Translations = {
   dev_check1: 'Vitest coverage: lines 86.20% / branches 79.37% / functions 84.32%',
   dev_check2: 'Strict CSP enforcement and native sandbox locks keep the main process secure',
   dev_check3: '166 test files · 1347 cases · 13 Playwright E2E flows',
+  dev_link_cli: 'headless CLI (--run / --sdk / --acp / --plugin)',
   dev_step1_comment: '// 1. Clone the core repository',
   dev_step2_comment: '// 2. Create local environment config',
   dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',

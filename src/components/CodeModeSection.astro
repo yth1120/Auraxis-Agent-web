@@ -1,0 +1,70 @@
+---
+---
+
+<section id="code-mode" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Code Mode</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="code_title">Code Mode：让模型编排工具</h2>
+      <p class="text-brand-muted mt-3" data-i18n="code_subtitle">RunCode 把 TypeScript 程序放进 worker 线程，模型用 await tools.Name() 像写代码一样编排工具调用。</p>
+    </div>
+
+    <!-- 双窗格演示窗口（任何主题下保持深色） -->
+    <div class="terminal-dark-box border border-brand-border rounded-xl overflow-hidden max-w-4xl mx-auto">
+      <!-- 标签栏 -->
+      <div class="bg-brand-black px-4 flex items-center gap-1 border-b border-brand-border">
+        <span class="flex items-center gap-1.5 py-3 pr-4 text-brand-accent border-b-2 border-brand-accent">
+          <span class="w-2 h-2 rounded-full bg-brand-accent/60" aria-hidden="true"></span>
+          <span class="text-[11px] font-mono" data-i18n="code_tab_code">RunCode · TypeScript 程序</span>
+        </span>
+        <span class="flex items-center gap-1.5 py-3 pr-4 text-brand-faint">
+          <span class="w-2 h-2 rounded-full bg-brand-faint/60" aria-hidden="true"></span>
+          <span class="text-[11px] font-mono" data-i18n="code_tab_out">worker 线程输出</span>
+        </span>
+      </div>
+
+      <!-- 双栏 -->
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <!-- 左：TS 程序 -->
+        <div class="p-5 font-mono text-[11px] leading-[1.7] text-brand-text border-b md:border-b-0 md:border-r border-brand-border/60 overflow-x-auto">
+          <pre class="whitespace-pre">{`import { tools } from 'auraxis/code-mode';
+
+// 1. 定位所有测试文件
+const files = await tools.Glob({
+  pattern: '**/*.test.ts',
+});
+
+// 2. 读取被测模块
+const app = await tools.Read({
+  file_path: 'src/App.tsx',
+});
+
+// 3. 写测试 —— 子调用回穿完整权限管线
+await tools.Write({
+  file_path: 'src/__tests__/App.test.tsx',
+  content: buildTest(app),
+});
+
+// 4. 静态校验 + 运行测试
+await tools.LSP({ command: 'diagnostics' });
+await tools.ReviewArtifact({ scope: 'test' });`}</pre>
+        </div>
+
+        <!-- 右：worker 输出 -->
+        <div class="p-5 font-mono text-[11px] leading-[1.8] text-brand-muted overflow-x-auto">
+          <pre class="whitespace-pre">{`$ auraxis run code-mode.ts
+▶ worker thread · concurrency pool (max 8)
+✓ Glob        → 1 file matched
+✓ Read        → src/App.tsx (2.4 KB)
+⚠ Write       → awaiting permission…
+✓ approved    → snapshot in .auraxis-snapshots/
+✓ LSP         → tsc --noEmit: 0 errors
+✓ Review      → 1 passed · 100% coverage
+<FINAL_ANSWER> task complete`}</pre>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-xs text-brand-muted mt-5 font-mono" data-i18n="code_note">并发安全工具最多 8 路重叠 · 变异工具串行 · 硬超时强杀</p>
+  </div>
+</section>

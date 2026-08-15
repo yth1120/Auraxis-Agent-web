@@ -1,17 +1,41 @@
 ---
-import { Terminal, Check, Copy } from 'lucide-react';
+import { Terminal, Check, Copy, ArrowUpRight, FileText, ListChecks, Blocks, Braces } from 'lucide-react';
 
-const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent.git';
+const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
+
+const DOC_LINKS = [
+  { href: `${REPO_URL}/blob/main/docs/README.md`, key: 'footer_contrib_1', icon: FileText },
+  { href: `${REPO_URL}/blob/main/AGENTS.md`, key: 'footer_contrib_2', icon: ListChecks },
+  { href: `${REPO_URL}/blob/main/packages/auraxis-sdk/README.md`, key: 'footer_contrib_3', icon: Blocks },
+  { href: `${REPO_URL}/blob/main/python/auraxis_sdk/README.md`, key: 'footer_contrib_4', icon: Braces },
+  { href: `${REPO_URL}/blob/main/docs/README.md`, key: 'dev_link_cli', icon: Terminal },
+];
 ---
 
-<section id="developer-docs" class="py-16 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-    <div class="lg:col-span-5 space-y-6">
-      <div class="w-12 h-12 bg-brand-accent/10 border border-brand-accent/25 rounded-lg flex items-center justify-center text-brand-accent">
-        <Terminal className="w-6 h-6" aria-hidden="true" />
+<section id="developer-docs" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+    <div class="lg:col-span-5 space-y-7">
+      <div class="space-y-4">
+        <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase">Developers</div>
+        <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="dev_title">基于 Auraxis 进行二次开发</h2>
+        <p class="text-brand-muted leading-relaxed" data-i18n="dev_description">Auraxis 主进程与渲染进程全部基于 TypeScript，跨进程类型以 electron/contracts/ 为单一事实源。无论扩展底层工具、外接企业 MCP 服务器，还是修改 17 个 Zustand Store，基础设施都已就绪。</p>
       </div>
-      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="dev_title">基于 Auraxis 进行二次开发</h2>
-      <p class="text-brand-muted leading-relaxed" data-i18n="dev_description">Auraxis 主进程与渲染进程全部基于 TypeScript，跨进程类型以 electron/contracts/ 为单一事实源。无论扩展底层工具、外接企业 MCP 服务器，还是修改 17 个 Zustand Store，基础设施都已就绪。</p>
+
+      <!-- 文档链接列表 -->
+      <div class="flex flex-col">
+        {DOC_LINKS.map(({ href, key, icon: Icon }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer"
+            class="group flex items-center justify-between py-3 border-b border-brand-hairline dark:border-brand-border/60 text-sm text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors">
+            <span class="flex items-center gap-3">
+              <Icon className="w-4 h-4 text-brand-accent" aria-hidden="true" />
+              <span data-i18n={key}></span>
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-brand-faint group-hover:text-brand-accent transition-colors" aria-hidden="true" />
+          </a>
+        ))}
+      </div>
+
+      <!-- 工程指标 -->
       <div class="space-y-3">
         <div class="flex items-start gap-3">
           <div class="w-5 h-5 rounded-full bg-brand-accent/15 flex items-center justify-center text-brand-accent mt-0.5"><Check className="w-3.5 h-3.5" aria-hidden="true" /></div>

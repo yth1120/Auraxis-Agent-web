@@ -263,7 +263,7 @@ const zh: Translations = {
 
   hero_badge: '原生沙箱隔离 · 统一 ReAct 步进引擎',
   hero_title_line1: '让 AI 智能体在桌面上',
-  hero_title_line2: '真正动手写代码',
+  hero_title_line2: '动手写代码',
   hero_description:
     'Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 在桌面上可审计地动手干活。',
   hero_cta_download: '免费下载',
@@ -446,7 +446,7 @@ const zh: Translations = {
   compare_row4_auraxis: '63 工具 + MCP + 插件 + 双 SDK',
   compare_modes_label: '三种权限模式，按场景切换',
 
-  tools_title: '彻底解耦的内置工具矩阵',
+  tools_title: '内置工具矩阵',
   tools_subtitle:
     '智能体在每一步 ReAct 循环中，将根据您的系统权限约束，挑选最合理的工具集进行组装。',
   tools_search_placeholder: '搜索工具名称或描述…',
@@ -525,7 +525,7 @@ const en: Translations = {
 
   hero_badge: 'Native Sandbox · Unified ReAct Step Engine',
   hero_title_line1: 'Your desktop AI agent',
-  hero_title_line2: 'that actually ships code',
+  hero_title_line2: 'that ships code',
   hero_description:
     'Auraxis is a desktop Agentic coding assistant built on Electron. One unified ReAct step engine drives chat and agents alike — with 63 built-in tools, multi-agent scheduling, Code Mode orchestration and native sandboxing, it makes AI act on your desktop — auditably.',
   hero_cta_download: 'Download',
@@ -707,7 +707,7 @@ const en: Translations = {
   compare_row4_auraxis: '63 tools + MCP + plugins + dual SDKs',
   compare_modes_label: 'Three permission modes, switch by scenario',
 
-  tools_title: 'Fully Decoupled Built-in Tool Matrix',
+  tools_title: 'Built-in Tool Matrix',
   tools_subtitle:
     'At each ReAct step, the agent assembles the most reasonable toolset under your system permission constraints.',
   tools_search_placeholder: 'Search tools by name or description…',

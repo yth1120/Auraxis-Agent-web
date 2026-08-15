@@ -4,30 +4,23 @@ import { MonitorCheck, ListChecks } from 'lucide-react';
 import releases from '../data/releases.json';
 ---
 
+<!-- 收尾 CTA：全宽深色横幅（任何主题下保持深色） -->
 <section id="download" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Download</div>
-      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="download_title">下载 Auraxis</h2>
-      <p class="text-brand-muted mt-3" data-i18n="download_subtitle">v2.0.1 · Electron 43 · MIT 开源。首个公开版本发布前，下载链接为占位符。</p>
-    </div>
+    <div class="terminal-dark-box border border-brand-border rounded-2xl px-6 py-14 sm:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Download</div>
+        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-ivory" data-i18n="download_title">下载 Auraxis</h2>
+        <p class="text-brand-muted mt-3" data-i18n="download_subtitle">v2.0.1 · Electron 43 · MIT 开源。首个公开版本发布前，下载链接为占位符。</p>
+      </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-      <!-- 主下载卡 -->
-      <div class="lg:col-span-7 bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-7 hover:border-brand-accent/40 transition-colors">
-        <div class="text-[10px] font-mono text-brand-faint uppercase tracking-wider" data-i18n="download_current_version">当前稳定版本</div>
-        <div class="flex items-baseline gap-3 mt-1 mb-5">
-          <span class="text-3xl font-semibold font-mono text-ink dark:text-ivory">v{releases.version}</span>
-          <span class="text-xs font-mono text-brand-muted">{releases.releaseDate}</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-700/50 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 font-mono">stable</span>
-        </div>
+      <div class="max-w-2xl mx-auto mb-10">
         <SmartDownloader client:visible />
       </div>
 
-      <!-- 右列：系统要求 + 更新日志 -->
-      <div class="lg:col-span-5 flex flex-col gap-4">
-        <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border p-6 rounded-xl flex-1">
-          <h3 class="text-sm font-medium text-ink dark:text-ivory mb-4 flex items-center gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <div class="bg-white/[0.04] border border-brand-border rounded-xl p-5">
+          <h3 class="text-sm font-medium text-ivory mb-3.5 flex items-center gap-2">
             <MonitorCheck className="w-4 h-4 text-brand-accent" aria-hidden="true" />
             <span data-i18n="download_requirements_title">系统要求</span>
           </h3>
@@ -38,8 +31,8 @@ import releases from '../data/releases.json';
           </ul>
         </div>
 
-        <div class="bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border p-6 rounded-xl flex-1">
-          <h3 class="text-sm font-medium text-ink dark:text-ivory mb-4 flex items-center gap-2">
+        <div class="bg-white/[0.04] border border-brand-border rounded-xl p-5">
+          <h3 class="text-sm font-medium text-ivory mb-3.5 flex items-center gap-2">
             <ListChecks className="w-4 h-4 text-brand-accent" aria-hidden="true" />
             <span data-i18n="download_changelog_title">v2.0.1 更新内容</span>
           </h3>
@@ -51,9 +44,10 @@ import releases from '../data/releases.json';
               </li>
             ))}
           </ul>
-          <p class="mt-4 pt-3 border-t border-brand-hairline dark:border-brand-border/60 text-xs text-brand-faint" data-i18n="download_placeholder_note">下载链接将在首个公开版本发布后开放。</p>
         </div>
       </div>
+
+      <p class="text-center text-xs text-brand-faint mt-6 font-mono" data-i18n="download_placeholder_note">下载链接将在首个公开版本发布后开放。</p>
     </div>
   </div>
 </section>

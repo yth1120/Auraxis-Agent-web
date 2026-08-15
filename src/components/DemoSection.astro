@@ -1,0 +1,45 @@
+---
+import TerminalSimulator from '../react/TerminalSimulator';
+import { Lightbulb, ListTodo, Hammer, BadgeCheck } from 'lucide-react';
+
+const FLOW = [
+  { icon: Lightbulb, titleKey: 'flow1_title', descKey: 'flow1_desc' },
+  { icon: ListTodo, titleKey: 'flow2_title', descKey: 'flow2_desc' },
+  { icon: Hammer, titleKey: 'flow3_title', descKey: 'flow3_desc' },
+  { icon: BadgeCheck, titleKey: 'flow4_title', descKey: 'flow4_desc' },
+];
+---
+
+<section id="demo" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Live Demo</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="demo_title">看它如何跑完一个真实任务</h2>
+      <p class="text-brand-muted mt-3" data-i18n="demo_subtitle">从用户输入到 &lt;FINAL_ANSWER&gt; 的完整 ReAct 循环：统一引擎驱动，权限看门狗把关，Code Mode 编排工具。</p>
+    </div>
+
+    <!-- 四步流程 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+      {FLOW.map(({ icon: Icon, titleKey, descKey }, i) => (
+        <div class="relative bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-9 h-9 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+              <Icon className="w-4 h-4" aria-hidden="true" />
+            </div>
+            <span class="text-xs font-mono text-brand-faint">STEP {i + 1}</span>
+          </div>
+          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
+          <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed" data-i18n={descKey}></p>
+          {i < FLOW.length - 1 && (
+            <span class="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 text-brand-faint text-lg select-none z-10" aria-hidden="true">›</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- IDE 终端实况（点击播放；遇到权限请求会暂停等你批准） -->
+    <div class="max-w-4xl mx-auto">
+      <TerminalSimulator client:visible />
+    </div>
+  </div>
+</section>

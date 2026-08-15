@@ -6,10 +6,11 @@ import { Github, Download } from 'lucide-react';
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 
 const NAV_LINKS = [
-  { href: '#features', key: 'nav_features' },
-  { href: '#react-demo', key: 'nav_demo' },
-  { href: '#architecture', key: 'nav_architecture' },
-  { href: '#tools', key: 'nav_tools' },
+  { href: '#solution', key: 'nav_solution', label: '解决方案' },
+  { href: '#demo', key: 'nav_demo', label: '实况演示' },
+  { href: '#compare', key: 'nav_compare', label: '对比' },
+  { href: '#architecture', key: 'nav_architecture', label: '系统架构' },
+  { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
 ];
 ---
 
@@ -22,14 +23,14 @@ const NAV_LINKS = [
     </a>
 
     <!-- 居中导航 -->
-    <nav class="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" aria-label="主导航">
-      {NAV_LINKS.map(({ href, key }) => (
+    <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" aria-label="主导航">
+      {NAV_LINKS.map(({ href, key, label }) => (
         <a
           href={href}
           data-i18n={key}
           class="px-3.5 h-8 inline-flex items-center text-[13px] font-medium text-brand-muted hover:text-ink dark:hover:text-ivory rounded-full transition-colors"
         >
-          {key === 'nav_features' ? '技术特性' : key === 'nav_demo' ? '智能体演练' : key === 'nav_architecture' ? '系统架构' : '工具矩阵'}
+          {label}
         </a>
       ))}
     </nav>

@@ -1,0 +1,32 @@
+---
+import { MessageSquareOff, EyeOff, TriangleAlert } from 'lucide-react';
+
+const PROBLEMS = [
+  { icon: MessageSquareOff, titleKey: 'problem1_title', descKey: 'problem1_desc' },
+  { icon: EyeOff, titleKey: 'problem2_title', descKey: 'problem2_desc' },
+  { icon: TriangleAlert, titleKey: 'problem3_title', descKey: 'problem3_desc' },
+];
+---
+
+<section id="problem" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Problem</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="problem_title">今天的 AI 助手，为什么还不够用</h2>
+      <p class="text-brand-muted mt-3" data-i18n="problem_subtitle">三个每天都在发生的痛点，Auraxis 逐个解决。</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {PROBLEMS.map(({ icon: Icon, titleKey, descKey }, i) => (
+        <div class="relative bg-white dark:bg-brand-card/60 border border-brand-hairline dark:border-brand-border rounded-xl p-7 hover:border-brand-accent/40 transition-colors">
+          <span class="absolute top-5 right-6 text-2xl font-mono text-brand-faint/60 select-none" aria-hidden="true">0{i + 1}</span>
+          <div class="w-10 h-10 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-5">
+            <Icon className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <h3 class="text-base font-medium text-ink dark:text-ivory" data-i18n={titleKey}></h3>
+          <p class="text-sm text-brand-muted mt-2 leading-relaxed" data-i18n={descKey}></p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

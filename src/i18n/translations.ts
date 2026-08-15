@@ -8,6 +8,8 @@ export interface Translations {
   nav_tools: string;
   nav_download: string;
   nav_github_label: string;
+  nav_solution: string;
+  nav_compare: string;
 
   // Hero
   hero_badge: string;
@@ -132,6 +134,54 @@ export interface Translations {
   code_tab_code: string;
   code_tab_out: string;
 
+  // Problem (叙事区)
+  problem_title: string;
+  problem_subtitle: string;
+  problem1_title: string;
+  problem1_desc: string;
+  problem2_title: string;
+  problem2_desc: string;
+  problem3_title: string;
+  problem3_desc: string;
+
+  // Solution (叙事区)
+  solution_title: string;
+  solution_subtitle: string;
+  pillar2_title: string;
+  pillar2_desc: string;
+  solution_more_label: string;
+
+  // Demo (叙事区)
+  demo_title: string;
+  demo_subtitle: string;
+  flow1_title: string;
+  flow1_desc: string;
+  flow2_title: string;
+  flow2_desc: string;
+  flow3_title: string;
+  flow3_desc: string;
+  flow4_title: string;
+  flow4_desc: string;
+
+  // Compare (叙事区)
+  compare_title: string;
+  compare_subtitle: string;
+  compare_other: string;
+  compare_auraxis: string;
+  compare_row1_label: string;
+  compare_row1_other: string;
+  compare_row1_auraxis: string;
+  compare_row2_label: string;
+  compare_row2_other: string;
+  compare_row2_auraxis: string;
+  compare_row3_label: string;
+  compare_row3_other: string;
+  compare_row3_auraxis: string;
+  compare_row4_label: string;
+  compare_row4_other: string;
+  compare_row4_auraxis: string;
+  compare_modes_label: string;
+
   // Tools
   tools_title: string;
   tools_subtitle: string;
@@ -203,11 +253,13 @@ export interface Translations {
 
 const zh: Translations = {
   nav_features: '技术特性',
-  nav_demo: '智能体演练',
+  nav_demo: '实况演示',
   nav_architecture: '系统架构',
   nav_tools: '工具矩阵',
   nav_download: '免费下载',
   nav_github_label: 'Auraxis GitHub 仓库',
+  nav_solution: '解决方案',
+  nav_compare: '对比',
 
   hero_badge: '原生沙箱隔离 · 统一 ReAct 步进引擎',
   hero_title_line1: '让 AI 智能体在桌面上',
@@ -343,6 +395,56 @@ const zh: Translations = {
   code_tab_code: 'RunCode · TypeScript 程序',
   code_tab_out: 'worker 线程输出',
 
+  problem_title: '今天的 AI 助手，为什么还不够用',
+  problem_subtitle: '三个每天都在发生的痛点，Auraxis 逐个解决。',
+  problem1_title: '只说不做',
+  problem1_desc:
+    '聊天式 AI 只输出建议，改哪一行、跑什么命令全靠你手动执行。回复很长，代码没动。',
+  problem2_title: '黑盒不可审计',
+  problem2_desc:
+    '工具调用、权限决策、文件改动全在云端或未知逻辑里发生，出了问题无从追溯。',
+  problem3_title: '环境被污染',
+  problem3_desc:
+    '多个任务并行时互相踩踏工作区，临时文件、未完成改动散落一地，主分支随时可能被弄脏。',
+
+  solution_title: '一个引擎，从聊天到智能体',
+  solution_subtitle:
+    'Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，再以工具、调度与沙箱支撑它在桌面上真实干活。',
+  pillar2_title: '63 个内置工具',
+  pillar2_desc:
+    '从文件读写、终端与 Web 搜索，到后台调度、会话检索与子 Agent 编排，全部 63 个工具经同一条权限管线执行，11 个危险工具默认弹窗确认。',
+  solution_more_label: '更多能力',
+
+  demo_title: '看它如何跑完一个真实任务',
+  demo_subtitle:
+    '从用户输入到 <FINAL_ANSWER> 的完整 ReAct 循环：统一引擎驱动，权限看门狗把关，Code Mode 编排工具。',
+  flow1_title: '理解任务',
+  flow1_desc: '解析需求、读取项目上下文，注入相关记忆与项目指令。',
+  flow2_title: '生成计划',
+  flow2_desc: 'LLM 产出结构化 TaskPlan；plan 模式下先交用户审批再执行。',
+  flow3_title: '执行工具',
+  flow3_desc: '63 个工具经「权限模式 → 沙箱门 → 审批 → 执行」管线逐一落地。',
+  flow4_title: '验证交付',
+  flow4_desc: 'LSP / ReviewArtifact 验证通过后输出 <FINAL_ANSWER>，回合结束。',
+
+  compare_title: 'Auraxis vs 普通 AI 助手',
+  compare_subtitle: '同样是大模型驱动，差别在是否真正掌控执行链路。',
+  compare_other: '普通 AI 助手',
+  compare_auraxis: 'Auraxis',
+  compare_row1_label: '执行方式',
+  compare_row1_other: '只给建议，不碰你的代码',
+  compare_row1_auraxis: '本地驱动 Bash / LSP / Git 真实执行',
+  compare_row2_label: '可审计性',
+  compare_row2_other: '黑盒输出，无法追溯',
+  compare_row2_auraxis: '统一事件日志，每一步可回放',
+  compare_row3_label: '安全隔离',
+  compare_row3_other: '直接操作主工作区',
+  compare_row3_auraxis: '三模式权限 + 原生沙箱 + Worktree 隔离',
+  compare_row4_label: '扩展能力',
+  compare_row4_other: '工具稀少、生态封闭',
+  compare_row4_auraxis: '63 工具 + MCP + 插件 + 双 SDK',
+  compare_modes_label: '三种权限模式，按场景切换',
+
   tools_title: '彻底解耦的内置工具矩阵',
   tools_subtitle:
     '智能体在每一步 ReAct 循环中，将根据您的系统权限约束，挑选最合理的工具集进行组装。',
@@ -412,11 +514,13 @@ const zh: Translations = {
 
 const en: Translations = {
   nav_features: 'Features',
-  nav_demo: 'Agent Demo',
+  nav_demo: 'Live Demo',
   nav_architecture: 'Architecture',
   nav_tools: 'Tools',
   nav_download: 'Download',
   nav_github_label: 'Auraxis GitHub Repository',
+  nav_solution: 'Solution',
+  nav_compare: 'Compare',
 
   hero_badge: 'Native Sandbox · Unified ReAct Step Engine',
   hero_title_line1: 'Your desktop AI agent',
@@ -550,6 +654,56 @@ const en: Translations = {
   code_note: 'Up to 8-way overlap for concurrency-safe tools · serial mutation · hard-timeout kill',
   code_tab_code: 'RunCode · TypeScript program',
   code_tab_out: 'worker thread output',
+
+  problem_title: "Why today's AI assistants aren't enough",
+  problem_subtitle: 'Three everyday pain points — Auraxis solves each of them.',
+  problem1_title: 'All talk, no code',
+  problem1_desc:
+    'Chat-based AI only outputs advice — which line to change, which command to run is left to you. Long replies, untouched code.',
+  problem2_title: 'Black box, zero audit',
+  problem2_desc:
+    'Tool calls, permission decisions and file changes happen in cloud or opaque logic. When something breaks, there is nothing to trace.',
+  problem3_title: 'Polluted workspace',
+  problem3_desc:
+    'Parallel tasks trample each other\u2019s working directory — temp files and half-finished changes scattered everywhere, main branch at risk.',
+
+  solution_title: 'One engine, from chat to agents',
+  solution_subtitle:
+    'Auraxis converges understand → plan → execute → verify into one auditable step engine, then backs it with tools, scheduling and sandboxing so it really works on your desktop.',
+  pillar2_title: '63 Built-in Tools',
+  pillar2_desc:
+    'From file I/O, terminal and web search, to background scheduling, session retrieval and sub-agent orchestration — all 63 tools run through the same permission pipeline; 11 dangerous ones ask for confirmation by default.',
+  solution_more_label: 'More capabilities',
+
+  demo_title: 'Watch it run a real task end-to-end',
+  demo_subtitle:
+    'The complete ReAct loop from user input to <FINAL_ANSWER>: one unified engine, a permission watchdog at the gate, Code Mode orchestrating tools.',
+  flow1_title: 'Understand',
+  flow1_desc: 'Parse the request, read project context, inject relevant memory and project instructions.',
+  flow2_title: 'Plan',
+  flow2_desc: 'The LLM produces a structured TaskPlan; in plan mode it waits for your approval first.',
+  flow3_title: 'Execute',
+  flow3_desc: 'All 63 tools land through the pipeline: permission profile → sandbox gate → approval → execution.',
+  flow4_title: 'Verify & deliver',
+  flow4_desc: 'LSP / ReviewArtifact checks pass, then <FINAL_ANSWER> ends the turn.',
+
+  compare_title: 'Auraxis vs ordinary AI assistants',
+  compare_subtitle: 'Same LLM under the hood — the difference is who controls the execution chain.',
+  compare_other: 'Ordinary AI assistant',
+  compare_auraxis: 'Auraxis',
+  compare_row1_label: 'Execution',
+  compare_row1_other: 'Advice only — never touches your code',
+  compare_row1_auraxis: 'Really drives Bash / LSP / Git locally',
+  compare_row2_label: 'Auditability',
+  compare_row2_other: 'Black-box output, nothing to trace',
+  compare_row2_auraxis: 'Unified event log, every step replayable',
+  compare_row3_label: 'Isolation',
+  compare_row3_other: 'Writes straight into your main workspace',
+  compare_row3_auraxis: '3 permission modes + native sandbox + Worktree',
+  compare_row4_label: 'Extensibility',
+  compare_row4_other: 'Few tools, closed ecosystem',
+  compare_row4_auraxis: '63 tools + MCP + plugins + dual SDKs',
+  compare_modes_label: 'Three permission modes, switch by scenario',
 
   tools_title: 'Fully Decoupled Built-in Tool Matrix',
   tools_subtitle:

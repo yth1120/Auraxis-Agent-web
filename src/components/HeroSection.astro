@@ -1,5 +1,4 @@
 ---
-import TerminalSimulator from '../react/TerminalSimulator';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
 const TECH_STACK = [
@@ -16,57 +15,51 @@ const TECH_STACK = [
 ];
 ---
 
-<section id="top" class="relative pt-16 pb-0">
-  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-    <div class="lg:col-span-6 space-y-7">
-      <div class="inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03]">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
-        <span class="text-xs font-mono text-brand-muted" data-i18n="hero_badge">原生沙箱隔离 · 统一 ReAct 步进引擎</span>
-      </div>
-
-      <h1 class="text-[44px] sm:text-6xl font-semibold tracking-tight leading-[1.06] text-ink dark:text-ivory">
-        <span data-i18n="hero_title_line1">让 AI 智能体在桌面上</span><br />
-        <span class="text-brand-accent" data-i18n="hero_title_line2">真正动手写代码</span>
-      </h1>
-
-      <p class="text-brand-muted text-base leading-relaxed max-w-xl" data-i18n="hero_description">
-        Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 从「只说不做」变成「可审计地动手」。
-      </p>
-
-      <div class="flex items-center gap-3">
-        <a href="#download" data-i18n="hero_cta_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-10 px-6 inline-flex items-center gap-2 rounded-md">
-          <ArrowRight className="w-4 h-4" aria-hidden="true" />
-          免费下载
-        </a>
-        <a href="#developer-docs" data-i18n="hero_cta_docs" class="border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-10 px-6 inline-flex items-center gap-2 rounded-md">
-          <BookOpen className="w-4 h-4" aria-hidden="true" />
-          查看文档
-        </a>
-      </div>
-
-      <!-- 数据条：hairline 分隔 -->
-      <div class="flex items-center pt-2 max-w-xl">
-        <div class="flex-1 pr-6">
-          <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tools">63</div>
-          <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tools_sub">内置 AI 工具</div>
-        </div>
-        <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border">
-          <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_perms">3</div>
-          <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_perms_sub">权限模式（ask/plan/afe）</div>
-        </div>
-        <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border">
-          <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tests">1347</div>
-          <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tests_sub">测试用例 · 166 个文件</div>
-        </div>
-        <div class="flex-1 pl-6 border-l border-brand-hairline dark:border-brand-border">
-          <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_sdk">2</div>
-          <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_sdk_sub">TypeScript &amp; Python SDK</div>
-        </div>
-      </div>
+<section id="top" class="relative pt-20 pb-0">
+  <div class="max-w-4xl mx-auto px-6 text-center space-y-7 mb-16">
+    <div class="inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03] mx-auto">
+      <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
+      <span class="text-xs font-mono text-brand-muted" data-i18n="hero_badge">原生沙箱隔离 · 统一 ReAct 步进引擎</span>
     </div>
 
-    <div id="react-demo" class="lg:col-span-6">
-      <TerminalSimulator client:visible />
+    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-ink dark:text-ivory">
+      <span data-i18n="hero_title_line1">让 AI 智能体在桌面上</span><br />
+      <span class="text-brand-accent" data-i18n="hero_title_line2">真正动手写代码</span>
+    </h1>
+
+    <p class="text-brand-muted text-base sm:text-lg leading-relaxed max-w-2xl mx-auto" data-i18n="hero_description">
+      Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 从「只说不做」变成「可审计地动手」。
+    </p>
+
+    <div class="flex items-center justify-center gap-3 pt-2">
+      <a href="#download" data-i18n="hero_cta_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md">
+        <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        免费下载
+      </a>
+      <a href="#demo" data-i18n="hero_cta_docs" class="border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-10 px-7 inline-flex items-center gap-2 rounded-md">
+        <BookOpen className="w-4 h-4" aria-hidden="true" />
+        查看实况演示
+      </a>
+    </div>
+
+    <!-- 数据条：hairline 分隔，居中 -->
+    <div class="flex items-center justify-center pt-6 max-w-2xl mx-auto">
+      <div class="flex-1 pr-6 text-center">
+        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tools">63</div>
+        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tools_sub">内置 AI 工具</div>
+      </div>
+      <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border text-center">
+        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_perms">3</div>
+        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_perms_sub">权限模式（ask/plan/afe）</div>
+      </div>
+      <div class="flex-1 px-6 border-l border-brand-hairline dark:border-brand-border text-center">
+        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tests">1347</div>
+        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_tests_sub">测试用例 · 166 个文件</div>
+      </div>
+      <div class="flex-1 pl-6 border-l border-brand-hairline dark:border-brand-border text-center">
+        <div class="text-2xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_sdk">2</div>
+        <div class="text-[11px] text-brand-muted mt-0.5" data-i18n="hero_stat_sdk_sub">TypeScript &amp; Python SDK</div>
+      </div>
     </div>
   </div>
 

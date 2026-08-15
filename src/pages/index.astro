@@ -1,14 +1,15 @@
 ---
-// Auraxis 官方网站 — 单页主入口
+// Auraxis 官方网站 — 单页主入口（叙事式布局）
 // Hybrid 模式：首页保持预渲染为静态 HTML，API 路由动态执行
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import PermissionSection from '../components/PermissionSection.astro';
-import CodeModeSection from '../components/CodeModeSection.astro';
+import ProblemSection from '../components/ProblemSection.astro';
+import SolutionSection from '../components/SolutionSection.astro';
+import DemoSection from '../components/DemoSection.astro';
+import CompareSection from '../components/CompareSection.astro';
 import ArchitectureSection from '../components/ArchitectureSection.astro';
 import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
 import DownloadSection from '../components/DownloadSection.astro';
@@ -19,15 +20,17 @@ import Footer from '../components/Footer.astro';
 <BaseLayout>
   <Header />
 
-  <main class="relative z-10 max-w-7xl mx-auto px-0 pt-0 pb-0">
+  <main class="relative z-10">
+    <!-- 叙事线：为什么 → 怎么做 → 看它跑 → 凭什么 → 里面 → 能力清单 → 扩展 → 获取 -->
     <HeroSection />
-    <FeatureGrid />
-    <PermissionSection />
-    <CodeModeSection />
+    <ProblemSection />
+    <SolutionSection />
+    <DemoSection />
+    <CompareSection />
     <ArchitectureSection />
     <ToolsMatrixSection />
-    <DownloadSection />
     <DeveloperDocs />
+    <DownloadSection />
   </main>
 
   <Footer />

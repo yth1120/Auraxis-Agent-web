@@ -265,7 +265,7 @@ const zh: Translations = {
   hero_title_line1: '让 AI 智能体在桌面上',
   hero_title_line2: '真正动手写代码',
   hero_description:
-    'Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 从「只说不做」变成「可审计地动手」。',
+    'Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 在桌面上可审计地动手干活。',
   hero_cta_download: '免费下载',
   hero_cta_docs: '查看文档',
   hero_stat_tools: '63',
@@ -526,7 +526,7 @@ const en: Translations = {
   hero_title_line1: 'Your desktop AI agent',
   hero_title_line2: 'that actually ships code',
   hero_description:
-    'Auraxis is a desktop Agentic coding assistant built on Electron. One unified ReAct step engine drives chat and agents alike — with 63 built-in tools, multi-agent scheduling, Code Mode orchestration and native sandboxing, AI moves from "talking" to auditable "doing".',
+    'Auraxis is a desktop Agentic coding assistant built on Electron. One unified ReAct step engine drives chat and agents alike — with 63 built-in tools, multi-agent scheduling, Code Mode orchestration and native sandboxing, it makes AI act on your desktop — auditably.',
   hero_cta_download: 'Download',
   hero_cta_docs: 'View Docs',
   hero_stat_tools: '63',

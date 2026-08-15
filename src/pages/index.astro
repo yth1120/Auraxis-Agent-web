@@ -6,10 +6,8 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
-import ProblemSection from '../components/ProblemSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import DemoSection from '../components/DemoSection.astro';
-import CompareSection from '../components/CompareSection.astro';
 import ArchitectureSection from '../components/ArchitectureSection.astro';
 import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
 import DownloadSection from '../components/DownloadSection.astro';
@@ -21,12 +19,10 @@ import Footer from '../components/Footer.astro';
   <Header />
 
   <main class="relative z-10">
-    <!-- 叙事线：为什么 → 怎么做 → 看它跑 → 凭什么 → 里面 → 能力清单 → 扩展 → 获取 -->
+    <!-- 产品介绍式结构：定位 → 核心能力 → 实况 → 内部 → 能力清单 → 扩展 → 获取 -->
     <HeroSection />
-    <ProblemSection />
     <SolutionSection />
     <DemoSection />
-    <CompareSection />
     <ArchitectureSection />
     <ToolsMatrixSection />
     <DeveloperDocs />

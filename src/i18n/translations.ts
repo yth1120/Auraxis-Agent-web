@@ -316,7 +316,7 @@ const zh: Translations = {
 
   features_title: '外置于系统的透明能力',
   features_subtitle:
-    '彻底打开大模型与操作系统之间的「黑盒」。Auraxis 不仅发送 prompt，更是一整套可审计的代码执行引擎。',
+    'Auraxis 不只是发送 prompt，更是一整套可审计的代码执行引擎：工具调用、权限决策、文件改动全部记录在统一事件日志中。',
   feature1_title: '统一 ReAct 步进引擎',
   feature1_desc:
     '聊天与 Agent 共用 step-engine 单一步进循环，停止策略 / 上下文压缩 / 重试均为策略钩子；业务迭代上限 200 次，安全硬上限 500 次，API 失败 3 次指数退避重试。',
@@ -346,7 +346,8 @@ const zh: Translations = {
     'TypeScript SDK（TCP JSON-RPC）与 Python SDK 双端对接，另有 headless CLI（--run / --sdk / --acp / --plugin）与 ACP 协议支持，自动化接入零门槛。',
 
   arch_title: '透明、干净的双进程交互架构',
-  arch_subtitle: '拒绝一切黑盒逻辑。这是 Auraxis 的内部运行方式，让每一条数据流转都在你的控制之中。',
+  arch_subtitle:
+    'Auraxis 的内部运行方式：主进程与渲染进程经 IPC 双向通信，每一条数据流转都清晰可见。',
   arch_renderer_title: '渲染进程 (Renderer / React 18)',
   arch_renderer_1: 'Ant Design 5 UI（深色 / 浅色 / 跟随系统）',
   arch_renderer_2: '17 个 Zustand Stores（会话以主进程为权威）',
@@ -409,7 +410,7 @@ const zh: Translations = {
 
   solution_title: '一个引擎，从聊天到智能体',
   solution_subtitle:
-    'Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，再以工具、调度与沙箱支撑它在桌面上真实干活。',
+    'Auraxis 把「理解、规划、执行、验证」收敛进同一套可审计的步进引擎，以工具、调度与沙箱支撑它在本地执行。',
   pillar2_title: '63 个内置工具',
   pillar2_desc:
     '从文件读写、终端与 Web 搜索，到后台调度、会话检索与子 Agent 编排，全部 63 个工具经同一条权限管线执行，11 个危险工具默认弹窗确认。',
@@ -577,7 +578,7 @@ const en: Translations = {
 
   features_title: 'Transparent Capabilities, Outside the System',
   features_subtitle:
-    'Open the "black box" between the LLM and your operating system. Auraxis is not just a prompt sender — it is a fully auditable code execution engine.',
+    'Auraxis is not just a prompt sender — it is a fully auditable code execution engine: every tool call, permission decision and file change lands in the unified event log.',
   feature1_title: 'Unified ReAct Step Engine',
   feature1_desc:
     'Chat and agents share one step engine (step-engine.ts) — stop policies, context compression and retries are strategy hooks. 200 iteration business cap, 500 hard cap, 3 exponential-backoff API retries.',
@@ -606,7 +607,8 @@ const en: Translations = {
   feature9_desc:
     'TypeScript SDK over TCP JSON-RPC plus a Python SDK, along with a headless CLI (--run / --sdk / --acp / --plugin) and ACP protocol support for zero-friction automation.',
   arch_title: 'Transparent Dual-Process Architecture',
-  arch_subtitle: 'No black-box logic — this is how Auraxis operates internally, every data flow under your control.',
+  arch_subtitle:
+    'How Auraxis works internally: main and renderer processes talk over IPC — every data flow stays visible and under your control.',
   arch_renderer_title: 'Renderer Process (React 18)',
   arch_renderer_1: 'Ant Design 5 UI (Dark / Light / System)',
   arch_renderer_2: '17 Zustand Stores (main process is session authority)',
@@ -669,7 +671,7 @@ const en: Translations = {
 
   solution_title: 'One engine, from chat to agents',
   solution_subtitle:
-    'Auraxis converges understand → plan → execute → verify into one auditable step engine, then backs it with tools, scheduling and sandboxing so it really works on your desktop.',
+    'Auraxis converges understand → plan → execute → verify into one auditable step engine, backed by tools, scheduling and sandboxing so it works locally.',
   pillar2_title: '63 Built-in Tools',
   pillar2_desc:
     'From file I/O, terminal and web search, to background scheduling, session retrieval and sub-agent orchestration — all 63 tools run through the same permission pipeline; 11 dangerous ones ask for confirmation by default.',

@@ -1,16 +1,17 @@
 import { useState, useCallback, useEffect } from 'react';
 import { ChevronDown, ChevronUp, AlertTriangle, ShieldCheck, Loader2 } from 'lucide-react';
 import { LanguageProvider, useLanguage } from '../i18n/LanguageContext';
-import type { Tool, ToolType, ApiResponse, ToolsListData } from '../types';
+import { TOOL_CATEGORIES } from '../data/tools';
+import type { Tool, ToolType, ApiResponse, ToolsListData, ToolCategory } from '../types';
 
-type FilterKey = 'all' | ToolType | string;
+type FilterKey = 'all' | ToolType | ToolCategory;
 
-interface FilterTab {
-  key: FilterKey;
-  label: string;
-}
-
-const FILTER_KEYS = ['all', 'danger', 'safe', 'filesystem', 'search', 'execution', 'planning', 'review', 'communication'] as const;
+const FILTER_KEYS: FilterKey[] = [
+  'all',
+  'danger',
+  'safe',
+  ...TOOL_CATEGORIES,
+];
 
 function ToolsGridInner() {
   const { t } = useLanguage();
@@ -22,10 +23,20 @@ function ToolsGridInner() {
   const [error, setError] = useState<string | null>(null);
 
   const filterLabels: Record<string, string> = {
-    all: t.tools_filter_all, danger: t.tools_filter_danger, safe: t.tools_filter_safe,
-    filesystem: t.tools_filter_filesystem, search: t.tools_filter_search,
-    execution: t.tools_filter_execution, planning: t.tools_filter_planning,
-    review: t.tools_filter_review, communication: t.tools_filter_communication,
+    all: t.tools_filter_all,
+    danger: t.tools_filter_danger,
+    safe: t.tools_filter_safe,
+    files: t.tools_filter_files,
+    execution: t.tools_filter_execution,
+    terminal: t.tools_filter_terminal,
+    web: t.tools_filter_web,
+    planning: t.tools_filter_planning,
+    agent: t.tools_filter_agent,
+    background: t.tools_filter_background,
+    session: t.tools_filter_session,
+    capability: t.tools_filter_capability,
+    verify: t.tools_filter_verify,
+    interaction: t.tools_filter_interaction,
   };
 
   useEffect(() => {
@@ -55,14 +66,14 @@ function ToolsGridInner() {
           const count = key === 'all' ? (stats?.danger ?? 0) + (stats?.safe ?? 0) : key === 'danger' ? stats?.danger : key === 'safe' ? stats?.safe : undefined;
           return (
             <button key={key} role="tab" aria-selected={activeFilter === key} onClick={() => setActiveFilter(key)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono font-medium transition-all ${activeFilter === key ? 'bg-brand-blue text-white shadow-sm' : 'bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 border border-transparent hover:border-slate-300 dark:hover:border-slate-600'}`}>
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono font-medium transition-colors ${activeFilter === key ? 'bg-brand-accent text-white' : 'bg-white dark:bg-brand-dark text-brand-muted hover:text-ink dark:hover:text-ivory border border-brand-hairline dark:border-brand-border'}`}>
               {filterLabels[key] ?? key}{count !== undefined && <span className="opacity-60 tabular-nums">{count}</span>}
             </button>
           );
         })}
       </div>
       {loading && (
-        <div className="flex items-center justify-center py-16 text-slate-400 dark:text-slate-500" role="status">
+        <div className="flex items-center justify-center py-16 text-brand-muted" role="status">
           <Loader2 className="w-5 h-5 animate-spin mr-2" aria-hidden="true" /><span className="text-sm font-mono">{t.tools_loading}</span>
         </div>
       )}
@@ -75,21 +86,21 @@ function ToolsGridInner() {
             return (
               <div key={tool.name} role="listitem" tabIndex={0} aria-expanded={isExpanded}
                 onClick={() => toggleExpand(tool.name)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(tool.name); } }}
-                className={`group relative bg-white dark:bg-[#0b0e14] border p-4 rounded-lg flex flex-col cursor-pointer transition-all duration-200 select-none ${isDanger ? 'border-red-200 dark:border-red-900/30 hover:border-red-400/50 dark:hover:border-red-500/50 hover:shadow-[0_0_12px_rgba(239,68,68,0.08)]' : 'border-emerald-200 dark:border-emerald-900/30 hover:border-emerald-400/50 dark:hover:border-emerald-500/50 hover:shadow-[0_0_12px_rgba(16,185,129,0.08)]'} ${isExpanded ? (isDanger ? 'border-red-400/60 dark:border-red-500/60' : 'border-emerald-400/60 dark:border-emerald-500/60') : ''}`}>
+                className={`group relative bg-white dark:bg-brand-dark border p-4 rounded-lg flex flex-col cursor-pointer transition-colors select-none ${isDanger ? 'border-red-200 dark:border-red-900/30 hover:border-red-400/50 dark:hover:border-red-500/50' : 'border-brand-hairline dark:border-brand-border hover:border-brand-accent/40'} ${isExpanded ? (isDanger ? 'border-red-400/60 dark:border-red-500/60' : 'border-brand-accent/50') : ''}`}>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-800 dark:text-slate-200 text-xs">{tool.name}</span>
+                  <span className="font-medium text-ink dark:text-ivory text-xs">{tool.name}</span>
                   <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${isDanger ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-900/40' : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/40'}`}>
                     {isDanger ? <span className="inline-flex items-center gap-0.5"><AlertTriangle className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_danger}</span> : <span className="inline-flex items-center gap-0.5"><ShieldCheck className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_safe}</span>}
                   </span>
                 </div>
-                <p className="text-slate-500 dark:text-brand-text mt-2 text-[11px] leading-tight flex-1">{tool.description}</p>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
-                  <span className="text-[9px] text-slate-400 dark:text-slate-500 font-mono">{isExpanded ? t.tools_hide_params : t.tools_view_params}</span>
-                  {isExpanded ? <ChevronUp className="w-3 h-3 text-slate-400" aria-hidden="true" /> : <ChevronDown className="w-3 h-3 text-slate-400" aria-hidden="true" />}
+                <p className="text-brand-muted mt-2 text-[11px] leading-tight flex-1">{tool.description}</p>
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-brand-hairline dark:border-brand-border/60">
+                  <span className="text-[9px] text-brand-faint font-mono">{isExpanded ? t.tools_hide_params : t.tools_view_params}</span>
+                  {isExpanded ? <ChevronUp className="w-3 h-3 text-brand-faint" aria-hidden="true" /> : <ChevronDown className="w-3 h-3 text-brand-faint" aria-hidden="true" />}
                 </div>
                 {isExpanded && (
-                  <div className="mt-3 p-2.5 bg-brand-black/95 rounded border border-slate-700 font-mono text-[10px] text-brand-accent overflow-x-auto" onClick={(e) => e.stopPropagation()}>
-                    <pre className="whitespace-pre-wrap leading-relaxed">{JSON.stringify(tool.paramSchema, null, 2)}</pre>
+                  <div className="mt-3 p-2.5 bg-brand-black/95 rounded border border-brand-border font-mono text-[10px] text-brand-accent overflow-x-auto" onClick={(e) => e.stopPropagation()}>
+                    <pre className="whitespace-pre-wrap leading-relaxed">{JSON.stringify(tool.params, null, 2)}</pre>
                   </div>
                 )}
               </div>
@@ -97,7 +108,7 @@ function ToolsGridInner() {
           })}
         </div>
       )}
-      {!loading && !error && tools.length === 0 && <p className="text-center text-slate-400 dark:text-slate-500 text-sm py-8">{t.tools_empty}</p>}
+      {!loading && !error && tools.length === 0 && <p className="text-center text-brand-muted text-sm py-8">{t.tools_empty}</p>}
     </div>
   );
 }

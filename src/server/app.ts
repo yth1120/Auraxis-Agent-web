@@ -3,7 +3,6 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { releasesRoute } from './routes/releases';
 import { toolsRoute } from './routes/tools';
-import { authRouter } from './routes/auth';
 
 /**
  * Hono 应用工厂
@@ -39,37 +38,9 @@ export function createApp(): Hono<{ Bindings: Env }> {
     })
   );
 
-  // Supabase 连通性探测
-  app.get('/api/health/supabase', async (c) => {
-    const { getSupabase } = await import('../server/utils/supabase');
-    try {
-      const supabase = getSupabase(c);
-      // 调用 Supabase Auth 健康检查端点验证连通性
-      const { data, error } = await supabase.auth.getSession();
-      // 即使没有 session，连接成功也会返回 null 而非抛出
-      if (error && error.message?.includes('fetch')) throw error;
-      return c.json({
-        success: true,
-        data: {
-          connected: true,
-          url: c.env.SUPABASE_URL,
-        },
-      });
-    } catch (err: any) {
-      return c.json({
-        success: false,
-        error: {
-          code: 'SUPABASE_UNREACHABLE',
-          message: err?.message ?? '无法连接 Supabase',
-        },
-      }, 503);
-    }
-  });
-
   // ── 业务路由 ──
   app.route('/api/releases', releasesRoute);
   app.route('/api/tools', toolsRoute);
-  app.route('/api/auth', authRouter);
 
   // ── 404 兜底 ──
   app.notFound((c) =>

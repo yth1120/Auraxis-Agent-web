@@ -36,5 +36,5 @@ export const PLATFORM_LABELS: Record<Platform, string> = {
   windows: 'Windows',
   mac: 'macOS',
   linux: 'Linux',
-  mobile: '移动端',
+  mobile: 'Mobile',
 };

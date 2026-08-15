@@ -13,12 +13,13 @@ interface Particle {
   color: string;
 }
 
+/** Aura 紫灰 — 仅作状态点/数据流动画的强调色 */
 const PARTICLES: Particle[] = [
-  { id: 1, x: 20, y: 25, color: '#2563EB' },
-  { id: 2, x: 20, y: 50, color: '#00E5FF' },
-  { id: 3, x: 20, y: 75, color: '#2563EB' },
-  { id: 4, x: 30, y: 38, color: '#00E5FF' },
-  { id: 5, x: 30, y: 62, color: '#2563EB' },
+  { id: 1, x: 20, y: 25, color: '#8C8AA8' },
+  { id: 2, x: 20, y: 50, color: '#8C8AA8' },
+  { id: 3, x: 20, y: 75, color: '#8C8AA8' },
+  { id: 4, x: 30, y: 38, color: '#8C8AA8' },
+  { id: 5, x: 30, y: 62, color: '#8C8AA8' },
 ];
 
 function ArchitectureFlowInner() {
@@ -33,47 +34,47 @@ function ArchitectureFlowInner() {
   const shouldAnimate = !prefersReduced;
 
   return (
-    <div className="bg-slate-100 dark:bg-brand-dark border border-slate-200 dark:border-brand-border rounded-xl p-8 overflow-x-auto transition-colors">
+    <div className="bg-white dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-xl p-8 overflow-x-auto transition-colors">
       <div className="min-w-[800px] flex items-stretch justify-between gap-8 font-mono text-xs">
         {/* ── 渲染进程 ── */}
         <div
-          className="flex-1 border border-brand-blue/20 dark:border-brand-blue/30 bg-white dark:bg-brand-blue/5 rounded-lg p-5 shadow-sm dark:shadow-none transition-all duration-300"
+          className="flex-1 border border-brand-accent/25 dark:border-brand-accent/30 bg-white dark:bg-brand-accent/5 rounded-lg p-5 transition-colors"
           onMouseEnter={handleRendererEnter}
           onMouseLeave={handleLeave}
         >
-          <div className="flex items-center gap-2 pb-3 border-b border-slate-200 dark:border-brand-blue/20 mb-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand-blue"></span>
-            <span className="font-bold text-slate-800 dark:text-slate-200">
+          <div className="flex items-center gap-2 pb-3 border-b border-brand-hairline dark:border-brand-border mb-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-brand-accent"></span>
+            <span className="font-medium text-ink dark:text-ivory">
               {t.arch_renderer_title}
             </span>
           </div>
-          <ul className="space-y-3 text-slate-600 dark:text-slate-400">
+          <ul className="space-y-3 text-brand-muted">
             <li className="flex items-center gap-2">
-              <LayoutTemplate className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+              <LayoutTemplate className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_renderer_1}</span>
             </li>
             <li className="flex items-center gap-2">
-              <Workflow className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+              <Workflow className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_renderer_2}</span>
             </li>
             <li className="flex items-center gap-2">
-              <FileCode className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+              <FileCode className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_renderer_3}</span>
             </li>
             <li className="flex items-center gap-2">
-              <Puzzle className="w-4 h-4 text-brand-blue" aria-hidden="true" />
+              <Puzzle className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_renderer_4}</span>
             </li>
           </ul>
         </div>
 
-        {/* ── IPC 桥梁 + SVG 粒子动画 ── */}
+        {/* ── IPC 桥梁 + 粒子动画 ── */}
         <div className="w-44 flex flex-col items-center justify-center text-center px-4 relative">
-          <div className="text-[10px] text-slate-400 dark:text-slate-500 mb-2 uppercase tracking-widest font-bold">
+          <div className="text-[10px] text-brand-faint mb-2 uppercase tracking-widest font-bold">
             {t.arch_ipc_label}
           </div>
 
-          {/* 粒子流动画（CSS 定位，避免 SVG cx 百分比不兼容） */}
+          {/* 粒子流动画（CSS 定位，数据驱动） */}
           {PARTICLES.map((p) => (
             <motion.div
               key={p.id}
@@ -110,7 +111,7 @@ function ArchitectureFlowInner() {
             />
           ))}
 
-          <div className="w-full py-1 border-y border-dashed border-slate-300 dark:border-brand-accent/50 text-brand-blue dark:text-brand-accent flex items-center justify-center gap-1 relative z-10">
+          <div className="w-full py-1 border-y border-dashed border-brand-border text-brand-accent flex items-center justify-center gap-1 relative z-10">
             <motion.div
               animate={
                 shouldAnimate && hoverZone !== 'none'
@@ -128,18 +129,18 @@ function ArchitectureFlowInner() {
             </motion.div>
             <span>{t.arch_ipc_bridge}</span>
           </div>
-          <div className="text-[9px] text-slate-400 dark:text-slate-500 mt-2 font-mono relative z-10">
+          <div className="text-[9px] text-brand-faint mt-2 font-mono relative z-10">
             {t.arch_ipc_protocol}
           </div>
         </div>
 
         {/* ── 主进程 ── */}
         <div
-          className="flex-1 border border-brand-accent/20 dark:border-brand-accent/30 bg-white dark:bg-brand-accent/5 rounded-lg p-5 shadow-sm dark:shadow-none transition-all duration-300 relative"
+          className="flex-1 border border-brand-accent/25 dark:border-brand-accent/30 bg-white dark:bg-brand-accent/5 rounded-lg p-5 transition-colors relative"
           onMouseEnter={handleMainEnter}
           onMouseLeave={handleLeave}
         >
-          {/* 悬浮高亮闪烁 */}
+          {/* 悬浮高亮（数据驱动淡入） */}
           {shouldAnimate && hoverZone === 'main' && (
             <motion.div
               className="absolute inset-0 rounded-lg bg-brand-accent/10 pointer-events-none"
@@ -149,27 +150,27 @@ function ArchitectureFlowInner() {
             />
           )}
 
-          <div className="flex items-center gap-2 pb-3 border-b border-slate-200 dark:border-brand-accent/20 mb-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-teal-500 dark:bg-brand-accent"></span>
-            <span className="font-bold text-slate-800 dark:text-slate-200">
+          <div className="flex items-center gap-2 pb-3 border-b border-brand-hairline dark:border-brand-border mb-4">
+            <span className="w-2.5 h-2.5 rounded-full bg-brand-accent"></span>
+            <span className="font-medium text-ink dark:text-ivory">
               {t.arch_main_title}
             </span>
           </div>
-          <ul className="space-y-3 text-slate-600 dark:text-slate-400">
+          <ul className="space-y-3 text-brand-muted">
             <li className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-teal-600 dark:text-brand-accent" aria-hidden="true" />
+              <Terminal className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_main_1}</span>
             </li>
             <li className="flex items-center gap-2">
-              <RefreshCw className="w-4 h-4 text-teal-600 dark:text-brand-accent" aria-hidden="true" />
+              <RefreshCw className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_main_2}</span>
             </li>
             <li className="flex items-center gap-2">
-              <KeyRound className="w-4 h-4 text-teal-600 dark:text-brand-accent" aria-hidden="true" />
+              <KeyRound className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_main_3}</span>
             </li>
             <li className="flex items-center gap-2">
-              <FolderLock className="w-4 h-4 text-teal-600 dark:text-brand-accent" aria-hidden="true" />
+              <FolderLock className="w-4 h-4 text-brand-accent" aria-hidden="true" />
               <span>{t.arch_main_4}</span>
             </li>
           </ul>

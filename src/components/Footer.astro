@@ -1,47 +1,55 @@
 ---
+const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
+const DOCS_URL = `${REPO_URL}/blob/main/docs/README.md`;
+const AGENTS_URL = `${REPO_URL}/blob/main/AGENTS.md`;
+const TS_SDK_URL = `${REPO_URL}/blob/main/packages/auraxis-sdk/README.md`;
+const PY_SDK_URL = `${REPO_URL}/blob/main/python/auraxis_sdk/README.md`;
+const ISSUES_URL = `${REPO_URL}/issues`;
+const DISCUSSIONS_URL = `${REPO_URL}/discussions`;
+const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 ---
 
-<footer class="border-t border-slate-200 dark:border-brand-border bg-slate-100 dark:bg-brand-black py-12 relative z-10 text-slate-500 text-xs transition-colors">
+<footer class="border-t border-brand-hairline dark:border-brand-border bg-white dark:bg-brand-black py-12 relative z-10 text-brand-muted text-xs transition-colors">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
     <div class="space-y-4">
-      <div class="flex items-center gap-2">
-        <img src="/image1.png" alt="DeepFlow Logo" class="w-12 h-12" />
-        <span class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-accent">DeepFlow Agentic</span>
+      <div class="flex items-center gap-2.5">
+        <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-8 w-auto" />
+        <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis</span>
       </div>
-      <p class="leading-relaxed" data-i18n="footer_brand">基于 Electron 构建的极致安全、工程高透明的 AI 驱动协作智能体调度底座。</p>
+      <p class="leading-relaxed" data-i18n="footer_brand">基于 Electron 构建的桌面端 Agentic 编程助手 — 透明、沙箱隔离、可扩展。</p>
     </div>
     <div>
-      <h4 class="text-slate-800 dark:text-slate-300 font-semibold mb-4 text-sm" data-i18n="footer_spec_title">核心规范</h4>
+      <h4 class="text-ink dark:text-ivory font-medium mb-4 text-sm" data-i18n="footer_spec_title">核心规范</h4>
       <ul class="space-y-2">
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_spec_1">ReAct 循环底座</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_spec_2">22 个底层工具集</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_spec_3">MCP JSON-RPC 标准</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_spec_4">Git Worktree 隔离</a></li>
+        <li><a href="#features" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_spec_1">统一 ReAct 步进引擎</a></li>
+        <li><a href="#tools" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_spec_2">63 个内置工具</a></li>
+        <li><a href="#architecture" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_spec_3">原生沙箱（四后端）</a></li>
+        <li><a href="#architecture" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_spec_4">Git Worktree 隔离</a></li>
       </ul>
     </div>
     <div>
-      <h4 class="text-slate-800 dark:text-slate-300 font-semibold mb-4 text-sm" data-i18n="footer_contrib_title">开源贡献</h4>
+      <h4 class="text-ink dark:text-ivory font-medium mb-4 text-sm" data-i18n="footer_contrib_title">开源资源</h4>
       <ul class="space-y-2">
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_contrib_1">开发者指南</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_contrib_2">插件开发协议</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_contrib_3">双进程共享类型</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_contrib_4">Vitest 覆盖率规约</a></li>
+        <li><a href={DOCS_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_contrib_1">架构文档 (docs/README)</a></li>
+        <li><a href={AGENTS_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_contrib_2">工程规范 (AGENTS.md)</a></li>
+        <li><a href={TS_SDK_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_contrib_3">TypeScript SDK</a></li>
+        <li><a href={PY_SDK_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_contrib_4">Python SDK</a></li>
       </ul>
     </div>
     <div>
-      <h4 class="text-slate-800 dark:text-slate-300 font-semibold mb-4 text-sm" data-i18n="footer_support_title">服务支持</h4>
+      <h4 class="text-ink dark:text-ivory font-medium mb-4 text-sm" data-i18n="footer_support_title">服务支持</h4>
       <ul class="space-y-2">
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_support_1">报告安全缺陷 (CSP 违规)</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_support_2">GitHub Issues 讨论版</a></li>
-        <li><a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_support_3">Discord 用户社区</a></li>
+        <li><a href={ISSUES_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_support_1">报告安全缺陷</a></li>
+        <li><a href={ISSUES_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_support_2">GitHub Issues</a></li>
+        <li><a href={DISCUSSIONS_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_support_3">GitHub Discussions</a></li>
       </ul>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-200 dark:border-brand-border/40 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p data-i18n="footer_copyright">&copy; 2026 DeepFlow Core Contributors. Open source under MIT License.</p>
+  <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-brand-hairline dark:border-brand-border/40 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p data-i18n="footer_copyright">&copy; 2026 Auraxis Core Contributors. 基于 MIT License 开源.</p>
     <div class="flex gap-4">
-      <a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_privacy">隐私条例</a>
-      <a href="#" class="hover:text-slate-800 dark:hover:text-slate-300 transition-colors" data-i18n="footer_license">软件许可证</a>
+      <a href="#" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_privacy">隐私条例</a>
+      <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-ivory transition-colors" data-i18n="footer_license">软件许可证</a>
     </div>
   </div>
 </footer>

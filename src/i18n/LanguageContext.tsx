@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback, type React
 import { TRANSLATIONS, type Language, type Translations } from './translations';
 
 /** 跨 React 孤岛同步语言变更的自定义事件名 */
-const LANG_CHANGE_EVENT = 'deepflow:lang-change';
+const LANG_CHANGE_EVENT = 'auraxis:lang-change';
 
 interface LanguageContextValue {
   lang: Language;
@@ -33,7 +33,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
         if (key && key in TRANSLATIONS[detail.lang]) {
-          el.textContent = (TRANSLATIONS[detail.lang] as Record<string, string>)[key];
+          el.textContent = (TRANSLATIONS[detail.lang] as unknown as Record<string, string>)[key];
         }
       });
     };

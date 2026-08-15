@@ -1,40 +1,51 @@
 ---
 import TerminalSimulator from '../react/TerminalSimulator';
-import SmartDownloader from '../react/SmartDownloader';
+import { ArrowRight, BookOpen } from 'lucide-react';
 ---
 
-<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+<section id="top" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24 pt-8">
   <div class="lg:col-span-6 space-y-6">
-    <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 border border-brand-blue/30 rounded-full text-brand-blue dark:text-brand-accent text-xs font-mono">
-      <span class="w-2 h-2 bg-brand-blue dark:bg-brand-accent rounded-full animate-pulse" aria-hidden="true"></span>
-      <span data-i18n="hero_badge">本地沙箱隔离 · 基于 DeepSeek 大模型驱动</span>
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 border border-brand-accent/25 rounded-full text-brand-muted dark:text-brand-muted text-xs font-mono">
+      <span class="w-1.5 h-1.5 bg-brand-accent rounded-full" aria-hidden="true"></span>
+      <span data-i18n="hero_badge">原生沙箱隔离 · 统一 ReAct 步进引擎</span>
     </div>
 
-    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-none text-slate-900 dark:text-white font-sans">
-      <span data-i18n="hero_title_line1">拒绝黑盒，</span><br />
-      掌控真正的 <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-blue-500 dark:from-brand-accent dark:to-brand-blue" data-i18n="hero_title_line2">AI 编程智能体</span>
+    <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.08] text-ink dark:text-ivory">
+      <span data-i18n="hero_title_line1">让 AI 智能体在桌面上</span><br />
+      <span class="text-brand-accent" data-i18n="hero_title_line2">真正动手写代码</span>
     </h1>
 
-    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-xl" data-i18n="hero_description">
-      DeepFlow 是为极客量身定制的桌面端 AI 协同平台。通过原生 Electron 驱动本地工具（Bash/LSP/Git），构建双路径 ReAct 自闭环智能体，彻底告别只说不写的"被动型"AI。
+    <p class="text-brand-muted text-base leading-relaxed max-w-xl" data-i18n="hero_description">
+      Auraxis 是基于 Electron 的桌面端 Agentic 编程助手：聊天与智能体共用一套统一步进引擎，63 个内置工具、多智能体调度、Code Mode 工具编排与原生沙箱，让 AI 从「只说不做」变成「可审计地动手」。
     </p>
 
-    <div id="download">
-      <SmartDownloader client:visible />
+    <div class="flex items-center gap-3 pt-2">
+      <a href="#download" data-i18n="hero_cta_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-9 px-5 inline-flex items-center gap-2 rounded-md">
+        <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        免费下载
+      </a>
+      <a href="#developer-docs" data-i18n="hero_cta_docs" class="border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-9 px-5 inline-flex items-center gap-2 rounded-md">
+        <BookOpen className="w-4 h-4" aria-hidden="true" />
+        查看文档
+      </a>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-brand-border/60">
+    <div class="grid grid-cols-4 gap-4 pt-6 border-t border-brand-hairline dark:border-brand-border/60">
       <div>
-        <h4 class="text-xl font-bold font-mono text-brand-blue dark:text-brand-accent" data-i18n="hero_stat_tools">22 个</h4>
-        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="hero_stat_tools_sub">内置高危/只读工具链</p>
+        <h4 class="text-xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tools">63</h4>
+        <p class="text-[11px] text-brand-muted" data-i18n="hero_stat_tools_sub">内置 AI 工具</p>
       </div>
       <div>
-        <h4 class="text-xl font-bold font-mono text-brand-blue dark:text-brand-accent" data-i18n="hero_stat_loop">Dual-Loop</h4>
-        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="hero_stat_loop_sub">聊天流与独立 Agent 循环</p>
+        <h4 class="text-xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_perms">3</h4>
+        <p class="text-[11px] text-brand-muted" data-i18n="hero_stat_perms_sub">权限模式（ask/plan/afe）</p>
       </div>
       <div>
-        <h4 class="text-xl font-bold font-mono text-brand-blue dark:text-brand-accent" data-i18n="hero_stat_local">100%</h4>
-        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="hero_stat_local_sub">本地工作区/记忆沙箱化</p>
+        <h4 class="text-xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_tests">1347</h4>
+        <p class="text-[11px] text-brand-muted" data-i18n="hero_stat_tests_sub">测试用例 · 166 个文件</p>
+      </div>
+      <div>
+        <h4 class="text-xl font-semibold font-mono text-brand-accent" data-i18n="hero_stat_sdk">2</h4>
+        <p class="text-[11px] text-brand-muted" data-i18n="hero_stat_sdk_sub">TypeScript &amp; Python SDK</p>
       </div>
     </div>
   </div>

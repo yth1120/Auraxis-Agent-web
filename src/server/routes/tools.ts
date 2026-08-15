@@ -9,7 +9,7 @@ export const toolsRoute = new Hono();
  *
  * 返回工具列表，支持查询参数筛选：
  *   ?type=danger|safe       — 按安全等级筛选
- *   ?category=filesystem    — 按功能分类筛选
+ *   ?category=files         — 按功能分类筛选
  *
  * Cache-Control: CDN 7d / 浏览器 1d（工具定义极少变更）
  */
@@ -39,9 +39,10 @@ toolsRoute.get('/', (c) => {
     data: {
       tools,
       total: tools.length,
+      // 统计始终为全量口径（危险/安全总数不随筛选变化）
       stats: {
-        danger: tools.filter((t) => t.type === 'danger').length,
-        safe: tools.filter((t) => t.type === 'safe').length,
+        danger: DANGER_TOOLS.length,
+        safe: SAFE_TOOLS.length,
       },
     },
   };
@@ -52,7 +53,7 @@ toolsRoute.get('/', (c) => {
 /**
  * GET /api/tools/:name
  *
- * 返回单个工具的完整定义（含参数 Schema）。
+ * 返回单个工具的完整定义（含入参字段）。
  */
 toolsRoute.get('/:name', (c) => {
   const name = c.req.param('name');

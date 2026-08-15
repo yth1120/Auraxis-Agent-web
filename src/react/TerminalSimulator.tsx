@@ -17,8 +17,7 @@ import type { LogStep, PlayState, PermissionState } from '../types';
 /**
  * 交互式终端仿真器 (React 孤岛)
  *
- * 将原 deepflow.html 中的 setInterval 定时器硬编码重构为
- * 完全状态驱动、抗竞态的 React 终端组件。
+ * 完全状态驱动、抗竞态的 React 终端组件，模拟 Auraxis 统一 ReAct 步进循环。
  *
  * 核心状态机：
  *   PlayState:  playing | paused | finished
@@ -31,20 +30,20 @@ const STEP_INTERVAL_MS = 1800;
 function getLogClassNames(step: LogStep): { container: string; preBlock?: string } {
   switch (step.type) {
     case 'input':
-      return { container: 'text-brand-accent font-semibold' };
+      return { container: 'text-brand-accent font-medium' };
     case 'system':
-      return { container: 'text-slate-500 dark:text-slate-400 text-[11px] border-l-2 border-slate-300 dark:border-slate-700 pl-2 py-0.5' };
+      return { container: 'text-brand-muted text-[11px] border-l-2 border-brand-border pl-2 py-0.5' };
     case 'step':
-      return { container: 'bg-brand-blue/5 dark:bg-brand-blue/10 border border-brand-blue/20 dark:border-brand-blue/30 p-2.5 rounded text-slate-700 dark:text-slate-300' };
+      return { container: 'bg-brand-accent/5 border border-brand-accent/20 p-2.5 rounded text-brand-text' };
     case 'tool-call':
-      return { container: 'bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-brand-border p-2.5 rounded' };
+      return { container: 'bg-white/5 border border-brand-border p-2.5 rounded' };
     case 'permission':
-      return { container: 'bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-300 dark:border-yellow-700/30 p-2.5 rounded text-yellow-700 dark:text-yellow-500' };
+      return { container: 'bg-yellow-500/10 border border-yellow-600/30 p-2.5 rounded text-yellow-600 dark:text-yellow-500' };
     case 'user-approved':
-      return { container: 'text-emerald-600 dark:text-emerald-400 font-semibold' };
+      return { container: 'text-emerald-600 dark:text-emerald-400 font-medium' };
     case 'success-answer':
       return {
-        container: 'bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-300 dark:border-emerald-500/30 p-3 rounded text-slate-700 dark:text-slate-200',
+        container: 'bg-emerald-500/10 border border-emerald-600/30 p-3 rounded text-brand-text',
       };
   }
 }
@@ -61,6 +60,7 @@ function LogEntry({
   onApprove: () => void;
   onDeny: () => void;
 }) {
+  const { t } = useLanguage();
   const classes = getLogClassNames(step);
   const isAwaitingApproval = step.type === 'permission' && permissionState === 'awaiting-approval';
 
@@ -68,7 +68,7 @@ function LogEntry({
     <div className={`font-mono text-xs leading-relaxed ${classes.container}`}>
       {step.type === 'input' && (
         <div className="flex items-start gap-1.5">
-          <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <ChevronRight className="w-4 h-4 text-brand-faint mt-0.5 flex-shrink-0" aria-hidden="true" />
           <span className="cursor-blink">{step.text}</span>
         </div>
       )}
@@ -77,8 +77,8 @@ function LogEntry({
 
       {step.type === 'step' && (
         <>
-          <div className="text-brand-blue dark:text-brand-accent font-semibold mb-1">{step.title}</div>
-          <pre className="whitespace-pre-wrap font-mono text-[11px] text-slate-600 dark:text-slate-400">
+          <div className="text-brand-accent font-medium mb-1">{step.title}</div>
+          <pre className="whitespace-pre-wrap font-mono text-[11px] text-brand-muted">
             {step.text}
           </pre>
         </>
@@ -86,16 +86,17 @@ function LogEntry({
 
       {step.type === 'tool-call' && (
         <>
-          <div className="flex items-center justify-between text-slate-700 dark:text-slate-300 mb-1">
+          <div className="flex items-center justify-between text-brand-text mb-1">
             <span>
-              调用工具: <span className="text-brand-accent font-bold">{step.name}</span>
+              {t.terminal_tool_call}
+              <span className="text-brand-accent font-bold">{step.name}</span>
             </span>
-            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-900/40 px-1 rounded font-mono">
+            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-600/30 px-1 rounded font-mono">
               {step.status}
             </span>
           </div>
-          <div className="text-slate-400 dark:text-slate-500 text-[10px] mb-1.5">参数: {step.args}</div>
-          <div className="text-slate-600 dark:text-slate-400 text-[11px] bg-slate-50 dark:bg-brand-black/40 p-1.5 rounded font-mono border border-slate-200 dark:border-brand-border/40 whitespace-pre-wrap">
+          <div className="text-brand-faint text-[10px] mb-1.5">{t.terminal_args}{step.args}</div>
+          <div className="text-brand-muted text-[11px] bg-brand-black/60 p-1.5 rounded font-mono border border-brand-border whitespace-pre-wrap">
             {step.result}
           </div>
         </>
@@ -111,22 +112,22 @@ function LogEntry({
                   e.stopPropagation();
                   onApprove();
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded border border-emerald-400/30 transition-colors"
-                aria-label="允许执行本次操作"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium rounded border border-emerald-400/30 transition-colors"
+                aria-label={t.terminal_allow}
               >
                 <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
-                允许执行
+                {t.terminal_allow}
               </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   onDeny();
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded border border-red-400/30 transition-colors"
-                aria-label="拒绝执行本次操作"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white text-xs font-medium rounded border border-red-400/30 transition-colors"
+                aria-label={t.terminal_deny}
               >
                 <ShieldAlert className="w-3.5 h-3.5" aria-hidden="true" />
-                拒绝
+                {t.terminal_deny}
               </button>
             </div>
           )}
@@ -144,9 +145,9 @@ function LogEntry({
         <>
           <div className="text-emerald-600 dark:text-emerald-400 font-bold mb-1.5 flex items-center gap-1">
             <Sparkles className="w-4 h-4" aria-hidden="true" />
-            任务宣告圆满完成
+            {t.terminal_task_done}
           </div>
-          <pre className="whitespace-pre-wrap font-mono text-[11px] text-slate-600 dark:text-slate-300">
+          <pre className="whitespace-pre-wrap font-mono text-[11px] text-brand-muted">
             {step.text}
           </pre>
         </>
@@ -184,7 +185,7 @@ function TerminalSimulatorInner() {
 
       const step = SIM_STEPS[nextIndex];
 
-      // 看门狗阻断：遇到 permission 类型自动暂停
+      // 权限看门狗阻断：遇到 permission 类型自动暂停
       if (step.type === 'permission') {
         setPermissionState('awaiting-approval');
         setPlayState('paused');
@@ -257,7 +258,7 @@ function TerminalSimulatorInner() {
     setPermissionState('idle');
   }, []);
 
-  // ── 看门狗交互 ──
+  // ── 权限看门狗交互 ──
   const handleApprove = useCallback(() => {
     setPermissionState('approved');
     // 追加 user-approved 日志并继续
@@ -279,7 +280,7 @@ function TerminalSimulatorInner() {
     // 追加拒绝日志
     const denyLog: LogStep = {
       type: 'system',
-      text: '[SecurityWatchdog] ⛔ 用户拒绝了本次高危操作。Agent 将跳过此步骤并重新规划替代方案。',
+      text: t.terminal_deny_log,
     };
     setLogs((prev) => [...prev, denyLog]);
     // 跳过后面的依赖步骤，直接到最后一个 success-answer
@@ -290,7 +291,7 @@ function TerminalSimulatorInner() {
       setCurrentStepIndex(SIM_STEPS.length);
     }
     setPlayState('playing');
-  }, []);
+  }, [t]);
 
   const isPlaying = playState === 'playing';
   const isFinished = playState === 'finished';
@@ -298,28 +299,28 @@ function TerminalSimulatorInner() {
 
   return (
     <div className="relative">
-      {/* 终端外壳光晕 */}
-      <div className="absolute -inset-1 rounded-xl bg-gradient-to-tr from-brand-accent/20 to-brand-blue/20 blur-lg opacity-75" aria-hidden="true" />
+      {/* 终端外壳 Aura 微光（仅 3% 面积强调） */}
+      <div className="absolute -inset-1 rounded-xl bg-brand-accent/15 blur-lg opacity-60" aria-hidden="true" />
 
-      <div className="relative terminal-dark-box border border-slate-700 dark:border-brand-border rounded-xl shadow-2xl overflow-hidden">
+      <div className="relative terminal-dark-box border border-brand-border rounded-xl overflow-hidden">
         {/* ── 标题栏 ── */}
-        <div className="bg-brand-black px-4 py-3 border-b border-slate-800 dark:border-brand-border flex items-center justify-between">
+        <div className="bg-brand-black px-4 py-3 border-b border-brand-border flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-red-500/80" aria-hidden="true"></span>
             <span className="w-3 h-3 rounded-full bg-yellow-500/80" aria-hidden="true"></span>
             <span className="w-3 h-3 rounded-full bg-green-500/80" aria-hidden="true"></span>
-            <span className="text-slate-400 dark:text-slate-500 text-[11px] ml-2 font-mono">
-              agent_scheduler_loop_v1.sh
+            <span className="text-brand-muted text-[11px] ml-2 font-mono">
+              {t.terminal_title}
             </span>
           </div>
-          <div className="text-[10px] text-brand-accent font-semibold font-mono flex items-center gap-1">
+          <div className="text-[10px] text-brand-accent font-medium font-mono flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
-            ACTIVE_SCHEDULER: 3/3
+            {t.terminal_status}
           </div>
         </div>
 
         {/* ── 控制栏 ── */}
-        <div className="bg-[#0f1422] px-4 py-2 border-b border-slate-800/50 dark:border-brand-border/50 flex items-center gap-4 text-[11px] text-slate-400 font-mono">
+        <div className="bg-brand-dark px-4 py-2 border-b border-brand-border/60 flex items-center gap-4 text-[11px] text-brand-muted font-mono">
           <span>
             {t.terminal_target}
           </span>
@@ -346,7 +347,7 @@ function TerminalSimulatorInner() {
               disabled={!canSkip}
               aria-label={t.terminal_skip}
               title={t.terminal_skip}
-              className="bg-slate-700/50 hover:bg-slate-700 text-slate-300 border border-slate-600/50 px-2 py-1 rounded transition-colors inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 py-1 rounded transition-colors inline-flex items-center gap-1 disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <SkipForward className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="text-[10px]">{t.terminal_skip}</span>
@@ -356,7 +357,7 @@ function TerminalSimulatorInner() {
               onClick={handleReset}
               aria-label={t.terminal_reset}
               title={t.terminal_reset}
-              className="bg-slate-700/50 hover:bg-slate-700 text-slate-300 border border-slate-600/50 px-2 py-1 rounded transition-colors inline-flex items-center gap-1"
+              className="bg-white/5 hover:bg-white/10 text-brand-text border border-brand-border px-2 py-1 rounded transition-colors inline-flex items-center gap-1"
             >
               <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="text-[10px]">{t.terminal_reset}</span>
@@ -389,7 +390,7 @@ function TerminalSimulatorInner() {
 
           {/* 完成状态 */}
           {isFinished && (
-            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono text-center pt-2 border-t border-slate-800/50">
+            <div className="text-[11px] text-brand-faint font-mono text-center pt-2 border-t border-brand-border/60">
               ⏹ {t.terminal_finished}
             </div>
           )}

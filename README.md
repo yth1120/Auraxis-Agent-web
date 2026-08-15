@@ -1,9 +1,10 @@
- # DeepFlow Agentic — 官方网站
-<img width="1912" height="948" alt="image" src="https://github.com/user-attachments/assets/185bacd2-2236-4cd1-aed3-583980908e4a" />
+# Auraxis — 官方网站
+
+<img width="3078" height="1376" alt="Auraxis 官网预览" src="https://github.com/user-attachments/assets/cc06146b-51a2-4b2e-a6c4-41aca0a0fb5e" />
 
 <p align="center">
-  <strong>DeepFlow Agentic</strong> 的官方品牌营销站点。<br />
-  一个为桌面端 AI 编程智能体 <strong>DeepFlow</strong> 量身打造的单页落地页。<br />
+  <strong>Auraxis</strong> 的官方品牌营销站点。<br />
+  为桌面端 Agentic 编程助手 <strong>Auraxis</strong>（Electron 应用）量身打造的单页落地页。<br />
   中英双语 · 深色/浅色主题 · 基于 Astro 4 + Hono + Cloudflare Pages。
 </p>
 
@@ -21,21 +22,22 @@
 
 ## 概述
 
-DeepFlow Agentic 网站是 [DeepFlow](https://github.com/deepflow) 桌面端 Electron 应用的品牌官网，旨在向开发者社区展示 DeepFlow 的核心能力：
+Auraxis 网站是 [Auraxis](https://github.com/yth1120/Auraxis-Agent) 桌面端 Electron 应用的品牌官网，向开发者社区展示 Auraxis 的核心能力：
 
-- **双路径 ReAct 自闭环智能体** — 主聊天流与独立 Agent 循环协同决策
-- **三模态权限看门狗** — Ask / Plan / AFE 三级安全策略
-- **22 个内置工具** — 9 个高危 + 13 个安全，按 6 大功能域分类
-- **Git Worktree 沙箱隔离** — 并发 Agent 自动隔离，杜绝工作区污染
-- **MCP 协议支持** — JSON-RPC over stdio 标准兼容
-- **加密持久化记忆** — SQLite + Electron safeStorage 硬件加密
+- **统一 ReAct 步进引擎** — 聊天与智能体共用 step-engine 单一步进循环，停止策略/压缩/重试均为策略钩子
+- **63 个内置工具** — 11 个危险 + 52 个安全，按 10 大能力族分类
+- **多智能体调度** — 优先级队列、并发控制、三级偏差检测、计划审批流
+- **Code Mode** — worker 线程执行 TypeScript 工具编排，子调用回穿完整权限管线
+- **原生沙箱** — Windows restricted token / AppContainer、Linux、macOS 四后端 + Git Worktree 隔离
+- **MCP + 插件系统** — JSON-RPC over stdio 标准兼容、四类扩展点
+- **持久化记忆** — SQLite + FTS5 全文搜索 + LLM 驱动记忆提取
 
 ### 在线预览
 
 | 语言 | 链接 |
 |------|------|
-| 🇨🇳 中文 | `https://deepflow-agentic.pages.dev` |
-| 🇺🇸 English | `https://deepflow-agentic.pages.dev/en` |
+| 🇨🇳 中文 | `https://auraxis-website.pages.dev` |
+| 🇺🇸 English | `https://auraxis-website.pages.dev`（切换 EN） |
 
 ---
 
@@ -44,7 +46,7 @@ DeepFlow Agentic 网站是 [DeepFlow](https://github.com/deepflow) 桌面端 Ele
 ```bash
 # 1. 克隆本仓库
 git clone <repo-url>
-cd deepflow-website
+cd auraxis-website
 
 # 2. 安装依赖
 npm install
@@ -79,40 +81,41 @@ npm run preview
 | **交互** | [React 18](https://react.dev) | 交互岛屿（Islands Architecture） |
 | **API** | [Hono](https://hono.dev) | 轻量服务端 API 框架（CF Workers 兼容） |
 | **样式** | [Tailwind CSS 3](https://tailwindcss.com) | 原子化 CSS + 暗色模式 |
-| **动画** | [Framer Motion 11](https://motion.dev) | React 岛屿交互动画 |
-| **图标** | [Lucide React](https://lucide.dev) | 开源图标库 |
-| **图标** | [Supabase JS SDK](https://supabase.com) | 可选的 Auth / DB 客户端 |
+| **动画** | [Framer Motion 11](https://motion.dev) | 数据驱动动画（粒子流动/旋转，遵循零位移动画规范） |
+| **图标** | [Lucide React](https://lucide.dev) | 开源线性图标库 |
 | **运行时** | [Cloudflare Pages](https://pages.cloudflare.com) | 部署 + SSR 运行时 |
-| **构建** | [Wrangler](https://developers.cloudflare.com/workers/wrangler/) | CF 环境变量管理 |
+| **构建** | [Wrangler](https://developers.cloudflare.com/workers/wrangler/) | CF 部署管理 |
 
-### 设计系统
+### 设计系统（与桌面端 Auraxis 品牌一致）
 
 | Token | 值 | 用途 |
 |-------|-----|------|
-| `brand-black` | `#030712` | 深色模式页面背景 |
-| `brand-dark` | `#0B0F19` | 深色卡片/代码块背景 |
-| `brand-card` | `#111827` | 卡片背景 |
-| `brand-border` | `#1F2937` | 边框色 |
-| `brand-text` | `#9CA3AF` | 辅助文本 |
-| `brand-accent` | `#00E5FF` | 极光青 — 品牌高亮 |
-| `brand-blue` | `#2563EB` | 深蓝 — 辅助强调色 |
-| `sans` | Inter | 正文字体 |
-| `mono` | JetBrains Mono | 代码/终端字体 |
+| `brand-black` | `#111216` | 深色主题页面背景（品牌黑） |
+| `brand-dark` | `#171822` | 深色卡片/代码块背景 |
+| `brand-card` | `#1C1E28` | 卡片背景 |
+| `brand-border` | `#262A35` | hairline 发丝线（深色） |
+| `brand-accent` | `#8C8AA8` | Aura 紫灰 — 仅约 3% 面积强调（焦点/选中/状态点） |
+| `brand-ivory` | `#F1F1EE` | 象牙白 — 浅色主题底色 / 深底正文 |
+| `sans` | 系统 UI 栈 | 正文（`-apple-system, Segoe UI, PingFang SC, Microsoft YaHei`） |
+| `mono` | `SF Mono, JetBrains Mono, Fira Code, Consolas` | 代码/终端字体 |
+
+> 视觉规范：圆角六档（5/6/8/12/14/9999）、零位移动画（按钮无 hover 位移/缩放）、选中态背景高亮禁左侧色条、禁止蓝色与大面积渐变。
 
 ---
 
 ## 项目结构
 
 ```
-deepflow-website/
+auraxis-website/
 ├── astro.config.mjs          # Astro 配置（Hybrid + CF 适配器）
-├── tailwind.config.mjs       # Tailwind 配置（品牌色彩 Token）
+├── tailwind.config.mjs       # Tailwind 配置（Auraxis 品牌色彩 Token）
 ├── wrangler.toml             # Cloudflare Pages 部署配置
 ├── tsconfig.json             # TypeScript 配置
 ├── package.json
 │
 ├── public/
-│   └── image1.png            # 静态资源（OG 图片等）
+│   ├── auraxis-logo.png      # 品牌 Logo（拷贝自桌面端 src/assets/）
+│   └── favicon-96.png        # 站点图标
 │
 └── src/
     ├── pages/
@@ -129,38 +132,36 @@ deepflow-website/
     │   ├── FeatureGrid.astro
     │   ├── ArchitectureSection.astro
     │   ├── ToolsMatrixSection.astro
+    │   ├── DownloadSection.astro   # 下载区（版本/系统要求/更新日志）
     │   ├── DeveloperDocs.astro
     │   └── Footer.astro
     │
     ├── react/                # React 交互岛屿
     │   ├── ThemeToggle.tsx   # 深色/浅色切换
     │   ├── LanguageToggle.tsx# 中/英语言切换
-    │   ├── TerminalSimulator.tsx # Agent 循环终端模拟器
-    │   ├── ArchitectureFlow.tsx  # 架构流交互图
-    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器
-    │   ├── SmartDownloader.tsx  # 智能下载按钮（自动平台检测）
-    │   └── AuthButton.tsx    # Supabase 身份验证按钮
+    │   ├── TerminalSimulator.tsx # ReAct 循环终端模拟器
+    │   ├── ArchitectureFlow.tsx  # 双进程架构交互图
+    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器（63 工具）
+    │   └── SmartDownloader.tsx  # 智能下载按钮（自动平台检测）
     │
     ├── i18n/
     │   ├── translations.ts   # ★ 中/英完整翻译表
     │   └── LanguageContext.tsx# React i18n Context Provider
     │
     ├── data/
-    │   ├── tools.ts          # ★ 22 个内置工具数据集
-    │   ├── releases.json     # 发布版本 & 下载资产
+    │   ├── tools-data.json   # ★ 63 个内置工具数据集（源自桌面端 tool-defs.ts）
+    │   ├── tools.ts          # 类型化工具数据访问层
+    │   ├── releases.json     # 发布版本 & 下载资产（v2.0.1）
     │   └── simSteps.ts       # 终端模拟步骤序列
     │
     ├── types/
-    │   └── index.ts          # ★ 全局 TypeScript 类型定义
+    │   └── index.ts          # ★ 全局 TypeScript 类型定义（与桌面端 contracts 同构）
     │
     ├── server/
     │   ├── app.ts            # ★ Hono 应用工厂（中间件 + 路由注册）
-    │   ├── routes/
-    │   │   ├── releases.ts   # GET /api/releases/latest
-    │   │   ├── tools.ts      # GET /api/tools   &   /api/tools/:name
-    │   │   └── auth.ts       # POST /api/auth/*（Supabase 身份验证）
-    │   └── utils/
-    │       └── supabase.ts   # Supabase 客户端工厂
+    │   └── routes/
+    │       ├── releases.ts   # GET /api/releases/latest
+    │       └── tools.ts      # GET /api/tools   &   /api/tools/:name
     │
     ├── utils/
     │   └── platform.ts       # User Agent 平台嗅探
@@ -176,22 +177,21 @@ deepflow-website/
 ### 渲染模型：Astro Hybrid
 
 ```
-┌──────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────┐
 │                    Cloudflare Pages                   │
-│                                                        │
-│   GET / (SSG)              GET /api/* (SSR)           │
-│   ┌─────────────────┐     ┌────────────────────┐      │
-│   │  index.astro     │     │  [...route].ts     │      │
-│   │  (预渲染静态HTML) │     │  (动态执行)         │      │
-│   │                 │     │       ↓             │      │
-│   │  React Islands  │     │  Hono Factory      │      │
-│   │  (客户端水合)    │     │  ┌──────────────┐  │      │
-│   └─────────────────┘     │  │ releases.ts  │  │      │
-│                            │  │ tools.ts     │  │      │
-│                            │  │ auth.ts      │  │      │
-│                            │  └──────────────┘  │      │
-│                            └────────────────────┘      │
-└──────────────────────────────────────────────────────┘
+│                                                       │
+│   GET / (SSG)              GET /api/* (SSR)          │
+│   ┌─────────────────┐     ┌────────────────────┐     │
+│   │  index.astro     │     │  [...route].ts     │     │
+│   │  (预渲染静态HTML) │     │  (动态执行)         │     │
+│   │                 │     │       ↓             │     │
+│   │  React Islands  │     │  Hono Factory      │     │
+│   │  (客户端水合)    │     │  ┌──────────────┐  │     │
+│   └─────────────────┘     │  │ releases.ts  │  │     │
+│                            │  │ tools.ts     │  │     │
+│                            │  └──────────────┘  │     │
+│                            └────────────────────┘     │
+└────────────────────────────────────────────────────┘
 ```
 
 - **首页 (`index.astro`)**: 构建时预渲染为静态 HTML，`prerender = true`
@@ -205,11 +205,9 @@ API 请求经 Astro catch-all 转发至 Hono 实例：
 | 端点 | 方法 | 说明 | 缓存策略 |
 |------|------|------|---------|
 | `/api/health` | GET | 健康检查 + 运行时长 | 无 |
-| `/api/health/supabase` | GET | Supabase 连通性探测 | 无 |
 | `/api/releases/latest` | GET | 最新版本 & 各平台下载资产 | 浏览器 1h / CDN 24h |
 | `/api/tools` | GET | 工具列表（支持 `?type=` & `?category=` 筛选） | 浏览器 1d / CDN 7d |
 | `/api/tools/:name` | GET | 单个工具详细定义 | 浏览器 1d / CDN 7d |
-| `/api/auth/*` | POST | Supabase 身份验证 | 无 |
 
 所有 API 响应遵循统一契约：
 
@@ -224,21 +222,21 @@ interface ApiResponse<T = unknown> {
 ### 数据流
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌─────────────────┐
-│  tools.ts    │───▶│  /api/tools  │───▶│  ToolsGrid.tsx  │
-│  (22 tools)  │    │  (Hono SSR)  │    │  (React Island) │
-├──────────────┤    ├──────────────┤    ├─────────────────┤
-│ releases.json│───▶│ /api/releases│───▶│ SmartDownloader │
-│ (version + DL)│   │  (Hono SSR)  │    │  (React Island) │
-├──────────────┤    └──────────────┘    └─────────────────┘
-│ simSteps.ts  │
-│ (LogStep[])  │───────────────────────▶ TerminalSimulator
-└──────────────┘                         (React Island)
+┌──────────────────┐    ┌──────────────┐    ┌─────────────────┐
+│ tools-data.json  │───▶│  /api/tools  │───▶│  ToolsGrid.tsx  │
+│ (63 tools)       │    │  (Hono SSR)  │    │  (React Island) │
+├──────────────────┤    ├──────────────┤    ├─────────────────┤
+│ releases.json    │───▶│ /api/releases│───▶│ SmartDownloader │
+│ (version + DL)   │    │  (Hono SSR)  │    │  (React Island) │
+├──────────────────┤    └──────────────┘    └─────────────────┘
+│ simSteps.ts      │
+│ (LogStep[])      │───────────────────────▶ TerminalSimulator
+└──────────────────┘                         (React Island)
 ```
 
-- **工具数据**: 静态 TypeScript 数组 → `GET /api/tools` → React 筛选过滤 UI
+- **工具数据**: 静态 JSON（源自桌面端 `electron/tool-defs.ts`）→ `GET /api/tools` → React 筛选过滤 UI
 - **版本数据**: 静态 JSON → `GET /api/releases/latest` → 自动平台检测下载按钮
-- **终端演示**: 硬编码的 LogStep 序列 → 逐行动画播放模拟 Agent 循环
+- **终端演示**: 硬编码的 LogStep 序列 → 逐行动画播放模拟 Auraxis ReAct 循环
 
 ---
 
@@ -251,7 +249,7 @@ interface ApiResponse<T = unknown> {
 1. **翻译表**: `src/i18n/translations.ts` 定义了完整的 `Translations` 接口 + 中英对照
 2. **静态内容**: HTML 标签使用 `data-i18n="key"` 属性标记，引导脚本自动替换文本
 3. **React 内容**: 每个岛屿包裹 `<LanguageProvider>`，通过 `useLanguage().t.key` 获取翻译
-4. **跨岛屿同步**: `deepflow:lang-change` 自定义事件在所有 React 岛屿和 Astro DOM 间同步
+4. **跨岛屿同步**: `auraxis:lang-change` 自定义事件在所有 React 岛屿和 Astro DOM 间同步
 5. **持久化**: 语言偏好存储在 `localStorage('lang')`，默认跟随浏览器 `navigator.language`
 
 ### 新增翻译
@@ -260,6 +258,7 @@ interface ApiResponse<T = unknown> {
 2. 在 `zh` 和 `en` 两个对象中补充对应的值
 3. 在 Astro 模板中使用 `data-i18n="key"`
 4. 在 React 组件中通过 `useLanguage().t.key` 引用
+5. 若该 key 出现在静态 Astro 元素上，同步更新 `BaseLayout.astro` 内联 EN 引导映射
 
 ---
 
@@ -285,20 +284,13 @@ interface ApiResponse<T = unknown> {
 4. 在 `src/i18n/translations.ts` 中添加所有 UI 字符串到 `Translations` 接口及中英对象
 5. 静态文本使用 `data-i18n="key"`，React 文本使用 `useLanguage().t.key`
 
-### 环境变量
+### 更新工具数据
 
-用于本地开发的敏感配置放在 `.dev.vars`：
-
-```
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your-anon-key
-```
-
-生产环境通过 Wrangler 设置：
+工具数据的事实源是桌面端 `electron/tool-defs.ts`。重新提取：
 
 ```bash
-npx wrangler pages secret put SUPABASE_URL --project-name=deepflow-website
-npx wrangler pages secret put SUPABASE_ANON_KEY --project-name=deepflow-website
+# 从桌面端仓库读取 TOOL_DEFINITIONS，生成 tools-data.json
+# 字段: name / description / category / danger / summary / concurrencySafe / params
 ```
 
 ### TypeScript
@@ -334,7 +326,7 @@ npm run build    # 生产构建（如有类型错误会失败）
 npm run build
 
 # 2. 使用 Wrangler 部署
-npx wrangler pages deploy ./dist --project-name=deepflow-website
+npx wrangler pages deploy ./dist --project-name=auraxis-website
 
 # 3. 或通过 Cloudflare Dashboard 连接 Git 仓库自动部署
 ```
@@ -344,9 +336,9 @@ npx wrangler pages deploy ./dist --project-name=deepflow-website
 `wrangler.toml`：
 
 ```toml
-name = "deepflow-website"
+name = "auraxis-website"
 pages_build_output_dir = "./dist"
-compatibility_date = "2026-06-09"
+compatibility_date = "2026-08-16"
 ```
 
 - 构建命令: `npm run build`
@@ -361,29 +353,25 @@ compatibility_date = "2026-06-09"
 |------|------|----------|------|
 | 主题切换 | `ThemeToggle.tsx` | `client:visible` | 深色/浅色模式切换 |
 | 语言切换 | `LanguageToggle.tsx` | `client:visible` | 中/英双语切换 |
-| 终端模拟器 | `TerminalSimulator.tsx` | `client:idle` | Agent 循环动画演示 |
+| 终端模拟器 | `TerminalSimulator.tsx` | `client:idle` | ReAct 循环动画演示 |
 | 架构流程图 | `ArchitectureFlow.tsx` | `client:visible` | 双进程交互架构可视化 |
-| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 工具筛选/查看/参数展示 |
+| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 63 工具筛选/查看/参数展示 |
 | 智能下载 | `SmartDownloader.tsx` | `client:idle` | 自动检测平台，展示下载链接 |
-| 身份认证 | `AuthButton.tsx` | `client:idle` | Supabase 登录/用户菜单 |
 
 ---
 
-## 与 DeepFlow 桌面端的对应关系
+## 与 Auraxis 桌面端的对应关系
 
-本网站的前端类型定义与 DeepFlow Electron 应用的类型系统保持同构映射：
-
-```
-electron/types.ts  ←→  src/types/index.ts
-```
+本网站的数据与类型定义与 Auraxis Electron 应用保持同构映射：
 
 | 概念 | 桌面端实现 | 网站数据源 |
 |------|-----------|-----------|
-| 22 个工具 | `electron/src/tools/` | `src/data/tools.ts` |
-| 权限模式 | `PermissionGate` | `types.ts PermissionMode` |
-| LogStep 序列 | `AgentLoop` 运行时日志 | `src/data/simSteps.ts` |
-| 发布版本 | `electron/release/` | `src/data/releases.json` |
-| 平台检测 | `electron/utils/platform.ts` | `src/utils/platform.ts` |
+| 63 个工具 | `electron/tool-defs.ts` | `src/data/tools-data.json` |
+| 危险工具集合 | `electron/ipc/tool-handlers.ts` (DANGEROUS_TOOLS) | `tools-data.json` 的 danger 字段 |
+| 权限模式 | `electron/types.ts` | `types.ts PermissionMode` |
+| LogStep 序列 | 运行时 ReAct 循环日志 | `src/data/simSteps.ts` |
+| 发布版本 | 桌面端 `package.json` | `src/data/releases.json` |
+| 平台检测 | `electron/utils/` | `src/utils/platform.ts` |
 
 ---
 
@@ -397,4 +385,4 @@ electron/types.ts  ←→  src/types/index.ts
 
 [MIT License](./LICENSE)
 
-© 2026 DeepFlow Core Contributors.
+© 2026 Auraxis Core Contributors.

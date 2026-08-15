@@ -1,38 +1,36 @@
 ---
 import ThemeToggle from '../react/ThemeToggle';
 import LanguageToggle from '../react/LanguageToggle';
-import AuthButton from '../react/AuthButton';
-import { Globe, Download } from 'lucide-react';
+import { Github, Download } from 'lucide-react';
+
+const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 ---
 
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-brand-black/80 backdrop-blur-md border-b border-slate-200 dark:border-brand-border transition-colors">
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-brand-black/80 backdrop-blur-md border-b border-brand-hairline dark:border-brand-border transition-colors">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <img src="/image1.png" alt="DeepFlow Logo" class="w-14 h-14" />
-      <div class="flex items-baseline gap-2">
-        <span class="font-bold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-blue-500 to-brand-accent">DeepFlow Agentic</span>
-        <span class="text-xs text-brand-accent font-mono border border-brand-accent/20 px-1.5 py-0.5 rounded">v1.2.0</span>
-      </div>
-    </div>
+    <a href="#top" class="flex items-center gap-2.5" aria-label="Auraxis 首页">
+      <img src="/auraxis-logo.png" alt="Auraxis Logo" class="h-8 w-auto" />
+      <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis</span>
+      <span class="text-[10px] text-brand-muted font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.1</span>
+    </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500 dark:text-slate-400" aria-label="主导航">
-      <a href="#features" data-i18n="nav_features" class="hover:text-brand-blue dark:hover:text-brand-accent transition-colors">技术特性</a>
-      <a href="#react-demo" data-i18n="nav_demo" class="hover:text-brand-blue dark:hover:text-brand-accent transition-colors">智能体演练</a>
-      <a href="#architecture" data-i18n="nav_architecture" class="hover:text-brand-blue dark:hover:text-brand-accent transition-colors">系统架构</a>
-      <a href="#developer-docs" data-i18n="nav_developer" class="hover:text-brand-blue dark:hover:text-brand-accent transition-colors">二次开发</a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-brand-muted" aria-label="主导航">
+      <a href="#features" data-i18n="nav_features" class="hover:text-ink dark:hover:text-ivory transition-colors">技术特性</a>
+      <a href="#react-demo" data-i18n="nav_demo" class="hover:text-ink dark:hover:text-ivory transition-colors">智能体演练</a>
+      <a href="#architecture" data-i18n="nav_architecture" class="hover:text-ink dark:hover:text-ivory transition-colors">系统架构</a>
+      <a href="#tools" data-i18n="nav_tools" class="hover:text-ink dark:hover:text-ivory transition-colors">工具矩阵</a>
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2.5">
       <LanguageToggle client:idle />
       <ThemeToggle client:idle />
-      <AuthButton client:load />
 
-      <a href="https://github.com/yth1120/DeepFlow" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors" aria-label="DeepFlow GitHub">
-        <Globe class="w-5 h-5" aria-hidden="true" />
+      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors p-2" aria-label="Auraxis GitHub">
+        <Github className="w-[18px] h-[18px]" aria-hidden="true" />
       </a>
 
-      <a href="#download" data-i18n="nav_download" class="bg-brand-blue dark:bg-slate-100 hover:bg-brand-blue/90 dark:hover:bg-white text-white dark:text-brand-black font-semibold text-xs px-4 py-2 rounded transition-all shadow-md inline-flex items-center gap-1.5">
-        <Download class="w-4 h-4" aria-hidden="true" />
+      <a href="#download" data-i18n="nav_download" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-4 h-9 inline-flex items-center gap-1.5 rounded-md">
+        <Download className="w-4 h-4" aria-hidden="true" />
         免费下载
       </a>
     </div>

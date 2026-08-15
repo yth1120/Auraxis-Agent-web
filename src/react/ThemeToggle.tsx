@@ -33,7 +33,7 @@ function ThemeToggleInner() {
       onClick={toggle}
       aria-label={isDark ? t.theme_light : t.theme_dark}
       title={isDark ? t.theme_light : t.theme_dark}
-      className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-brand-border transition-all"
+      className="p-2 rounded-md bg-white dark:bg-brand-dark hover:bg-black/5 dark:hover:bg-white/5 text-brand-muted border border-brand-hairline dark:border-brand-border transition-colors"
     >
       {isDark ? (
         <Sun className="w-4 h-4" aria-hidden="true" />

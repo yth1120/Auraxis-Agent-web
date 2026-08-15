@@ -5,19 +5,41 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'PingFang SC',
+          'Hiragino Sans GB',
+          'Microsoft YaHei',
+          'sans-serif',
+        ],
+        mono: ['SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
       },
       colors: {
         brand: {
-          black: '#030712',
-          dark: '#0B0F19',
-          card: '#111827',
-          border: '#1F2937',
-          text: '#9CA3AF',
-          accent: '#00E5FF', // DeepSeek Aurora Cyan
-          blue: '#2563EB',   // DeepSeek Deep Blue
+          // Auraxis 品牌色板 —「Black is the Axis, White is the Structure, Purple is the Aura」
+          black: '#111216', // 品牌黑：深色主题页面底色
+          dark: '#171822', // 深色抬升面（终端/代码块深底）
+          card: '#1C1E28', // 深色卡片背景
+          border: '#262A35', // 深色 hairline 发丝线
+          ink: '#111216', // 浅色主题主文字
+          ink2: '#3E3D4A', // 浅色主题次级文字
+          text: '#C9C8D6', // 深色主题正文
+          muted: '#9B9AAE', // 次级/辅助文字（深浅主题通用）
+          faint: '#6E6D82', // 三级弱文字
+          accent: '#8C8AA8', // Aura 紫灰：仅约 3% 面积强调（焦点/选中/状态点）
+          ivory: '#F1F1EE', // 象牙白：浅色主题底色 / 深底上的正文色
+          hairline: '#E3E2DC', // 浅色主题 hairline
         },
+      },
+      borderRadius: {
+        // 圆角六档：5 / 6 / 8 / 12 / 14 / 9999（禁止碎角）
+        axs: '5px',
+        amd: '6px',
+        alg: '8px',
+        axl: '12px',
+        a2xl: '14px',
       },
     },
   },

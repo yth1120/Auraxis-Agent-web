@@ -1,52 +1,58 @@
 ---
 import { Terminal, Check, Copy } from 'lucide-react';
+
+const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent.git';
 ---
 
-<section id="developer-docs" class="py-16 border-t border-slate-200 dark:border-brand-border/80 transition-colors">
+<section id="developer-docs" class="py-16 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
     <div class="lg:col-span-5 space-y-6">
-      <div class="w-12 h-12 bg-brand-blue/10 dark:bg-brand-accent/10 border border-brand-blue/30 dark:border-brand-accent/30 rounded-lg flex items-center justify-center text-brand-blue dark:text-brand-accent">
-        <Terminal class="w-6 h-6" aria-hidden="true" />
+      <div class="w-12 h-12 bg-brand-accent/10 border border-brand-accent/25 rounded-lg flex items-center justify-center text-brand-accent">
+        <Terminal className="w-6 h-6" aria-hidden="true" />
       </div>
-      <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="dev_title">基于 DeepFlow 进行二次开发</h2>
-      <p class="text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="dev_description">DeepFlow 的主进程和渲染进程全部基于 TypeScript 开发。它提供了完美的 TS 类型镜像支持（electron/types.ts ↔ src/types/），无论您是想扩展底层工具、外接企业 MCP 服务器还是修改 Zustand 的 12 个持久化 Store，我们都已准备好了完善的基础设施。</p>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="dev_title">基于 Auraxis 进行二次开发</h2>
+      <p class="text-brand-muted leading-relaxed" data-i18n="dev_description">Auraxis 主进程与渲染进程全部基于 TypeScript，跨进程类型以 electron/contracts/ 为单一事实源。无论扩展底层工具、外接企业 MCP 服务器，还是修改 17 个 Zustand Store，基础设施都已就绪。</p>
       <div class="space-y-3">
         <div class="flex items-start gap-3">
-          <div class="w-5 h-5 rounded-full bg-brand-blue/10 dark:bg-brand-accent/20 flex items-center justify-center text-brand-blue dark:text-brand-accent mt-0.5"><Check class="w-3.5 h-3.5" aria-hidden="true" /></div>
-          <span class="text-sm text-slate-700 dark:text-slate-300" data-i18n="dev_check1">Vitest 前后端覆盖率门槛，代码更稳健</span>
+          <div class="w-5 h-5 rounded-full bg-brand-accent/15 flex items-center justify-center text-brand-accent mt-0.5"><Check className="w-3.5 h-3.5" aria-hidden="true" /></div>
+          <span class="text-sm text-brand-ink2 dark:text-brand-text" data-i18n="dev_check1">Vitest 覆盖率门槛：行/语句 86.20% · 分支 79.37% · 函数 84.32%</span>
         </div>
         <div class="flex items-start gap-3">
-          <div class="w-5 h-5 rounded-full bg-brand-blue/10 dark:bg-brand-accent/20 flex items-center justify-center text-brand-blue dark:text-brand-accent mt-0.5"><Check class="w-3.5 h-3.5" aria-hidden="true" /></div>
-          <span class="text-sm text-slate-700 dark:text-slate-300" data-i18n="dev_check2">严格的 CSP 内容安全限制与沙箱锁保证主进程安全</span>
+          <div class="w-5 h-5 rounded-full bg-brand-accent/15 flex items-center justify-center text-brand-accent mt-0.5"><Check className="w-3.5 h-3.5" aria-hidden="true" /></div>
+          <span class="text-sm text-brand-ink2 dark:text-brand-text" data-i18n="dev_check2">严格 CSP 内容安全策略与原生沙箱锁保证主进程安全</span>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-5 h-5 rounded-full bg-brand-accent/15 flex items-center justify-center text-brand-accent mt-0.5"><Check className="w-3.5 h-3.5" aria-hidden="true" /></div>
+          <span class="text-sm text-brand-ink2 dark:text-brand-text" data-i18n="dev_check3">166 个测试文件 · 1347 个用例 · 13 条 Playwright E2E 链路</span>
         </div>
       </div>
     </div>
 
     <div class="lg:col-span-7">
-      <div class="code-dark-box border border-slate-700 dark:border-brand-border rounded-xl overflow-hidden font-mono text-xs shadow-xl">
-        <div class="bg-brand-black px-4 py-3 border-b border-slate-800 dark:border-brand-border flex items-center justify-between">
-          <span class="text-slate-400" data-i18n="dev_titlebar">快速克隆并启动开发</span>
-          <span class="text-slate-500 dark:text-slate-600 font-bold" data-i18n="dev_titlebar_type">TypeScript / Vite</span>
+      <div class="code-dark-box border border-brand-border rounded-xl overflow-hidden font-mono text-xs">
+        <div class="bg-brand-black px-4 py-3 border-b border-brand-border flex items-center justify-between">
+          <span class="text-brand-muted" data-i18n="dev_titlebar">快速克隆并启动开发</span>
+          <span class="text-brand-faint font-bold" data-i18n="dev_titlebar_type">TypeScript / Vite</span>
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <p class="text-slate-400 dark:text-slate-500 mb-2" data-i18n="dev_step1_comment">// 1. 克隆底层核心仓库</p>
-            <div class="bg-brand-black/60 p-3 rounded border border-slate-700 dark:border-brand-border flex items-center justify-between group">
-              <span class="text-brand-accent">git clone https://github.com/yth1120/DeepFlow.git</span>
-              <button data-copy-text="git clone https://github.com/yth1120/DeepFlow.git" class="text-slate-500 hover:text-slate-300 transition-colors p-1 rounded hover:bg-slate-700/50" aria-label="复制命令" title="点击复制"><Copy class="w-4 h-4" aria-hidden="true" /></button>
+            <p class="text-brand-muted mb-2" data-i18n="dev_step1_comment">// 1. 克隆底层核心仓库</p>
+            <div class="bg-brand-black/60 p-3 rounded border border-brand-border flex items-center justify-between group">
+              <span class="text-brand-accent">{`git clone ${REPO_URL}`}</span>
+              <button data-copy-text={`git clone ${REPO_URL}`} class="text-brand-muted hover:text-brand-ivory transition-colors p-1 rounded hover:bg-white/5" aria-label="复制命令" title="点击复制"><Copy className="w-4 h-4" aria-hidden="true" /></button>
             </div>
           </div>
           <div>
-            <p class="text-slate-400 dark:text-slate-500 mb-2" data-i18n="dev_step2_comment">// 2. 创建本地开发环境变量配置</p>
-            <div class="bg-brand-black/60 p-3 rounded border border-slate-700 dark:border-brand-border flex items-center justify-between group">
-              <span class="text-slate-300">cp .env.example .env</span>
-              <button data-copy-text="cp .env.example .env" class="text-slate-500 hover:text-slate-300 transition-colors p-1 rounded hover:bg-slate-700/50" aria-label="复制命令" title="点击复制"><Copy class="w-4 h-4" aria-hidden="true" /></button>
+            <p class="text-brand-muted mb-2" data-i18n="dev_step2_comment">// 2. 创建本地开发环境变量配置</p>
+            <div class="bg-brand-black/60 p-3 rounded border border-brand-border flex items-center justify-between group">
+              <span class="text-brand-text">cp .env.example .env</span>
+              <button data-copy-text="cp .env.example .env" class="text-brand-muted hover:text-brand-ivory transition-colors p-1 rounded hover:bg-white/5" aria-label="复制命令" title="点击复制"><Copy className="w-4 h-4" aria-hidden="true" /></button>
             </div>
           </div>
           <div>
-            <p class="text-slate-400 dark:text-slate-500 mb-2" data-i18n="dev_step3_comment">// 3. 安装依赖并启动 Electron 联动调试开发</p>
-            <div class="bg-brand-black/60 p-3 rounded border border-slate-700 dark:border-brand-border">
-              <span class="text-slate-300 block">npm install</span>
+            <p class="text-brand-muted mb-2" data-i18n="dev_step3_comment">// 3. 安装依赖并启动 Electron 联动调试开发</p>
+            <div class="bg-brand-black/60 p-3 rounded border border-brand-border">
+              <span class="text-brand-text block">npm install</span>
               <span class="text-brand-accent block">npm run electron:dev</span>
             </div>
           </div>

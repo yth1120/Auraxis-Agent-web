@@ -7,54 +7,76 @@ import '../styles/global.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DeepFlow Agentic - Desktop AI Coding Agent & Multi-Engine Scheduler</title>
-    <meta name="description" content="DeepFlow Agentic is a desktop AI co-pilot platform built for hackers. Local sandbox, ReAct agent, dual-engine architecture." />
+    <title>Auraxis — 桌面端 Agentic 编程助手 | Official Website</title>
+    <meta name="description" content="Auraxis v2.0.1 — 基于 Electron 的桌面端 Agentic 编程助手。统一 ReAct 步进引擎、多智能体调度、Code Mode 工具编排、63 个内置工具、原生沙箱与持久化项目记忆。" />
+    <meta name="keywords" content="Auraxis, AI Coding Agent, Electron, ReAct, MCP, 智能体编程助手" />
+    <link rel="icon" type="image/png" href="/favicon-96.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Auraxis — 桌面端 Agentic 编程助手" />
+    <meta property="og:description" content="统一 ReAct 步进引擎 · 多智能体调度 · Code Mode · 63 个内置工具 · 原生沙箱 · 中英双语" />
+    <meta property="og:image" content="/auraxis-logo.png" />
 
     <script is:inline>
       (function(){
+        // ── 主题预载（防 FOUC）：默认深色，跟随系统，localStorage 持久化 ──
         var T=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
         document.documentElement.classList.toggle('dark',T==='dark');
+        // ── 语言引导：中/英静态文本替换（与 src/i18n/translations.ts 保持同步） ──
         var L=localStorage.getItem('lang')||(navigator.language.startsWith('zh')?'zh':'en');
         var EN={
-          nav_features:'Features',nav_demo:'Agent Demo',nav_architecture:'Architecture',nav_developer:'Dev Docs',nav_download:'Download',
-          hero_badge:'Local Sandbox · Powered by DeepSeek LLM',
-          hero_title_line1:'No Black Box,',hero_title_line2:'Take Control of Your AI Coding Agent',
-          hero_description:'DeepFlow is a desktop AI co-pilot platform built for hackers. Powered by native Electron, it drives local tools (Bash/LSP/Git) through a dual-path ReAct self-looping agent — no more "passive" AI.',
-          hero_stat_tools:'22 Tools',hero_stat_tools_sub:'Built-in safe & dangerous toolchain',
-          hero_stat_loop:'Dual-Loop',hero_stat_loop_sub:'Chat stream & standalone Agent loops',
-          hero_stat_local:'100%',hero_stat_local_sub:'Local workspace / sandboxed memory',
-          features_title:'Transparent Capabilities, Outside the System',
-          features_subtitle:'Open the "black box" between LLMs and the operating system. DeepFlow is not just a prompt sender — it is a fully auditable code execution engine.',
-          feature1_title:'Tri-Modal Permission Watchdog',feature1_desc:'Built-in Ask (confirm), Plan (approve), and AFE (auto-execute). Read-only operations pass silently; dangerous commands (Bash/Write) must pass strict interception review.',
-          feature2_title:'Dual-Path Autonomous Decision Engine',feature2_desc:'The main chat ReAct loop (fast response) and independent sub-agent TaskPlan (deep reasoning) run side by side. Built-in drift detection (Blocked → Stalled → Replan).',
-          feature3_title:'Git Worktree Sandbox Isolation',feature3_desc:'Never pollute your working directory! Independent worktrees are auto-created for concurrent agents. All modifications run in a dirty sandbox and merge only after review.',
-          feature4_title:'SQLite + Encrypted Persistent Memory',feature4_desc:'Built-in SQLite serves as long-term project memory. Security-sensitive settings (API keys) are serialized via Electron safeStorage with local hardware-backed encryption.',
-          feature5_title:'MCP (Model Context Protocol) Support',feature5_desc:'Full JSON-RPC over stdio compliance. Pull third-party MCP server nodes to dynamically integrate code indexing, document extraction, and database interaction capabilities.',
-          feature6_title:'Secure Plugin Dynamic Loader',feature6_desc:'Extension points are supported on the renderer side, but source code is strictly scanned for eval, child_process, fs, and irregular fetch calls before loading — eliminating rogue plugin data theft at the root.',
-          arch_title:'Transparent, Clean Dual-Process Architecture',arch_subtitle:'No black-box logic. This is how DeepFlow operates internally — every data flow under your control.',
-          tools_title:'Fully Decoupled Built-in Tool Matrix',tools_subtitle:'At each ReAct loop step, the agent selects the most appropriate toolset based on your system permission constraints.',
-          tools_danger_label:'Dangerous (requires approval)',tools_safe_label:'Safe (silent pass-through)',
-          dev_title:'Extend DeepFlow',dev_description:'DeepFlow is built entirely in TypeScript, with mirrored type definitions (electron/types.ts ↔ src/types/). Whether you want to extend low-level tools, connect enterprise MCP servers, or modify the 12 Zustand persistent stores, we have the infrastructure ready for you.',
-          dev_check1:'Vitest coverage thresholds for both frontend and backend',dev_check2:'Strict CSP enforcement and sandbox locks ensure main process security',
-          dev_step1_comment:'// 1. Clone the core repository',dev_step2_comment:'// 2. Create local environment config',dev_step3_comment:'// 3. Install dependencies & launch Electron dev mode',dev_titlebar:'Quick Clone & Start Development',dev_titlebar_type:'TypeScript / Vite',
-          footer_brand:'An ultra-secure, engineering-transparent AI-driven collaborative agent scheduler built on Electron.',
-          footer_spec_title:'Core Spec',footer_spec_1:'ReAct Loop Engine',footer_spec_2:'22 Built-in Tools',footer_spec_3:'MCP JSON-RPC',footer_spec_4:'Git Worktree Isolation',
-          footer_contrib_title:'Open Source',footer_contrib_1:'Developer Guide',footer_contrib_2:'Plugin Protocol',footer_contrib_3:'Shared Types',footer_contrib_4:'Vitest Coverage',
-          footer_support_title:'Support',footer_support_1:'Report Security Issues',footer_support_2:'GitHub Discussions',footer_support_3:'Discord Community',
-          footer_copyright:'© 2026 DeepFlow Core Contributors. Open source under MIT License.',footer_privacy:'Privacy',footer_license:'License'
+          nav_features:'Features',nav_demo:'Agent Demo',nav_architecture:'Architecture',nav_tools:'Tools',nav_download:'Download',nav_github_label:'Auraxis GitHub Repository',
+          hero_badge:'Native Sandbox · Unified ReAct Step Engine',
+          hero_title_line1:'Your desktop AI agent',hero_title_line2:'that actually ships code',
+          hero_description:'Auraxis is a desktop Agentic coding assistant built on Electron. One unified ReAct step engine drives chat and agents alike — with 63 built-in tools, multi-agent scheduling, Code Mode orchestration and native sandboxing.',
+          hero_cta_download:'Download',hero_cta_docs:'Docs',
+          hero_stat_tools:'63',hero_stat_tools_sub:'Built-in tools',hero_stat_perms:'3',hero_stat_perms_sub:'Permission modes',hero_stat_tests:'1347',hero_stat_tests_sub:'Test cases · 166 files',hero_stat_sdk:'2',hero_stat_sdk_sub:'TS & Python SDKs',
+          download_title:'Download Auraxis',download_subtitle:'v2.0.1 · Electron 43 · MIT License. Download links are placeholders until the first public release.',
+          download_current_version:'Current Stable Version',download_detected:'Detected:',download_loading:'Loading...',download_error:'Failed to load version info.',
+          download_requirements_title:'System Requirements',download_req1:'Windows 10+ (x64) · macOS 12+ · Linux (x64)',download_req2:'Node 24 runtime embedded — no extra installs',download_req3:'Git Bash or PowerShell for shell tools',
+          download_changelog_title:'What\u2019s new in v2.0.1',
+          download_placeholder_note:'Download links will be live after the first public release.',
+          features_title:'Transparent Capabilities, Outside the System',features_subtitle:'Auraxis is not just a prompt sender — it is a fully auditable code execution engine between the LLM and your operating system.',
+          feature1_title:'Unified ReAct Step Engine',feature1_desc:'Chat and agents share one step engine (step-engine.ts) with retry, compression and stop policies as hooks. 200 iteration business cap, 500 hard cap.',
+          feature2_title:'Multi-Agent Scheduler',feature2_desc:'Priority queue (high/normal/low), max concurrency 3, real-time status broadcast and 3-level deviance detection (L1 failure / L2 stall / L3 replan).',
+          feature3_title:'Code Mode',feature3_desc:'RunCode executes TypeScript programs in a worker thread; every tools.Name() sub-call re-enters the full permission pipeline with 8-way overlap.',
+          feature4_title:'Tri-Modal Permission Gate',feature4_desc:'Ask (default) / Plan (approval) / AFE (auto). Read-only tools pass silently; dangerous calls must pass strict interception review.',
+          feature5_title:'Native Sandbox',feature5_desc:'Windows restricted token / AppContainer, Linux and macOS backends, plus Git worktree isolation for concurrent agents.',
+          feature6_title:'MCP + Plugin System',feature6_desc:'Full JSON-RPC over stdio MCP client. Renderer plugins extend commands/tools/hooks/ui with 8 dangerous-pattern scans before loading.',
+          feature7_title:'Persistent Project Memory',feature7_desc:'LLM-driven memory extraction (user/feedback/project/reference), project isolation, SQLite + FTS5 full-text search over a unified JSONL event log.',
+          feature8_title:'Dual API Formats',feature8_desc:'DeepSeek by default with OpenAI-compatible and Anthropic formats. Web search across DuckDuckGo / Exa / Perplexity / DeepSeek providers.',
+          feature9_title:'TS & Python SDKs',feature9_desc:'TypeScript SDK over TCP JSON-RPC, Python SDK, plus a headless CLI (--run / --sdk / --acp / --plugin) for automation.',
+          arch_title:'Transparent Dual-Process Architecture',arch_subtitle:'No black-box logic — this is how Auraxis operates internally, every data flow under your control.',
+          arch_renderer_title:'Renderer Process (React 18)',
+          arch_renderer_1:'Ant Design 5 UI (Dark / Light / System)',arch_renderer_2:'17 Zustand Stores (session is main-process authority)',arch_renderer_3:'Markdown + mermaid + KaTeX rendering',arch_renderer_4:'Dynamic Plugin Manager (pre-load audit)',
+          arch_ipc_label:'IPC Bidirectional',arch_ipc_bridge:'Context Bridge',arch_ipc_protocol:'domain:action Protocol',
+          arch_main_title:'Main Process (Node.js Env)',
+          arch_main_1:'63 Tool Executors + step-engine / agent-loop',arch_main_2:'Multi-Agent Scheduler & Deviance Detection',arch_main_3:'Native Sandbox (4 backends) + Worktree Isolation',arch_main_4:'Unified JSONL Event Log + FTS5 Search',
+          tools_title:'Fully Decoupled Built-in Tool Matrix',tools_subtitle:'At each ReAct step, the agent assembles the most reasonable toolset under your system permission constraints.',
+          tools_danger_label:'Danger (requires approval)',tools_safe_label:'Safe (silent pass-through)',
+          tools_filter_all:'All',tools_filter_danger:'Danger',tools_filter_safe:'Safe',
+          tools_filter_files:'Files',tools_filter_execution:'Execute',tools_filter_terminal:'Terminal',tools_filter_web:'Web',tools_filter_planning:'Planning',tools_filter_agent:'Agents',tools_filter_background:'Background',tools_filter_session:'Sessions',tools_filter_capability:'Capability',tools_filter_verify:'Verify',
+          tools_badge_danger:'Danger',tools_badge_safe:'Safe',tools_view_params:'View Schema',tools_hide_params:'Hide Schema',tools_loading:'Loading tools...',tools_error:'Failed to load tools: ',tools_empty:'No tools match the current filter.',
+          tools_footnote:'All 63 tools ship with strict TypeScript definitions and IPC security policy mapping.',
+          dev_title:'Extend Auraxis',dev_description:'Auraxis is built entirely in TypeScript with a single source of truth for cross-process types (electron/contracts/). Extend low-level tools, connect enterprise MCP servers, or modify the 17 Zustand stores — the infrastructure is ready.',
+          dev_check1:'Vitest coverage thresholds: lines 86.20% / branches 79.37% / functions 84.32%',dev_check2:'Strict CSP enforcement and native sandbox locks keep the main process secure',dev_check3:'166 test files · 1347 cases · 13 Playwright E2E flows',
+          dev_step1_comment:'// 1. Clone the core repository',dev_step2_comment:'// 2. Create local environment config',dev_step3_comment:'// 3. Install dependencies & launch Electron dev mode',dev_step3_line2:'npm run electron:dev',
+          dev_titlebar:'Quick Clone & Start Development',dev_titlebar_type:'TypeScript / Vite',dev_copy_button:'Copy command',
+          footer_brand:'A desktop Agentic coding assistant built on Electron — transparent, sandboxed, extensible.',
+          footer_spec_title:'Core Spec',footer_spec_1:'Unified ReAct Engine',footer_spec_2:'63 Built-in Tools',footer_spec_3:'Native Sandbox',footer_spec_4:'Git Worktree Isolation',
+          footer_contrib_title:'Open Source',footer_contrib_1:'Architecture Docs',footer_contrib_2:'Engineering Spec (AGENTS.md)',footer_contrib_3:'TypeScript SDK',footer_contrib_4:'Python SDK',
+          footer_support_title:'Support',footer_support_1:'Report Security Issues',footer_support_2:'GitHub Issues',footer_support_3:'GitHub Discussions',
+          footer_copyright:'© 2026 Auraxis Core Contributors. Open source under MIT License.',footer_privacy:'Privacy',footer_license:'License',
+          theme_dark:'Switch to Dark Mode',theme_light:'Switch to Light Mode'
         };
         window.__i18n=EN;
         if(L==='en'){document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(EN[k])e.textContent=EN[k]})})}
       })();
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-slate-50 dark:bg-brand-black text-slate-800 dark:text-slate-100 font-sans selection:bg-brand-accent/30 selection:text-white transition-colors duration-200">
+  <body class="bg-ivory dark:bg-brand-black text-ink dark:text-ivory font-sans transition-colors duration-200">
     <div class="fixed inset-0 grid-bg pointer-events-none z-0" aria-hidden="true"></div>
-    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-blue/5 dark:bg-brand-blue/10 rounded-full blur-[120px] pointer-events-none transition-all" aria-hidden="true"></div>
+    <!-- Aura 紫灰状态微光：仅 3% 面积强调 -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/10 dark:bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none transition-all" aria-hidden="true"></div>
     <div class="fixed bottom-10 right-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none transition-all" aria-hidden="true"></div>
     <slot />
   </body>

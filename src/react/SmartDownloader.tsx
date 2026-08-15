@@ -44,7 +44,7 @@ function SmartDownloaderInner() {
 
   const handleDownload = useCallback((platform: Platform) => {
     const asset: DownloadAsset | undefined = release?.downloads[platform];
-    if (asset?.url) {
+    if (asset?.url && asset.url !== '#') {
       window.open(asset.url, '_blank', 'noopener,noreferrer');
     } else {
       const fallback: Record<string, string> = {
@@ -71,19 +71,19 @@ function SmartDownloaderInner() {
       {error && !loading && (
         <div className="text-[10px] text-amber-500 font-mono">{t.download_error}</div>
       )}
-      <div className="bg-white dark:bg-brand-card border border-slate-200 dark:border-brand-border p-4 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+      <div className="bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border p-4 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <p className="text-[10px] text-slate-400 dark:text-brand-text font-mono uppercase tracking-wider">
+          <p className="text-[10px] text-brand-faint font-mono uppercase tracking-wider">
             {t.download_current_version}
           </p>
-          <h3 className="text-sm font-semibold text-slate-800 dark:text-white">
+          <h3 className="text-sm font-medium text-ink dark:text-ivory">
             {loading ? (
-              <span className="inline-flex items-center gap-1.5 text-slate-400">
+              <span className="inline-flex items-center gap-1.5 text-brand-muted">
                 <Loader2 className="w-3 h-3 animate-spin" aria-hidden="true" />
                 {t.download_loading}
               </span>
             ) : (
-              `DeepFlow Agentic ${release?.version ?? '1.2.0'}`
+              `Auraxis ${release?.version ?? '2.0.1'}`
             )}
           </h3>
           {!isMobile && !loading && (
@@ -103,7 +103,7 @@ function SmartDownloaderInner() {
                 disabled={isMobile}
                 aria-label={platformTips[platform]}
                 title={asset ? `${asset.label} — ${asset.size}` : platformTips[platform]}
-                className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded transition-all whitespace-nowrap border ${isActive ? 'bg-brand-blue hover:bg-brand-blue/90 text-white border-brand-accent/50 shadow-[0_0_8px_rgba(0,229,255,0.3)]' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white border-slate-200 dark:border-slate-700'} ${isMobile ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 h-9 rounded transition-colors whitespace-nowrap border ${isActive ? 'bg-brand-accent/15 text-brand-accent border-brand-accent/40 hover:bg-brand-accent/25' : 'bg-white dark:bg-brand-dark hover:bg-black/5 dark:hover:bg-white/5 text-brand-ink2 dark:text-brand-text border-brand-hairline dark:border-brand-border'} ${isMobile ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <Icon className="w-4 h-4" aria-hidden="true" />
                 <span>{label}</span>

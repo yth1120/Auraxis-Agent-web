@@ -3,60 +3,85 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════
-   DeepFlow Global Styles
-   Swiss Engineering Grid · Terminal Aesthetic
+   Auraxis Global Styles
+   Black is the Axis · White is the Structure · Purple is the Aura
    ═══════════════════════════════════════════════════ */
 
-/* ── 滚动条美化（WebKit） ──────────────────────── */
+:root {
+  --color-border-dim: rgba(17, 18, 22, 0.1); /* 浅色 hairline */
+  --color-bg: #f1f1ee;
+  --color-surface: #ffffff;
+  --color-text: #111216;
+  --color-text-muted: #6e6d82;
+  --color-accent: #8c8aa8;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.dark {
+  --color-border-dim: rgba(255, 255, 255, 0.08); /* 深色 hairline */
+  --color-bg: #111216;
+  --color-surface: #171822;
+  --color-text: #f1f1ee;
+  --color-text-muted: #9b9aae;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── 滚动条（WebKit，6px 细滚动条） ─────────────── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgba(140, 138, 168, 0.35);
   border-radius: 3px;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: #1f2937;
-}
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: rgba(140, 138, 168, 0.55);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
-}
-
-/* ── 瑞士工程网格背景 ──────────────────────────── */
-/* 浅色模式：淡蓝色网格线（精密纸张排版感） */
+/* ── 精密网格背景（40px，1px 线，2–3% 透明度） ──── */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(17, 18, 22, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 18, 22, 0.04) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* 深色模式：极光青网格线（暗色终端冷峻质感） */
 .dark .grid-bg {
   background-image:
-    linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(140, 138, 168, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 138, 168, 0.028) 1px, transparent 1px);
 }
 
 /* ── 终端打字光标 ──────────────────────────────── */
 .cursor-blink::after {
-  content: '|';
+  content: '▍';
+  margin-left: 1px;
   animation: blink 1s step-end infinite;
 }
 
@@ -79,30 +104,41 @@
 }
 
 /* ── 深色盒强制样式 ────────────────────────────── */
-/* 终端模块和代码克隆模块在浅色模式下始终维持深色底，保证代码高亮对比度 */
+/* 终端模块和代码模块在浅色模式下始终维持深色底，保证代码高亮对比度 */
 .terminal-dark-box {
-  background-color: #0b0f19 !important;
-  color: #e2e8f0 !important;
+  background-color: #111216 !important;
+  color: #e8e7ee !important;
 }
 
 .code-dark-box {
-  background-color: #0a0d16 !important;
-  color: #e2e8f0 !important;
+  background-color: #0e0f14 !important;
+  color: #e8e7ee !important;
 }
 
-/* ── 选中高亮 ──────────────────────────────────── */
+/* ── 选中高亮（Aura 紫灰，克制） ───────────────── */
 ::selection {
-  background-color: rgba(0, 229, 255, 0.3);
+  background-color: rgba(140, 138, 168, 0.35);
   color: #ffffff;
 }
 
-/* ── 平滑滚动（可降级） ─────────────────────────── */
-html {
-  scroll-behavior: smooth;
+/* ── 滚动渐显（数据驱动淡入，位移 ≤ 8px，无弹跳） ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

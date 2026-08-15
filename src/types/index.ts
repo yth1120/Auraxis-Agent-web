@@ -1,26 +1,31 @@
 /**
- * DeepFlow 共享类型定义
+ * Auraxis 共享类型定义
  *
- * 与 electron/types.ts 及 src/types/ 保持同构映射。
- * 所有 IPC 通道名称、Zustand 持久化前缀均有标注说明。
+ * 与桌面端 electron/contracts/ 保持语义同构映射：
+ * PermissionMode ↔ electron/types.ts，IPC 响应封装 ↔ IpcResponse 风格。
  */
 
 // ─── 权限模态 ─────────────────────────────────────
-/** 工具执行权限策略 — 与 Electron 主进程的 PermissionGate 完全对齐 */
+/** 工具执行权限策略 — 与桌面端 PermissionMode 完全对齐 */
 export type PermissionMode = 'ask' | 'plan' | 'afe';
 
 // ─── 工具分类 ─────────────────────────────────────
 /** 工具安全等级 */
 export type ToolType = 'danger' | 'safe';
 
-/** 工具功能分类（按职责域划分） */
+/** 工具功能分类（按能力族划分，对应桌面端 63 个工具） */
 export type ToolCategory =
-  | 'filesystem'
-  | 'search'
+  | 'files'
   | 'execution'
+  | 'terminal'
+  | 'web'
   | 'planning'
-  | 'review'
-  | 'communication';
+  | 'agent'
+  | 'background'
+  | 'session'
+  | 'capability'
+  | 'verify'
+  | 'interaction';
 
 // ─── 终端仿真 ─────────────────────────────────────
 /**
@@ -68,17 +73,19 @@ export interface Tool {
   type: ToolType;
   /** 中文简述 */
   description: string;
-  /** 参数 Schema（字段名 → 类型字符串） */
-  paramSchema: Record<string, string>;
+  /** 入参字段名列表（对应桌面端 inputSchema 顶层 properties） */
+  params: string[];
   /** 功能分类 */
   category: ToolCategory;
+  /** 是否携带结构化输出摘要 */
+  summary?: boolean;
 }
 
 // ─── 平台检测 ─────────────────────────────────────
 export type Platform = 'windows' | 'mac' | 'linux' | 'mobile';
 
 // ─── API 响应封装 ─────────────────────────────────
-/** 统一 API 响应封装 — 前端所有 fetch 调用的返回契约 */
+/** 统一 API 响应封装 — 与桌面端 IpcResponse 风格同构 */
 export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
@@ -93,7 +100,7 @@ export interface ApiResponse<T = unknown> {
 export interface DownloadAsset {
   /** 展示标签，如 "macOS (Universal DMG)" */
   label: string;
-  /** CDN 直链 */
+  /** 下载直链（首个公开版本发布前为占位符） */
   url: string;
   /** 文件体积，如 "142 MB" */
   size: string;

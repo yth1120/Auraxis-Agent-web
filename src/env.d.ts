@@ -5,8 +5,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV?: string;
-    SUPABASE_URL?: string;
-    SUPABASE_ANON_KEY?: string;
   }
 }
 declare const process: {
@@ -27,8 +25,7 @@ declare namespace App {
 
 // ── Cloudflare Pages 环境变量绑定 ──────────────────
 // 通过 wrangler.toml [vars] 或 Cloudflare Dashboard 注入，
-// 在 Hono 路由中通过 c.env 读取
+// 在 Hono 路由中通过 c.env 读取（当前站点无需任何密钥）
 interface Env {
-  SUPABASE_URL: string;
-  SUPABASE_ANON_KEY: string;
+  [key: string]: unknown;
 }

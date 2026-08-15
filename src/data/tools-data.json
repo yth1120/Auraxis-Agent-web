@@ -1,0 +1,569 @@
+[
+  {
+    "name": "RunCode",
+    "description": "执行代码片段或 TypeScript 工具编排程序（隔离临时目录）",
+    "category": "execution",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["language", "code", "description", "timeout_ms"]
+  },
+  {
+    "name": "RunWorkflow",
+    "description": "运行脚本化多智能体工作流（预置或内联脚本）",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["name", "projectRoot", "script"]
+  },
+  {
+    "name": "ListSkills",
+    "description": "列出本地技能目录中可用的技能",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "ReadSkill",
+    "description": "读取指定技能的完整说明与资源",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["name"]
+  },
+  {
+    "name": "Bash",
+    "description": "在项目目录执行 Shell 命令（默认超时 120s）",
+    "category": "execution",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["command", "workdir", "timeout", "description", "run_in_background", "sandbox_permissions", "justification"]
+  },
+  {
+    "name": "Read",
+    "description": "读取文件内容，返回版本哈希供写入校验",
+    "category": "files",
+    "danger": false,
+    "summary": true,
+    "concurrencySafe": true,
+    "params": ["file_path", "offset", "limit"]
+  },
+  {
+    "name": "ReadImage",
+    "description": "读取图片文件并供模型查看（PNG/JPG/GIF 等）",
+    "category": "files",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["file_path"]
+  },
+  {
+    "name": "Write",
+    "description": "创建或覆盖文件，可携带版本号防并发覆盖",
+    "category": "files",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["file_path", "content", "version"]
+  },
+  {
+    "name": "Edit",
+    "description": "在文件中精确替换 old_string 为 new_string",
+    "category": "files",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["file_path", "old_string", "new_string", "version"]
+  },
+  {
+    "name": "StrReplaceEditor",
+    "description": "单一用途文本编辑器：查看/新建/替换/插入",
+    "category": "files",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["command", "path", "file_text", "old_str", "new_str", "insert_line", "view_range"]
+  },
+  {
+    "name": "Grep",
+    "description": "用正则表达式在项目文件中搜索",
+    "category": "files",
+    "danger": false,
+    "summary": true,
+    "concurrencySafe": true,
+    "params": ["pattern", "path", "include"]
+  },
+  {
+    "name": "Glob",
+    "description": "按 glob 模式查找文件",
+    "category": "files",
+    "danger": false,
+    "summary": true,
+    "concurrencySafe": true,
+    "params": ["pattern", "path"]
+  },
+  {
+    "name": "WebFetch",
+    "description": "抓取 URL 内容并提取文本",
+    "category": "web",
+    "danger": true,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["url", "prompt"]
+  },
+  {
+    "name": "WebSearch",
+    "description": "使用 DuckDuckGo 搜索网络",
+    "category": "web",
+    "danger": true,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["query"]
+  },
+  {
+    "name": "TodoWrite",
+    "description": "创建并管理结构化任务清单跟踪进度",
+    "category": "planning",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["todos"]
+  },
+  {
+    "name": "Agent",
+    "description": "启动子智能体自主处理复杂多步任务",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["description", "prompt", "subagent_type", "backend", "background"]
+  },
+  {
+    "name": "Replan",
+    "description": "计划受阻时生成新的子计划继续执行",
+    "category": "planning",
+    "danger": false,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["currentPlanStatus", "blockedTasks", "reason"]
+  },
+  {
+    "name": "CronCreate",
+    "description": "按 cron 语法创建定时或一次性任务",
+    "category": "background",
+    "danger": true,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["name", "prompt", "cron", "recurring"]
+  },
+  {
+    "name": "CronDelete",
+    "description": "按 ID 取消已调度的 cron 任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["jobId"]
+  },
+  {
+    "name": "CronList",
+    "description": "列出所有活动的 cron 任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "ScheduleCreate",
+    "description": "创建会话级定时跟进（延时/定点/周期）",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["prompt", "after_seconds", "at", "every_seconds"]
+  },
+  {
+    "name": "ScheduleDelete",
+    "description": "按 ID 取消已调度的跟进任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["id"]
+  },
+  {
+    "name": "ScheduleList",
+    "description": "列出会话内已调度的跟进任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "TaskOutput",
+    "description": "读取后台任务或子代理的累计输出",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["taskId"]
+  },
+  {
+    "name": "TaskStop",
+    "description": "按 ID 停止运行中的工具或子代理",
+    "category": "background",
+    "danger": true,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["taskId"]
+  },
+  {
+    "name": "EnterPlanMode",
+    "description": "进入规划模式，设计方案供用户审批",
+    "category": "planning",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["goal", "context"]
+  },
+  {
+    "name": "ExitPlanMode",
+    "description": "用户批准计划后退出规划模式开始实施",
+    "category": "planning",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["planId"]
+  },
+  {
+    "name": "NotebookEdit",
+    "description": "读取或修改 Jupyter 笔记本（.ipynb）单元格",
+    "category": "files",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["file_path", "cell_index", "action", "source", "cell_type", "version"]
+  },
+  {
+    "name": "EnterWorktree",
+    "description": "创建隔离的 Git worktree 沙箱重定向后续调用",
+    "category": "verify",
+    "danger": true,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["task_id", "projectRoot"]
+  },
+  {
+    "name": "LSP",
+    "description": "代码智能：定义/引用/实现/hover/诊断",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["action", "symbol", "file_path", "line", "column"]
+  },
+  {
+    "name": "ReviewArtifact",
+    "description": "运行构建/测试/类型检查/静态检查验证",
+    "category": "verify",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["check_type", "projectRoot", "file_path"]
+  },
+  {
+    "name": "Delete",
+    "description": "删除项目内的文件或目录（可递归）",
+    "category": "files",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["file_path", "recursive"]
+  },
+  {
+    "name": "GitCommit",
+    "description": "暂存全部改动并创建 git 提交",
+    "category": "verify",
+    "danger": true,
+    "summary": true,
+    "concurrencySafe": false,
+    "params": ["message"]
+  },
+  {
+    "name": "SessionQuery",
+    "description": "搜索历史会话记录回忆过往决策",
+    "category": "session",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["query", "limit"]
+  },
+  {
+    "name": "ReadSpill",
+    "description": "读取溢出到磁盘的超大工具输出",
+    "category": "session",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["path"]
+  },
+  {
+    "name": "AskUser",
+    "description": "向用户提出澄清问题并等待回答",
+    "category": "interaction",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["question", "options"]
+  },
+  {
+    "name": "Pty",
+    "description": "管理持久交互式终端会话（create/write/read/close 等）",
+    "category": "execution",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["action", "session_id", "command", "cwd", "data", "enter", "timeout_ms"]
+  },
+  {
+    "name": "TerminalOpen",
+    "description": "为当前任务打开持久终端会话",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["command", "cwd", "session_id"]
+  },
+  {
+    "name": "TerminalList",
+    "description": "列出当前任务的终端会话",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "TerminalRead",
+    "description": "读取终端会话自上次读取以来的新输出",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["session_id", "timeout_ms"]
+  },
+  {
+    "name": "TerminalSend",
+    "description": "向终端会话发送输入（可回车提交）",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["session_id", "data", "enter"]
+  },
+  {
+    "name": "TerminalSignal",
+    "description": "向终端会话发送控制信号（SIGINT 等）",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["session_id", "signal"]
+  },
+  {
+    "name": "TerminalClose",
+    "description": "关闭终端会话并释放 shell 进程",
+    "category": "terminal",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["session_id"]
+  },
+  {
+    "name": "InspectRuntime",
+    "description": "检查运行时：可用工具、插件、技能（只读）",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "WriteSkill",
+    "description": "创建或覆盖可复用的技能说明（Markdown）",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["name", "content"]
+  },
+  {
+    "name": "ListAgents",
+    "description": "列出活动智能体与子代理及其状态",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "SendMessage",
+    "description": "向后端子代理发送后续指令",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["agentId", "message"]
+  },
+  {
+    "name": "InterruptAgent",
+    "description": "按 ID 中断运行中的智能体或子代理",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["agentId", "reason"]
+  },
+  {
+    "name": "Report",
+    "description": "向启动你的代理发送进度报告",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["content"]
+  },
+  {
+    "name": "GetGoal",
+    "description": "读取当前持久目标的文本、阶段与轮次",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "CreateGoal",
+    "description": "为当前运行创建持久目标",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["objective", "maxRounds"]
+  },
+  {
+    "name": "UpdateGoal",
+    "description": "更新目标修订：编辑/暂停/恢复/完成/阻塞",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["goalId", "revision", "action", "objective", "maxRounds", "reason"]
+  },
+  {
+    "name": "MountPlugin",
+    "description": "动态挂载插件，注册新工具供模型调用",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["id", "name", "version", "description", "tools"]
+  },
+  {
+    "name": "UnmountPlugin",
+    "description": "移除已挂载插件并注销其全部工具",
+    "category": "capability",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["id"]
+  },
+  {
+    "name": "Ralph",
+    "description": "以全新子代理迭代执行目标（Ralph 循环）",
+    "category": "agent",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["objective", "maxRounds"]
+  },
+  {
+    "name": "Pwsh",
+    "description": "执行 PowerShell 命令（Windows 原生）",
+    "category": "execution",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["command", "workdir", "timeout"]
+  },
+  {
+    "name": "SessionEventSearch",
+    "description": "在会话事件流中搜索匹配文本或工具名",
+    "category": "session",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["query", "sessionId", "limit"]
+  },
+  {
+    "name": "SessionEventRead",
+    "description": "按序号读取会话中的原始事件（含前后邻接）",
+    "category": "session",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["sessionId", "seq", "before", "after"]
+  },
+  {
+    "name": "SessionTrace",
+    "description": "读取会话谱系：父会话、分支、事件统计",
+    "category": "session",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["sessionId"]
+  },
+  {
+    "name": "TaskList",
+    "description": "列出后台 Shell 任务与运行中的代理",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "JobList",
+    "description": "列出运行时已知的全部后台任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": []
+  },
+  {
+    "name": "JobOutput",
+    "description": "按 ID 读取后台任务累计输出（不阻塞）",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": true,
+    "params": ["job_id"]
+  },
+  {
+    "name": "JobKill",
+    "description": "按 ID 停止运行中的后台任务",
+    "category": "background",
+    "danger": false,
+    "summary": false,
+    "concurrencySafe": false,
+    "params": ["job_id"]
+  }
+]

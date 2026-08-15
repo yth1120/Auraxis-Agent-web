@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: BASE_PATH=/Auraxis-Agent-web/ npm run build
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

@@ -71,13 +71,13 @@ function SmartDownloaderInner() {
   return (
     <div className="flex flex-col gap-3">
       {isMobile && (
-        <div className="flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-lg text-amber-700 dark:text-amber-400 text-xs" role="alert">
+        <div className="flex items-start gap-2 px-3 py-2 bg-brand-warning/10 border border-brand-warning/30 rounded-lg text-brand-warning text-xs" role="alert">
           <Info className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true" />
           <span>{t.download_mobile_warning}</span>
         </div>
       )}
       {error && !loading && (
-        <div className="text-[10px] text-amber-700 dark:text-amber-400 font-mono">{t.download_error}</div>
+        <div className="text-[10px] text-brand-warning font-mono">{t.download_error}</div>
       )}
       <div className="bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border p-4 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
@@ -91,7 +91,7 @@ function SmartDownloaderInner() {
                 {t.download_loading}
               </span>
             ) : (
-              `Auraxis Agent ${release?.version ?? '2.0.0'}`
+              `Auraxis Agent ${release?.version ?? '3.0.0'}`
             )}
           </h3>
           {!isMobile && !loading && (

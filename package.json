@@ -1,7 +1,7 @@
 {
   "name": "auraxis-website",
   "type": "module",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "Auraxis 官方网站 — 桌面端 Agentic 编程助手品牌营销站（Astro 4 · 中英双语 · Cloudflare Pages）",
   "scripts": {

@@ -1,5 +1,5 @@
 ---
-import { RefreshCw, Workflow, Braces, ShieldCheck, Lock, Database } from 'lucide-react';
+import { RefreshCw, Workflow, Braces, ShieldCheck, Lock, Database, Puzzle, Sparkles, Code2, LayoutGrid, FileText, UserCircle } from 'lucide-react';
 
 interface Pillar {
   icon: typeof RefreshCw;
@@ -36,7 +36,7 @@ const FEATURES: Pillar[] = [
     titleKey: 'feature4_title',
     descKey: 'feature4_desc',
     title: '三模态权限看门狗',
-    desc: 'ask（默认）/ plan（计划审批）/ afe（全自动）三模式；规则作用域 once/session/always；只读工具（Read/Grep/Glob）自动放行，危险调用必经拦截审查。',
+    desc: 'ask（默认）/ plan（计划审批）/ auto（全自动）三种审批策略；规则作用域 once/session/always；只读工具（Read/Grep/Glob）自动放行，危险调用必经拦截审查。',
   },
   {
     icon: Lock,
@@ -50,7 +50,49 @@ const FEATURES: Pillar[] = [
     titleKey: 'feature7_title',
     descKey: 'feature7_desc',
     title: '持久化项目记忆',
-    desc: 'LLM 驱动的对话记忆提取（user/feedback/project/reference 四类）按项目隔离；会话统一 append-only JSONL 事件日志 + SQLite 投影缓存 + FTS5 全文搜索。',
+    desc: 'Eywa 溯源记忆（M1–M4）：证据先于信念、不可变证据、规则信号与硬锚点校验，零 LLM 确定性读取路径；会话统一 append-only JSONL 事件日志 + SQLite 投影缓存 + FTS5 全文搜索。',
+  },
+  {
+    icon: Puzzle,
+    titleKey: 'feature6_title',
+    descKey: 'feature6_desc',
+    title: 'MCP + 插件系统',
+    desc: 'MCP 客户端（JSON-RPC over stdio）；渲染层插件提供 commands/tools/hooks/ui 四类扩展点，载入前扫描危险模式并需要用户确认。',
+  },
+  {
+    icon: Sparkles,
+    titleKey: 'feature8_title',
+    descKey: 'feature8_desc',
+    title: 'DeepSeek 官方深度能力',
+    desc: '默认 DeepSeek（内置 deepseek-v4-flash / v4-pro），支持 reasoning effort、strict tools、FIM 补全、计划 JSON 模式与最大 384K 输出；同时兼容 OpenAI / Anthropic 消息格式。',
+  },
+  {
+    icon: Code2,
+    titleKey: 'feature9_title',
+    descKey: 'feature9_desc',
+    title: 'TS & Python 双 SDK',
+    desc: 'TypeScript SDK（TCP JSON-RPC）与 Python SDK，另有 headless CLI（--run / --sdk / --acp / --plugin）与 ACP 协议支持，可用于自动化集成。',
+  },
+  {
+    icon: LayoutGrid,
+    titleKey: 'feature10_title',
+    descKey: 'feature10_desc',
+    title: 'Chat / Work / Code 三模式',
+    desc: '三种产品形态共用同一套 ReAct 步进引擎，模式状态互不污染：Chat 会话时间线、Work 文档协作（代码只读硬边界）、Code Mode worker 线程工具编排。',
+  },
+  {
+    icon: FileText,
+    titleKey: 'feature11_title',
+    descKey: 'feature11_desc',
+    title: '文档生成与云连接器',
+    desc: 'ReadDocument / WriteDocument 读写 Word、Excel、PPT、PDF（CJK 字体自动嵌入）；Slack / Google Drive / Notion 连接器令牌经 safeStorage 加密保存。',
+  },
+  {
+    icon: UserCircle,
+    titleKey: 'feature12_title',
+    descKey: 'feature12_desc',
+    title: '本地账户与分层设置',
+    desc: '本地优先账户（scrypt 密码哈希）、分层 Instructions 面板、连接器 / MCP / 插件 / 权限档案管理，以及内嵌真实测试覆盖率报告。',
   },
 ];
 ---

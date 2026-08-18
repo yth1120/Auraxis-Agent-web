@@ -1,15 +1,17 @@
 ---
 // Auraxis 官方网站 — 单页主入口（叙事式布局）
-// Hybrid 模式：首页保持预渲染为静态 HTML，API 路由动态执行
+// 纯静态 SSG：首页在构建时预渲染为 HTML，所有数据随包内置
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import UpdateBanner from '../components/UpdateBanner.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ScreenshotSection from '../components/ScreenshotSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import DemoSection from '../components/DemoSection.astro';
 import ArchitectureSection from '../components/ArchitectureSection.astro';
+import ResearchSection from '../components/ResearchSection.astro';
 import ToolsMatrixSection from '../components/ToolsMatrixSection.astro';
 import SafetySection from '../components/SafetySection.astro';
 import EcosystemSection from '../components/EcosystemSection.astro';
@@ -21,9 +23,10 @@ import Footer from '../components/Footer.astro';
 
 <BaseLayout>
   <Header />
+  <UpdateBanner />
 
   <main class="relative z-10">
-    <!-- 结构：定位 → 界面截图 → 功能 → 演示 → 工具 → 安全 → 架构 → 集成 → 开发 → 获取 → FAQ -->
+    <!-- 结构：定位 → 界面截图 → 功能 → 演示 → 工具 → 安全 → 架构 → 技术内核 → 集成 → 开发 → 获取 → FAQ -->
     <HeroSection />
     <ScreenshotSection />
     <SolutionSection />
@@ -31,6 +34,7 @@ import Footer from '../components/Footer.astro';
     <ToolsMatrixSection />
     <SafetySection />
     <ArchitectureSection />
+    <ResearchSection />
     <EcosystemSection />
     <DeveloperDocs />
     <DownloadSection />

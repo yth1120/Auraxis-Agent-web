@@ -51,6 +51,8 @@ function ToolsGridInner() {
     danger: t.tools_filter_danger,
     safe: t.tools_filter_safe,
     files: t.tools_filter_files,
+    documents: t.tools_filter_documents,
+    connectors: t.tools_filter_connectors,
     execution: t.tools_filter_execution,
     terminal: t.tools_filter_terminal,
     web: t.tools_filter_web,
@@ -125,10 +127,10 @@ function ToolsGridInner() {
             return (
               <div key={tool.name} role="listitem" tabIndex={0} aria-expanded={isExpanded}
                 onClick={() => toggleExpand(tool.name)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(tool.name); } }}
-                className={`group relative bg-white dark:bg-brand-card border p-4 rounded-lg flex flex-col cursor-pointer transition-colors select-none ${isDanger ? 'border-red-200 dark:border-red-900/30 hover:border-red-400/50 dark:hover:border-red-500/50' : 'border-brand-hairline dark:border-brand-border hover:border-brand-accent/40'} ${isExpanded ? (isDanger ? 'border-red-400/60 dark:border-red-500/60' : 'border-brand-accent/50') : ''}`}>
+                className={`group relative bg-white dark:bg-brand-card border p-4 rounded-lg flex flex-col cursor-pointer transition-colors select-none ${isDanger ? 'border-brand-danger/40 hover:border-brand-danger/70' : 'border-brand-hairline dark:border-brand-border hover:border-brand-accent/40'} ${isExpanded ? (isDanger ? 'border-brand-danger/70' : 'border-brand-accent/50') : ''}`}>
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-ink dark:text-ivory text-xs font-mono">{tool.name}</span>
-                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${isDanger ? 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-950/50 border-red-200 dark:border-red-900/40' : 'text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/40'}`}>
+                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${isDanger ? 'text-brand-danger bg-brand-danger/10 border-brand-danger/30' : 'text-brand-success bg-brand-success/10 border-brand-success/30'}`}>
                     {isDanger ? <span className="inline-flex items-center gap-0.5"><AlertTriangle className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_danger}</span> : <span className="inline-flex items-center gap-0.5"><ShieldCheck className="w-2.5 h-2.5" aria-hidden="true" />{t.tools_badge_safe}</span>}
                   </span>
                 </div>

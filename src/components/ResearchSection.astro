@@ -1,0 +1,290 @@
+---
+import {
+  BrainCircuit,
+  Network,
+  Layers,
+  ScanSearch,
+  Gauge,
+  Cpu,
+  BadgeCheck,
+  History,
+  LayoutTemplate,
+  ArrowRightLeft,
+  FileCheck2,
+  ArrowRight,
+  CheckCheck,
+  FileText,
+} from 'lucide-react';
+
+interface TechCard {
+  icon: typeof BrainCircuit;
+  titleKey: string;
+  descKey: string;
+  title: string;
+  paper: string;
+  desc: string;
+  arxiv: string;
+  tags: string[];
+}
+
+const RESEARCH_MODULES: TechCard[] = [
+  {
+    icon: BrainCircuit,
+    titleKey: 'research_eywa_title',
+    descKey: 'research_eywa_desc',
+    title: 'Eywa · 溯源记忆',
+    paper: 'Eywa: Provenance-Grounded Long-Term Memory for AI Agents',
+    desc: '证据先于信念：不可变证据、规则信号与硬锚点校验，零 LLM 确定性读取路径，支持信念审计与擦除。',
+    arxiv: '2605.30771',
+    tags: ['Memory', 'Evidence'],
+  },
+  {
+    icon: Network,
+    titleKey: 'research_map_title',
+    descKey: 'research_map_desc',
+    title: 'MAP-Graph · 共享记忆授权',
+    paper: 'MAP-Graph: Provenance-Aware Shared Memory for Multi-Agent Workflows',
+    desc: '多智能体共享记忆的授权、来源信任与风险门控：高风险 Write / Edit / Bash 需要更高证据标准。',
+    arxiv: '2608.10509',
+    tags: ['Authorization', 'Trust'],
+  },
+  {
+    icon: Layers,
+    titleKey: 'research_agora_title',
+    descKey: 'research_agora_desc',
+    title: 'AGORA · 步级压缩',
+    paper: 'AGORA: Adapter-Grounded Observation-Action Retention for Inference-Free Prompt Compression in LLM Agents',
+    desc: '免推理的整步保留 / 丢弃，绝不把工具调用与结果拆开，保护 Agent 的动作语法。',
+    arxiv: '2605.26596',
+    tags: ['Compression', 'Steps'],
+  },
+  {
+    icon: ScanSearch,
+    titleKey: 'research_swe_title',
+    descKey: 'research_swe_desc',
+    title: 'SWE-Touch · 漂移检测',
+    paper: 'SWE-Touch: Benchmarking Coding Agents When Users Touch the Code',
+    desc: '用户或外部进程触碰代码后，下一轮迭代前检测工作区漂移，并定向验证受影响区域。',
+    arxiv: '2608.02499',
+    tags: ['Drift', 'Verify'],
+  },
+  {
+    icon: Gauge,
+    titleKey: 'research_oversight_title',
+    descKey: 'research_oversight_desc',
+    title: 'Oversight · 审批疲劳防护',
+    paper: 'Oversight Has a Capacity: Calibrating Agent Guards to a Subjective, Fatiguing Human',
+    desc: '把“是否升级给人审”当作资源分配问题：20 次决策滑动窗口 + 疲劳分数，输出 escalate / auto / balanced 建议。',
+    arxiv: '2606.08919',
+    tags: ['Fatigue', 'Approval'],
+  },
+  {
+    icon: Cpu,
+    titleKey: 'research_autotool_title',
+    descKey: 'research_autotool_desc',
+    title: 'AutoTool · 工具惯性图',
+    paper: 'AutoTool: Efficient Tool Selection for Large Language Model Agents',
+    desc: '从历史工具轨迹构建有向图并预测下一个工具，观测层 + 预测层，可降低约 30% 推理成本。',
+    arxiv: '2511.14650',
+    tags: ['Inertia', 'Prediction'],
+  },
+  {
+    icon: BadgeCheck,
+    titleKey: 'research_gate_title',
+    descKey: 'research_gate_desc',
+    title: 'Verifier-as-Gatekeeper · 技能准入',
+    paper: 'When Self-Evolution Backfires: Pre-Commit Gating against Skill Contamination in LLM Agents',
+    desc: '技能入库前做结构、行为与语义三重校验与边际增益子集选择，阻止不可逆的技能污染。',
+    arxiv: '2608.05810',
+    tags: ['Skill', 'Gate'],
+  },
+];
+
+const CACHE_SUITE: TechCard[] = [
+  {
+    icon: History,
+    titleKey: 'research_radix_title',
+    descKey: 'research_radix_desc',
+    title: 'RadixAttention · 规范历史重放',
+    paper: 'SGLang: Efficient Execution of Structured Language Model Programs (RadixAttention)',
+    desc: '每轮把实际发送的完整消息数组写入 llm_context_v1，下一轮回放相同前缀，保持字节级稳定。',
+    arxiv: '2312.07104',
+    tags: ['Replay', 'Prefix'],
+  },
+  {
+    icon: LayoutTemplate,
+    titleKey: 'research_promptcache_title',
+    descKey: 'research_promptcache_desc',
+    title: 'Prompt Cache · 稳定块组织',
+    paper: 'Prompt Cache: Modular Attention Reuse for Low-Latency Inference',
+    desc: '系统提示、工具定义、AGENTS.md 等静态块原位替换；升级或切换项目时才重新组装。',
+    arxiv: '2311.04934',
+    tags: ['Stable', 'Blocks'],
+  },
+  {
+    icon: ArrowRightLeft,
+    titleKey: 'research_cacheaware_title',
+    descKey: 'research_cacheaware_desc',
+    title: 'Cache-Aware · 动态内容尾置',
+    paper: 'Cache-Aware Prompt Compression: A Two-Tier Cost Model for LLM API Caching',
+    desc: '跨会话记忆不再前插到头部，而是作为独立字段放到当前用户消息之前或快照尾部，避免破坏前缀缓存。',
+    arxiv: '2607.15516',
+    tags: ['Tail', 'Dynamic'],
+  },
+  {
+    icon: FileCheck2,
+    titleKey: 'research_dedup_title',
+    descKey: 'research_dedup_desc',
+    title: 'Byte-Exact · 字节精确去重',
+    paper: 'Byte-Exact Deduplication in Retrieval-Augmented Generation',
+    desc: '回放时若新记忆块与快照末尾字节相同则跳过追加，防止同一检索内容逐轮累积。',
+    arxiv: '2605.09611',
+    tags: ['Dedup', 'Bytes'],
+  },
+];
+
+const ARXIV_BASE = 'https://arxiv.org/abs/';
+const ALL_PAPERS = [...RESEARCH_MODULES, ...CACHE_SUITE].map((t) => `${ARXIV_BASE}${t.arxiv}`);
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<section id="research" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- 区块标题 + 数据统计 -->
+    <div class="reveal text-center max-w-3xl mx-auto mb-8">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4">Research &amp; Systems</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="research_title">技术内核 · 论文驱动开发</h2>
+      <p class="text-brand-muted mt-3 leading-relaxed" data-i18n="research_subtitle">
+        Auraxis 以 11 篇论文的核心思想驱动工程落地：7 个研究模块 + 4 项缓存对齐技术，全部为原创客户端实现。
+      </p>
+    </div>
+
+    <!-- 数据统计条 -->
+    <div class="reveal flex items-center justify-center gap-2.5 flex-wrap mb-10">
+      <div class="terminal-dark-box border border-brand-border rounded-full px-4 py-1.5 inline-flex items-baseline gap-2">
+        <span class="font-mono text-base font-semibold text-brand-ivory">11</span>
+        <span class="text-[10px] font-mono text-brand-muted" data-i18n="research_stat_papers">论文</span>
+      </div>
+      <div class="terminal-dark-box border border-brand-border rounded-full px-4 py-1.5 inline-flex items-baseline gap-2">
+        <span class="font-mono text-base font-semibold text-brand-ivory">7</span>
+        <span class="text-[10px] font-mono text-brand-muted" data-i18n="research_stat_modules">研究模块</span>
+      </div>
+      <div class="terminal-dark-box border border-brand-border rounded-full px-4 py-1.5 inline-flex items-baseline gap-2">
+        <span class="font-mono text-base font-semibold text-brand-ivory">4</span>
+        <span class="text-[10px] font-mono text-brand-muted" data-i18n="research_stat_cache">缓存技术</span>
+      </div>
+    </div>
+
+    <!-- 原创实现声明 -->
+    <div class="reveal flex items-start justify-center gap-2 text-center max-w-2xl mx-auto mb-14">
+      <FileText className="w-3.5 h-3.5 text-brand-accent mt-0.5 flex-shrink-0" aria-hidden="true" />
+      <p class="text-[11px] font-mono text-brand-muted leading-relaxed" data-i18n="research_note_original">
+        11 项实现均为原创代码：借鉴论文算法思想，未复制论文代码；缓存技术为 DeepSeek 官方前缀缓存的客户端适配。
+      </p>
+    </div>
+
+    <!-- 研究驱动模块（论文台账） -->
+    <div class="mb-12">
+      <div class="reveal flex items-center justify-between gap-3 mb-5">
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
+          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="research_group_papers">研究驱动模块</h3>
+        </div>
+        <span class="text-[10px] font-mono text-brand-faint">01–07</span>
+      </div>
+
+      <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl divide-y divide-brand-hairline dark:divide-brand-border/60 overflow-hidden">
+        {RESEARCH_MODULES.map(({ icon: Icon, titleKey, descKey, title, paper, desc, arxiv, tags }, i) => (
+          <div class="group grid grid-cols-1 md:grid-cols-[52px_1fr_auto] items-start md:items-center gap-x-4 gap-y-3 px-5 py-4 hover:bg-brand-accent/[0.04] transition-colors">
+            <div class="font-mono text-[11px] text-brand-faint pt-0.5">{pad(i)}</div>
+
+            <div class="min-w-0">
+              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                <Icon className="w-4 h-4 text-brand-accent flex-shrink-0" aria-hidden="true" />
+                <h4 class="text-[13px] font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h4>
+                <span class="inline-flex items-center gap-1 text-[9px] font-mono text-brand-success bg-brand-success/10 border border-brand-success/30 rounded-full px-1.5 py-0.5">
+                  <span class="w-1 h-1 rounded-full bg-brand-success" aria-hidden="true"></span>
+                  <span data-i18n="research_status_landed">已落地</span>
+                </span>
+              </div>
+              <p class="text-[10px] font-mono text-brand-accent mt-1 line-clamp-1 leading-relaxed">{paper}</p>
+              <p class="text-xs text-brand-muted mt-1.5 leading-relaxed" data-i18n={descKey}>{desc}</p>
+              <div class="flex flex-wrap gap-1.5 mt-2.5">
+                {tags.map((tag) => (
+                  <span class="text-[9px] font-mono text-brand-faint border border-brand-hairline dark:border-brand-border rounded px-1.5 py-0.5">{tag}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="md:text-right md:max-w-[200px]">
+              <a href={`${ARXIV_BASE}${arxiv}`} target="_blank" rel="noopener noreferrer"
+                class="inline-block text-[10px] font-mono text-brand-faint hover:text-brand-accent transition-colors break-all leading-relaxed">
+                {ARXIV_BASE}{arxiv} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 缓存对齐套件（四步管线） -->
+    <div class="mb-12">
+      <div class="reveal flex items-center justify-between gap-3 mb-5">
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
+          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n="research_group_cache">缓存对齐套件</h3>
+        </div>
+        <span class="text-[10px] font-mono text-brand-faint">STEP 01–04</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {CACHE_SUITE.map(({ icon: Icon, titleKey, descKey, title, paper, desc, arxiv, tags }, i) => (
+          <div class="reveal group bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-5 hover:border-brand-accent/50 transition-colors flex flex-col" style={`--reveal-delay: ${i * 60}ms`}>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[9px] font-mono text-brand-faint tracking-[0.18em]">STEP {pad(i)}</span>
+              {i < CACHE_SUITE.length - 1
+                ? <ArrowRight className="w-3.5 h-3.5 text-brand-accent/60 group-hover:text-brand-accent transition-colors" aria-hidden="true" />
+                : <CheckCheck className="w-3.5 h-3.5 text-brand-success" aria-hidden="true" />}
+            </div>
+            <div class="flex items-center gap-2.5 mb-3">
+              <div class="w-8 h-8 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent flex-shrink-0">
+                <Icon className="w-4 h-4" aria-hidden="true" />
+              </div>
+              <h4 class="text-[13px] font-medium text-ink dark:text-ivory leading-tight" data-i18n={titleKey}>{title}</h4>
+            </div>
+            <p class="text-[10px] font-mono text-brand-accent leading-relaxed line-clamp-2">{paper}</p>
+            <p class="text-xs text-brand-muted leading-relaxed mt-2 flex-1" data-i18n={descKey}>{desc}</p>
+            <div class="flex flex-wrap gap-1.5 mt-3">
+              {tags.map((tag) => (
+                <span class="text-[9px] font-mono text-brand-faint border border-brand-hairline dark:border-brand-border rounded px-1.5 py-0.5">{tag}</span>
+              ))}
+            </div>
+            <a href={`${ARXIV_BASE}${arxiv}`} target="_blank" rel="noopener noreferrer"
+              class="mt-3 text-[10px] font-mono text-brand-faint hover:text-brand-accent transition-colors break-all leading-relaxed">
+              {ARXIV_BASE}{arxiv} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- 全部论文地址清单 -->
+    <div class="reveal terminal-dark-box border border-brand-border rounded-xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-3 border-b border-brand-border">
+        <span class="text-xs font-mono text-brand-accent" data-i18n="research_sources_title">全部论文地址（11 篇）</span>
+        <span class="text-[9px] font-mono text-brand-faint hidden sm:inline">arxiv.org/abs/…</span>
+      </div>
+      <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+        {ALL_PAPERS.map((url, i) => (
+          <div class="flex items-baseline gap-2 min-w-0">
+            <span class="text-[9px] font-mono text-brand-faint flex-shrink-0">{pad(i)}</span>
+            <a href={url} target="_blank" rel="noopener noreferrer"
+              class="text-[10px] font-mono text-brand-muted hover:text-brand-ivory transition-colors break-all leading-relaxed">
+              {url} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,7 +5,7 @@
 <p align="center">
   <strong>Auraxis Agent</strong> 的官方品牌营销站点。<br />
   为桌面端编程助手 <strong>Auraxis Agent</strong>（Electron 应用）量身打造的单页落地页。<br />
-  中英双语 · 深色/浅色主题 · 基于 Astro 4 + Hono + Cloudflare Pages。
+  中英双语 · 深色/浅色主题 · 基于 Astro 4 + React Islands + Tailwind CSS。
 </p>
 
 <p align="center">
@@ -24,20 +24,21 @@
 
 Auraxis Agent 网站是 [Auraxis Agent](https://github.com/yth1120/Auraxis-Agent) 桌面端 Electron 应用的品牌官网，向开发者社区展示 Auraxis Agent 的核心能力：
 
-- **统一 ReAct 步进引擎** — 聊天与智能体共用 step-engine 单一步进循环，停止策略/压缩/重试均为策略钩子
-- **63 个内置工具** — 11 个危险 + 52 个安全，按 10 大能力族分类
+- **Chat / Work / Code 三模式** — 三种产品形态共用同一套 ReAct 步进引擎，模式状态互不污染
+- **71 个内置工具** — 15 个危险 + 56 个安全，按 13 大能力族分类
 - **多智能体调度** — 优先级队列、并发控制、三级偏差检测、计划审批流
 - **Code Mode** — worker 线程执行 TypeScript 工具编排，子调用回穿完整权限管线
+- **文档生成与云连接器** — Word / Excel / PPT / PDF 读写，Slack / Google Drive / Notion
 - **原生沙箱** — Windows restricted token / AppContainer、Linux、macOS 四后端 + Git Worktree 隔离
 - **MCP + 插件系统** — JSON-RPC over stdio 标准兼容、四类扩展点
-- **持久化记忆** — SQLite + FTS5 全文搜索 + LLM 驱动记忆提取
+- **Eywa 溯源记忆** — 证据先于信念、零 LLM 读取路径 + SQLite FTS5 全文搜索
+- **研究驱动模块 + 缓存对齐** — 7 篇论文落地（Eywa / MAP-Graph / AGORA / SWE-Touch / Oversight / AutoTool / Verifier-as-Gatekeeper）+ 4 项客户端缓存技术（RadixAttention / Prompt Cache / Cache-Aware / Byte-Exact）
 
 ### 在线预览
 
-| 语言 | 链接 |
+| 平台 | 链接 |
 |------|------|
-| 🇨🇳 中文 | `https://auraxis-website.pages.dev` |
-| 🇺🇸 English | `https://auraxis-website.pages.dev`（切换 EN） |
+| GitHub Pages | `https://yth1120.github.io/Auraxis-Agent-web/` |
 
 ---
 
@@ -46,7 +47,7 @@ Auraxis Agent 网站是 [Auraxis Agent](https://github.com/yth1120/Auraxis-Agent
 ```bash
 # 1. 克隆本仓库
 git clone <repo-url>
-cd auraxis-website
+cd Auraxis-Agent-web
 
 # 2. 安装依赖
 npm install
@@ -66,9 +67,9 @@ npm run preview
 | 命令 | 说明 |
 |------|------|
 | `npm run dev` / `npm start` | 启动 Astro 开发服务器 |
-| `npm run build` | 生产构建（首页 SSG + API 路由 SSR） |
+| `npm run build` | 生产构建（纯静态输出到 `dist/`） |
 | `npm run preview` | 本地预览构建产物 |
-| `npm run check` | TypeScript 类型检查 |
+| `npm run check` | `astro check` TypeScript 诊断（无输出） |
 | `npm run astro` | Astro CLI 工具 |
 
 ---
@@ -77,25 +78,29 @@ npm run preview
 
 | 层级 | 技术 | 用途 |
 |------|------|------|
-| **框架** | [Astro 4](https://astro.build) | Hybrid 渲染引擎（SSG + SSR） |
+| **框架** | [Astro 4](https://astro.build) | 静态站点生成（SSG） |
 | **交互** | [React 18](https://react.dev) | 交互岛屿（Islands Architecture） |
-| **API** | [Hono](https://hono.dev) | 轻量服务端 API 框架（CF Workers 兼容） |
 | **样式** | [Tailwind CSS 3](https://tailwindcss.com) | 原子化 CSS + 暗色模式 |
 | **动画** | [Framer Motion 11](https://motion.dev) | 数据驱动动画（粒子流动/旋转，遵循零位移动画规范） |
 | **图标** | [Lucide React](https://lucide.dev) | 开源线性图标库 |
-| **运行时** | [Cloudflare Pages](https://pages.cloudflare.com) | 部署 + SSR 运行时 |
-| **构建** | [Wrangler](https://developers.cloudflare.com/workers/wrangler/) | CF 部署管理 |
+| **部署** | [GitHub Pages](https://pages.github.com) / [Cloudflare Pages](https://pages.cloudflare.com) | 静态托管 + 自动部署 |
+| **构建** | [Wrangler](https://developers.cloudflare.com/workers/wrangler/) | 可选的 CF Pages 部署管理 |
+
+> 本站为**纯静态站点**：所有数据（工具矩阵、版本/下载信息）随构建打包为 JSON，由 React 岛屿在客户端消费，无 SSR 与后端 API。
 
 ### 设计系统（与桌面端 Auraxis 品牌一致）
 
 | Token | 值 | 用途 |
 |-------|-----|------|
+| `brand-page` | 浅 `#EAEDF1` / 深 `#111216` | 页面底衬/顶栏/页脚（浅色主题压深一档） |
 | `brand-black` | `#111216` | 深色主题页面背景（品牌黑） |
-| `brand-dark` | `#171822` | 深色卡片/代码块背景 |
-| `brand-card` | `#1C1E28` | 卡片背景 |
-| `brand-border` | `#262A35` | hairline 发丝线（深色） |
-| `brand-accent` | `#8C8AA8` | Aura 紫灰 — 仅约 3% 面积强调（焦点/选中/状态点） |
-| `brand-ivory` | `#F1F1EE` | 象牙白 — 浅色主题底色 / 深底正文 |
+| `brand-dark` | `#1B1D21` | 深色卡片/代码块背景 |
+| `brand-card` | `#23262B` | 卡片背景 |
+| `brand-border` | `#454B55` | hairline 发丝线（深色，更强对比） |
+| `brand-accent` | 浅 `#5C5A74` / 深 `#8C8AA8` | Aura 紫灰 — 仅约 3% 面积强调（焦点/选中/状态点，随主题切换） |
+| `brand-ivory` | `#F3F3F0` | 深底正文色 |
+| `brand-muted` | 浅 `#2B2F35` / 深 `#D6DAE0` | 次级/辅助文字（随主题切换，字体加深） |
+| `brand-faint` | 浅 `#33373D` / 深 `#BCC1C8` | 三级弱文字（随主题切换，字体加深） |
 | `sans` | 系统 UI 栈 | 正文（`-apple-system, Segoe UI, PingFang SC, Microsoft YaHei`） |
 | `mono` | `SF Mono, JetBrains Mono, Fira Code, Consolas` | 代码/终端字体 |
 
@@ -106,142 +111,99 @@ npm run preview
 ## 项目结构
 
 ```
-auraxis-website/
-├── astro.config.mjs          # Astro 配置（Hybrid + CF 适配器）
+Auraxis-Agent-web/
+├── astro.config.mjs          # Astro 配置（静态输出 + 可选 BASE_PATH）
 ├── tailwind.config.mjs       # Tailwind 配置（Auraxis 品牌色彩 Token）
-├── wrangler.toml             # Cloudflare Pages 部署配置
-├── tsconfig.json             # TypeScript 配置
 ├── package.json
-│
 ├── public/
-│   ├── auraxis-logo.png      # 品牌 Logo（拷贝自桌面端 src/assets/）
-│   └── favicon-96.png        # 站点图标
+│   ├── auraxis-logo.png      # 品牌 Logo
+│   ├── favicon-96.png        # 站点图标
+│   ├── releases.json         # 运行时版本/下载信息（与 src/data 同步）
+│   ├── screenshots/          # 界面截图
+│   └── videos/               # 真实录屏演示
 │
 └── src/
     ├── pages/
-    │   ├── index.astro       # ★ 主页入口（SSG 预渲染）
-    │   └── api/
-    │       └── [...route].ts # API catch-all，委托给 Hono
-    │
+    │   └── index.astro       # ★ 主页入口（单页落地页）
     ├── layouts/
     │   └── BaseLayout.astro  # HTML 骨架、主题预加载、i18n 引导
-    │
     ├── components/           # Astro 无交互组件
+    │   ├── UpdateBanner.astro     # 顶部重点更新横幅（每次进入自动弹出，可关闭）
     │   ├── Header.astro
     │   ├── HeroSection.astro
-    │   ├── SolutionSection.astro    # 核心能力（6 张能力卡）
-    │   ├── DemoSection.astro        # ReAct 循环演示（终端模拟）
+    │   ├── ScreenshotSection.astro
+    │   ├── SolutionSection.astro    # 核心能力（12 张能力卡）
+    │   ├── DemoSection.astro        # 真实录屏演示
     │   ├── ArchitectureSection.astro
+    │   ├── ResearchSection.astro     # 技术内核·论文驱动开发（论文台账 + 缓存管线 + 地址清单）
     │   ├── ToolsMatrixSection.astro
-    │   ├── SafetySection.astro      # 安全模型（权限模式 / 沙箱后端）
+    │   ├── SafetySection.astro      # 安全模型（权限策略 / 沙箱后端）
     │   ├── EcosystemSection.astro   # 开发者生态（CLI / TS SDK / Python SDK / 插件）
-    │   ├── DownloadSection.astro    # 下载区（版本/系统要求/更新日志）
     │   ├── DeveloperDocs.astro      # 二次开发指南（克隆 / 启动 / 文档链接）
+    │   ├── DownloadSection.astro    # 下载区（版本/系统要求/更新日志）
     │   ├── FaqSection.astro         # 常见问题（details/summary）
     │   ├── GitHubIcon.astro         # GitHub 品牌图标（内联 SVG）
     │   └── Footer.astro
-    │
     ├── react/                # React 交互岛屿
     │   ├── ThemeToggle.tsx   # 深色/浅色切换
     │   ├── LanguageToggle.tsx# 中/英语言切换
-    │   ├── TerminalSimulator.tsx # ReAct 循环终端模拟器
     │   ├── ArchitectureFlow.tsx  # 双进程架构交互图
-    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器（63 工具）
+    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器（71 工具）
     │   └── SmartDownloader.tsx  # 智能下载按钮（自动平台检测）
-    │
     ├── i18n/
     │   ├── translations.ts   # ★ 中/英完整翻译表
     │   └── LanguageContext.tsx# React i18n Context Provider
-    │
     ├── data/
-    │   ├── tools-data.json   # ★ 63 个内置工具数据集（源自桌面端 tool-defs.ts）
+    │   ├── tools-data.json   # ★ 71 个内置工具数据集（源自桌面端 tool-defs.ts）
     │   ├── tools.ts          # 类型化工具数据访问层
-    │   ├── releases.json     # 发布版本 & 下载资产（v2.0.0）
-    │   └── simSteps.ts       # 终端模拟步骤序列
-    │
+    │   └── releases.json     # 发布版本 & 下载资产（v3.0.0）
     ├── types/
     │   └── index.ts          # ★ 全局 TypeScript 类型定义（与桌面端 contracts 同构）
-    │
-    ├── server/
-    │   ├── app.ts            # ★ Hono 应用工厂（中间件 + 路由注册）
-    │   └── routes/
-    │       ├── releases.ts   # GET /api/releases/latest
-    │       └── tools.ts      # GET /api/tools   &   /api/tools/:name
-    │
     ├── utils/
     │   └── platform.ts       # User Agent 平台嗅探
-    │
     └── styles/
-        └── global.css        # 全局样式、网格背景、终端光标、滚动条
+        └── global.css        # 全局样式、网格背景、滚动条
 ```
 
 ---
 
 ## 架构设计
 
-### 渲染模型：Astro Hybrid
+### 渲染模型：Astro 静态站点
 
 ```
-┌────────────────────────────────────────────────────┐
-│                    Cloudflare Pages                   │
-│                                                       │
-│   GET / (SSG)              GET /api/* (SSR)          │
-│   ┌─────────────────┐     ┌────────────────────┐     │
-│   │  index.astro     │     │  [...route].ts     │     │
-│   │  (预渲染静态HTML) │     │  (动态执行)         │     │
-│   │                 │     │       ↓             │     │
-│   │  React Islands  │     │  Hono Factory      │     │
-│   │  (客户端水合)    │     │  ┌──────────────┐  │     │
-│   └─────────────────┘     │  │ releases.ts  │  │     │
-│                            │  │ tools.ts     │  │     │
-│                            │  └──────────────┘  │     │
-│                            └────────────────────┘     │
-└────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                     GitHub Pages / CF Pages                  │
+│                                                              │
+│   GET / (index.html)                                         │
+│   ┌──────────────────────────────────────────────────────┐   │
+│   │  index.astro（构建时预渲染为静态 HTML）                  │   │
+│   │  ├── React Islands（client:visible / client:idle）     │   │
+│   │  │   ├── ToolsGrid ──────▶ src/data/tools-data.json    │   │
+│   │  │   └── SmartDownloader ─▶ public/releases.json        │   │
+│   │  └── 静态资源（截图 / 录屏 / Logo）                      │   │
+│   └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-- **首页 (`index.astro`)**: 构建时预渲染为静态 HTML，`prerender = true`
-- **API 路由 (`[...route].ts`)**: 运行时动态执行，`prerender = false`
+- **首页 (`index.astro`)**: 构建时预渲染为静态 HTML，无运行时服务端逻辑
 - **React 岛屿**: 无共享根节点，每个 `.astro` 组件独立导入 React 岛屿，通过 `client:visible` / `client:idle` 按需水合
-
-### API 层
-
-API 请求经 Astro catch-all 转发至 Hono 实例：
-
-| 端点 | 方法 | 说明 | 缓存策略 |
-|------|------|------|---------|
-| `/api/health` | GET | 健康检查 + 运行时长 | 无 |
-| `/api/releases/latest` | GET | 最新版本 & 各平台下载资产 | 浏览器 1h / CDN 24h |
-| `/api/tools` | GET | 工具列表（支持 `?type=` & `?category=` 筛选） | 浏览器 1d / CDN 7d |
-| `/api/tools/:name` | GET | 单个工具详细定义 | 浏览器 1d / CDN 7d |
-
-所有 API 响应遵循统一契约：
-
-```typescript
-interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  error?: { code: string; message: string };
-}
-```
+- **数据流**: 工具与版本数据随构建打包为 JSON，岛屿在客户端直接消费，天然支持任意静态托管
 
 ### 数据流
 
 ```
-┌──────────────────┐    ┌──────────────┐    ┌─────────────────┐
-│ tools-data.json  │───▶│  /api/tools  │───▶│  ToolsGrid.tsx  │
-│ (63 tools)       │    │  (Hono SSR)  │    │  (React Island) │
-├──────────────────┤    ├──────────────┤    ├─────────────────┤
-│ releases.json    │───▶│ /api/releases│───▶│ SmartDownloader │
-│ (version + DL)   │    │  (Hono SSR)  │    │  (React Island) │
-├──────────────────┤    └──────────────┘    └─────────────────┘
-│ simSteps.ts      │
-│ (LogStep[])      │───────────────────────▶ TerminalSimulator
-└──────────────────┘                         (React Island)
+┌──────────────────┐    ┌─────────────────┐
+│ tools-data.json  │───▶│  ToolsGrid.tsx  │
+│ (71 tools)       │    │  (React Island) │
+├──────────────────┤    ├─────────────────┤
+│ releases.json    │───▶│ SmartDownloader │
+│ (v3.0.0 + DL)    │    │  (React Island) │
+└──────────────────┘    └─────────────────┘
 ```
 
-- **工具数据**: 静态 JSON（源自桌面端 `electron/tool-defs.ts`）→ `GET /api/tools` → React 筛选过滤 UI
-- **版本数据**: 静态 JSON → `GET /api/releases/latest` → 自动平台检测下载按钮
-- **终端演示**: 硬编码的 LogStep 序列 → 逐行动画播放模拟 Auraxis ReAct 循环
+- **工具数据**: 静态 JSON（源自桌面端 `electron/tool-defs.ts`，危险集合对齐 `DANGEROUS_TOOLS`）→ 本地筛选/搜索 UI
+- **版本数据**: `src/data/releases.json` 与 `public/releases.json` 双写保持同步 → 自动平台检测下载按钮
 
 ---
 
@@ -297,7 +259,12 @@ interface ApiResponse<T = unknown> {
 # 从桌面端仓库读取 TOOL_DEFINITIONS，生成 tools-data.json
 # 字段: name / description(中文翻译) / descriptionEn(桌面端原文) / category / danger / concurrencySafe / params
 # params 对应桌面端 input_schema.properties 的顶层键名
+# danger 对齐 electron/ipc/tool-handlers.ts 的 DANGEROUS_TOOLS（当前 15 个）
 ```
+
+### 更新版本/下载数据
+
+桌面端发布新版本时，同步修改 `src/data/releases.json` 与 `public/releases.json`（两处保持一致），并更新页面中的版本徽标与 `download_*` 翻译。
 
 ### TypeScript
 
@@ -325,7 +292,17 @@ npm run build    # 生产构建（如有类型错误会失败）
 
 ## 部署
 
-项目原生部署到 **Cloudflare Pages**。
+### GitHub Pages（默认，CI 自动部署）
+
+`.github/workflows/deploy.yml` 会在推送到 `master` / `main` 时自动构建并部署：
+
+```yaml
+# 构建时注入子路径 BASE_PATH=/Auraxis-Agent-web/
+```
+
+### Cloudflare Pages（静态托管）
+
+构建产物为纯静态目录，可直接部署到 Cloudflare Pages：
 
 ```bash
 # 1. 构建生产版本
@@ -337,19 +314,9 @@ npx wrangler pages deploy ./dist --project-name=auraxis-website
 # 3. 或通过 Cloudflare Dashboard 连接 Git 仓库自动部署
 ```
 
-### Cloudflare 配置
-
-`wrangler.toml`：
-
-```toml
-name = "auraxis-website"
-pages_build_output_dir = "./dist"
-compatibility_date = "2026-08-16"
-```
-
 - 构建命令: `npm run build`
 - 构建输出: `./dist`
-- 适配器: `@astrojs/cloudflare`（Hybrid 模式自动输出 `_worker.js`）
+- 根路径部署时无需 `BASE_PATH`；子路径部署时传入对应前缀
 
 ---
 
@@ -357,12 +324,11 @@ compatibility_date = "2026-08-16"
 
 | 组件 | 文件 | 水合策略 | 功能 |
 |------|------|----------|------|
-| 主题切换 | `ThemeToggle.tsx` | `client:visible` | 深色/浅色模式切换 |
-| 语言切换 | `LanguageToggle.tsx` | `client:visible` | 中/英双语切换 |
-| 终端模拟器 | `TerminalSimulator.tsx` | `client:idle` | ReAct 循环动画演示 |
-| 架构流程图 | `ArchitectureFlow.tsx` | `client:visible` | 双进程交互架构可视化 |
-| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 63 工具筛选/查看/参数展示 |
-| 智能下载 | `SmartDownloader.tsx` | `client:idle` | 自动检测平台，展示下载链接 |
+| 主题切换 | `ThemeToggle.tsx` | `client:idle` | 深色/浅色模式切换 |
+| 语言切换 | `LanguageToggle.tsx` | `client:idle` | 中/英双语切换 |
+| 架构流程图 | `ArchitectureFlow.tsx` | `client:idle` | 双进程交互架构可视化 |
+| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 71 工具筛选/搜索/参数展示 |
+| 智能下载 | `SmartDownloader.tsx` | `client:visible` | 自动检测平台，展示下载链接 |
 
 ---
 
@@ -372,11 +338,10 @@ compatibility_date = "2026-08-16"
 
 | 概念 | 桌面端实现 | 网站数据源 |
 |------|-----------|-----------|
-| 63 个工具 | `electron/tool-defs.ts` | `src/data/tools-data.json` |
+| 71 个工具 | `electron/tool-defs.ts` | `src/data/tools-data.json` |
 | 危险工具集合 | `electron/ipc/tool-handlers.ts` (DANGEROUS_TOOLS) | `tools-data.json` 的 danger 字段 |
-| 权限模式 | `electron/types.ts` | `types.ts PermissionMode` |
-| LogStep 序列 | 运行时 ReAct 循环日志 | `src/data/simSteps.ts` |
-| 发布版本 | 桌面端 `package.json` | `src/data/releases.json` |
+| 权限策略 | `electron/contracts/core.ts` / `permission.ts` | `types.ts PermissionMode` |
+| 发布版本 | 桌面端 `CHANGELOG.md` + GitHub Releases | `src/data/releases.json` |
 | 平台检测 | `electron/utils/` | `src/utils/platform.ts` |
 
 ---

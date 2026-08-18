@@ -13,13 +13,13 @@ interface Particle {
   color: string;
 }
 
-/** Aura 紫灰 — 仅作状态点/数据流动画的强调色 */
+/** Aura 紫灰（跟随主题 CSS 变量）— 仅作状态点/数据流动画的强调色 */
 const PARTICLES: Particle[] = [
-  { id: 1, x: 20, y: 25, color: '#8C8AA8' },
-  { id: 2, x: 20, y: 50, color: '#8C8AA8' },
-  { id: 3, x: 20, y: 75, color: '#8C8AA8' },
-  { id: 4, x: 30, y: 38, color: '#8C8AA8' },
-  { id: 5, x: 30, y: 62, color: '#8C8AA8' },
+  { id: 1, x: 20, y: 25, color: 'var(--color-accent)' },
+  { id: 2, x: 20, y: 50, color: 'var(--color-accent)' },
+  { id: 3, x: 20, y: 75, color: 'var(--color-accent)' },
+  { id: 4, x: 30, y: 38, color: 'var(--color-accent)' },
+  { id: 5, x: 30, y: 62, color: 'var(--color-accent)' },
 ];
 
 function ArchitectureFlowInner() {

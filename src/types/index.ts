@@ -6,16 +6,18 @@
  */
 
 // ─── 权限模态 ─────────────────────────────────────
-/** 工具执行权限策略 — 与桌面端 PermissionMode 完全对齐 */
-export type PermissionMode = 'ask' | 'plan' | 'afe';
+/** 工具执行审批策略 — 与桌面端 ApprovalPolicy 对齐（历史 'afe' 拼写归一为 'auto'） */
+export type PermissionMode = 'ask' | 'plan' | 'auto';
 
 // ─── 工具分类 ─────────────────────────────────────
 /** 工具安全等级 */
 export type ToolType = 'danger' | 'safe';
 
-/** 工具功能分类（按能力族划分，对应桌面端 63 个工具） */
+/** 工具功能分类（按能力族划分，对应桌面端 71 个工具） */
 export type ToolCategory =
   | 'files'
+  | 'documents'
+  | 'connectors'
   | 'execution'
   | 'terminal'
   | 'web'
@@ -79,6 +81,8 @@ export interface Tool {
   params: string[];
   /** 功能分类 */
   category: ToolCategory;
+  /** 是否允许并发安全调用（桌面端 isConcurrencySafe） */
+  concurrencySafe: boolean;
 }
 
 // ─── 平台检测 ─────────────────────────────────────
@@ -119,7 +123,7 @@ export interface ReleaseInfo {
 }
 
 // ─── API 响应数据类型 ──────────────────────────────
-/** GET /api/tools 返回的工具列表 */
+/** 工具列表统计数据结构（站点静态数据，非 API 响应） */
 export interface ToolsListData {
   tools: Tool[];
   total: number;

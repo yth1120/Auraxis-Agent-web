@@ -17,17 +17,38 @@ const FOOTER_LINKS = [
 
 const SUPPORT_LINKS = [
   { href: `${REPO_URL}/issues`, key: 'footer_support_2', label: 'GitHub Issues' },
-  { href: `${REPO_URL}/discussions`, key: 'footer_support_3', label: 'GitHub Discussions' },
+  { href: `${REPO_URL}/blob/main/CHANGELOG.md`, key: 'footer_support_3', label: '更新日志' },
   { href: `${REPO_URL}/issues`, key: 'footer_support_1', label: '报告安全缺陷' },
 ];
 ---
 
-<footer class="border-t border-brand-hairline dark:border-brand-border bg-white dark:bg-brand-black py-14 relative z-10 transition-colors">
+<footer class="border-t border-brand-hairline dark:border-brand-border bg-brand-page dark:bg-brand-black py-14 relative z-10 transition-colors">
+  <!-- 共建修复 CTA：欢迎技术大牛参与 -->
+  <div class="max-w-6xl mx-auto px-6 pb-12">
+    <div class="reveal border border-brand-accent/30 dark:border-brand-accent/40 bg-brand-accent/[0.06] dark:bg-brand-accent/[0.08] rounded-2xl px-6 py-10 sm:px-10 text-center">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-3" data-i18n="footer_cta_kicker">Open Source · 共建</div>
+      <h2 class="text-2xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="footer_cta_title">诚邀各大技术大牛参与修复与共建</h2>
+      <p class="text-sm text-brand-muted leading-relaxed mt-3 max-w-2xl mx-auto" data-i18n="footer_cta_desc">
+        Auraxis 是个人 MIT 开源项目，正在持续迭代。欢迎提交 Issue、PR、性能 / 安全 / 架构建议，帮助我们一起把工程细节打磨得更稳。
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-7">
+        <a href={`${REPO_URL}/issues`} target="_blank" rel="noopener noreferrer" data-i18n="footer_cta_primary"
+          class="inline-flex items-center gap-2 bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-sm h-10 px-6 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40 transition-colors">
+          <GitHubIcon size={16} />提交 Issue / PR
+        </a>
+        <a href={REPO_URL} target="_blank" rel="noopener noreferrer" data-i18n="footer_cta_secondary"
+          class="inline-flex items-center gap-2 border border-brand-hairline dark:border-brand-border hover:bg-black/5 dark:hover:bg-white/5 text-ink dark:text-ivory font-medium text-sm h-10 px-6 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40 transition-colors">
+          访问 GitHub 仓库
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="max-w-6xl mx-auto px-6 flex flex-col items-center text-center gap-6">
     <div class="flex items-center gap-2.5">
       <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="32" height="32" class="h-8 w-auto" />
       <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
-      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v2.0.0</span>
+      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.0.0</span>
     </div>
 
     <p class="text-brand-muted text-sm max-w-md leading-relaxed" data-i18n="footer_brand">Auraxis Agent —— 一个基于 Electron 的桌面端编程助手，MIT 开源，个人开发中。</p>

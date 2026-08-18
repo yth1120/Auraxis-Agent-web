@@ -35,11 +35,11 @@ const MODES: Mode[] = [
   {
     titleKey: 'perm_afe_title',
     descKey: 'perm_afe_desc',
-    title: 'AFE · 全自动',
+    title: 'Auto · 全自动',
     desc: '无人值守的自动化执行。',
     items: [
       { key: 'perm_afe_1', text: '所有工具自动批准，无弹窗打断' },
-      { key: 'perm_afe_2', text: '工具仍经过沙箱与路径、扩展名、URL 检查；无头流程按惯例豁免 read-before-write' },
+      { key: 'perm_afe_2', text: '工作区卫生检查（扩展名 / read-before-write / URL）仍然生效' },
       { key: 'perm_afe_3', text: '适合 CI 流水线与长时间后台任务' },
     ],
   },
@@ -99,7 +99,7 @@ const SANDBOX = [
         </div>
         <div class="bg-ivory dark:bg-brand-dark border border-brand-hairline dark:border-brand-border rounded-lg px-4 py-3">
           <div class="text-xs font-medium text-ink dark:text-ivory" data-i18n="safety_profiles_title">内置权限档案</div>
-          <div class="text-xs text-brand-muted mt-1 leading-relaxed" data-i18n="safety_profiles_desc">标准（文件可写，ask）/ 只读（拒绝写，ask）/ 沙箱（文件可写、网络拒绝，afe）</div>
+          <div class="text-xs text-brand-muted mt-1 leading-relaxed" data-i18n="safety_profiles_desc">标准（工作区写入 + 逐次确认）/ 只读（read + 逐次确认）/ 沙箱（工作区写入、网络拒绝、auto）；另有 ask / auto / full / readonly 四个运行时预设</div>
         </div>
       </div>
     </div>

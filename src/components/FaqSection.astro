@@ -2,14 +2,16 @@
 const FAQS = [
   { qKey: 'faq_q1', aKey: 'faq_a1', q: '需要 API Key 吗？支持哪些模型？', a: '需要。Auraxis Agent 默认使用 DeepSeek API（内置 deepseek-v4-flash / v4-pro），同时兼容 OpenAI 与 Anthropic 消息格式；也可以在设置中添加自定义模型，或通过环境变量配置。' },
   { qKey: 'faq_q2', aKey: 'faq_a2', q: '与 IDE 插件或纯 CLI 工具有什么区别？', a: 'Auraxis Agent 是独立的桌面客户端，把聊天与多 Agent 收敛到同一套可审计的 ReAct 引擎，工具、调度、沙箱都在本地。同时它也提供 headless CLI 与 SDK，方便自动化集成。' },
-  { qKey: 'faq_q3', aKey: 'faq_a3', q: '三种权限模式应该怎么选？', a: '默认 ask 适合日常：危险工具逐个弹窗确认；plan 适合大型重构：先审批计划，批准后仅执行已批准步骤；afe 适合 CI 与无人值守任务：全自动放行，工具仍走统一执行管线。' },
+  { qKey: 'faq_q3', aKey: 'faq_a3', q: '三种权限模式应该怎么选？', a: '默认 ask 适合日常：危险工具逐个弹窗确认；plan 适合大型重构：先审批计划，批准后仅执行已批准步骤；auto（原 afe 拼写）适合 CI 与无人值守任务：全自动放行，工具仍走统一执行管线。另有四个运行时预设：ask / auto / full / readonly，组合审批策略、沙箱档位与卫生检查。' },
   { qKey: 'faq_q4', aKey: 'faq_a4', q: '沙箱隔离到什么程度？', a: '命令级隔离覆盖 Windows restricted token / AppContainer、Linux 与 macOS 四类后端；文件类工具受路径边界与扩展名白名单约束；Git 仓库中的并发任务还可以进入独立 worktree 分支。' },
-  { qKey: 'faq_q5', aKey: 'faq_a5', q: '我的数据存在哪里？', a: '全部本地。会话为 append-only JSONL 事件日志，检索走 SQLite 投影缓存与 FTS5；长期记忆按项目隔离；API Key 使用系统 safeStorage 加密保存。' },
+  { qKey: 'faq_q5', aKey: 'faq_a5', q: '我的数据存在哪里？', a: '全部本地。会话为 append-only JSONL 事件日志，检索走 SQLite 投影缓存与 FTS5；长期记忆升级为 Eywa 溯源记忆（证据先于信念，零 LLM 读取路径），按项目隔离；API Key 与云连接器令牌使用系统 safeStorage 加密保存。' },
   { qKey: 'faq_q6', aKey: 'faq_a6', q: '这个项目开源吗？', a: '是的，MIT License。源码、架构文档与两份 SDK 都在 GitHub（yth1120/Auraxis-Agent）上。' },
   { qKey: 'faq_q7', aKey: 'faq_a7', q: '需要自己安装 Node.js 吗？', a: '不需要。安装包内置 Node 24 运行时，开箱即用；Shell 工具建议使用 Git Bash 或 PowerShell。' },
   { qKey: 'faq_q8', aKey: 'faq_a8', q: '这个项目成熟吗？', a: '不成熟。这是个人开发项目，处于持续迭代阶段，可能存在缺陷或缺失功能，请谨慎用于重要工作；发现问题欢迎在 GitHub 提交 Issue。' },
-  { qKey: 'faq_q9', aKey: 'faq_a9', q: 'ask/plan/afe 和只读/工作区写入/完全访问是什么关系？', a: '它们是两层：ask/plan/afe 是审批模式，决定危险工具是否需要确认（默认 ask）；read/workspace-write/full 是沙箱权限档位，决定 Agent 能访问项目哪些范围（默认 workspace-write）。另有内置权限档案（标准/只读/沙箱）组合这两层。' },
+  { qKey: 'faq_q9', aKey: 'faq_a9', q: 'ask/plan/auto 和只读/工作区写入/完全访问是什么关系？', a: '它们是两层：ask/plan/auto 是审批策略，决定危险工具是否需要确认（默认 ask；afe 为历史拼写，已归一为 auto）；read/workspace-write/full 是沙箱权限档位，决定 Agent 能访问项目哪些范围（默认 workspace-write）。另有四个运行时预设（ask / auto / full / readonly）与内置权限档案（标准/只读/沙箱）组合这两层。' },
   { qKey: 'faq_q10', aKey: 'faq_a10', q: 'Auraxis Agent 会上传我的数据吗？', a: '默认不会。会话、记忆与设置都保存在本地；遥测默认关闭，只有手动开启后才会以严格白名单脱敏的方式上报。API Key 使用系统 safeStorage 加密保存。' },
+  { qKey: 'faq_q11', aKey: 'faq_a11', q: 'Chat / Work / Code 三种模式有什么区别？', a: '三种模式共用同一套 ReAct 步进引擎，但互不污染状态：Chat 是日常对话与代码问答；Work 面向文档协作，默认先澄清需求，只允许写文档与非代码文件，代码写入会被硬拒绝；Code 模式用 RunCode 在 worker 线程编排工具，适合自动化编码任务。' },
+  { qKey: 'faq_q12', aKey: 'faq_a12', q: '文档生成和云连接器需要额外配置吗？', a: '文档工具（Word / Excel / PPT / PDF）开箱即用，无需配置。Slack / Google Drive / Notion 需要在设置 → 连接器中填入令牌，令牌使用系统 safeStorage 加密保存；对应工具会在每次调用时提示外部副作用。' },
 ];
 ---
 

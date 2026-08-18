@@ -8,24 +8,53 @@
    ═══════════════════════════════════════════════════ */
 
 :root {
-  --color-border-dim: rgba(17, 18, 22, 0.1); /* 浅色 hairline */
-  --color-bg: #f1f1ee;
+  /* 与桌面端 tokens.css 对齐：浅色为冷中性白，无暖象牙 */
+  --color-border-dim: rgba(30, 35, 42, 0.26); /* 浅色 hairline（更强对比） */
+  --color-bg: #eaedf1;
   --color-surface: #ffffff;
   --color-text: #111216;
-  --color-text-muted: #6e6d82;
-  --color-accent: #8c8aa8;
+  --color-text-muted: #454b53;
+  --color-accent: #6a6884;
+
+  /* Tailwind 主题切换用 RGB 通道（light） */
+  --color-page-rgb: 234 237 241;
+  --color-ivory-rgb: 255 255 255;
+  --color-accent-rgb: 92 90 116;
+  --color-muted-rgb: 43 47 53;
+  --color-faint-rgb: 51 55 61;
+  --color-secondary-rgb: 37 41 47;
+  --color-hairline-rgb: 201 205 213;
+  /* 浅色语义色略深于桌面端，保证 9px 徽章文字在 10% 淡色底上 ≥ 4.5:1 */
+  --color-success-rgb: 69 110 92;
+  --color-danger-rgb: 150 80 90;
+  --color-warning-rgb: 149 95 36;
+
   --font-sans:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    'Inter Variable', 'Segoe UI Variable Text', 'Segoe UI', -apple-system, BlinkMacSystemFont,
+    'HarmonyOS Sans SC', 'MiSans', 'PingFang SC', 'Hiragino Sans GB', 'Source Han Sans SC',
+    'Noto Sans CJK SC', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas,
+    'Liberation Mono', Menlo, Courier, 'PingFang SC', 'Microsoft YaHei', monospace;
 }
 
 .dark {
-  --color-border-dim: rgba(255, 255, 255, 0.08); /* 深色 hairline */
+  --color-border-dim: rgba(62, 67, 76, 0.88); /* 深色 hairline（更强对比） */
   --color-bg: #111216;
-  --color-surface: #171822;
-  --color-text: #f1f1ee;
-  --color-text-muted: #9b9aae;
+  --color-surface: #1b1d21;
+  --color-text: #f3f3f0;
+  --color-text-muted: #c5c9ce;
+  --color-accent: #8c8aa8;
+
+  /* Tailwind 主题切换用 RGB 通道（dark） */
+  --color-page-rgb: 17 18 22;
+  --color-ivory-rgb: 243 243 240;
+  --color-accent-rgb: 140 138 168;
+  --color-muted-rgb: 214 218 223;
+  --color-faint-rgb: 188 193 200;
+  --color-secondary-rgb: 226 229 231;
+  --color-success-rgb: 79 174 134;
+  --color-danger-rgb: 176 113 119;
+  --color-warning-rgb: 184 147 90;
 }
 
 html {
@@ -49,8 +78,8 @@ body {
 
 /* ── 滚动条（WebKit，6px 细滚动条） ─────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -58,26 +87,34 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(140, 138, 168, 0.35);
-  border-radius: 3px;
+  background: rgba(30, 35, 42, 0.22);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(140, 138, 168, 0.55);
+  background: rgba(30, 35, 42, 0.32);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
 }
 
 /* ── 精密网格背景（40px，1px 线，2–3% 透明度） ──── */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(17, 18, 22, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 18, 22, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(17, 18, 22, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 18, 22, 0.11) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 .dark .grid-bg {
   background-image:
-    linear-gradient(rgba(140, 138, 168, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(140, 138, 168, 0.028) 1px, transparent 1px);
+    linear-gradient(rgba(140, 138, 168, 0.085) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 138, 168, 0.085) 1px, transparent 1px);
 }
 
 /* ── 终端打字光标 ──────────────────────────────── */
@@ -108,33 +145,40 @@ body {
 /* ── 深色盒强制样式 ────────────────────────────── */
 /* 终端模块和代码模块在浅色模式下始终维持深色底，保证代码高亮对比度 */
 .terminal-dark-box {
-  background-color: #171822 !important;
-  color: #f1f1ee !important;
+  background-color: #1b1d21 !important;
+  color: #f3f3f0 !important;
 }
 
 .code-dark-box {
-  background-color: #171822 !important;
-  color: #f1f1ee !important;
+  background-color: #1b1d21 !important;
+  color: #f3f3f0 !important;
 }
 
-/* 浅色主题下提升次级文字对比度（深色盒内部保持原色板） */
-html:not(.dark) .text-brand-muted:not(.terminal-dark-box .text-brand-muted):not(.code-dark-box .text-brand-muted) {
-  color: #6a697e;
+/* 深色盒在浅色主题下强制使用深色模式的次级文字/强调色 */
+html:not(.dark) .terminal-dark-box .text-brand-muted,
+html:not(.dark) .code-dark-box .text-brand-muted {
+  color: #c5c9ce;
 }
 
-html:not(.dark) .text-brand-faint:not(.terminal-dark-box .text-brand-faint):not(.code-dark-box .text-brand-faint) {
-  color: #5f5e70;
+html:not(.dark) .terminal-dark-box .text-brand-faint,
+html:not(.dark) .code-dark-box .text-brand-faint {
+  color: #9da2a9;
 }
 
-/* 浅色主题下加深 accent 紫灰，保证文字/图标对比度 ≥ 4.5:1（深色盒内部保持原色板） */
-html:not(.dark) .text-brand-accent:not(.terminal-dark-box .text-brand-accent):not(.code-dark-box .text-brand-accent) {
-  color: #55536e;
+html:not(.dark) .terminal-dark-box .text-brand-accent,
+html:not(.dark) .code-dark-box .text-brand-accent {
+  color: #8c8aa8;
 }
 
 /* ── 选中高亮（Aura 紫灰，克制） ───────────────── */
 ::selection {
-  background-color: rgba(140, 138, 168, 0.35);
-  color: #ffffff;
+  background-color: rgba(106, 104, 132, 0.16);
+  color: #111216;
+}
+
+.dark ::selection {
+  background-color: rgba(140, 138, 168, 0.22);
+  color: #f3f3f0;
 }
 
 /* ── 翻页式弹入（数据驱动淡入 + 向上弹出，一次成型不循环） ── */

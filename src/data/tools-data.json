@@ -676,7 +676,7 @@
     "name": "Pwsh",
     "description": "执行 PowerShell 命令（Windows 原生）",
     "category": "execution",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "command",
@@ -684,6 +684,100 @@
       "timeout"
     ],
     "descriptionEn": "Execute a PowerShell command (powershell.exe on Windows, pwsh when available elsewhere). Returns stdout, stderr, and exit code. Use for PowerShell-specific work: modules, registry, pipelines, .ps1 scripts."
+  },
+  {
+    "name": "ReadDocument",
+    "description": "读取专业文档（.docx/.xlsx/.pptx/.pdf）并返回纯文本内容",
+    "category": "documents",
+    "danger": false,
+    "concurrencySafe": true,
+    "params": [
+      "file_path"
+    ],
+    "descriptionEn": "Read a professional document file (.docx/.xlsx/.pptx/.pdf) and return its text content as plain text (xlsx also returns structured sheets). Use this instead of Read for binary document formats."
+  },
+  {
+    "name": "WriteDocument",
+    "description": "按结构化规格创建或覆盖专业文档（Word/Excel/PPT/PDF）",
+    "category": "documents",
+    "danger": true,
+    "concurrencySafe": false,
+    "params": [
+      "file_path",
+      "spec"
+    ],
+    "descriptionEn": "Create or overwrite a professional document (.docx/.xlsx/.pptx/.pdf) from a structured spec. For docx/pdf: { title?, blocks: [{type:\"paragraph|heading|bullet|numbered|table|pageBreak\", text?, level?, rows?}] }. For xlsx: { sheets: [{ name, rows: string[][] }] }. For pptx: { slides: [{ title?, subtitle?, bullets?, notes? }] }. Returns the written path and byte size."
+  },
+  {
+    "name": "SlackListChannels",
+    "description": "列出配置的 Slack 机器人/用户可访问的频道",
+    "category": "connectors",
+    "danger": false,
+    "concurrencySafe": true,
+    "params": [
+      "limit"
+    ],
+    "descriptionEn": "List Slack channels (public + private) the configured bot/user can access. Tokens come from Settings → 连接器; do not ask the user for a token."
+  },
+  {
+    "name": "SlackPostMessage",
+    "description": "向 Slack 频道发送消息（外部副作用，需确认意图）",
+    "category": "connectors",
+    "danger": true,
+    "concurrencySafe": false,
+    "params": [
+      "channel",
+      "text"
+    ],
+    "descriptionEn": "Post a message to a Slack channel by id (from SlackListChannels). External side effect — confirm intent before use."
+  },
+  {
+    "name": "DriveList",
+    "description": "列出配置的 Google Drive 令牌可访问的文件/文件夹",
+    "category": "connectors",
+    "danger": false,
+    "concurrencySafe": true,
+    "params": [
+      "query",
+      "page_size"
+    ],
+    "descriptionEn": "List Google Drive files/folders the configured token can access. Optional query follows the Drive API `q` syntax (e.g. \"name contains 'Report'\")."
+  },
+  {
+    "name": "DriveRead",
+    "description": "按 ID 读取 Google Drive 文件（文本返回文本，其他返回 base64）",
+    "category": "connectors",
+    "danger": false,
+    "concurrencySafe": true,
+    "params": [
+      "file_id"
+    ],
+    "descriptionEn": "Read a Google Drive file by id (from DriveList). Text files return text; other files return base64 content."
+  },
+  {
+    "name": "NotionSearch",
+    "description": "搜索 Notion 集成令牌可访问的页面/数据库",
+    "category": "connectors",
+    "danger": false,
+    "concurrencySafe": true,
+    "params": [
+      "query",
+      "page_size"
+    ],
+    "descriptionEn": "Search Notion pages/databases the integration token can access. Returns page id, title and url."
+  },
+  {
+    "name": "NotionCreatePage",
+    "description": "在父页面下创建 Notion 页面（外部副作用，需确认意图）",
+    "category": "connectors",
+    "danger": true,
+    "concurrencySafe": false,
+    "params": [
+      "parent_page_id",
+      "title",
+      "markdown"
+    ],
+    "descriptionEn": "Create a Notion page under a parent page (from NotionSearch). Markdown (headings/bullets/numbered/code/paragraphs) becomes Notion blocks. External side effect — confirm intent before use."
   },
   {
     "name": "SessionEventSearch",

@@ -382,11 +382,11 @@ const zh: Translations = {
 
   banner_label: '重点更新横幅',
   banner_text:
-    '重点更新：Chat / Work / Code 三模式 · 工具 63 → 71 · 文档生成与云连接器 · Eywa 溯源记忆',
+    '重点更新：Aqua 玻璃主题 · 壁纸设置 · 执行档位 / 运行权限弹窗重设计 · 侧边栏修复',
   banner_link: '查看详情',
   banner_close: '关闭横幅',
 
-  hero_badge: 'MIT 开源 · v3.0.0 · 个人开发',
+  hero_badge: 'MIT 开源 · v3.0.1 · 个人开发',
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: '桌面端编程助手',
   hero_description:
@@ -413,7 +413,7 @@ const zh: Translations = {
 
   download_title: '下载 Auraxis Agent',
   download_subtitle:
-    'v3.0.0 · Electron 43 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
+    'v3.0.1 · Electron 43 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
   download_current_version: '当前稳定版本',
   download_detected: '检测到:',
   download_loading: '加载中...',
@@ -424,7 +424,7 @@ const zh: Translations = {
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: '内置 Node 24 运行时，无需额外安装',
   download_req3: 'Shell 工具建议使用 Git Bash 或 PowerShell',
-  download_changelog_title: 'v3.0.0 更新内容',
+  download_changelog_title: 'v3.0.1 更新内容',
   download_placeholder_note: '下载遇到问题？前往 GitHub Releases 获取全部安装包（含 Apple Silicon arm64）。',
   download_unavailable: '下载链接暂不可用：',
   download_windows_tip: '下载 Windows 版本',
@@ -790,11 +790,11 @@ const en: Translations = {
 
   banner_label: 'Update banner',
   banner_text:
-    'Highlights: Chat / Work / Code modes · 63 → 71 tools · document generation & cloud connectors · Eywa provenance memory',
+    'Highlights: Aqua glass theme · wallpaper support · preset panel redesign · sidebar fixes',
   banner_link: 'View details',
   banner_close: 'Close banner',
 
-  hero_badge: 'MIT License · v3.0.0 · Personal project',
+  hero_badge: 'MIT License · v3.0.1 · Personal project',
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: 'Desktop Coding Assistant',
   hero_description:
@@ -821,7 +821,7 @@ const en: Translations = {
 
   download_title: 'Download Auraxis Agent',
   download_subtitle:
-    'v3.0.0 · Electron 43 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
+    'v3.0.1 · Electron 43 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
   download_current_version: 'Current Stable Version',
   download_detected: 'Detected:',
   download_loading: 'Loading...',
@@ -832,7 +832,7 @@ const en: Translations = {
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: 'Node 24 runtime embedded — no extra installs',
   download_req3: 'Git Bash or PowerShell recommended for shell tools',
-  download_changelog_title: "What's new in v3.0.0",
+  download_changelog_title: "What's new in v3.0.1",
   download_placeholder_note: 'Having trouble? Visit GitHub Releases for every installer, including the Apple Silicon arm64 DMG.',
   download_unavailable: 'Download not available: ',
   download_windows_tip: 'Download for Windows',

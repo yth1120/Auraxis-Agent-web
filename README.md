@@ -156,7 +156,7 @@ Auraxis-Agent-web/
     ├── data/
     │   ├── tools-data.json   # ★ 71 个内置工具数据集（源自桌面端 tool-defs.ts）
     │   ├── tools.ts          # 类型化工具数据访问层
-    │   └── releases.json     # 发布版本 & 下载资产（v3.0.0）
+    │   └── releases.json     # 发布版本 & 下载资产（v3.0.1）
     ├── types/
     │   └── index.ts          # ★ 全局 TypeScript 类型定义（与桌面端 contracts 同构）
     ├── utils/
@@ -198,7 +198,7 @@ Auraxis-Agent-web/
 │ (71 tools)       │    │  (React Island) │
 ├──────────────────┤    ├─────────────────┤
 │ releases.json    │───▶│ SmartDownloader │
-│ (v3.0.0 + DL)    │    │  (React Island) │
+│ (v3.0.1 + DL)    │    │  (React Island) │
 └──────────────────┘    └─────────────────┘
 ```
 

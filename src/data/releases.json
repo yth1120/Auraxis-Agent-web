@@ -1,36 +1,35 @@
 {
-  "version": "3.0.0",
-  "releaseDate": "2026-08-18",
+  "version": "3.0.1",
+  "releaseDate": "2026-08-20",
   "changelog": [
-    "Chat / Work / Code 三模式：统一 ReAct 引擎，模式状态互不污染，Work 文档协作 + Code Mode 工具编排",
-    "工具 63 → 71：新增 Word / Excel / PPT / PDF 文档读写与 Slack / Google Drive / Notion 云连接器",
-    "Eywa 溯源记忆（M1–M4）与 MAP-Graph 共享记忆授权：证据先于信念，零 LLM 确定性读取路径",
-    "DeepSeek 官方深度能力：reasoning effort / strict tools / FIM / 最大 384K 输出 / 流式缓存命中显示",
-    "本地账户系统、分层 Instructions 面板、设置面板重建与 Windows 11 Acrylic 侧边栏透明度",
-    "237 个测试文件 · 1,740 个用例 · 15/15 Playwright E2E · 覆盖率 85.42% 行 / 79.08% 分支 / 86.63% 函数"
+    "Aqua 玻璃模式：顶栏与左右侧栏悬浮圆角玻璃卡片，中间主区域透明融入背景，磨砂强度实时联动",
+    "壁纸设置：本地图片设为玻璃背景，自动压缩为 1920px JPEG 持久化，支持缩略图预览与一键移除",
+    "执行档位 / 运行权限弹窗重设计：260px 极简单行卡片，图标 + 标题 + 选中对勾，详细说明移入悬停提示",
+    "侧边栏打磨：收起时滑出 + 淡出完全归零；移除「工具」折叠按钮，技能 / 插件 / 定时任务常驻显示",
+    "修复：壁纸图片在 Electron CSP 下因 blob: 被拦截导致的「图片读取失败」；侧边栏透明化类优先级恢复"
   ],
   "downloads": {
     "windows": {
       "label": "Windows (NSIS 安装包)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.0/Auraxis.Setup.3.0.0.exe",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis.Setup.3.0.1.exe",
       "size": "180 MB",
       "arch": "x64"
     },
     "mac": {
       "label": "macOS (Intel DMG)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.0/Auraxis-3.0.0.dmg",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1.dmg",
       "size": "227 MB",
       "arch": "x64",
       "alt": {
         "label": "macOS (Apple Silicon DMG)",
-        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.0/Auraxis-3.0.0-arm64.dmg",
+        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1-arm64.dmg",
         "size": "225 MB",
         "arch": "arm64"
       }
     },
     "linux": {
       "label": "Linux (AppImage)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.0/Auraxis-3.0.0.AppImage",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1.AppImage",
       "size": "236 MB",
       "arch": "x64"
     },

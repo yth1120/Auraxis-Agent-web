@@ -31,11 +31,11 @@ No test suite is configured yet — `check` is the only validation step.
 
 ```
 src/data/tools-data.json (71 tools) ──▶ ToolsGrid.tsx (React island)
-src/data/releases.json + public/releases.json (v3.0.0) ──▶ SmartDownloader.tsx
+src/data/releases.json + public/releases.json (v3.0.1) ──▶ SmartDownloader.tsx
 ```
 
 - **Tool definitions** (`src/data/tools-data.json` + typed accessor `src/data/tools.ts`): 71 tools extracted from the desktop app's `electron/tool-defs.ts`. Each tool has `danger` (15 tools, aligned with `DANGEROUS_TOOLS` in `electron/ipc/tool-handlers.ts`), `category` (files / documents / connectors / execution / terminal / web / planning / agent / background / session / capability / verify / interaction), `description` (Chinese) / `descriptionEn` (desktop original), `concurrencySafe`, and `params` (top-level `input_schema` property names).
-- **Release info** (`src/data/releases.json`, mirrored in `public/releases.json`): v3.0.0 with real changelog and per-platform download assets, consumed by the SmartDownloader React island.
+- **Release info** (`src/data/releases.json`, mirrored in `public/releases.json`): v3.0.1 with real changelog and per-platform download assets, consumed by the SmartDownloader React island.
 
 ### i18n system
 
@@ -66,7 +66,7 @@ src/data/releases.json + public/releases.json (v3.0.0) ──▶ SmartDownloader
 | `src/types/index.ts` | All shared TypeScript types (mirrors desktop `electron/contracts/` semantics) |
 | `src/data/tools-data.json` | Canonical 71-tool dataset (source of truth: desktop `electron/tool-defs.ts`) |
 | `src/data/tools.ts` | Typed accessor over the dataset (ALL_TOOLS / DANGER_TOOLS / SAFE_TOOLS / TOOL_CATEGORIES) |
-| `src/data/releases.json` | v3.0.0 release + download assets (keep in sync with `public/releases.json`) |
+| `src/data/releases.json` | v3.0.1 release + download assets (keep in sync with `public/releases.json`) |
 | `tailwind.config.mjs` | Brand design tokens (brand-black `#111216`, brand-accent light `#5C5A74` / dark `#8C8AA8`, brand-ivory `#F3F3F0`) |
 
 ### Styling conventions

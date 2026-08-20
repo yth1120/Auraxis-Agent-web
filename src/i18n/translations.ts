@@ -388,9 +388,9 @@ const zh: Translations = {
 
   hero_badge: 'MIT 开源 · v3.0.1 · 个人开发',
   hero_title_line1: 'Auraxis Agent',
-  hero_title_line2: '桌面端编程助手',
+  hero_title_line2: '桌面端智能体工作台',
   hero_description:
-    'Auraxis Agent 是一个基于 Electron 的桌面端编程助手，个人开发、MIT 开源。它提供 Chat / Work / Code 三模式、统一的 ReAct 步进引擎、71 个内置工具、多 Agent 调度、文档生成与云连接器，以及原生沙箱隔离。',
+    'Auraxis Agent 是一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），个人开发、MIT 开源。它提供 Chat / Work / Code 三模式、统一的 ReAct 步进引擎、71 个内置工具、多 Agent 调度、文档生成与云连接器，以及原生沙箱隔离。',
   hero_cta_download: '下载',
   hero_cta_docs: '查看演示',
   hero_image_alt: 'Auraxis Agent 桌面端界面截图',
@@ -745,7 +745,7 @@ const zh: Translations = {
   dev_copy_button: '复制命令',
   dev_copy_title: '点击复制',
 
-  footer_brand: 'Auraxis Agent —— 一个基于 Electron 的桌面端编程助手，MIT 开源，个人开发中。',
+  footer_brand: 'Auraxis Agent —— 一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），MIT 开源，个人开发中。',
   footer_cta_kicker: 'Open Source · 共建',
   footer_cta_title: '诚邀各大技术大牛参与修复与共建',
   footer_cta_desc:
@@ -796,9 +796,9 @@ const en: Translations = {
 
   hero_badge: 'MIT License · v3.0.1 · Personal project',
   hero_title_line1: 'Auraxis Agent',
-  hero_title_line2: 'Desktop Coding Assistant',
+  hero_title_line2: 'Agentic Workbench',
   hero_description:
-    'Auraxis Agent is a desktop coding assistant built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
+    'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
   hero_cta_download: 'Download',
   hero_cta_docs: 'View Demo',
   hero_image_alt: 'Auraxis Agent desktop UI screenshot',
@@ -1150,7 +1150,7 @@ const en: Translations = {
   dev_copy_button: 'Copy command',
   dev_copy_title: 'Click to copy',
 
-  footer_brand: 'Auraxis Agent — an Electron-based desktop coding assistant, MIT-licensed, personal project in development.',
+  footer_brand: 'Auraxis Agent — an Electron-based desktop agentic workbench, MIT-licensed, personal project in development.',
   footer_cta_kicker: 'Open Source · Build Together',
   footer_cta_title: 'An open invitation to every developer and expert: let\u2019s fix and build together',
   footer_cta_desc:

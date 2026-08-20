@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>Auraxis Agent</strong> 的官方品牌营销站点。<br />
-  为桌面端编程助手 <strong>Auraxis Agent</strong>（Electron 应用）量身打造的单页落地页。<br />
+  为桌面端智能体工作台 <strong>Auraxis Agent</strong>（Electron 应用）量身打造的单页落地页。<br />
   中英双语 · 深色/浅色主题 · 基于 Astro 4 + React Islands + Tailwind CSS。
 </p>
 

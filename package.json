@@ -3,7 +3,7 @@
   "type": "module",
   "version": "3.0.1",
   "private": true,
-  "description": "Auraxis 官方网站 — 桌面端 Agentic 编程助手品牌营销站（Astro 4 · 中英双语 · Cloudflare Pages）",
+  "description": "Auraxis 官方网站 — 桌面端智能体工作台品牌营销站（Astro 4 · 中英双语 · Cloudflare Pages）",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

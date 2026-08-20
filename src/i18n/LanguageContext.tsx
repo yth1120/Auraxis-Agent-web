@@ -10,8 +10,8 @@ function applyDocumentLang(lang: Language) {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
   document.title =
     lang === 'zh'
-      ? 'Auraxis Agent — 桌面端编程助手 | Official Website'
-      : 'Auraxis Agent — Desktop Coding Assistant | Official Website';
+      ? 'Auraxis Agent — 桌面端智能体工作台 | Official Website'
+      : 'Auraxis Agent — Agentic Workbench | Official Website';
 }
 
 /** 同步静态元素上的 aria-label / title 属性（配合 data-i18n-aria / data-i18n-title） */

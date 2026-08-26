@@ -474,8 +474,8 @@ const zh: Translations = {
   arch_title: '双进程架构',
   arch_subtitle:
     'Auraxis Agent 的内部结构：主进程负责工具执行与调度，渲染进程负责界面，二者通过 IPC 通信。',
-  arch_renderer_title: '渲染进程 (Renderer / React 18)',
-  arch_renderer_1: 'Ant Design 5 UI（深色 / 浅色 / 跟随系统）',
+  arch_renderer_title: '渲染进程 (Renderer / React 19)',
+  arch_renderer_1: 'Ant Design 6 UI（深色 / 浅色 / 跟随系统）',
   arch_renderer_2: '18 个 Zustand Stores（会话以主进程为权威）',
   arch_renderer_3: 'Markdown + mermaid + KaTeX 渲染',
   arch_renderer_4: '动态插件管理器（载入前安全审计）',
@@ -881,8 +881,8 @@ const en: Translations = {
   arch_title: 'Dual-Process Architecture',
   arch_subtitle:
     'How Auraxis Agent is structured: the main process handles tool execution and scheduling, the renderer process handles the UI, and they communicate over IPC.',
-  arch_renderer_title: 'Renderer Process (React 18)',
-  arch_renderer_1: 'Ant Design 5 UI (Dark / Light / System)',
+  arch_renderer_title: 'Renderer Process (React 19)',
+  arch_renderer_1: 'Ant Design 6 UI (Dark / Light / System)',
   arch_renderer_2: '18 Zustand Stores (main process is session authority)',
   arch_renderer_3: 'Markdown + mermaid + KaTeX rendering',
   arch_renderer_4: 'Dynamic Plugin Manager (pre-load audit)',

@@ -79,7 +79,7 @@ npm run preview
 | 层级 | 技术 | 用途 |
 |------|------|------|
 | **框架** | [Astro 4](https://astro.build) | 静态站点生成（SSG） |
-| **交互** | [React 18](https://react.dev) | 交互岛屿（Islands Architecture） |
+| **交互** | [React 19](https://react.dev) | 交互岛屿（Islands Architecture） |
 | **样式** | [Tailwind CSS 3](https://tailwindcss.com) | 原子化 CSS + 暗色模式 |
 | **动画** | [Framer Motion 11](https://motion.dev) | 数据驱动动画（粒子流动/旋转，遵循零位移动画规范） |
 | **图标** | [Lucide React](https://lucide.dev) | 开源线性图标库 |

@@ -1,36 +1,37 @@
 {
-  "version": "3.0.1",
-  "releaseDate": "2026-08-20",
+  "version": "3.2.0",
+  "releaseDate": "2026-08-26",
   "changelog": [
-    "Aqua 玻璃模式：顶栏与左右侧栏悬浮圆角玻璃卡片，中间主区域透明融入背景，磨砂强度实时联动",
-    "壁纸设置：本地图片设为玻璃背景，自动压缩为 1920px JPEG 持久化，支持缩略图预览与一键移除",
-    "执行档位 / 运行权限弹窗重设计：260px 极简单行卡片，图标 + 标题 + 选中对勾，详细说明移入悬停提示",
-    "侧边栏打磨：收起时滑出 + 淡出完全归零；移除「工具」折叠按钮，技能 / 插件 / 定时任务常驻显示",
-    "修复：壁纸图片在 Electron CSP 下因 blob: 被拦截导致的「图片读取失败」；侧边栏透明化类优先级恢复"
+    "新增 DeepSeek V4 Flash Vision Exp 多模态模型：支持 JPEG / PNG / GIF / WebP 图片与 ReadImage 路由，非视觉模型自动降级文本",
+    "接入 DeepSeek Harness MCP 一键预设：本地 Harness Web、Auraxis Key 注入、Windows npx.cmd 兼容",
+    "接入飞书 / Lark OpenAPI MCP：一键 stdio、域名选择、工具预设、App ID / Secret 加密存储与 tenant_access_token 测试",
+    "MCP 工具按 serverId 命名空间路由，修复跨服务误匹配；初始化超时提升至 180 秒，内置 Windows 命令 shim",
+    "完成 React 19 / Ant Design 6 / Zustand 5 / Electron 44 / Vite 8 / TypeScript 6+ / Vitest 4 / Node 22 升级与兼容修复；拆分大型模块、移除生产 any、加固 IPC / Agent / Store 类型",
+    "修复登录流程、Windows userData 与 Vite 开发源验证；稳定三平台 CI，245 个测试文件 / 1,802 用例通过"
   ],
   "downloads": {
     "windows": {
       "label": "Windows (NSIS 安装包)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis.Setup.3.0.1.exe",
-      "size": "180 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis.Setup.3.2.0.exe",
+      "size": "215 MB",
       "arch": "x64"
     },
     "mac": {
       "label": "macOS (Intel DMG)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1.dmg",
-      "size": "227 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0.dmg",
+      "size": "265 MB",
       "arch": "x64",
       "alt": {
         "label": "macOS (Apple Silicon DMG)",
-        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1-arm64.dmg",
-        "size": "225 MB",
+        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0-arm64.dmg",
+        "size": "261 MB",
         "arch": "arm64"
       }
     },
     "linux": {
       "label": "Linux (AppImage)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.0.1/Auraxis-3.0.1.AppImage",
-      "size": "236 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0.AppImage",
+      "size": "262 MB",
       "arch": "x64"
     },
     "mobile": {

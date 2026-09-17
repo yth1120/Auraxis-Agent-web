@@ -1,6 +1,6 @@
 ---
 import SmartDownloader from '../react/SmartDownloader';
-import { MonitorCheck, ListChecks } from 'lucide-react';
+import { MonitorCheck, ListChecks, Terminal } from 'lucide-react';
 import releases from '../data/releases.json';
 ---
 
@@ -52,6 +52,25 @@ import releases from '../data/releases.json';
         <a href="https://github.com/yth1120/Auraxis-Agent/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs text-brand-accent hover:text-brand-ivory transition-colors font-mono">
           GitHub Releases ↗
         </a>
+      </div>
+
+      <!-- 命令行版本：独立仓库与独立发布节奏 -->
+      <div class="mt-10 pt-8 border-t border-brand-border/60 max-w-3xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h3 class="text-sm font-medium text-ivory flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-brand-accent" aria-hidden="true" />
+              <span data-i18n="download_cli_title">Auraxis CLI</span>
+            </h3>
+            <p class="text-[13px] text-brand-muted mt-2 leading-relaxed" data-i18n="download_cli_desc">
+              独立仓库的本地 Agent 命令行工作台，无需安装桌面端。npm 一键安装，或下载 8 个平台的原生二进制（含校验和）。
+            </p>
+          </div>
+          <a href="https://github.com/yth1120/Auraxis-CLI/releases/latest" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-mono text-brand-accent hover:text-brand-ivory transition-colors">
+            <span data-i18n="download_cli_release">CLI Releases ↗</span>
+          </a>
+        </div>
+        <code class="mt-4 block text-[11px] font-mono text-brand-ivory terminal-dark-box border border-brand-border rounded px-3 py-2.5">npm i -g @auraxis/cli &amp;&amp; auraxis --run "任务"</code>
       </div>
     </div>
   </div>

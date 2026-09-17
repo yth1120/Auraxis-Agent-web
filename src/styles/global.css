@@ -59,6 +59,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
   /* 兜底底色：Tailwind 类未加载/失效时也保证背景正确 */
   background-color: var(--color-bg);
 }
@@ -115,6 +116,42 @@ body {
   background-image:
     linear-gradient(rgba(140, 138, 168, 0.085) 1px, transparent 1px),
     linear-gradient(90deg, rgba(140, 138, 168, 0.085) 1px, transparent 1px);
+}
+
+/* ── 药丸形顶部栏：内容常驻，背景随滚动渐显，宽度继续缩短 ── */
+.auraxis-topbar {
+  max-width: 72rem;
+  width: var(--auraxis-topbar-width, min(72rem, calc(100vw - 1.25rem)));
+  height: 44px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    width 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    backdrop-filter 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.auraxis-topbar[data-state='content'] {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 降低动效偏好（Windows「动画效果」关闭会命中）：
+     保留与设计一致的收缩时长，并换成位移分布更均匀的曲线，
+     只略去阴影 / 背景模糊这类装饰性过渡 */
+  .auraxis-topbar {
+    transition:
+      width 360ms cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 360ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 360ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 /* ── 终端打字光标 ──────────────────────────────── */
@@ -197,10 +234,19 @@ html:not(.dark) .code-dark-box .text-brand-accent {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* 降低动效偏好：保留阶梯节奏（--reveal-delay）与淡入，只压缩位移与时长，
+     避免「一层层向上弹出」的大幅整屏位移，同时不把动画整个抹掉 */
   .js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.32s ease var(--reveal-delay, 0ms),
+      transform 0.32s ease-out var(--reveal-delay, 0ms);
+  }
+
+  .js .reveal.reveal-visible {
     opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(0);
   }
 }
 

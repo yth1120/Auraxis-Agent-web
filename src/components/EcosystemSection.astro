@@ -6,9 +6,10 @@ const ECOSYSTEM = [
     icon: Terminal,
     titleKey: 'eco_cli_title',
     descKey: 'eco_cli_desc',
-    title: 'Headless CLI',
-    desc: 'npm run cli -- --run "任务" 直接跑完整 ReAct 循环，模型、权限、沙箱与 JSON 输出均可配置。',
-    command: 'npm run cli -- --run "任务"',
+    title: 'Auraxis CLI',
+    desc: '独立发布的本地 Agent 命令行工作台：ReAct 工具循环、Code Mode、MCP、权限审批与会话恢复，不依赖桌面端。',
+    command: 'auraxis --run "任务"',
+    href: 'https://github.com/yth1120/Auraxis-CLI',
   },
   {
     icon: Braces,
@@ -46,14 +47,36 @@ const ECOSYSTEM = [
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {ECOSYSTEM.map(({ icon: Icon, titleKey, descKey, title, desc, command }, i) => (
+      {ECOSYSTEM.map(({ icon: Icon, titleKey, descKey, title, desc, command, href }, i) => (
         <div class="reveal bg-white dark:bg-brand-card border border-brand-hairline dark:border-brand-border rounded-xl p-6 hover:border-brand-accent/40 transition-colors flex flex-col" style={`--reveal-delay: ${i * 110}ms`}>
           <div class="w-9 h-9 rounded-md bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4">
             <Icon className="w-4 h-4" aria-hidden="true" />
           </div>
-          <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h3>
+          {href ? (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group/title inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-ivory hover:text-brand-accent transition-colors"
+            >
+              <span data-i18n={titleKey}>{title}</span>
+              <span class="text-brand-faint group-hover/title:text-brand-accent transition-colors" aria-hidden="true">↗</span>
+            </a>
+          ) : (
+            <h3 class="text-sm font-medium text-ink dark:text-ivory" data-i18n={titleKey}>{title}</h3>
+          )}
           <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed flex-1" data-i18n={descKey}>{desc}</p>
           <code class="mt-4 block text-[10px] font-mono text-brand-ivory code-dark-box border border-brand-border rounded px-2.5 py-1.5 truncate">{command}</code>
+          {href ? (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-3 inline-flex items-center gap-1 text-[11px] font-mono text-brand-accent hover:text-brand-ivory transition-colors"
+            >
+              <span data-i18n="eco_cli_release">GitHub Releases ↗</span>
+            </a>
+          ) : null}
         </div>
       ))}
     </div>

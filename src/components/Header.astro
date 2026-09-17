@@ -15,39 +15,77 @@ const NAV_LINKS = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-brand-page/75 dark:bg-brand-black/75 backdrop-blur-xl border-b border-brand-hairline dark:border-brand-border transition-colors">
-  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between relative">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 pointer-events-none px-2 sm:px-4 pt-2">
+  <div
+    id="auraxis-topbar"
+    data-state="content"
+    style="--auraxis-topbar-width: min(72rem, calc(100vw - 1.25rem))"
+    class="auraxis-topbar pointer-events-auto mx-auto w-full max-w-6xl flex items-center justify-between gap-2 relative rounded-full border border-brand-hairline dark:border-brand-border bg-brand-page/85 dark:bg-brand-black/85 backdrop-blur-xl px-2.5 sm:px-3 shadow-[0_8px_24px_-16px_rgba(17,18,22,0.32)] dark:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.72)]"
+  >
     <a href="#top" class="flex items-center gap-2.5 flex-shrink-0" data-i18n-aria="nav_home" aria-label="Auraxis 首页">
       <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="40" height="40" class="h-10 w-auto" />
-      <span class="font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
-      <span class="hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.2.0</span>
+      <span class="hidden sm:inline font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
+      <span class="topbar-version hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.2.0</span>
     </a>
 
     <!-- 居中导航 -->
-    <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 p-1 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" data-i18n-aria="nav_main" aria-label="主导航">
+    <nav class="topbar-nav absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex items-center gap-0.5 p-0.5 bg-black/[0.04] dark:bg-white/[0.04] border border-brand-hairline dark:border-brand-border rounded-full" data-i18n-aria="nav_main" aria-label="主导航">
       {NAV_LINKS.map(({ href, key, label }) => (
         <a
           href={href}
           data-i18n={key}
-          class="px-3.5 h-8 inline-flex items-center text-[13px] font-medium text-brand-muted hover:text-ink dark:hover:text-ivory rounded-full transition-colors"
+          class="px-2.5 h-7 inline-flex items-center text-xs font-medium text-brand-muted hover:text-ink dark:hover:text-ivory rounded-full transition-colors"
         >
           {label}
         </a>
       ))}
     </nav>
 
-    <div class="flex items-center gap-2 flex-shrink-0">
+    <div class="flex items-center gap-1.5 flex-shrink-0">
       <LanguageToggle client:idle />
       <ThemeToggle client:idle />
 
-      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors p-2" aria-label="Auraxis GitHub">
-        <GitHubIcon size={16} />
+      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-brand-hairline dark:border-brand-border text-xs font-medium text-brand-muted hover:text-ink dark:hover:text-ivory hover:bg-black/5 dark:hover:bg-white/5 transition-colors" aria-label="Auraxis GitHub">
+        <GitHubIcon size={14} />
+        <span>GitHub</span>
       </a>
 
-      <a href="#download" data-i18n-aria="nav_download" aria-label="下载" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-3 sm:px-4 h-9 inline-flex items-center gap-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
-        <Download className="w-4 h-4" aria-hidden="true" />
+      <a href="#download" data-i18n-aria="nav_download" aria-label="下载" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-3 h-8 inline-flex items-center gap-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
+        <Download className="w-3.5 h-3.5" aria-hidden="true" />
         <span class="hidden sm:inline" data-i18n="nav_download">下载</span>
       </a>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var topbar = document.getElementById('auraxis-topbar');
+    if (!topbar) return;
+
+    var ticking = false;
+
+    function updateTopbarState() {
+      var currentY = window.scrollY;
+      var visible = currentY >= 24;
+
+      topbar.dataset.state = visible ? 'visible' : 'content';
+
+      var maxWidth = Math.min(1152, Math.max(0, window.innerWidth - 24));
+      var compactWidth = Math.min(900, maxWidth);
+      var width = visible ? compactWidth : maxWidth;
+
+      topbar.style.setProperty('--auraxis-topbar-width', width.toFixed(2) + 'px');
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateTopbarState);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateTopbarState();
+  })();
+</script>

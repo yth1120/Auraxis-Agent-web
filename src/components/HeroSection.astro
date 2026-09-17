@@ -4,14 +4,27 @@ const BASE = import.meta.env.BASE_URL;
 ---
 
 <section id="top" class="relative pt-24 pb-24">
+  <div class="max-w-6xl mx-auto px-6 mb-8 lg:mb-10">
+    <a
+      href="#download"
+      data-i18n-aria="banner_label"
+      aria-label="重点更新"
+      class="reveal group inline-flex w-fit self-start max-w-full flex-wrap items-center gap-x-3 gap-y-1.5 px-2 py-1 rounded-lg transition-colors hover:bg-black/[0.03] hover:text-ink dark:hover:bg-white/[0.03] dark:hover:text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40"
+    >
+      <span class="text-lg leading-none flex-shrink-0" aria-hidden="true">🎉</span>
+      <span class="flex-shrink-0 text-xs font-mono text-brand-faint">v3.2.0</span>
+      <p class="min-w-0 text-sm sm:text-base text-brand-muted leading-relaxed transition-colors group-hover:text-ink dark:group-hover:text-ivory" data-i18n="banner_text">
+        重点更新：多模态模型 · DeepSeek Harness MCP · 飞书 / Lark MCP · 技术栈与架构升级
+      </p>
+      <span data-i18n="banner_link" class="flex items-center gap-1 text-sm font-medium text-brand-faint transition-colors group-hover:text-ink dark:group-hover:text-ivory whitespace-nowrap">
+        查看详情 <span aria-hidden="true">→</span>
+      </span>
+    </a>
+  </div>
+
   <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1fr_1.12fr] gap-10 lg:gap-12 items-center">
     <div class="text-center lg:text-left space-y-7">
-      <div class="reveal inline-flex items-center gap-2.5 px-3.5 h-8 border border-brand-hairline dark:border-brand-border rounded-full bg-white/60 dark:bg-white/[0.03] mx-auto lg:mx-0">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
-        <span class="text-xs font-mono text-brand-muted" data-i18n="hero_badge">MIT 开源 · v3.2.0 · 个人开发</span>
-      </div>
-
-      <h1 class="reveal text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.22] text-ink dark:text-ivory" style="--reveal-delay: 120ms">
+      <h1 class="reveal text-4xl sm:text-5xl lg:text-5xl font-semibold tracking-tight leading-[1.15] text-ink dark:text-ivory" style="--reveal-delay: 120ms">
         <span data-i18n="hero_title_line1">Auraxis Agent</span><br />
         <span class="block mt-2 sm:mt-3" data-i18n="hero_title_line2">桌面端智能体工作台</span>
       </h1>

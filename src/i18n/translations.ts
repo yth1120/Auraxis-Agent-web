@@ -22,7 +22,6 @@ export interface Translations {
   banner_close: string;
 
   // Hero
-  hero_badge: string;
   hero_title_line1: string;
   hero_title_line2: string;
   hero_description: string;
@@ -65,6 +64,9 @@ export interface Translations {
   download_windows_tip: string;
   download_mac_tip: string;
   download_linux_tip: string;
+  download_cli_title: string;
+  download_cli_desc: string;
+  download_cli_release: string;
 
   // Features
   features_title: string;
@@ -198,6 +200,7 @@ export interface Translations {
   eco_subtitle: string;
   eco_cli_title: string;
   eco_cli_desc: string;
+  eco_cli_release: string;
   eco_ts_title: string;
   eco_ts_desc: string;
   eco_py_title: string;
@@ -386,7 +389,6 @@ const zh: Translations = {
   banner_link: '查看详情',
   banner_close: '关闭横幅',
 
-  hero_badge: 'MIT 开源 · v3.2.0 · 个人开发',
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: '桌面端智能体工作台',
   hero_description:
@@ -430,6 +432,10 @@ const zh: Translations = {
   download_windows_tip: '下载 Windows 版本',
   download_mac_tip: '下载 macOS 版本',
   download_linux_tip: '下载 Linux 版本',
+  download_cli_title: 'Auraxis CLI',
+  download_cli_desc:
+    '独立仓库的本地 Agent 命令行工作台，无需安装桌面端。npm 一键安装，或下载 8 个平台的原生二进制（含 SHA256 校验和）。',
+  download_cli_release: 'CLI Releases ↗',
 
   features_title: '外置于系统的透明能力',
   features_subtitle:
@@ -589,9 +595,10 @@ const zh: Translations = {
 
   eco_title: '扩展与集成',
   eco_subtitle: 'Auraxis Agent 提供 MCP 协议、CLI、SDK 与插件机制，方便脚本和外部程序接入。',
-  eco_cli_title: 'Headless CLI',
+  eco_cli_title: 'Auraxis CLI',
   eco_cli_desc:
-    'npm run cli -- --run "任务" 直接跑完整 ReAct 循环，模型、权限、沙箱与 JSON 输出均可配置。',
+    '独立发布的本地 Agent 命令行工作台：ReAct 工具循环、Code Mode、MCP、权限审批与会话恢复，不依赖桌面端。npm 安装或下载原生二进制即可使用。',
+  eco_cli_release: 'GitHub Releases ↗',
   eco_ts_title: 'TypeScript SDK',
   eco_ts_desc:
     'packages/auraxis-sdk 通过 TCP JSON-RPC 与桌面端通信，可嵌入自己的工具链。',
@@ -735,7 +742,7 @@ const zh: Translations = {
   dev_check1: 'Vitest 覆盖率：行/语句 85.42% · 分支 79.08% · 函数 86.63%（门槛 80 / 70 / 80）',
   dev_check2: '生产环境启用严格 CSP，主进程与渲染进程隔离',
   dev_check3: '237 个测试文件 · 1740 个用例 · 15 条 Playwright E2E 链路',
-  dev_link_cli: 'headless CLI（--run / --sdk / --acp / --plugin）',
+  dev_link_cli: 'Auraxis CLI — 独立的本地 Agent 命令行工作台（ReAct / Code Mode / MCP）',
   dev_step1_comment: '// 1. 克隆底层核心仓库',
   dev_step2_comment: '// 2. 创建本地开发环境变量配置',
   dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',
@@ -794,7 +801,6 @@ const en: Translations = {
   banner_link: 'View details',
   banner_close: 'Close banner',
 
-  hero_badge: 'MIT License · v3.2.0 · Personal project',
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: 'Agentic Workbench',
   hero_description:
@@ -838,6 +844,10 @@ const en: Translations = {
   download_windows_tip: 'Download for Windows',
   download_mac_tip: 'Download for macOS',
   download_linux_tip: 'Download for Linux',
+  download_cli_title: 'Auraxis CLI',
+  download_cli_desc:
+    'A standalone local agent workbench in its own repository — no desktop app required. Install from npm, or grab native binaries for 8 platforms with SHA256 checksums.',
+  download_cli_release: 'CLI Releases ↗',
 
   features_title: 'Transparent Capabilities, Outside the System',
   features_subtitle:
@@ -994,9 +1004,10 @@ const en: Translations = {
 
   eco_title: 'Extensions & Integration',
   eco_subtitle: 'Auraxis Agent ships an MCP client, a CLI, SDKs and a plugin mechanism for scripts and external programs.',
-  eco_cli_title: 'Headless CLI',
+  eco_cli_title: 'Auraxis CLI',
   eco_cli_desc:
-    'Run a full ReAct loop headlessly: npm run cli -- --run "task", with configurable model, permissions, sandbox and JSON output.',
+    'A standalone local agent workbench for the terminal: ReAct tool loop, Code Mode, MCP, approval prompts and session resume — no desktop app required. Install from npm or grab a native binary.',
+  eco_cli_release: 'GitHub Releases ↗',
   eco_ts_title: 'TypeScript SDK',
   eco_ts_desc:
     'packages/auraxis-sdk talks to the desktop app over TCP JSON-RPC, ready to embed in your own toolchain.',
@@ -1140,7 +1151,7 @@ const en: Translations = {
   dev_check1: 'Vitest coverage: lines 85.42% / branches 79.08% / functions 86.63% (thresholds 80 / 70 / 80)',
   dev_check2: 'Strict CSP is enabled in production; main and renderer processes are isolated',
   dev_check3: '237 test files · 1740 cases · 15 Playwright E2E flows',
-  dev_link_cli: 'headless CLI (--run / --sdk / --acp / --plugin)',
+  dev_link_cli: 'Auraxis CLI — standalone local agent workbench (ReAct / Code Mode / MCP)',
   dev_step1_comment: '// 1. Clone the core repository',
   dev_step2_comment: '// 2. Create local environment config',
   dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',

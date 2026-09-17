@@ -34,7 +34,6 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
         var EN={
           nav_features:'Features',nav_demo:'Demo',nav_architecture:'Architecture',nav_tools:'Tools',nav_download:'Download',nav_github_label:'Auraxis Agent GitHub Repository',nav_solution:'Features',nav_compare:'Compare',nav_safety:'Security',nav_faq:'FAQ',
           banner_label:'Update banner',banner_text:'Highlights: multimodal model · DeepSeek Harness MCP · Feishu/Lark MCP · stack & architecture upgrades',banner_link:'View details',banner_close:'Close banner',
-          hero_badge:'MIT License · v3.2.0 · Personal project',
           hero_title_line1:'Auraxis Agent',hero_title_line2:'Agentic Workbench',
           hero_description:'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
           hero_cta_download:'Download',hero_cta_docs:'View Demo',
@@ -163,9 +162,8 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
 
     <script is:inline>
       (function () {
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var els = document.querySelectorAll('.reveal');
-        if (reduce || !('IntersectionObserver' in window)) {
+        if (!('IntersectionObserver' in window)) {
           els.forEach(function (el) { el.classList.add('reveal-visible'); });
           return;
         }

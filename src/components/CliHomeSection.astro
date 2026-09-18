@@ -1,0 +1,56 @@
+---
+// 首页第二屏：左边命令下载卡片、右边终端截图
+import { ArrowRight } from 'lucide-react';
+import CliInstallStrip from './CliInstallStrip.astro';
+
+const BASE = import.meta.env.BASE_URL;
+const SHOT = `${BASE}screenshots/cli-session.png`;
+---
+
+<section id="cli" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="reveal max-w-3xl">
+      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4" data-i18n="cli_kicker">Auraxis CLI</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="home_cli_title">
+        命令行版本：终端里的本地 Agent
+      </h2>
+      <p class="text-brand-muted mt-3 leading-relaxed" data-i18n="home_cli_desc">
+        不装桌面端也能用：同一套 ReAct 工具循环、Code Mode、权限审批与多模型协议，直接在终端里跑。npm 一行安装，或下载内置运行时的原生二进制。
+      </p>
+    </div>
+
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-12 items-center">
+      <!-- 左：命令下载卡片 -->
+      <div class="reveal" style="--reveal-delay: 120ms">
+        <CliInstallStrip labelKey="cli_install_label" />
+        <a
+          href={`${BASE}cli/`}
+          class="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-brand-accent hover:text-brand-ivory transition-colors"
+          data-i18n="home_cli_more"
+        >查看 CLI 完整文档 →</a>
+      </div>
+
+      <!-- 右：终端截图 -->
+      <div class="reveal" style="--reveal-delay: 240ms">
+        <figure class="terminal-dark-box border border-brand-border rounded-2xl overflow-hidden shadow-[0_24px_80px_-32px_rgba(0,0,0,0.65)]">
+          <img
+            src={SHOT}
+            alt="Auraxis CLI 交互模式：执行时间轴、工具调用与状态行"
+            data-i18n-alt="cli_shot_alt"
+            width="964"
+            height="684"
+            class="w-full h-auto block"
+            loading="eager"
+          />
+          <figcaption class="px-4 py-3 border-t border-brand-border/70 text-[11px] font-mono text-brand-muted flex items-center justify-between gap-4">
+            <span data-i18n="cli_shot_caption">一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。</span>
+            <a href={`${BASE}cli/`} class="flex-shrink-0 text-brand-accent hover:text-brand-ivory transition-colors inline-flex items-center gap-1">
+              <span data-i18n="home_cli_cta">CLI 详情</span>
+              <ArrowRight className="w-3 h-3" aria-hidden="true" />
+            </a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

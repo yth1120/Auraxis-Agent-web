@@ -82,6 +82,10 @@ export interface Translations {
   download_windows_tip: string;
   download_mac_tip: string;
   download_linux_tip: string;
+  home_cli_title: string;
+  home_cli_desc: string;
+  home_cli_more: string;
+  home_cli_cta: string;
   cli_kicker: string;
   cli_page_title: string;
   cli_page_desc: string;
@@ -514,6 +518,10 @@ const zh: Translations = {
   download_windows_tip: '下载 Windows 版本',
   download_mac_tip: '下载 macOS 版本',
   download_linux_tip: '下载 Linux 版本',
+  home_cli_title: '命令行版本：终端里的本地 Agent',
+  home_cli_desc: '不装桌面端也能用：同一套 ReAct 工具循环、Code Mode、权限审批与多模型协议，直接在终端里跑。npm 一行安装，或下载内置运行时的原生二进制。',
+  home_cli_more: '查看 CLI 完整文档 →',
+  home_cli_cta: 'CLI 详情',
   cli_kicker: 'Auraxis CLI',
   cli_page_title: '终端里的本地 Agent 工作台',
   cli_page_desc:
@@ -990,6 +998,10 @@ const en: Translations = {
   download_windows_tip: 'Download for Windows',
   download_mac_tip: 'Download for macOS',
   download_linux_tip: 'Download for Linux',
+  home_cli_title: 'Command line version: a local agent in your terminal',
+  home_cli_desc: 'Use it without the desktop app: the same ReAct tool loop, Code Mode, approval gates and multi-provider protocols, right in your terminal. One npm command, or a native binary with the runtime embedded.',
+  home_cli_more: 'Read the full CLI docs →',
+  home_cli_cta: 'CLI details',
   cli_kicker: 'Auraxis CLI',
   cli_page_title: 'The local agent workbench for your terminal',
   cli_page_desc:

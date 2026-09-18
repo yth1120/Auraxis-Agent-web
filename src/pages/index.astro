@@ -6,6 +6,7 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
+import CliHomeSection from '../components/CliHomeSection.astro';
 import ScreenshotSection from '../components/ScreenshotSection.astro';
 import SolutionSection from '../components/SolutionSection.astro';
 import DemoSection from '../components/DemoSection.astro';
@@ -24,8 +25,9 @@ import Footer from '../components/Footer.astro';
   <Header />
 
   <main class="relative z-10">
-    <!-- 结构：定位 → 界面截图 → 功能 → 演示 → 工具 → 安全 → 架构 → 技术内核 → 集成 → 开发 → 获取 → FAQ -->
+    <!-- 结构：定位 → 命令行版本 → 桌面端截图 → 功能 → 演示 → 工具 → 安全 → 架构 → 技术内核 → 集成 → 开发 → 获取 → FAQ -->
     <HeroSection />
+    <CliHomeSection />
     <ScreenshotSection />
     <SolutionSection />
     <DemoSection />

@@ -8,11 +8,12 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "check": "astro check",
+    "check": "npm run check:version && npm run build",
     "preview": "astro preview",
     "astro": "astro",
     "audit:click": "node scripts/click-audit.mjs",
-    "audit:click:live": "node scripts/click-audit.mjs https://yth1120.github.io/Auraxis-Agent-web/"
+    "audit:click:live": "node scripts/click-audit.mjs https://yth1120.github.io/Auraxis-Agent-web/",
+    "check:version": "node scripts/check-versions.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

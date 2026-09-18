@@ -127,7 +127,7 @@ export interface Translations {
   perm_afe_2: string;
   perm_afe_3: string;
   sandbox_title: string;
-  sandbox_subtitle: string;
+  sandbox_subtitle: string;
   // Code Mode
   // Safety (安全模型)
   safety_title: string;
@@ -184,7 +184,7 @@ export interface Translations {
   eco_plugin_title: string;
   eco_plugin_desc: string;
 
-  // Problem (叙事区)
+  // Problem (叙事区)
   // Solution (叙事区)
   solution_title: string;
   solution_subtitle: string;

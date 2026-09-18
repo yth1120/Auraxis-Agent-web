@@ -2,9 +2,16 @@
 import { TRANSLATIONS } from '../i18n/translations';
 import '../styles/global.css';
 
+// 站点版本号的唯一来源：src/data/releases.json（同样驱动下载区与 releases.json）
+import releases from '../data/releases.json';
+const VERSION = releases.version;
+const VERSION_TAG = `v${VERSION}`;
+
 // 英文词典单一来源：直接复用 src/i18n/translations.ts 的 en 对象，
 // 避免内联副本与 TS 词典漂移（历史上漏键会导致切英文残留中文）。
 const EN_JSON = JSON.stringify(TRANSLATIONS.en).replaceAll('<', '\\u003c');
+// 下载区等客户端组件直接从内联数据读取，避免额外请求与版本漂移
+const RELEASES_JSON = JSON.stringify(releases).replaceAll('<', '\\u003c');
 
 const inlineScript = `(function(){
         document.documentElement.classList.add('js');
@@ -15,6 +22,7 @@ const inlineScript = `(function(){
         var L=localStorage.getItem('lang')||(navigator.language.startsWith('zh')?'zh':'en');
         var EN=${EN_JSON};
         window.__i18n=EN;
+        window.__releases=${RELEASES_JSON};
         if(L==='en'){document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(EN[k])e.textContent=EN[k]})})}
       })();`;
 
@@ -28,7 +36,7 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Auraxis Agent — 桌面端智能体工作台 | Official Website</title>
-    <meta name="description" content="Auraxis Agent v3.4.0 — 基于 Electron 的桌面端智能体工作台。编码 / 文档 / 自动化：Chat / Work / Code 三模式、统一 ReAct 步进引擎、多智能体调度、DeepSeek V4.1 Flash 原生多模态、71 个内置工具、原生沙箱与 Eywa 溯源记忆。" />
+    <meta name="description" content={`Auraxis Agent ${VERSION_TAG} — 基于 Electron 的桌面端智能体工作台。编码 / 文档 / 自动化：Chat / Work / Code 三模式、统一 ReAct 步进引擎、多智能体调度、DeepSeek V4.1 Flash 原生多模态、71 个内置工具、原生沙箱与 Eywa 溯源记忆。`} />
     <script is:inline set:html={inlineScript}></script>
   </head>
   <body class="bg-brand-page dark:bg-brand-black text-ink dark:text-ivory font-sans transition-colors duration-200">

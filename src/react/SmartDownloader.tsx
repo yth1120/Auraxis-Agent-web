@@ -34,6 +34,15 @@ function SmartDownloaderInner() {
 
   useEffect(() => {
     let cancelled = false;
+    // 构建期内联的同一份 releases 数据优先，避免额外请求与版本漂移
+    const inlined = (globalThis as { __releases?: ReleaseInfo }).__releases;
+    if (inlined && typeof inlined === 'object' && inlined.version) {
+      setRelease(inlined);
+      setLoading(false);
+      return () => {
+        cancelled = true;
+      };
+    }
     fetch(`${import.meta.env.BASE_URL}releases.json`)
       .then(async (res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -1,8 +1,10 @@
 ---
 import GitHubIcon from './GitHubIcon.astro';
+import releases from '../data/releases.json';
 const BASE = import.meta.env.BASE_URL;
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
+const VERSION = releases.version;
 const LICENSE_URL = `${REPO_URL}/blob/main/LICENSE`;
 
 const FOOTER_LINKS = [
@@ -48,7 +50,7 @@ const SUPPORT_LINKS = [
     <div class="flex items-center gap-2.5">
       <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="32" height="32" class="h-8 w-auto" />
       <span class="font-semibold text-lg tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
-      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.4.0</span>
+      <span class="text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v{VERSION}</span>
     </div>
 
     <p class="text-brand-muted text-sm max-w-md leading-relaxed" data-i18n="footer_brand">Auraxis Agent —— 一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），MIT 开源，个人开发中。</p>

@@ -3,9 +3,11 @@ import ThemeToggle from '../react/ThemeToggle';
 import LanguageToggle from '../react/LanguageToggle';
 import { Download } from 'lucide-react';
 import GitHubIcon from './GitHubIcon.astro';
+import releases from '../data/releases.json';
 
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const BASE = import.meta.env.BASE_URL;
+const VERSION = releases.version;
 
 // 单页站点：CLI 内容在首页第二屏（#cli），导航项在页内滚动。
 const NAV_LINKS = [
@@ -27,7 +29,7 @@ const NAV_LINKS = [
     <a href={`${BASE}#top`} class="flex items-center gap-2.5 flex-shrink-0" data-i18n-aria="nav_home" aria-label="Auraxis 首页">
       <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="40" height="40" class="h-10 w-auto" />
       <span class="hidden sm:inline font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
-      <span class="topbar-version hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.4.0</span>
+      <span class="topbar-version hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v{VERSION}</span>
     </a>
 
     <!-- 居中导航 -->

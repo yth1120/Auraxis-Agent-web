@@ -1,29 +1,13 @@
 export type Language = 'zh' | 'en';
 
 export interface Translations {
-  // Header
-  nav_features: string;
-  nav_demo: string;
+  // Header  nav_demo: string;
   nav_architecture: string;
   nav_tools: string;
   nav_cli: string;
 
-  nav_cli_install: string;
-
-  nav_cli_features: string;
-
-  nav_cli_commands: string;
-
-  nav_cli_start: string;
-
-  nav_cli_desktop: string;
-
-  nav_cli_release: string;
-
   nav_download: string;
-  nav_github_label: string;
   nav_solution: string;
-  nav_compare: string;
   nav_safety: string;
   nav_faq: string;
   nav_home: string;
@@ -33,7 +17,6 @@ export interface Translations {
   banner_label: string;
   banner_text: string;
   banner_link: string;
-  banner_close: string;
 
   // Hero
   hero_title_line1: string;
@@ -42,22 +25,9 @@ export interface Translations {
   hero_cli_label: string;
   hero_cli_title: string;
   hero_cli_copy: string;
-  hero_cli_hint: string;
   hero_cta_download: string;
   hero_cta_docs: string;
   hero_image_alt: string;
-  hero_stat_tools: string;
-  hero_stat_tools_sub: string;
-  hero_stat_perms: string;
-  hero_stat_perms_sub: string;
-  hero_stat_sandbox: string;
-  hero_stat_sandbox_sub: string;
-  hero_stat_agents: string;
-  hero_stat_agents_sub: string;
-  hero_stat_sdk: string;
-  hero_stat_sdk_sub: string;
-  hero_stat_engine: string;
-  hero_stat_engine_sub: string;
 
   // Screenshot（界面预览）
   screenshot_caption: string;
@@ -84,11 +54,7 @@ export interface Translations {
   download_linux_tip: string;
   home_cli_title: string;
   home_cli_desc: string;
-  home_cli_more: string;
-  home_cli_cta: string;
   cli_kicker: string;
-  cli_page_title: string;
-  cli_page_desc: string;
   cli_install_label: string;
   cli_dl_runtime_label: string;
   cli_dl_runtime: string;
@@ -98,47 +64,11 @@ export interface Translations {
   cli_dl_license: string;
   cli_dl_readme: string;
   cli_dl_note: string;
-  cli_meta_node: string;
-  cli_meta_platforms: string;
-  cli_meta_releases: string;
   cli_shot_alt: string;
   cli_shot_caption: string;
-  cli_features_title: string;
-  cli_f1_title: string;
-  cli_f1_desc: string;
-  cli_f2_title: string;
-  cli_f2_desc: string;
-  cli_f3_title: string;
-  cli_f3_desc: string;
-  cli_f4_title: string;
-  cli_f4_desc: string;
-  cli_f5_title: string;
-  cli_f5_desc: string;
-  cli_f6_title: string;
-  cli_f6_desc: string;
-  cli_usage_title: string;
-  cli_usage_subtitle: string;
-  cli_cmd_run: string;
-  cli_cmd_headless: string;
-  cli_cmd_code: string;
-  cli_cmd_sessions: string;
-  cli_cmd_doctor: string;
-  cli_slash_title: string;
-  cli_slash_note: string;
-  cli_slash_more: string;
-  cli_start_title: string;
-  cli_step1: string;
-  cli_step2: string;
-  cli_step3: string;
-  cli_binary_title: string;
-  cli_binary_desc: string;
   cli_binary_link: string;
-  cli_cta_repo: string;
-  cli_cta_back: string;
 
   // Features
-  features_title: string;
-  features_subtitle: string;
   feature1_title: string;
   feature1_desc: string;
   feature2_title: string;
@@ -181,10 +111,7 @@ export interface Translations {
   arch_main_3: string;
   arch_main_4: string;
 
-  // Permission gate
-  perm_title: string;
-  perm_subtitle: string;
-  perm_ask_title: string;
+  // Permission gate  perm_ask_title: string;
   perm_ask_desc: string;
   perm_ask_1: string;
   perm_ask_2: string;
@@ -200,19 +127,8 @@ export interface Translations {
   perm_afe_2: string;
   perm_afe_3: string;
   sandbox_title: string;
-  sandbox_subtitle: string;
-  sandbox_win: string;
-  sandbox_linux: string;
-  sandbox_mac: string;
-  sandbox_worktree: string;
-
+  sandbox_subtitle: string;
   // Code Mode
-  code_title: string;
-  code_subtitle: string;
-  code_note: string;
-  code_tab_code: string;
-  code_tab_out: string;
-
   // Safety (安全模型)
   safety_title: string;
   safety_subtitle: string;
@@ -221,13 +137,6 @@ export interface Translations {
   safety_sandbox_levels_desc: string;
   safety_profiles_title: string;
   safety_profiles_desc: string;
-  safety_pipe_title: string;
-  safety_pipe_1: string;
-  safety_pipe_2: string;
-  safety_pipe_3: string;
-  safety_pipe_4: string;
-  safety_pipe_5: string;
-  safety_pipe_6: string;
 
   // Research & Systems (技术内核)
   research_title: string;
@@ -275,22 +184,10 @@ export interface Translations {
   eco_plugin_title: string;
   eco_plugin_desc: string;
 
-  // Problem (叙事区)
-  problem_title: string;
-  problem_subtitle: string;
-  problem1_title: string;
-  problem1_desc: string;
-  problem2_title: string;
-  problem2_desc: string;
-  problem3_title: string;
-  problem3_desc: string;
-
+  // Problem (叙事区)
   // Solution (叙事区)
   solution_title: string;
   solution_subtitle: string;
-  pillar2_title: string;
-  pillar2_desc: string;
-  solution_more_label: string;
   ui_details: string;
 
   // Demo (叙事区)
@@ -298,34 +195,8 @@ export interface Translations {
   demo_subtitle: string;
   demo_video_caption: string;
   demo_video_aria: string;
-  flow1_title: string;
-  flow1_desc: string;
-  flow2_title: string;
-  flow2_desc: string;
-  flow3_title: string;
-  flow3_desc: string;
-  flow4_title: string;
-  flow4_desc: string;
 
   // Compare (叙事区)
-  compare_title: string;
-  compare_subtitle: string;
-  compare_other: string;
-  compare_auraxis: string;
-  compare_row1_label: string;
-  compare_row1_other: string;
-  compare_row1_auraxis: string;
-  compare_row2_label: string;
-  compare_row2_other: string;
-  compare_row2_auraxis: string;
-  compare_row3_label: string;
-  compare_row3_other: string;
-  compare_row3_auraxis: string;
-  compare_row4_label: string;
-  compare_row4_other: string;
-  compare_row4_auraxis: string;
-  compare_modes_label: string;
-
   // FAQ
   faq_title: string;
   faq_subtitle: string;
@@ -377,12 +248,7 @@ export interface Translations {
   tools_filter_verify: string;
   tools_filter_interaction: string;
   tools_badge_danger: string;
-  tools_badge_safe: string;
-  tools_view_params: string;
-  tools_hide_params: string;
-  tools_loading: string;
-  tools_error: string;
-  tools_empty: string;
+  tools_badge_safe: string;  tools_empty: string;
   tools_footnote: string;
   tools_legend: string;
 
@@ -399,9 +265,7 @@ export interface Translations {
   dev_link_cli: string;
   dev_step1_comment: string;
   dev_step2_comment: string;
-  dev_step3_comment: string;
-  dev_step3_line2: string;
-  dev_titlebar: string;
+  dev_step3_comment: string;  dev_titlebar: string;
   dev_titlebar_type: string;
   dev_copy_button: string;
   dev_copy_title: string;
@@ -413,52 +277,26 @@ export interface Translations {
   footer_cta_desc: string;
   footer_cta_primary: string;
   footer_cta_secondary: string;
-  footer_spec_title: string;
-  footer_spec_1: string;
-  footer_spec_2: string;
-  footer_spec_3: string;
-  footer_spec_4: string;
-  footer_contrib_title: string;
   footer_contrib_1: string;
   footer_contrib_2: string;
   footer_contrib_3: string;
-  footer_contrib_4: string;
-  footer_support_title: string;
-  footer_support_1: string;
+  footer_contrib_4: string;  footer_support_1: string;
   footer_support_2: string;
   footer_support_3: string;
-  footer_copyright: string;
-  footer_privacy: string;
-  footer_license: string;
+  footer_copyright: string;  footer_license: string;
 
   // Theme
   theme_dark: string;
   theme_light: string;
 }
 
-const zh: Translations = {
-  nav_features: '技术特性',
-  nav_demo: '演示',
+const zh: Translations = {  nav_demo: '演示',
   nav_architecture: '系统架构',
   nav_tools: '工具矩阵',
   nav_cli: 'CLI',
 
-  nav_cli_install: '安装',
-
-  nav_cli_features: '能力',
-
-  nav_cli_commands: '命令',
-
-  nav_cli_start: '快速开始',
-
-  nav_cli_desktop: '桌面端',
-
-  nav_cli_release: 'CLI Releases',
-
   nav_download: '下载',
-  nav_github_label: 'Auraxis Agent GitHub 仓库',
   nav_solution: '功能',
-  nav_compare: '对比',
   nav_safety: '安全模型',
   nav_faq: '常见问题',
   nav_home: 'Auraxis Agent 首页',
@@ -468,7 +306,6 @@ const zh: Translations = {
   banner_text:
     'v3.4.0 · 新增 Auraxis CLI（终端里的独立 Agent）· DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · 会话内自动更新',
   banner_link: '查看详情',
-  banner_close: '关闭横幅',
 
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: '桌面端智能体工作台',
@@ -477,23 +314,9 @@ const zh: Translations = {
   hero_cli_label: '命令行版本',
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: '复制',
-  hero_cli_hint:
-    '桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。也可以下载 8 个平台的原生二进制。',
   hero_cta_download: '下载',
   hero_cta_docs: '查看演示',
   hero_image_alt: 'Auraxis Agent 桌面端界面截图',
-  hero_stat_tools: '71',
-  hero_stat_tools_sub: '内置 AI 工具',
-  hero_stat_perms: '3',
-  hero_stat_perms_sub: '审批策略（ask/plan/auto）',
-  hero_stat_sandbox: '4',
-  hero_stat_sandbox_sub: '原生沙箱后端',
-  hero_stat_agents: '3',
-  hero_stat_agents_sub: '内置 Agent 类型',
-  hero_stat_sdk: '2',
-  hero_stat_sdk_sub: 'TS / Python SDK',
-  hero_stat_engine: '1',
-  hero_stat_engine_sub: '统一步进引擎',
 
   screenshot_caption: 'Auraxis Agent — 桌面端界面预览',
   screenshot_note: '界面截图来自项目 README，实际效果以最新版本为准。',
@@ -520,12 +343,7 @@ const zh: Translations = {
   download_linux_tip: '下载 Linux 版本',
   home_cli_title: '命令行版本：终端里的本地 Agent',
   home_cli_desc: '不装桌面端也能用：同一套 ReAct 工具循环、Code Mode、权限审批与多模型协议，直接在终端里跑。npm 一行安装，或下载内置运行时的原生二进制。',
-  home_cli_more: '查看 CLI 完整文档 →',
-  home_cli_cta: 'CLI 详情',
   cli_kicker: 'Auraxis CLI',
-  cli_page_title: '终端里的本地 Agent 工作台',
-  cli_page_desc:
-    'Auraxis CLI 是独立发布的命令行版本：不依赖桌面端，直接在你自己的终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批。模型、协议、沙箱与思考强度都可以按任务切换。',
   cli_install_label: '安装',
   cli_dl_runtime_label: '运行环境',
   cli_dl_runtime: 'Node 22.12+ 或原生二进制（内置运行时）',
@@ -535,47 +353,9 @@ const zh: Translations = {
   cli_dl_license: 'MIT 开源 · 本地运行',
   cli_dl_readme: '查看仓库 README ↗',
   cli_dl_note: '附 SHA256SUMS.txt 校验和；npm 包名 @auraxis/cli，安装后命令为 auraxis。',
-  cli_meta_node: 'Node 22.12+ 或使用内置运行时的原生二进制',
-  cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
-  cli_meta_releases: '下载原生二进制 ↗',
   cli_shot_alt: 'Auraxis CLI 交互模式界面：执行时间轴、工具调用与状态行',
   cli_shot_caption: '一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。',
-  cli_features_title: '核心能力',
-  cli_f1_title: '终端交互',
-  cli_f1_desc: '流式文本与思考折叠、执行时间轴、输入联想与命令面板，都是为长时间跑任务设计的。',
-  cli_f2_title: '两种运行方式',
-  cli_f2_desc: '交互 TUI 或 --run 无头执行；无头模式输出 NDJSON，方便脚本和流水线消费。',
-  cli_f3_title: '安全边界',
-  cli_f3_desc: 'ask / plan / auto 审批策略叠加 read / workspace-write / full / container 沙箱，危险工具逐次确认。',
-  cli_f4_title: '可扩展',
-  cli_f4_desc: 'MCP 服务、技能、插件、Hooks 与自定义模型都能接入，配置与桌面端同源。',
-  cli_f5_title: '模型与协议',
-  cli_f5_desc: '默认 deepseek-flash，支持 Chat Completions / Responses / Anthropic 三种协议与思考强度切换。',
-  cli_f6_title: '上下文管理',
-  cli_f6_desc: '上下文预算、超限自动摘要、工具输出裁剪与会话恢复，长任务不会中途失忆。',
-  cli_usage_title: '常用用法',
-  cli_usage_subtitle: '交互模式下直接输入 / 开头的命令；无头模式用参数控制一次执行。',
-  cli_cmd_run: '交互式 TUI，进入后直接对话',
-  cli_cmd_headless: '无头执行一次任务，可接 CI',
-  cli_cmd_code: '以 Code Mode 运行编排程序',
-  cli_cmd_sessions: '查看并恢复历史会话',
-  cli_cmd_doctor: '检查模型、密钥与工具配置',
-  cli_slash_title: '交互命令',
-  cli_slash_note: '输入 / 即出现联想面板，↑↓ 选择',
-  cli_slash_more: '完整命令与选项见仓库 README。',
-  cli_start_title: '快速开始',
-  cli_step1: '全局安装，得到 auraxis 命令',
-  cli_step2: '加密保存 API Key 到本机',
-  cli_step3: '进入交互模式，直接开始任务',
-  cli_binary_title: '原生二进制',
-  cli_binary_desc: '8 个平台的自包含可执行文件，内置运行时，不需要 Node。附带 SHA256SUMS.txt 校验和。',
   cli_binary_link: '前往 GitHub Releases ↗',
-  cli_cta_repo: '查看源码',
-  cli_cta_back: '返回桌面端介绍',
-
-  features_title: '外置于系统的透明能力',
-  features_subtitle:
-    'Auraxis Agent 不只是发送 prompt，更是一整套可审计的代码执行引擎：工具调用、权限决策、文件改动全部记录在统一事件日志中。',
   feature1_title: '统一 ReAct 步进引擎',
   feature1_desc:
     '聊天与 Agent 共用 step-engine 单一步进循环，停止策略 / 上下文压缩 / 重试均为策略钩子；业务迭代上限 200 次，安全硬上限 500 次，API 失败 3 次指数退避重试。',
@@ -628,12 +408,7 @@ const zh: Translations = {
   arch_main_1: '71 个工具执行器 + step-engine / agent-loop',
   arch_main_2: '多智能体调度器与三级偏差检测',
   arch_main_3: '原生沙箱（四后端）+ Worktree 隔离',
-  arch_main_4: '统一 JSONL 事件日志 + FTS5 全文搜索',
-
-  perm_title: '三模态权限看门狗',
-  perm_subtitle:
-    '每一次危险调用都经过权限管线：权限模式 → 沙箱门 → 审批 → 执行，顺序不可绕过。',
-  perm_ask_title: 'Ask · 询问模式',
+  arch_main_4: '统一 JSONL 事件日志 + FTS5 全文搜索',  perm_ask_title: 'Ask · 询问模式',
   perm_ask_desc: '默认模式。安全与效率的最佳平衡。',
   perm_ask_1: '只读工具（Read / Grep / Glob）自动放行',
   perm_ask_2: '危险工具弹窗确认，逐次可见',
@@ -651,20 +426,7 @@ const zh: Translations = {
 
   sandbox_title: '原生沙箱，四后端隔离',
   sandbox_subtitle:
-    '命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。',
-  sandbox_win: 'Windows Restricted Token / AppContainer',
-  sandbox_linux: 'Linux 隔离后端',
-  sandbox_mac: 'macOS 隔离后端',
-  sandbox_worktree: 'Git Worktree 沙箱（.auraxis-sandbox/task-<id>）',
-
-  code_title: 'Code Mode：让模型编排工具',
-  code_subtitle:
-    'RunCode 把 TypeScript 程序放进 worker 线程，模型用 await tools.Name() 像写代码一样编排工具调用。',
-  code_note: '并发安全工具最多 8 路重叠 · 变异工具串行 · 硬超时强杀',
-  code_tab_code: 'RunCode · TypeScript 程序',
-  code_tab_out: 'worker 线程输出',
-
-  safety_title: '安全模型：权限与沙箱',
+    '命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。',  safety_title: '安全模型：权限与沙箱',
   safety_subtitle:
     '每次危险调用都按固定顺序经过权限模式、沙箱门、审批与执行；路径边界、read-before-write、撤销快照与冲突检测作为兜底，覆盖工具调用的全生命周期。',
   safety_note:
@@ -675,13 +437,6 @@ const zh: Translations = {
   safety_profiles_title: '内置权限档案',
   safety_profiles_desc:
     '标准（工作区写入 + 逐次确认）/ 只读（read + 逐次确认）/ 沙箱（工作区写入、网络拒绝、auto）；另有 ask / auto / full / readonly 四个运行时预设',
-  safety_pipe_title: '工具调用安全管线',
-  safety_pipe_1: 'read-before-write 硬门：写入已有文件前必须先 Read 或携带版本号',
-  safety_pipe_2: '路径边界与扩展名白名单，文件工具只允许在项目边界内操作',
-  safety_pipe_3: '原生沙箱四后端：Windows restricted token / AppContainer、Linux、macOS',
-  safety_pipe_4: 'Git Worktree 沙箱：并发任务在 .auraxis-sandbox/task-<id> 隔离分支执行',
-  safety_pipe_5: '写操作前自动生成撤销快照（.auraxis-snapshots/），可随时回退',
-  safety_pipe_6: '多 Agent 文件锁与冲突检测，防止并发写入互相覆盖',
 
   research_title: '技术内核 · 论文驱动开发',
   research_subtitle:
@@ -743,60 +498,16 @@ const zh: Translations = {
   eco_plugin_title: '插件系统',
   eco_plugin_desc:
     'commands / tools / hooks / ui 四类扩展点，载入前做危险模式扫描与能力确认。',
-
-  problem_title: '今天的 AI 助手，为什么还不够用',
-  problem_subtitle: '三个每天都在发生的痛点，Auraxis 逐个解决。',
-  problem1_title: '只说不做',
-  problem1_desc:
-    '聊天式 AI 只输出建议，改哪一行、跑什么命令全靠你手动执行。回复很长，代码没动。',
-  problem2_title: '黑盒不可审计',
-  problem2_desc:
-    '工具调用、权限决策、文件改动全在云端或未知逻辑里发生，出了问题无从追溯。',
-  problem3_title: '环境被污染',
-  problem3_desc:
-    '多个任务并行时互相踩踏工作区，临时文件、未完成改动散落一地，主分支随时可能被弄脏。',
-
-  solution_title: '核心能力',
   solution_subtitle:
     'Auraxis Agent 把聊天与 Agent 执行收敛到同一套 ReAct 步进引擎，工具、调度与沙箱都在本地运行。',
   ui_details:
     '界面与工程细节：终端抽屉 · PTY/SSH 会话 · 后台与定时任务 · 图片输入 · 撤销快照 · 冲突检测 · Work 模式任务看板 · 本地账户 · 中英双语界面 · 深浅主题（Windows 11 Acrylic）· 可选遥测',
-  pillar2_title: '71 个内置工具',
-  pillar2_desc:
-    '从文件读写、终端与 Web 搜索，到文档生成、云连接器、后台调度、会话检索与子 Agent 编排，全部 71 个工具经同一条权限管线执行，15 个危险工具默认弹窗确认。',
-  solution_more_label: '更多能力',
 
   demo_title: 'ReAct 循环演示',
   demo_subtitle:
     '一段真实录屏，展示从用户输入到 <FINAL_ANSWER> 的 ReAct 循环：统一引擎驱动，权限看门狗把关，Code Mode 编排工具。',
   demo_video_caption: '真实录屏演示',
   demo_video_aria: 'Auraxis Agent ReAct 循环真实录屏',
-  flow1_title: '理解任务',
-  flow1_desc: '解析需求、读取项目上下文，注入相关记忆与项目指令。',
-  flow2_title: '生成计划',
-  flow2_desc: 'LLM 产出结构化 TaskPlan；plan 模式下先交用户审批再执行。',
-  flow3_title: '执行工具',
-  flow3_desc: '71 个工具经「权限模式 → 沙箱门 → 审批 → 执行」管线逐一落地。',
-  flow4_title: '验证交付',
-  flow4_desc: 'LSP / ReviewArtifact 验证通过后输出 <FINAL_ANSWER>，回合结束。',
-
-  compare_title: 'Auraxis vs 普通 AI 助手',
-  compare_subtitle: '同样是大模型驱动，差别在是否真正掌控执行链路。',
-  compare_other: '普通 AI 助手',
-  compare_auraxis: 'Auraxis Agent',
-  compare_row1_label: '执行方式',
-  compare_row1_other: '只给建议，不碰你的代码',
-  compare_row1_auraxis: '本地驱动 Bash / LSP / Git 真实执行',
-  compare_row2_label: '可审计性',
-  compare_row2_other: '黑盒输出，无法追溯',
-  compare_row2_auraxis: '统一事件日志，每一步可回放',
-  compare_row3_label: '安全隔离',
-  compare_row3_other: '直接操作主工作区',
-  compare_row3_auraxis: '三模式权限 + 原生沙箱 + Worktree 隔离',
-  compare_row4_label: '扩展能力',
-  compare_row4_other: '工具稀少、生态封闭',
-  compare_row4_auraxis: '71 工具 + MCP + 插件 + 双 SDK',
-  compare_modes_label: '三种权限模式，按场景切换',
 
   faq_title: '常见问题',
   faq_subtitle: '关于模型、权限、沙箱与数据的一些说明。',
@@ -859,12 +570,7 @@ const zh: Translations = {
   tools_filter_verify: '验证提交',
   tools_filter_interaction: '交互',
   tools_badge_danger: '危险',
-  tools_badge_safe: '安全',
-  tools_view_params: '查看参数',
-  tools_hide_params: '收起 Schema',
-  tools_loading: '加载工具数据...',
-  tools_error: '工具数据加载失败：',
-  tools_empty: '当前筛选条件下没有匹配的工具。',
+  tools_badge_safe: '安全',  tools_empty: '当前筛选条件下没有匹配的工具。',
   tools_footnote: '工具定义与桌面端 electron/tool-defs.ts 保持同步。',
   tools_legend: '工具安全等级图例',
 
@@ -880,9 +586,7 @@ const zh: Translations = {
   dev_link_cli: 'Auraxis CLI — 独立的本地 Agent 命令行工作台（ReAct / Code Mode / MCP）',
   dev_step1_comment: '// 1. 克隆底层核心仓库',
   dev_step2_comment: '// 2. 创建本地开发环境变量配置',
-  dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',
-  dev_step3_line2: 'npm run electron:dev',
-  dev_titlebar: '快速克隆并启动开发',
+  dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',  dev_titlebar: '快速克隆并启动开发',
   dev_titlebar_type: 'TypeScript / Vite',
   dev_copy_button: '复制命令',
   dev_copy_title: '点击复制',
@@ -894,51 +598,25 @@ const zh: Translations = {
     'Auraxis 是个人 MIT 开源项目，正在持续迭代。欢迎提交 Issue、PR、性能 / 安全 / 架构建议，帮助我们一起把工程细节打磨得更稳。',
   footer_cta_primary: '提交 Issue / PR',
   footer_cta_secondary: '访问 GitHub 仓库',
-  footer_spec_title: '核心规范',
-  footer_spec_1: '统一 ReAct 步进引擎',
-  footer_spec_2: '71 个内置工具',
-  footer_spec_3: '原生沙箱（四后端）',
-  footer_spec_4: 'Git Worktree 隔离',
-  footer_contrib_title: '开源资源',
   footer_contrib_1: '架构文档 (docs/README)',
   footer_contrib_2: '工程规范 (AGENTS.md)',
   footer_contrib_3: 'TypeScript SDK',
-  footer_contrib_4: 'Python SDK',
-  footer_support_title: '服务支持',
-  footer_support_1: '报告安全缺陷',
+  footer_contrib_4: 'Python SDK',  footer_support_1: '报告安全缺陷',
   footer_support_2: 'GitHub Issues',
   footer_support_3: '更新日志',
-  footer_copyright: '© 2026 Auraxis Core Contributors. 基于 MIT License 开源.',
-  footer_privacy: '隐私条例',
-  footer_license: '软件许可证',
+  footer_copyright: '© 2026 Auraxis Core Contributors. 基于 MIT License 开源.',  footer_license: '软件许可证',
 
   theme_dark: '切换到深色模式',
   theme_light: '切换到浅色模式',
 };
 
-const en: Translations = {
-  nav_features: 'Features',
-  nav_demo: 'Demo',
+const en: Translations = {  nav_demo: 'Demo',
   nav_architecture: 'Architecture',
   nav_tools: 'Tools',
   nav_cli: 'CLI',
 
-  nav_cli_install: 'Install',
-
-  nav_cli_features: 'Capabilities',
-
-  nav_cli_commands: 'Commands',
-
-  nav_cli_start: 'Quick start',
-
-  nav_cli_desktop: 'Desktop app',
-
-  nav_cli_release: 'CLI Releases',
-
   nav_download: 'Download',
-  nav_github_label: 'Auraxis Agent GitHub Repository',
   nav_solution: 'Features',
-  nav_compare: 'Compare',
   nav_safety: 'Security',
   nav_faq: 'FAQ',
   nav_home: 'Auraxis Agent Home',
@@ -948,7 +626,6 @@ const en: Translations = {
   banner_text:
     'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',
   banner_link: 'View details',
-  banner_close: 'Close banner',
 
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: 'Agentic Workbench',
@@ -957,23 +634,9 @@ const en: Translations = {
   hero_cli_label: 'Command line version',
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: 'Copy',
-  hero_cli_hint:
-    'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required. Native binaries for 8 platforms are also available.',
   hero_cta_download: 'Download',
   hero_cta_docs: 'View Demo',
   hero_image_alt: 'Auraxis Agent desktop UI screenshot',
-  hero_stat_tools: '71',
-  hero_stat_tools_sub: 'Built-in AI tools',
-  hero_stat_perms: '3',
-  hero_stat_perms_sub: 'Approval policies (ask/plan/auto)',
-  hero_stat_sandbox: '4',
-  hero_stat_sandbox_sub: 'Native sandbox backends',
-  hero_stat_agents: '3',
-  hero_stat_agents_sub: 'Built-in agent types',
-  hero_stat_sdk: '2',
-  hero_stat_sdk_sub: 'TS / Python SDKs',
-  hero_stat_engine: '1',
-  hero_stat_engine_sub: 'Unified step engine',
 
   screenshot_caption: 'Auraxis Agent — Desktop UI Preview',
   screenshot_note: 'Screenshot from the project README; the actual UI may differ in the latest version.',
@@ -1000,12 +663,7 @@ const en: Translations = {
   download_linux_tip: 'Download for Linux',
   home_cli_title: 'Command line version: a local agent in your terminal',
   home_cli_desc: 'Use it without the desktop app: the same ReAct tool loop, Code Mode, approval gates and multi-provider protocols, right in your terminal. One npm command, or a native binary with the runtime embedded.',
-  home_cli_more: 'Read the full CLI docs →',
-  home_cli_cta: 'CLI details',
   cli_kicker: 'Auraxis CLI',
-  cli_page_title: 'The local agent workbench for your terminal',
-  cli_page_desc:
-    'Auraxis CLI ships as its own package: no desktop app required. It runs the same ReAct tool loop, Code Mode and approval gates right in your terminal, with model, protocol, sandbox and reasoning effort switchable per task.',
   cli_install_label: 'Install',
   cli_dl_runtime_label: 'Runtime',
   cli_dl_runtime: 'Node 22.12+ or a native binary with the runtime embedded',
@@ -1015,47 +673,9 @@ const en: Translations = {
   cli_dl_license: 'MIT licensed · runs locally',
   cli_dl_readme: 'Repository README ↗',
   cli_dl_note: 'SHA256SUMS.txt included; the npm package is @auraxis/cli and installs the auraxis command.',
-  cli_meta_node: 'Node 22.12+ — or use a native binary with the runtime embedded',
-  cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
-  cli_meta_releases: 'Download native binaries ↗',
   cli_shot_alt: 'Auraxis CLI interactive mode: execution timeline, tool calls and status line',
   cli_shot_caption: 'A real run: write a file, read it back — the timeline and durations come from the actual output.',
-  cli_features_title: 'Core capabilities',
-  cli_f1_title: 'Terminal interaction',
-  cli_f1_desc: 'Streaming text with collapsible thinking, an execution timeline, input suggestions and a command palette — built for long-running tasks.',
-  cli_f2_title: 'Two ways to run',
-  cli_f2_desc: 'Interactive TUI or headless `--run`; headless mode emits NDJSON, ready for scripts and pipelines.',
-  cli_f3_title: 'Safety boundaries',
-  cli_f3_desc: 'ask / plan / auto approval policies layered over read / workspace-write / full / container sandboxes; dangerous tools ask every time.',
-  cli_f4_title: 'Extensible',
-  cli_f4_desc: 'MCP servers, skills, plugins, hooks and custom models all plug in, sharing the same config shape as the desktop app.',
-  cli_f5_title: 'Models & protocols',
-  cli_f5_desc: 'deepseek-flash by default, with Chat Completions / Responses / Anthropic protocol switching and adjustable reasoning effort.',
-  cli_f6_title: 'Context management',
-  cli_f6_desc: 'Context budgets, automatic summarisation when exceeded, tool-output trimming and session resume keep long tasks on track.',
-  cli_usage_title: 'Common usage',
-  cli_usage_subtitle: 'Type slash commands inside the TUI, or drive a single run with flags in headless mode.',
-  cli_cmd_run: 'Interactive TUI — just start talking',
-  cli_cmd_headless: 'Run one task headlessly, CI-friendly',
-  cli_cmd_code: 'Execute an orchestration program in Code Mode',
-  cli_cmd_sessions: 'List and resume past sessions',
-  cli_cmd_doctor: 'Check models, keys and tool configuration',
-  cli_slash_title: 'Interactive commands',
-  cli_slash_note: 'Type / for the suggestion panel, pick with ↑↓',
-  cli_slash_more: 'Full command and flag reference lives in the repository README.',
-  cli_start_title: 'Quick start',
-  cli_step1: 'Install globally to get the auraxis command',
-  cli_step2: 'Store your API key locally, encrypted',
-  cli_step3: 'Enter interactive mode and start a task',
-  cli_binary_title: 'Native binaries',
-  cli_binary_desc: 'Self-contained executables for 8 platforms with the runtime embedded — no Node needed. SHA256SUMS.txt included.',
   cli_binary_link: 'Open GitHub Releases ↗',
-  cli_cta_repo: 'View source',
-  cli_cta_back: 'Back to the desktop app',
-
-  features_title: 'Transparent Capabilities, Outside the System',
-  features_subtitle:
-    'Auraxis Agent is not just a prompt sender — it is a fully auditable code execution engine: every tool call, permission decision and file change lands in the unified event log.',
   feature1_title: 'Unified ReAct Step Engine',
   feature1_desc:
     'Chat and agents share one step engine (step-engine.ts) — stop policies, context compression and retries are strategy hooks. 200 iteration business cap, 500 hard cap, 3 exponential-backoff API retries.',
@@ -1107,12 +727,7 @@ const en: Translations = {
   arch_main_1: '71 Tool Executors + step-engine / agent-loop',
   arch_main_2: 'Multi-Agent Scheduler & Deviance Detection',
   arch_main_3: 'Native Sandbox (4 backends) + Worktree Isolation',
-  arch_main_4: 'Unified JSONL Event Log + FTS5 Search',
-
-  perm_title: 'Tri-Modal Permission Gate',
-  perm_subtitle:
-    'Every dangerous call runs through the pipeline: permission profile → sandbox gate → approval → execution. The order cannot be bypassed.',
-  perm_ask_title: 'Ask · Default',
+  arch_main_4: 'Unified JSONL Event Log + FTS5 Search',  perm_ask_title: 'Ask · Default',
   perm_ask_desc: 'The default mode. Best balance of safety and velocity.',
   perm_ask_1: 'Read-only tools (Read / Grep / Glob) pass silently',
   perm_ask_2: 'Dangerous tools prompt for confirmation, call by call',
@@ -1130,20 +745,7 @@ const en: Translations = {
 
   sandbox_title: 'Native Sandbox, Four Backends',
   sandbox_subtitle:
-    'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',
-  sandbox_win: 'Windows Restricted Token / AppContainer',
-  sandbox_linux: 'Linux isolation backend',
-  sandbox_mac: 'macOS isolation backend',
-  sandbox_worktree: 'Git Worktree sandbox (.auraxis-sandbox/task-<id>)',
-
-  code_title: 'Code Mode: Let the Model Orchestrate Tools',
-  code_subtitle:
-    'RunCode executes TypeScript programs in a worker thread — the model writes code with await tools.Name() to orchestrate tool calls.',
-  code_note: 'Up to 8-way overlap for concurrency-safe tools · serial mutation · hard-timeout kill',
-  code_tab_code: 'RunCode · TypeScript program',
-  code_tab_out: 'worker thread output',
-
-  safety_title: 'Security Model: Permissions & Sandbox',
+    'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',  safety_title: 'Security Model: Permissions & Sandbox',
   safety_subtitle:
     'Every dangerous call goes through permission profile → sandbox gate → approval → execution in a fixed order. Path boundaries, read-before-write, undo snapshots and conflict detection back it up across the whole tool-call lifecycle.',
   safety_note:
@@ -1152,13 +754,6 @@ const en: Translations = {
   safety_sandbox_levels_desc: 'read / workspace-write (default) / full',
   safety_profiles_title: 'Built-in permission profiles',
   safety_profiles_desc: 'Standard (workspace-write + ask) / Read-only (read + ask) / Sandbox (workspace-write, network blocked, auto); plus four runtime presets: ask / auto / full / readonly',
-  safety_pipe_title: 'Tool-call Safety Pipeline',
-  safety_pipe_1: 'read-before-write gate: existing files must be read first or carry a version',
-  safety_pipe_2: 'Path boundaries and extension whitelist keep file tools inside the project',
-  safety_pipe_3: 'Native sandbox: Windows restricted token / AppContainer, Linux, macOS',
-  safety_pipe_4: 'Git worktree sandbox: concurrent tasks run in isolated branches under .auraxis-sandbox/task-<id>',
-  safety_pipe_5: 'Undo snapshots (.auraxis-snapshots/) are created before writes, recoverable anytime',
-  safety_pipe_6: 'File locks and conflict detection prevent concurrent agents from overwriting each other',
 
   research_title: 'Research & Systems · Paper-Driven',
   research_subtitle:
@@ -1220,60 +815,16 @@ const en: Translations = {
   eco_plugin_title: 'Plugin System',
   eco_plugin_desc:
     'Four extension points — commands / tools / hooks / ui — with dangerous-pattern scanning and capability confirmation before load.',
-
-  problem_title: "Why today's AI assistants aren't enough",
-  problem_subtitle: 'Three everyday pain points — Auraxis solves each of them.',
-  problem1_title: 'All talk, no code',
-  problem1_desc:
-    'Chat-based AI only outputs advice — which line to change, which command to run is left to you. Long replies, untouched code.',
-  problem2_title: 'Black box, zero audit',
-  problem2_desc:
-    'Tool calls, permission decisions and file changes happen in cloud or opaque logic. When something breaks, there is nothing to trace.',
-  problem3_title: 'Polluted workspace',
-  problem3_desc:
-    'Parallel tasks trample each other\u2019s working directory — temp files and half-finished changes scattered everywhere, main branch at risk.',
-
-  solution_title: 'Core Features',
   solution_subtitle:
     'Auraxis Agent converges chat and agent execution into one ReAct step engine — tools, scheduling and sandboxing all run locally.',
   ui_details:
     'UI & engineering details: terminal drawer · PTY/SSH sessions · background & scheduled tasks · image input · undo snapshots · conflict detection · Work task board · local account · bilingual UI · dark/light theme (Windows 11 Acrylic) · opt-in telemetry',
-  pillar2_title: '71 Built-in Tools',
-  pillar2_desc:
-    'From file I/O, terminal and web search to document generation, cloud connectors, background scheduling, session retrieval and sub-agent orchestration — all 71 tools run through the same permission pipeline; 15 dangerous ones ask for confirmation by default.',
-  solution_more_label: 'More capabilities',
 
   demo_title: 'ReAct Loop Demo',
   demo_subtitle:
     'A real screen recording showing the ReAct loop from user input to <FINAL_ANSWER>: one unified engine, a permission watchdog at the gate, Code Mode orchestrating tools.',
   demo_video_caption: 'Screen recording demo',
   demo_video_aria: 'Auraxis Agent ReAct loop screen recording',
-  flow1_title: 'Understand',
-  flow1_desc: 'Parse the request, read project context, inject relevant memory and project instructions.',
-  flow2_title: 'Plan',
-  flow2_desc: 'The LLM produces a structured TaskPlan; in plan mode it waits for your approval first.',
-  flow3_title: 'Execute',
-  flow3_desc: 'All 71 tools land through the pipeline: permission profile → sandbox gate → approval → execution.',
-  flow4_title: 'Verify & deliver',
-  flow4_desc: 'LSP / ReviewArtifact checks pass, then <FINAL_ANSWER> ends the turn.',
-
-  compare_title: 'Auraxis vs ordinary AI assistants',
-  compare_subtitle: 'Same LLM under the hood — the difference is who controls the execution chain.',
-  compare_other: 'Ordinary AI assistant',
-  compare_auraxis: 'Auraxis Agent',
-  compare_row1_label: 'Execution',
-  compare_row1_other: 'Advice only — never touches your code',
-  compare_row1_auraxis: 'Really drives Bash / LSP / Git locally',
-  compare_row2_label: 'Auditability',
-  compare_row2_other: 'Black-box output, nothing to trace',
-  compare_row2_auraxis: 'Unified event log, every step replayable',
-  compare_row3_label: 'Isolation',
-  compare_row3_other: 'Writes straight into your main workspace',
-  compare_row3_auraxis: '3 permission modes + native sandbox + Worktree',
-  compare_row4_label: 'Extensibility',
-  compare_row4_other: 'Few tools, closed ecosystem',
-  compare_row4_auraxis: '71 tools + MCP + plugins + dual SDKs',
-  compare_modes_label: 'Three permission modes, switch by scenario',
 
   faq_title: 'FAQ',
   faq_subtitle: 'Answers about models, permissions, sandboxing and data.',
@@ -1336,12 +887,7 @@ const en: Translations = {
   tools_filter_verify: 'Verify',
   tools_filter_interaction: 'Interaction',
   tools_badge_danger: 'Danger',
-  tools_badge_safe: 'Safe',
-  tools_view_params: 'View Schema',
-  tools_hide_params: 'Hide Schema',
-  tools_loading: 'Loading tools...',
-  tools_error: 'Failed to load tools: ',
-  tools_empty: 'No tools match the current filter.',
+  tools_badge_safe: 'Safe',  tools_empty: 'No tools match the current filter.',
   tools_footnote: 'Tool definitions stay in sync with the desktop electron/tool-defs.ts.',
   tools_legend: 'Tool safety legend',
 
@@ -1357,9 +903,7 @@ const en: Translations = {
   dev_link_cli: 'Auraxis CLI — standalone local agent workbench (ReAct / Code Mode / MCP)',
   dev_step1_comment: '// 1. Clone the core repository',
   dev_step2_comment: '// 2. Create local environment config',
-  dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',
-  dev_step3_line2: 'npm run electron:dev',
-  dev_titlebar: 'Quick Clone & Start Development',
+  dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',  dev_titlebar: 'Quick Clone & Start Development',
   dev_titlebar_type: 'TypeScript / Vite',
   dev_copy_button: 'Copy command',
   dev_copy_title: 'Click to copy',
@@ -1371,23 +915,13 @@ const en: Translations = {
     'Auraxis is a personal MIT-licensed project under continuous iteration. Issues, PRs, and performance / security / architecture feedback are all welcome as we polish the engineering details together.',
   footer_cta_primary: 'Open an Issue / PR',
   footer_cta_secondary: 'Visit the GitHub repo',
-  footer_spec_title: 'Core Spec',
-  footer_spec_1: 'Unified ReAct Engine',
-  footer_spec_2: '71 Built-in Tools',
-  footer_spec_3: 'Native Sandbox',
-  footer_spec_4: 'Git Worktree Isolation',
-  footer_contrib_title: 'Open Source',
   footer_contrib_1: 'Architecture Docs',
   footer_contrib_2: 'Engineering Spec (AGENTS.md)',
   footer_contrib_3: 'TypeScript SDK',
-  footer_contrib_4: 'Python SDK',
-  footer_support_title: 'Support',
-  footer_support_1: 'Report Security Issues',
+  footer_contrib_4: 'Python SDK',  footer_support_1: 'Report Security Issues',
   footer_support_2: 'GitHub Issues',
   footer_support_3: 'Changelog',
-  footer_copyright: '© 2026 Auraxis Core Contributors. Open source under MIT License.',
-  footer_privacy: 'Privacy',
-  footer_license: 'License',
+  footer_copyright: '© 2026 Auraxis Core Contributors. Open source under MIT License.',  footer_license: 'License',
 
   theme_dark: 'Switch to Dark Mode',
   theme_light: 'Switch to Light Mode',

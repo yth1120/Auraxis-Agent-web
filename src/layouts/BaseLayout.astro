@@ -1,5 +1,22 @@
 ---
+import { TRANSLATIONS } from '../i18n/translations';
 import '../styles/global.css';
+
+// 英文词典单一来源：直接复用 src/i18n/translations.ts 的 en 对象，
+// 避免内联副本与 TS 词典漂移（历史上漏键会导致切英文残留中文）。
+const EN_JSON = JSON.stringify(TRANSLATIONS.en).replaceAll('<', '\\u003c');
+
+const inlineScript = `(function(){
+        document.documentElement.classList.add('js');
+        // 主题预载（防 FOUC）：默认深色，跟随系统，localStorage 持久化
+        var T=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+        document.documentElement.classList.toggle('dark',T==='dark');
+        // 语言引导：英文词典由构建期从 translations.ts 注入，单一来源不漂移
+        var L=localStorage.getItem('lang')||(navigator.language.startsWith('zh')?'zh':'en');
+        var EN=${EN_JSON};
+        window.__i18n=EN;
+        if(L==='en'){document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(EN[k])e.textContent=EN[k]})})}
+      })();`;
 
 const SITE_URL = Astro.site?.href ?? 'https://yth1120.github.io/Auraxis-Agent-web/';
 const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
@@ -12,155 +29,7 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Auraxis Agent — 桌面端智能体工作台 | Official Website</title>
     <meta name="description" content="Auraxis Agent v3.4.0 — 基于 Electron 的桌面端智能体工作台。编码 / 文档 / 自动化：Chat / Work / Code 三模式、统一 ReAct 步进引擎、多智能体调度、DeepSeek V4.1 Flash 原生多模态、71 个内置工具、原生沙箱与 Eywa 溯源记忆。" />
-    <meta name="keywords" content="Auraxis Agent, AI Agent, Agentic Workbench, Electron, ReAct, MCP, 智能体工作台" />
-    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon-96.png`} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Auraxis Agent — 桌面端智能体工作台" />
-    <meta property="og:description" content="Chat / Work / Code 三模式 · 统一 ReAct 步进引擎 · 71 个内置工具 · 文档生成与云连接器 · 原生沙箱 · 中英双语" />
-    <meta property="og:image" content={OG_IMAGE_URL} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Auraxis Agent — 桌面端智能体工作台" />
-    <meta name="twitter:description" content="基于 Electron 的桌面端智能体工作台 · 编码 / 文档 / 自动化 · MIT 开源" />
-    <meta name="twitter:image" content={OG_IMAGE_URL} />
-
-    <script is:inline>
-      (function(){
-        document.documentElement.classList.add('js');
-        // ── 主题预载（防 FOUC）：默认深色，跟随系统，localStorage 持久化 ──
-        var T=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
-        document.documentElement.classList.toggle('dark',T==='dark');
-        // ── 语言引导：中/英静态文本替换（与 src/i18n/translations.ts 保持同步） ──
-        var L=localStorage.getItem('lang')||(navigator.language.startsWith('zh')?'zh':'en');
-        var EN={
-          nav_features:'Features',nav_demo:'Demo',nav_architecture:'Architecture',nav_tools:'Tools',nav_cli:'CLI',nav_cli_install:'Install',nav_cli_features:'Capabilities',nav_cli_commands:'Commands',nav_cli_start:'Quick start',nav_cli_desktop:'Desktop app',nav_cli_release:'CLI Releases',nav_download:'Download',nav_github_label:'Auraxis Agent GitHub Repository',nav_solution:'Features',nav_compare:'Compare',nav_safety:'Security',nav_faq:'FAQ',
-          banner_label:'Update banner',banner_text:'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',banner_link:'View details',banner_close:'Close banner',
-          hero_title_line1:'Auraxis Agent',hero_title_line2:'Agentic Workbench',
-          hero_description:'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
-          hero_cta_download:'Download',hero_cta_docs:'View Demo',
-          hero_cli_label:'Command line version',hero_cli_title:'Auraxis CLI',hero_cli_copy:'Copy',hero_cli_hint:'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required.',
-          hero_stat_tools:'71',hero_stat_tools_sub:'Built-in AI tools',hero_stat_perms:'3',hero_stat_perms_sub:'Approval policies (ask/plan/auto)',hero_stat_sandbox:'4',hero_stat_sandbox_sub:'Native sandbox backends',hero_stat_agents:'3',hero_stat_agents_sub:'Built-in agent types',hero_stat_sdk:'2',hero_stat_sdk_sub:'TS / Python SDKs',hero_stat_engine:'1',hero_stat_engine_sub:'Unified step engine',
-          screenshot_caption:'Auraxis Agent — Desktop UI Preview',screenshot_note:'Screenshot from the project README; the actual UI may differ in the latest version.',
-          download_title:'Download Auraxis Agent',download_subtitle:'v3.4.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
-          download_current_version:'Current Stable Version',download_detected:'Detected:',download_loading:'Loading...',download_error:'Failed to load version info.',
-          download_requirements_title:'System Requirements',download_req1:'Windows 10+ (x64) · macOS 12+ · Linux (x64)',download_req2:'Node 24 runtime embedded — no extra installs',download_req3:'Git Bash or PowerShell for shell tools',
-          download_changelog_title:'What\u2019s new in v3.4.0',
-          download_placeholder_note:'Having trouble? Visit GitHub Releases for every installer, including the Apple Silicon arm64 DMG.',
-          features_title:'Transparent Capabilities, Outside the System',features_subtitle:'Auraxis is not just a prompt sender — it is a fully auditable code execution engine: every tool call, permission decision and file change lands in the unified event log.',
-          feature1_title:'Unified ReAct Step Engine',feature1_desc:'Chat and agents share one step engine (step-engine.ts) with retry, compression and stop policies as hooks. 200 iteration business cap, 500 hard cap.',
-          feature2_title:'Multi-Agent Scheduler',feature2_desc:'Priority queue (high/normal/low), max concurrency 3, real-time status broadcast and 3-level deviance detection (L1 failure / L2 stall / L3 replan).',
-          feature3_title:'Code Mode',feature3_desc:'RunCode executes TypeScript programs in a worker thread; every tools.Name() sub-call re-enters the full permission pipeline with 8-way overlap.',
-          feature4_title:'Tri-Modal Permission Gate',feature4_desc:'Ask (default) / Plan (approval) / Auto (fully automatic) approval policies. Read-only tools pass silently; dangerous calls must pass strict interception review.',
-          feature5_title:'Native Sandbox',feature5_desc:'Windows restricted token / AppContainer, Linux and macOS backends, plus Git worktree isolation for concurrent agents.',
-          feature6_title:'MCP + Plugin System',feature6_desc:'MCP client over JSON-RPC stdio. Renderer plugins extend commands/tools/hooks/ui — source is scanned for dangerous patterns and requires user confirmation before loading.',
-          feature7_title:'Persistent Project Memory',feature7_desc:'Eywa provenance memory (M1–M4): evidence before belief, immutable evidence, rule-based signals and hard-anchor validation, with a deterministic zero-LLM read path and belief audit/erasure.',
-          feature8_title:'DeepSeek Native Capabilities',feature8_desc:'DeepSeek by default with reasoning effort (low/high/max), strict tools, FIM completion, plan-generation JSON mode, up to 384K max output tokens and streaming cache-hit display; OpenAI- and Anthropic-format endpoints are also supported.',
-          feature9_title:'TS & Python SDKs',feature9_desc:'TypeScript SDK over TCP JSON-RPC plus a Python SDK, along with a headless CLI (--run / --sdk / --acp / --plugin) and ACP protocol support for automation.',
-          feature10_title:'Chat / Work / Code Modes',feature10_desc:'Three product forms share one ReAct step engine without state pollution: Chat session timeline, Work document collaboration (read-only code boundary + execution autonomy tiers) and Code Mode worker-thread tool orchestration.',
-          feature11_title:'Documents & Cloud Connectors',feature11_desc:'ReadDocument / WriteDocument handle Word, Excel, PowerPoint and PDF (with automatic CJK font embedding); Slack / Google Drive / Notion connectors are configured in Settings with tokens encrypted via safeStorage.',
-          feature12_title:'Local Account & Layered Settings',feature12_desc:'Local-first account with scrypt password hashing, layered Instructions (global → project root → nested AGENTS.md), connector / MCP / plugin / permission-profile management, and a live test-coverage report in Settings.',
-          arch_title:'Dual-Process Architecture',arch_subtitle:'How Auraxis Agent is structured: the main process handles tool execution and scheduling, the renderer process handles the UI, and they communicate over IPC.',
-          arch_renderer_title:'Renderer Process (React 19)',
-          arch_renderer_1:'Ant Design 6 UI (Dark / Light / System)',arch_renderer_2:'18 Zustand Stores (session is main-process authority)',arch_renderer_3:'Markdown + mermaid + KaTeX rendering',arch_renderer_4:'Dynamic Plugin Manager (pre-load audit)',
-          arch_ipc_label:'IPC Bidirectional',arch_ipc_bridge:'Context Bridge',arch_ipc_protocol:'domain:action Protocol',
-          arch_main_title:'Main Process (Node.js Env)',
-          arch_main_1:'71 Tool Executors + step-engine / agent-loop',arch_main_2:'Multi-Agent Scheduler & Deviance Detection',arch_main_3:'Native Sandbox (4 backends) + Worktree Isolation',arch_main_4:'Unified JSONL Event Log + FTS5 Search',
-          perm_title:'Tri-Modal Permission Gate',perm_subtitle:'Every dangerous call runs through the pipeline: permission profile → sandbox gate → approval → execution. The order cannot be bypassed.',
-          perm_ask_title:'Ask · Default',perm_ask_desc:'The default mode. Best balance of safety and velocity.',perm_ask_1:'Read-only tools (Read / Grep / Glob) pass silently',perm_ask_2:'Dangerous tools prompt for confirmation, call by call',perm_ask_3:'Rule scopes: once / session / always',
-          perm_plan_title:'Plan · Approval',perm_plan_desc:'Plan first, then act. Built for large refactors.',perm_plan_1:'LLM generates a structured task plan for user approval',perm_plan_2:'After approval, only approved plan steps execute; a rejected plan falls back to Ask',perm_plan_3:'Approval waits time out after 5 minutes and falls back to Ask',
-          perm_afe_title:'Auto · Full Automation',perm_afe_desc:'Unattended, automated execution.',perm_afe_1:'All tools auto-approved — no modal interruptions',perm_afe_2:'Workspace hygiene checks (extensions / read-before-write / URLs) still apply',perm_afe_3:'Ideal for CI pipelines and long-running background tasks',
-          sandbox_title:'Native Sandbox, Four Backends',sandbox_subtitle:'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',
-          sandbox_win:'Windows Restricted Token / AppContainer',sandbox_linux:'Linux isolation backend',sandbox_mac:'macOS isolation backend',sandbox_worktree:'Git Worktree sandbox (.auraxis-sandbox/task-<id>)',
-          code_title:'Code Mode: Let the Model Orchestrate Tools',code_subtitle:'RunCode executes TypeScript programs in a worker thread — the model writes code with await tools.Name() to orchestrate tool calls.',
-          code_note:'Up to 8-way overlap for concurrency-safe tools · serial mutation · hard-timeout kill',code_tab_code:'RunCode · TypeScript program',code_tab_out:'worker thread output',
-          safety_title:'Security Model: Permissions & Sandbox',safety_subtitle:'Every dangerous call goes through permission profile → sandbox gate → approval → execution in a fixed order. Path boundaries, read-before-write, undo snapshots and conflict detection back it up across the whole tool-call lifecycle.',
-          safety_note:'All tool calls go through permission profile → sandbox gate → approval → execution, constrained by path boundaries, read-before-write, undo snapshots and conflict detection.',
-          safety_sandbox_levels_title:'Sandbox levels',safety_sandbox_levels_desc:'read / workspace-write (default) / full',
-          safety_profiles_title:'Built-in permission profiles',safety_profiles_desc:'Standard (workspace-write + ask) / Read-only (read + ask) / Sandbox (workspace-write, network blocked, auto); plus four runtime presets: ask / auto / full / readonly',
-          safety_pipe_title:'Tool-call Safety Pipeline',safety_pipe_1:'read-before-write gate: existing files must be read first or carry a version',safety_pipe_2:'Path boundaries and extension whitelist keep file tools inside the project',safety_pipe_3:'Native sandbox: Windows restricted token / AppContainer, Linux, macOS',safety_pipe_4:'Git worktree sandbox: concurrent tasks run in isolated branches under .auraxis-sandbox/task-<id>',safety_pipe_5:'Undo snapshots (.auraxis-snapshots/) are created before writes, recoverable anytime',safety_pipe_6:'File locks and conflict detection prevent concurrent agents from overwriting each other',
-          research_title:'Research & Systems · Paper-Driven',research_subtitle:'Auraxis is engineering-driven by 11 papers: 7 research modules plus 4 cache-alignment techniques, all original client-side implementations.',
-          research_group_papers:'Research-Driven Modules',research_group_cache:'Cache-Alignment Suite',research_sources_title:'Paper Sources (11)',
-          research_stat_papers:'Papers',research_stat_modules:'Research Modules',research_stat_cache:'Cache Techniques',research_status_landed:'Landed',
-          research_note_original:'All 11 implementations are original code: algorithmic ideas borrowed, no paper code copied. Cache techniques are client-side adaptations of DeepSeek\u2019s official prefix cache.',
-          research_eywa_title:'Eywa · Provenance Memory',research_eywa_desc:'Evidence before belief: immutable evidence, rule-based signals and hard-anchor validation, a deterministic zero-LLM read path, and belief audit/erasure.',
-          research_map_title:'MAP-Graph · Shared-Memory Authorization',research_map_desc:'Authorization, source trust and risk gating for multi-agent shared memory: high-risk Write / Edit / Bash calls demand a higher evidence bar.',
-          research_agora_title:'AGORA · Step-Level Compression',research_agora_desc:'Inference-free whole-step keep/drop that never splits a tool call from its result, preserving the agent\u2019s action grammar.',
-          research_swe_title:'SWE-Touch · Drift Detection',research_swe_desc:'When the user or another process touches the code, drift is detected before the next iteration and the affected areas are verified.',
-          research_oversight_title:'Oversight · Approval-Fatigue Guard',research_oversight_desc:'Treats human escalation as a resource-allocation problem: a 20-decision sliding window plus fatigue score suggests escalate / auto / balanced.',
-          research_autotool_title:'AutoTool · Tool Inertia Graph',research_autotool_desc:'Builds a directed graph from historical tool trajectories to predict the next tool — observation plus prediction layers cut inference cost by up to ~30%.',
-          research_gate_title:'Verifier-as-Gatekeeper · Skill Admission',research_gate_desc:'Pre-commit structural, behavioral and semantic checks plus marginal-gain subset selection prevent irreversible skill-library contamination.',
-          research_radix_title:'RadixAttention · Canonical Replay',research_radix_desc:'Writes the full message array actually sent to the LLM into llm_context_v1 each round; the next turn replays the same prefix byte-for-byte.',
-          research_promptcache_title:'Prompt Cache · Stable Blocks',research_promptcache_desc:'System prompt, tool definitions and AGENTS.md stay as stable blocks, replaced in place only when content really changes.',
-          research_cacheaware_title:'Cache-Aware · Dynamic Tail',research_cacheaware_desc:'Cross-session memory is no longer unshifted to the head — it travels as a separate field near the current user message or snapshot tail.',
-          research_dedup_title:'Byte-Exact · Deduplication',research_dedup_desc:'On replay, a byte-identical memory block is skipped, preventing the same retrieval from accumulating every round.',
-          eco_title:'Extensions & Integration',eco_subtitle:'Auraxis Agent ships an MCP client, a CLI, SDKs and a plugin mechanism for scripts and external programs.',
-          eco_cli_title:'Auraxis CLI',eco_cli_desc:'A standalone local agent workbench for the terminal: ReAct tool loop, Code Mode, MCP, approval prompts and session resume — no desktop app required. Install from npm or grab a native binary.',
-          
-          dev_link_cli:'Auraxis CLI — standalone local agent workbench (ReAct / Code Mode / MCP)',
-          
-          home_cli_title:'Command line version: a local agent in your terminal',home_cli_desc:'Use it without the desktop app: the same ReAct tool loop, Code Mode, approval gates and multi-provider protocols, right in your terminal. One npm command, or a native binary with the runtime embedded.',home_cli_more:'Read the full CLI docs →',home_cli_cta:'CLI details',cli_kicker:'Auraxis CLI',cli_page_title:'The local agent workbench for your terminal',cli_page_desc:'Auraxis CLI ships as its own package: no desktop app required. It runs the same ReAct tool loop, Code Mode and approval gates right in your terminal, with model, protocol, sandbox and reasoning effort switchable per task.',
-          cli_install_label:'Install',cli_dl_runtime_label:'Runtime',cli_dl_runtime:'Node 22.12+ or a native binary with the runtime embedded',cli_dl_platforms_label:'Platforms',cli_dl_platforms:'Windows / macOS / Linux · x64 / arm64 · glibc / musl',cli_dl_license_label:'License',cli_dl_license:'MIT licensed · runs locally',cli_dl_readme:'Repository README ↗',cli_dl_note:'SHA256SUMS.txt included; the npm package is @auraxis/cli and installs the auraxis command.',cli_meta_node:'Node 22.12+ — or use a native binary with the runtime embedded',cli_meta_platforms:'Windows / macOS / Linux · x64 / arm64 · glibc / musl',cli_meta_releases:'Download native binaries ↗',cli_shot_alt:'Auraxis CLI interactive mode: execution timeline, tool calls and status line',cli_shot_caption:'A real run: write a file, read it back — the timeline and durations come from the actual output.',
-          cli_features_title:'Core capabilities',cli_f1_title:'Terminal interaction',cli_f1_desc:'Streaming text with collapsible thinking, an execution timeline, input suggestions and a command palette — built for long-running tasks.',cli_f2_title:'Two ways to run',cli_f2_desc:'Interactive TUI or headless --run; headless mode emits NDJSON, ready for scripts and pipelines.',cli_f3_title:'Safety boundaries',cli_f3_desc:'ask / plan / auto approval policies layered over read / workspace-write / full / container sandboxes; dangerous tools ask every time.',cli_f4_title:'Extensible',cli_f4_desc:'MCP servers, skills, plugins, hooks and custom models all plug in, sharing the same config shape as the desktop app.',cli_f5_title:'Models & protocols',cli_f5_desc:'deepseek-flash by default, with Chat Completions / Responses / Anthropic protocol switching and adjustable reasoning effort.',cli_f6_title:'Context management',cli_f6_desc:'Context budgets, automatic summarisation when exceeded, tool-output trimming and session resume keep long tasks on track.',
-          cli_usage_title:'Common usage',cli_usage_subtitle:'Type slash commands inside the TUI, or drive a single run with flags in headless mode.',cli_cmd_run:'Interactive TUI — just start talking',cli_cmd_headless:'Run one task headlessly, CI-friendly',cli_cmd_code:'Execute an orchestration program in Code Mode',cli_cmd_sessions:'List and resume past sessions',cli_cmd_doctor:'Check models, keys and tool configuration',cli_slash_title:'Interactive commands',cli_slash_note:'Type / for the suggestion panel, pick with ↑↓',cli_slash_more:'Full command and flag reference lives in the repository README.',
-          cli_start_title:'Quick start',cli_step1:'Install globally to get the auraxis command',cli_step2:'Store your API key locally, encrypted',cli_step3:'Enter interactive mode and start a task',cli_binary_title:'Native binaries',cli_binary_desc:'Self-contained executables for 8 platforms with the runtime embedded — no Node needed. SHA256SUMS.txt included.',cli_binary_link:'Open GitHub Releases ↗',cli_cta_repo:'View source',cli_cta_back:'Back to the desktop app',
-          eco_ts_title:'TypeScript SDK',eco_ts_desc:'packages/auraxis-sdk talks to the desktop app over TCP JSON-RPC, ready to embed in your own toolchain.',
-          eco_py_title:'Python SDK',eco_py_desc:'python/auraxis_sdk provides a symmetric API for driving sessions and tools from Python automation.',
-          eco_plugin_title:'Plugin System',eco_plugin_desc:'Four extension points — commands / tools / hooks / ui — with dangerous-pattern scanning and capability confirmation before load.',
-          problem_title:"Why today's AI assistants aren't enough",problem_subtitle:'Three everyday pain points — Auraxis solves each of them.',
-          problem1_title:'All talk, no code',problem1_desc:'Chat-based AI only outputs advice — which line to change, which command to run is left to you. Long replies, untouched code.',
-          problem2_title:'Black box, zero audit',problem2_desc:'Tool calls, permission decisions and file changes happen in cloud or opaque logic. When something breaks, there is nothing to trace.',
-          problem3_title:'Polluted workspace',problem3_desc:'Parallel tasks trample each other\u2019s working directory — temp files and half-finished changes scattered everywhere, main branch at risk.',
-          solution_title:'Core Features',solution_subtitle:'Auraxis Agent converges chat and agent execution into one ReAct step engine — tools, scheduling and sandboxing all run locally.',
-          ui_details:'UI & engineering details: terminal drawer · PTY/SSH sessions · background & scheduled tasks · image input · undo snapshots · conflict detection · Work task board · local account · bilingual UI · dark/light theme (Windows 11 Acrylic) · opt-in telemetry',
-          pillar2_title:'71 Built-in Tools',pillar2_desc:'From file I/O, terminal and web search to document generation, cloud connectors, background scheduling, session retrieval and sub-agent orchestration — all 71 tools run through the same permission pipeline; 15 dangerous ones ask for confirmation by default.',
-          solution_more_label:'More capabilities',
-          demo_title:'ReAct Loop Demo',demo_subtitle:'A real screen recording plus an interactive simulation showing the ReAct loop from user input to <FINAL_ANSWER>: one unified engine, a permission watchdog at the gate, Code Mode orchestrating tools.',
-          demo_video_caption:'Screen recording demo',
-          flow1_title:'Understand',flow1_desc:'Parse the request, read project context, inject relevant memory and project instructions.',
-          flow2_title:'Plan',flow2_desc:'The LLM produces a structured TaskPlan; in plan mode it waits for your approval first.',
-          flow3_title:'Execute',flow3_desc:'All 71 tools land through the pipeline: permission profile → sandbox gate → approval → execution.',
-          flow4_title:'Verify & deliver',flow4_desc:'LSP / ReviewArtifact checks pass, then <FINAL_ANSWER> ends the turn.',
-          compare_title:'Auraxis vs ordinary AI assistants',compare_subtitle:'Same LLM under the hood — the difference is who controls the execution chain.',
-          compare_other:'Ordinary AI assistant',compare_auraxis:'Auraxis',
-          compare_row1_label:'Execution',compare_row1_other:'Advice only — never touches your code',compare_row1_auraxis:'Really drives Bash / LSP / Git locally',
-          compare_row2_label:'Auditability',compare_row2_other:'Black-box output, nothing to trace',compare_row2_auraxis:'Unified event log, every step replayable',
-          compare_row3_label:'Isolation',compare_row3_other:'Writes straight into your main workspace',compare_row3_auraxis:'3 permission modes + native sandbox + Worktree',
-          compare_row4_label:'Extensibility',compare_row4_other:'Few tools, closed ecosystem',compare_row4_auraxis:'71 tools + MCP + plugins + dual SDKs',
-          compare_modes_label:'Three permission modes, switch by scenario',
-          faq_title:'FAQ',faq_subtitle:'Answers about models, permissions, sandboxing and data.',
-          faq_q1:'Do I need an API key? Which models are supported?',faq_a1:'Yes. Auraxis uses DeepSeek by default (deepseek-v4-flash / v4-pro) and is compatible with OpenAI- and Anthropic-format endpoints. You can add custom models in settings or via environment variables.',
-          faq_q2:'How is this different from an IDE plugin or a plain CLI tool?',faq_a2:'Auraxis is a standalone desktop client that converges chat and multi-agent runs into one auditable ReAct engine — tools, scheduling and sandboxing all run locally. It also ships a headless CLI and SDKs for automation.',
-          faq_q3:'Which permission mode should I choose?',faq_a3:'ask (default) fits everyday work — dangerous tools prompt one by one; plan fits large refactors — approve a plan, then only approved steps execute; auto (legacy spelling: afe) fits CI and unattended tasks — auto-approve while tools still go through the unified execution pipeline. Four runtime presets (ask / auto / full / readonly) combine approval policy, sandbox level and hygiene checks.',
-          faq_q4:'How far does sandbox isolation go?',faq_a4:'Command-level isolation covers Windows restricted token / AppContainer, Linux and macOS. File tools are constrained by path boundaries and extension whitelists; concurrent tasks in Git repos can also run in separate worktree branches.',
-          faq_q5:'Where is my data stored?',faq_a5:'Everything stays local. Sessions are append-only JSONL event logs with a SQLite projection cache and FTS5 search; long-term memory is now Eywa provenance memory (evidence before belief, zero-LLM read path), isolated per project; API keys and connector tokens are encrypted with the OS safeStorage.',
-          faq_q6:'Is this project open source?',faq_a6:'Yes, under the MIT License. Source code, architecture docs and both SDKs are on GitHub (yth1120/Auraxis-Agent).',
-          faq_q7:'Do I need to install Node.js myself?',faq_a7:'No. The app embeds the Node 24 runtime; shell tools work best with Git Bash or PowerShell.',
-          faq_q8:'Is this project mature?',faq_a8:'No. It is a personal project under continuous iteration and may contain bugs or missing features. Please be cautious with important work; issues and feedback on GitHub are welcome.',
-          faq_q9:'How do ask/plan/auto relate to read/workspace-write/full?',faq_a9:'They are two layers: ask/plan/auto is the approval policy that decides whether dangerous tools need confirmation (default ask; "afe" is a legacy spelling normalized to auto); read/workspace-write/full is the sandbox level that decides how much of the project an agent can access (default workspace-write). Four runtime presets (ask / auto / full / readonly) and built-in permission profiles (Standard / Read-only / Sandbox) combine both layers.',
-          faq_q10:'Does Auraxis upload my data?',faq_a10:'Not by default. Sessions, memory and settings all stay local; telemetry is off unless you opt in, and is reported through a strict allowlist with personal data removed. API keys are encrypted with the OS safeStorage.',
-          faq_q11:'What is the difference between Chat / Work / Code modes?',faq_a11:'All three modes share the same ReAct step engine without polluting each other\u2019s state. Chat is everyday conversation and code Q&A; Work targets document collaboration — it clarifies ambiguous requests first and hard-rejects code-file writes; Code mode orchestrates tools via RunCode in a worker thread for automated coding tasks.',
-          faq_q12:'Do document generation and cloud connectors need extra setup?',faq_a12:'Document tools (Word / Excel / PowerPoint / PDF) work out of the box. Slack / Google Drive / Notion require tokens in Settings → Connectors, encrypted with the OS safeStorage; corresponding tools show an external side-effect warning on each call.',
-          tools_title:'Built-in Tool Matrix',tools_subtitle:'At each ReAct step, the agent calls these tools within your permission constraints.',
-          tools_danger_label:'Danger (requires approval)',tools_safe_label:'Safe (silent pass-through)',
-          tools_filter_all:'All',tools_filter_danger:'Danger',tools_filter_safe:'Safe',
-          tools_filter_files:'Files',tools_filter_documents:'Documents',tools_filter_connectors:'Connectors',tools_filter_execution:'Execute',tools_filter_terminal:'Terminal',tools_filter_web:'Web',tools_filter_planning:'Planning',tools_filter_agent:'Agents',tools_filter_background:'Background',tools_filter_session:'Sessions',tools_filter_capability:'Capability',tools_filter_verify:'Verify',
-          tools_badge_danger:'Danger',tools_badge_safe:'Safe',tools_view_params:'View Schema',tools_hide_params:'Hide Schema',tools_loading:'Loading tools...',tools_error:'Failed to load tools: ',tools_empty:'No tools match the current filter.',
-          tools_footnote:'Tool definitions stay in sync with the desktop electron/tool-defs.ts.',
-          dev_title:'Local Development',dev_description:'The Auraxis source is on GitHub, and both the main and renderer processes are TypeScript. The commands below clone the project and start local development.',
-          dev_check1:'Vitest coverage: lines 85.42% / branches 79.08% / functions 86.63% (thresholds 80 / 70 / 80)',dev_check2:'Strict CSP is enabled in production; main and renderer processes are isolated',dev_check3:'237 test files · 1740 cases · 15 Playwright E2E flows',
-          dev_step1_comment:'// 1. Clone the core repository',dev_step2_comment:'// 2. Create local environment config',dev_step3_comment:'// 3. Install dependencies & launch Electron dev mode',dev_step3_line2:'npm run electron:dev',
-          dev_titlebar:'Quick Clone & Start Development',dev_titlebar_type:'TypeScript / Vite',dev_copy_button:'Copy command',
-          footer_brand:'Auraxis Agent — an Electron-based desktop agentic workbench, MIT-licensed, personal project in development.',
-          footer_cta_kicker:'Open Source · Build Together',footer_cta_title:'An open invitation to every developer and expert: let\u2019s fix and build together',footer_cta_desc:'Auraxis is a personal MIT-licensed project under continuous iteration. Issues, PRs, and performance / security / architecture feedback are all welcome as we polish the engineering details together.',footer_cta_primary:'Open an Issue / PR',footer_cta_secondary:'Visit the GitHub repo',
-          footer_spec_title:'Core Spec',footer_spec_1:'Unified ReAct Engine',footer_spec_2:'71 Built-in Tools',footer_spec_3:'Native Sandbox',footer_spec_4:'Git Worktree Isolation',
-          footer_contrib_title:'Open Source',footer_contrib_1:'Architecture Docs',footer_contrib_2:'Engineering Spec (AGENTS.md)',footer_contrib_3:'TypeScript SDK',footer_contrib_4:'Python SDK',
-          footer_support_title:'Support',footer_support_1:'Report Security Issues',footer_support_2:'GitHub Issues',footer_support_3:'Changelog',
-          footer_copyright:'© 2026 Auraxis Core Contributors. Open source under MIT License.',footer_privacy:'Privacy',footer_license:'License',
-          theme_dark:'Switch to Dark Mode',theme_light:'Switch to Light Mode'
-        };
-        window.__i18n=EN;
-        if(L==='en'){document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n');if(EN[k])e.textContent=EN[k]})})}
-      })();
-    </script>
+    <script is:inline set:html={inlineScript}></script>
   </head>
   <body class="bg-brand-page dark:bg-brand-black text-ink dark:text-ivory font-sans transition-colors duration-200">
     <div class="fixed inset-0 grid-bg pointer-events-none z-0" aria-hidden="true"></div>

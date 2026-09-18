@@ -4,11 +4,11 @@ import { Terminal, Check, Copy, ArrowUpRight, FileText, ListChecks, Blocks, Brac
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 
 const DOC_LINKS = [
-  { href: `${REPO_URL}/blob/main/docs/README.md`, key: 'footer_contrib_1', icon: FileText },
-  { href: `${REPO_URL}/blob/main/AGENTS.md`, key: 'footer_contrib_2', icon: ListChecks },
-  { href: `${REPO_URL}/blob/main/packages/auraxis-sdk/README.md`, key: 'footer_contrib_3', icon: Blocks },
-  { href: `${REPO_URL}/blob/main/python/auraxis_sdk/README.md`, key: 'footer_contrib_4', icon: Braces },
-  { href: 'https://github.com/yth1120/Auraxis-CLI#readme', key: 'dev_link_cli', icon: Terminal },
+  { href: `${REPO_URL}/blob/main/docs/README.md`, key: 'footer_contrib_1', label: '架构文档 (docs/README)', icon: FileText },
+  { href: `${REPO_URL}/blob/main/AGENTS.md`, key: 'footer_contrib_2', label: '工程规范 (AGENTS.md)', icon: ListChecks },
+  { href: `${REPO_URL}/blob/main/packages/auraxis-sdk/README.md`, key: 'footer_contrib_3', label: 'TypeScript SDK', icon: Blocks },
+  { href: `${REPO_URL}/blob/main/python/auraxis_sdk/README.md`, key: 'footer_contrib_4', label: 'Python SDK', icon: Braces },
+  { href: 'https://github.com/yth1120/Auraxis-CLI#readme', key: 'dev_link_cli', label: 'Auraxis CLI — 独立的本地 Agent 命令行工作台', icon: Terminal },
 ];
 ---
 
@@ -23,12 +23,12 @@ const DOC_LINKS = [
 
       <!-- 文档链接列表 -->
       <div class="flex flex-col">
-        {DOC_LINKS.map(({ href, key, icon: Icon }) => (
+        {DOC_LINKS.map(({ href, key, label, icon: Icon }) => (
           <a href={href} target="_blank" rel="noopener noreferrer"
             class="group flex items-center justify-between py-3 border-b border-brand-hairline dark:border-brand-border/60 text-sm text-brand-muted hover:text-ink dark:hover:text-ivory transition-colors">
             <span class="flex items-center gap-3">
               <Icon className="w-4 h-4 text-brand-accent" aria-hidden="true" />
-              <span data-i18n={key}></span>
+              <span data-i18n={key}>{label}</span>
             </span>
             <ArrowUpRight className="w-3.5 h-3.5 text-brand-faint group-hover:text-brand-accent transition-colors" aria-hidden="true" />
           </a>

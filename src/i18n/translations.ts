@@ -18,7 +18,6 @@ export interface Translations {
   // Update banner
   banner_label: string;
   banner_text: string;
-  banner_install: string;
   banner_link: string;
   banner_close: string;
 
@@ -393,7 +392,6 @@ const zh: Translations = {
   banner_label: '重点更新横幅',
   banner_text:
     'v3.4.0 · 新增 Auraxis CLI（终端里的独立 Agent）· DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · 会话内自动更新',
-  banner_install: 'NEW Auraxis CLI',
   banner_link: '查看详情',
   banner_close: '关闭横幅',
 
@@ -405,7 +403,7 @@ const zh: Translations = {
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: '复制',
   hero_cli_hint:
-    '桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。',
+    '桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。也可以下载 8 个平台的原生二进制。',
   hero_cta_download: '下载',
   hero_cta_docs: '查看演示',
   hero_image_alt: 'Auraxis Agent 桌面端界面截图',
@@ -813,7 +811,6 @@ const en: Translations = {
   banner_label: 'Update banner',
   banner_text:
     'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',
-  banner_install: 'NEW Auraxis CLI',
   banner_link: 'View details',
   banner_close: 'Close banner',
 
@@ -825,7 +822,7 @@ const en: Translations = {
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: 'Copy',
   hero_cli_hint:
-    'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required.',
+    'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required. Native binaries for 8 platforms are also available.',
   hero_cta_download: 'Download',
   hero_cta_docs: 'View Demo',
   hero_image_alt: 'Auraxis Agent desktop UI screenshot',

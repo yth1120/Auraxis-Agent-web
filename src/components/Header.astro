@@ -7,11 +7,16 @@ import GitHubIcon from './GitHubIcon.astro';
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const BASE = import.meta.env.BASE_URL;
 
+// 子页面（如 /cli/）上的锚点要指回首页，否则会落在当前页找不到的锚点上
+const onHome = Astro.url.pathname.replace(/\/index\.html$/, '/') === BASE;
+const anchor = (id: string) => (onHome ? id : `${BASE}${id}`);
+
 const NAV_LINKS = [
-  { href: '#solution', key: 'nav_solution', label: '功能' },
-  { href: '#demo', key: 'nav_demo', label: '演示' },
-  { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
-  { href: '#download', key: 'nav_download', label: '下载' },
+  { href: anchor('#solution'), key: 'nav_solution', label: '功能' },
+  { href: anchor('#demo'), key: 'nav_demo', label: '演示' },
+  { href: anchor('#tools'), key: 'nav_tools', label: '工具矩阵' },
+  { href: `${BASE}cli/`, key: 'nav_cli', label: 'CLI' },
+  { href: anchor('#download'), key: 'nav_download', label: '下载' },
 ];
 ---
 

@@ -1,0 +1,39 @@
+---
+import { Terminal, Copy } from 'lucide-react';
+
+const { labelKey = 'hero_cli_label', command = 'npm i -g @auraxis/cli' } = Astro.props as {
+  labelKey?: string;
+  command?: string;
+};
+---
+
+<div class="terminal-dark-box border border-brand-border rounded-2xl px-5 sm:px-7 py-5 ring-1 ring-brand-accent/20 shadow-[0_22px_60px_-30px_rgba(0,0,0,0.6)]">
+  <div class="flex flex-col lg:flex-row lg:items-baseline gap-x-6 gap-y-3">
+    <span class="flex-shrink-0 text-[11px] font-mono text-brand-faint uppercase tracking-[0.18em]" data-i18n={labelKey}>命令行版本</span>
+    <span class="flex-shrink-0 inline-flex items-center gap-2 text-sm font-mono text-brand-accent">
+      <Terminal className="w-4 h-4" aria-hidden="true" />
+      <span data-i18n="hero_cli_title">Auraxis CLI</span>
+    </span>
+    <div class="flex-1 min-w-0 flex items-center gap-3 lg:justify-end">
+      <code class="min-w-0 flex items-baseline gap-2.5 font-mono text-base sm:text-lg">
+        <span class="text-brand-accent select-none flex-shrink-0" aria-hidden="true">❯</span>
+        <span class="text-brand-ivory truncate">{command}</span>
+      </code>
+      <button
+        type="button"
+        data-copy-text={command}
+        class="flex-shrink-0 inline-flex items-center gap-1.5 text-[11px] font-mono text-brand-muted hover:text-brand-ivory transition-colors px-2.5 py-1.5 rounded-lg border border-brand-border hover:border-brand-accent/50 hover:bg-white/5"
+        data-i18n-aria="dev_copy_button"
+        data-i18n-title="dev_copy_title"
+        aria-label="复制命令"
+        title="点击复制"
+      >
+        <Copy className="w-3.5 h-3.5" aria-hidden="true" />
+        <span data-i18n="hero_cli_copy">复制</span>
+      </button>
+    </div>
+  </div>
+  <p class="mt-3.5 pt-3.5 border-t border-brand-border/60 text-xs text-brand-muted leading-relaxed" data-i18n="hero_cli_hint">
+    桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。也可以下载 8 个平台的原生二进制。
+  </p>
+</div>

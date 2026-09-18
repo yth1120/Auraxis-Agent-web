@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, BookOpen, Copy, Terminal } from 'lucide-react';
+import { ArrowRight, BookOpen, Terminal } from 'lucide-react';
 const BASE = import.meta.env.BASE_URL;
 ---
 
@@ -60,37 +60,28 @@ const BASE = import.meta.env.BASE_URL;
     </div>
   </div>
 
-  <!-- 命令行版本：横跨整页宽度的独立命令区 -->
+  <!-- 命令行版本：首页只留入口，细节在 /cli 独立页 -->
   <div class="max-w-6xl mx-auto px-6 mt-12 lg:mt-14">
-    <div class="reveal terminal-dark-box border border-brand-border rounded-2xl px-5 sm:px-7 py-5 ring-1 ring-brand-accent/20 shadow-[0_22px_60px_-30px_rgba(0,0,0,0.6)]" style="--reveal-delay: 460ms">
-      <div class="flex flex-col lg:flex-row lg:items-baseline gap-x-6 gap-y-3">
-        <span class="flex-shrink-0 text-[11px] font-mono text-brand-faint uppercase tracking-[0.18em]" data-i18n="hero_cli_label">命令行版本</span>
-        <span class="flex-shrink-0 inline-flex items-center gap-2 text-sm font-mono text-brand-accent">
-          <Terminal className="w-4 h-4" aria-hidden="true" />
-          <span data-i18n="hero_cli_title">Auraxis CLI</span>
-        </span>
-        <div class="flex-1 min-w-0 flex items-center gap-3 lg:justify-end">
-          <code class="min-w-0 flex items-baseline gap-2.5 font-mono text-base sm:text-lg">
-            <span class="text-brand-accent select-none flex-shrink-0" aria-hidden="true">❯</span>
-            <span class="text-brand-ivory truncate">npm i -g @auraxis/cli</span>
-          </code>
-          <button
-            type="button"
-            data-copy-text="npm i -g @auraxis/cli"
-            class="flex-shrink-0 inline-flex items-center gap-1.5 text-[11px] font-mono text-brand-muted hover:text-brand-ivory transition-colors px-2.5 py-1.5 rounded-lg border border-brand-border hover:border-brand-accent/50 hover:bg-white/5"
-            data-i18n-aria="dev_copy_button"
-            data-i18n-title="dev_copy_title"
-            aria-label="复制命令"
-            title="点击复制"
-          >
-            <Copy className="w-3.5 h-3.5" aria-hidden="true" />
-            <span data-i18n="hero_cli_copy">复制</span>
-          </button>
+    <a
+      href={`${BASE}cli/`}
+      class="reveal group block terminal-dark-box border border-brand-border rounded-2xl px-5 sm:px-7 py-5 ring-1 ring-brand-accent/20 shadow-[0_22px_60px_-30px_rgba(0,0,0,0.6)] hover:ring-brand-accent/40 hover:border-brand-accent/40 transition-colors"
+      style="--reveal-delay: 460ms"
+    >
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-6 gap-y-3">
+        <div class="min-w-0">
+          <span class="inline-flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-[0.16em]">
+            <Terminal className="w-3.5 h-3.5" aria-hidden="true" />
+            <span data-i18n="cli_teaser_title">Auraxis CLI</span>
+          </span>
+          <p class="mt-2.5 text-sm text-brand-muted leading-relaxed max-w-2xl" data-i18n="cli_teaser_desc">
+            独立的命令行版本：不装桌面端，也能在终端里跑完整的 ReAct 工具循环、Code Mode 与权限审批。
+          </p>
         </div>
+        <span class="flex-shrink-0 inline-flex items-center gap-2">
+          <code class="text-[13px] font-mono text-brand-ivory bg-white/[0.06] border border-brand-border rounded-lg px-2.5 py-1.5 whitespace-nowrap">npm i -g @auraxis/cli</code>
+          <span class="text-sm font-medium text-brand-accent group-hover:text-brand-ivory transition-colors whitespace-nowrap" data-i18n="cli_teaser_cta">查看 CLI 详情 →</span>
+        </span>
       </div>
-      <p class="mt-3.5 pt-3.5 border-t border-brand-border/60 text-xs text-brand-muted leading-relaxed" data-i18n="hero_cli_hint">
-        桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。也可以下载 8 个平台的原生二进制。
-      </p>
-    </div>
+    </a>
   </div>
 </section>

@@ -6,6 +6,8 @@ export interface Translations {
   nav_demo: string;
   nav_architecture: string;
   nav_tools: string;
+  nav_cli: string;
+
   nav_download: string;
   nav_github_label: string;
   nav_solution: string;
@@ -73,6 +75,48 @@ export interface Translations {
   download_cli_release: string;
   download_cli_copy: string;
   download_cli_hint: string;
+  cli_teaser_title: string;
+  cli_teaser_desc: string;
+  cli_teaser_cta: string;
+  cli_kicker: string;
+  cli_page_title: string;
+  cli_page_desc: string;
+  cli_install_label: string;
+  cli_meta_node: string;
+  cli_meta_platforms: string;
+  cli_meta_releases: string;
+  cli_features_title: string;
+  cli_f1_title: string;
+  cli_f1_desc: string;
+  cli_f2_title: string;
+  cli_f2_desc: string;
+  cli_f3_title: string;
+  cli_f3_desc: string;
+  cli_f4_title: string;
+  cli_f4_desc: string;
+  cli_f5_title: string;
+  cli_f5_desc: string;
+  cli_f6_title: string;
+  cli_f6_desc: string;
+  cli_usage_title: string;
+  cli_usage_subtitle: string;
+  cli_cmd_run: string;
+  cli_cmd_headless: string;
+  cli_cmd_code: string;
+  cli_cmd_sessions: string;
+  cli_cmd_doctor: string;
+  cli_slash_title: string;
+  cli_slash_note: string;
+  cli_slash_more: string;
+  cli_start_title: string;
+  cli_step1: string;
+  cli_step2: string;
+  cli_step3: string;
+  cli_binary_title: string;
+  cli_binary_desc: string;
+  cli_binary_link: string;
+  cli_cta_repo: string;
+  cli_cta_back: string;
 
   // Features
   features_title: string;
@@ -206,7 +250,6 @@ export interface Translations {
   eco_subtitle: string;
   eco_cli_title: string;
   eco_cli_desc: string;
-  eco_cli_release: string;
   eco_ts_title: string;
   eco_ts_desc: string;
   eco_py_title: string;
@@ -380,6 +423,8 @@ const zh: Translations = {
   nav_demo: '演示',
   nav_architecture: '系统架构',
   nav_tools: '工具矩阵',
+  nav_cli: 'CLI',
+
   nav_download: '下载',
   nav_github_label: 'Auraxis Agent GitHub 仓库',
   nav_solution: '功能',
@@ -449,6 +494,49 @@ const zh: Translations = {
   download_cli_release: 'CLI Releases ↗',
   download_cli_copy: '复制',
   download_cli_hint: '装完全局命令 auraxis；也可下载 8 个平台的原生二进制（含 SHA256 校验和），无需 Node。',
+  cli_teaser_title: 'Auraxis CLI',
+  cli_teaser_desc: '独立的命令行版本：不装桌面端，也能在终端里跑完整的 ReAct 工具循环、Code Mode 与权限审批。',
+  cli_teaser_cta: '查看 CLI 详情',
+  cli_kicker: 'Auraxis CLI',
+  cli_page_title: '终端里的本地 Agent 工作台',
+  cli_page_desc:
+    'Auraxis CLI 是独立发布的命令行版本：不依赖桌面端，直接在你自己的终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批。模型、协议、沙箱与思考强度都可以按任务切换。',
+  cli_install_label: '安装',
+  cli_meta_node: 'Node 22.12+ 或使用内置运行时的原生二进制',
+  cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
+  cli_meta_releases: '下载原生二进制 ↗',
+  cli_features_title: '核心能力',
+  cli_f1_title: '终端交互',
+  cli_f1_desc: '流式文本与思考折叠、执行时间轴、输入联想与命令面板，都是为长时间跑任务设计的。',
+  cli_f2_title: '两种运行方式',
+  cli_f2_desc: '交互 TUI 或 --run 无头执行；无头模式输出 NDJSON，方便脚本和流水线消费。',
+  cli_f3_title: '安全边界',
+  cli_f3_desc: 'ask / plan / auto 审批策略叠加 read / workspace-write / full / container 沙箱，危险工具逐次确认。',
+  cli_f4_title: '可扩展',
+  cli_f4_desc: 'MCP 服务、技能、插件、Hooks 与自定义模型都能接入，配置与桌面端同源。',
+  cli_f5_title: '模型与协议',
+  cli_f5_desc: '默认 deepseek-flash，支持 Chat Completions / Responses / Anthropic 三种协议与思考强度切换。',
+  cli_f6_title: '上下文管理',
+  cli_f6_desc: '上下文预算、超限自动摘要、工具输出裁剪与会话恢复，长任务不会中途失忆。',
+  cli_usage_title: '常用用法',
+  cli_usage_subtitle: '交互模式下直接输入 / 开头的命令；无头模式用参数控制一次执行。',
+  cli_cmd_run: '交互式 TUI，进入后直接对话',
+  cli_cmd_headless: '无头执行一次任务，可接 CI',
+  cli_cmd_code: '以 Code Mode 运行编排程序',
+  cli_cmd_sessions: '查看并恢复历史会话',
+  cli_cmd_doctor: '检查模型、密钥与工具配置',
+  cli_slash_title: '交互命令',
+  cli_slash_note: '输入 / 即出现联想面板，↑↓ 选择',
+  cli_slash_more: '完整命令与选项见仓库 README。',
+  cli_start_title: '快速开始',
+  cli_step1: '全局安装，得到 auraxis 命令',
+  cli_step2: '加密保存 API Key 到本机',
+  cli_step3: '进入交互模式，直接开始任务',
+  cli_binary_title: '原生二进制',
+  cli_binary_desc: '8 个平台的自包含可执行文件，内置运行时，不需要 Node。附带 SHA256SUMS.txt 校验和。',
+  cli_binary_link: '前往 GitHub Releases ↗',
+  cli_cta_repo: '查看源码',
+  cli_cta_back: '返回桌面端介绍',
 
   features_title: '外置于系统的透明能力',
   features_subtitle:
@@ -611,7 +699,6 @@ const zh: Translations = {
   eco_cli_title: 'Auraxis CLI',
   eco_cli_desc:
     '独立发布的本地 Agent 命令行工作台：ReAct 工具循环、Code Mode、MCP、权限审批与会话恢复，不依赖桌面端。npm 安装或下载原生二进制即可使用。',
-  eco_cli_release: 'GitHub Releases ↗',
   eco_ts_title: 'TypeScript SDK',
   eco_ts_desc:
     'packages/auraxis-sdk 通过 TCP JSON-RPC 与桌面端通信，可嵌入自己的工具链。',
@@ -799,6 +886,8 @@ const en: Translations = {
   nav_demo: 'Demo',
   nav_architecture: 'Architecture',
   nav_tools: 'Tools',
+  nav_cli: 'CLI',
+
   nav_download: 'Download',
   nav_github_label: 'Auraxis Agent GitHub Repository',
   nav_solution: 'Features',
@@ -868,6 +957,49 @@ const en: Translations = {
   download_cli_release: 'CLI Releases ↗',
   download_cli_copy: 'Copy',
   download_cli_hint: 'Installs the global `auraxis` command — or grab native binaries for 8 platforms (SHA256 checksums included), no Node required.',
+  cli_teaser_title: 'Auraxis CLI',
+  cli_teaser_desc: 'The standalone command line version: run the full ReAct tool loop, Code Mode and approval gates in your terminal — no desktop app required.',
+  cli_teaser_cta: 'Explore the CLI',
+  cli_kicker: 'Auraxis CLI',
+  cli_page_title: 'The local agent workbench for your terminal',
+  cli_page_desc:
+    'Auraxis CLI ships as its own package: no desktop app required. It runs the same ReAct tool loop, Code Mode and approval gates right in your terminal, with model, protocol, sandbox and reasoning effort switchable per task.',
+  cli_install_label: 'Install',
+  cli_meta_node: 'Node 22.12+ — or use a native binary with the runtime embedded',
+  cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
+  cli_meta_releases: 'Download native binaries ↗',
+  cli_features_title: 'Core capabilities',
+  cli_f1_title: 'Terminal interaction',
+  cli_f1_desc: 'Streaming text with collapsible thinking, an execution timeline, input suggestions and a command palette — built for long-running tasks.',
+  cli_f2_title: 'Two ways to run',
+  cli_f2_desc: 'Interactive TUI or headless `--run`; headless mode emits NDJSON, ready for scripts and pipelines.',
+  cli_f3_title: 'Safety boundaries',
+  cli_f3_desc: 'ask / plan / auto approval policies layered over read / workspace-write / full / container sandboxes; dangerous tools ask every time.',
+  cli_f4_title: 'Extensible',
+  cli_f4_desc: 'MCP servers, skills, plugins, hooks and custom models all plug in, sharing the same config shape as the desktop app.',
+  cli_f5_title: 'Models & protocols',
+  cli_f5_desc: 'deepseek-flash by default, with Chat Completions / Responses / Anthropic protocol switching and adjustable reasoning effort.',
+  cli_f6_title: 'Context management',
+  cli_f6_desc: 'Context budgets, automatic summarisation when exceeded, tool-output trimming and session resume keep long tasks on track.',
+  cli_usage_title: 'Common usage',
+  cli_usage_subtitle: 'Type slash commands inside the TUI, or drive a single run with flags in headless mode.',
+  cli_cmd_run: 'Interactive TUI — just start talking',
+  cli_cmd_headless: 'Run one task headlessly, CI-friendly',
+  cli_cmd_code: 'Execute an orchestration program in Code Mode',
+  cli_cmd_sessions: 'List and resume past sessions',
+  cli_cmd_doctor: 'Check models, keys and tool configuration',
+  cli_slash_title: 'Interactive commands',
+  cli_slash_note: 'Type / for the suggestion panel, pick with ↑↓',
+  cli_slash_more: 'Full command and flag reference lives in the repository README.',
+  cli_start_title: 'Quick start',
+  cli_step1: 'Install globally to get the auraxis command',
+  cli_step2: 'Store your API key locally, encrypted',
+  cli_step3: 'Enter interactive mode and start a task',
+  cli_binary_title: 'Native binaries',
+  cli_binary_desc: 'Self-contained executables for 8 platforms with the runtime embedded — no Node needed. SHA256SUMS.txt included.',
+  cli_binary_link: 'Open GitHub Releases ↗',
+  cli_cta_repo: 'View source',
+  cli_cta_back: 'Back to the desktop app',
 
   features_title: 'Transparent Capabilities, Outside the System',
   features_subtitle:
@@ -1027,7 +1159,6 @@ const en: Translations = {
   eco_cli_title: 'Auraxis CLI',
   eco_cli_desc:
     'A standalone local agent workbench for the terminal: ReAct tool loop, Code Mode, MCP, approval prompts and session resume — no desktop app required. Install from npm or grab a native binary.',
-  eco_cli_release: 'GitHub Releases ↗',
   eco_ts_title: 'TypeScript SDK',
   eco_ts_desc:
     'packages/auraxis-sdk talks to the desktop app over TCP JSON-RPC, ready to embed in your own toolchain.',

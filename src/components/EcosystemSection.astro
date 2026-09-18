@@ -1,5 +1,6 @@
 ---
 import { Terminal, Braces, Code2, Puzzle } from 'lucide-react';
+const BASE = import.meta.env.BASE_URL;
 
 const ECOSYSTEM = [
   {
@@ -9,7 +10,7 @@ const ECOSYSTEM = [
     title: 'Auraxis CLI',
     desc: '独立发布的本地 Agent 命令行工作台：ReAct 工具循环、Code Mode、MCP、权限审批与会话恢复，不依赖桌面端。',
     command: 'auraxis --run "任务"',
-    href: 'https://github.com/yth1120/Auraxis-CLI',
+    href: `${BASE}cli/`,
   },
   {
     icon: Braces,
@@ -55,8 +56,6 @@ const ECOSYSTEM = [
           {href ? (
             <a
               href={href}
-              target="_blank"
-              rel="noopener noreferrer"
               class="group/title inline-flex items-center gap-1 text-sm font-medium text-ink dark:text-ivory hover:text-brand-accent transition-colors"
             >
               <span data-i18n={titleKey}>{title}</span>
@@ -67,16 +66,6 @@ const ECOSYSTEM = [
           )}
           <p class="text-[13px] text-brand-muted mt-1.5 leading-relaxed flex-1" data-i18n={descKey}>{desc}</p>
           <code class="mt-4 block text-[10px] font-mono text-brand-ivory code-dark-box border border-brand-border rounded px-2.5 py-1.5 truncate">{command}</code>
-          {href ? (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-3 inline-flex items-center gap-1 text-[11px] font-mono text-brand-accent hover:text-brand-ivory transition-colors"
-            >
-              <span data-i18n="eco_cli_release">GitHub Releases ↗</span>
-            </a>
-          ) : null}
         </div>
       ))}
     </div>

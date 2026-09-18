@@ -353,8 +353,8 @@ const zh: Translations = {  nav_demo: '演示',
   cli_dl_license: 'MIT 开源 · 本地运行',
   cli_dl_readme: '查看仓库 README ↗',
   cli_dl_note: '附 SHA256SUMS.txt 校验和；npm 包名 @auraxis/cli，安装后命令为 auraxis。',
-  cli_shot_alt: 'Auraxis CLI 交互模式界面：执行时间轴、工具调用与状态行',
-  cli_shot_caption: '一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。',
+  cli_shot_alt: 'Auraxis CLI 启动卡片：模型、模式、思考强度、项目路径与快捷命令',
+  cli_shot_caption: '真实终端会话：启动卡片、模型与思考强度设置、多轮对话与可折叠思考。',
   cli_binary_link: '前往 GitHub Releases ↗',
   feature1_title: '统一 ReAct 步进引擎',
   feature1_desc:
@@ -673,8 +673,8 @@ const en: Translations = {  nav_demo: 'Demo',
   cli_dl_license: 'MIT licensed · runs locally',
   cli_dl_readme: 'Repository README ↗',
   cli_dl_note: 'SHA256SUMS.txt included; the npm package is @auraxis/cli and installs the auraxis command.',
-  cli_shot_alt: 'Auraxis CLI interactive mode: execution timeline, tool calls and status line',
-  cli_shot_caption: 'A real run: write a file, read it back — the timeline and durations come from the actual output.',
+  cli_shot_alt: 'Auraxis CLI startup card: model, mode, reasoning effort, project path and quick commands',
+  cli_shot_caption: 'A real terminal session: startup card, model and reasoning settings, multi-turn chat with collapsible thinking.',
   cli_binary_link: 'Open GitHub Releases ↗',
   feature1_title: 'Unified ReAct Step Engine',
   feature1_desc:

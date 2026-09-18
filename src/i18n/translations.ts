@@ -67,6 +67,8 @@ export interface Translations {
   download_cli_title: string;
   download_cli_desc: string;
   download_cli_release: string;
+  download_cli_copy: string;
+  download_cli_hint: string;
 
   // Features
   features_title: string;
@@ -436,6 +438,8 @@ const zh: Translations = {
   download_cli_desc:
     '独立仓库的本地 Agent 命令行工作台，无需安装桌面端。npm 一键安装，或下载 8 个平台的原生二进制（含 SHA256 校验和）。',
   download_cli_release: 'CLI Releases ↗',
+  download_cli_copy: '复制',
+  download_cli_hint: '装完全局命令 auraxis；也可下载 8 个平台的原生二进制（含 SHA256 校验和），无需 Node。',
 
   features_title: '外置于系统的透明能力',
   features_subtitle:
@@ -848,6 +852,8 @@ const en: Translations = {
   download_cli_desc:
     'A standalone local agent workbench in its own repository — no desktop app required. Install from npm, or grab native binaries for 8 platforms with SHA256 checksums.',
   download_cli_release: 'CLI Releases ↗',
+  download_cli_copy: 'Copy',
+  download_cli_hint: 'Installs the global `auraxis` command — or grab native binaries for 8 platforms (SHA256 checksums included), no Node required.',
 
   features_title: 'Transparent Capabilities, Outside the System',
   features_subtitle:

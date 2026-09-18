@@ -1,10 +1,11 @@
 ---
 // 首页第二屏：左边命令下载卡片、右边终端截图
-import { ArrowRight } from 'lucide-react';
 import CliInstallStrip from './CliInstallStrip.astro';
 
 const BASE = import.meta.env.BASE_URL;
 const SHOT = `${BASE}screenshots/cli-session.png`;
+const RELEASES = 'https://github.com/yth1120/Auraxis-CLI/releases/latest';
+const README = 'https://github.com/yth1120/Auraxis-CLI#readme';
 ---
 
 <section id="cli" class="py-20 border-t border-brand-hairline dark:border-brand-border/80 transition-colors">
@@ -23,11 +24,6 @@ const SHOT = `${BASE}screenshots/cli-session.png`;
       <!-- 左：命令下载卡片 -->
       <div class="reveal" style="--reveal-delay: 120ms">
         <CliInstallStrip labelKey="cli_install_label" />
-        <a
-          href={`${BASE}cli/`}
-          class="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-brand-accent hover:text-brand-ivory transition-colors"
-          data-i18n="home_cli_more"
-        >查看 CLI 完整文档 →</a>
       </div>
 
       <!-- 右：终端截图 -->
@@ -42,12 +38,12 @@ const SHOT = `${BASE}screenshots/cli-session.png`;
             class="w-full h-auto block"
             loading="eager"
           />
-          <figcaption class="px-4 py-3 border-t border-brand-border/70 text-[11px] font-mono text-brand-muted flex items-center justify-between gap-4">
+          <figcaption class="px-4 py-3 border-t border-brand-border/70 text-[11px] font-mono text-brand-muted flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <span data-i18n="cli_shot_caption">一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。</span>
-            <a href={`${BASE}cli/`} class="flex-shrink-0 text-brand-accent hover:text-brand-ivory transition-colors inline-flex items-center gap-1">
-              <span data-i18n="home_cli_cta">CLI 详情</span>
-              <ArrowRight className="w-3 h-3" aria-hidden="true" />
-            </a>
+            <span class="flex items-center gap-3 flex-shrink-0">
+              <a href={README} target="_blank" rel="noopener noreferrer" class="text-brand-muted hover:text-brand-ivory transition-colors" data-i18n="cli_dl_readme">查看仓库 README ↗</a>
+              <a href={RELEASES} target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-brand-ivory transition-colors inline-flex items-center gap-1" data-i18n="cli_binary_link">前往 GitHub Releases ↗</a>
+            </span>
           </figcaption>
         </figure>
       </div>

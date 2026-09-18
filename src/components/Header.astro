@@ -7,23 +7,20 @@ import GitHubIcon from './GitHubIcon.astro';
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const BASE = import.meta.env.BASE_URL;
 
-// CLI 页是与主站并列的独立页：品牌名、导航与版本都以 CLI 为主体。
+// CLI 内容在首页内（#cli 第二屏），不再有独立的第二个界面。
 const { variant = 'main' } = Astro.props as { variant?: 'main' | 'cli' };
 const isCli = variant === 'cli';
 
 const NAV_LINKS = isCli
   ? [
-      { href: '#install', key: 'nav_cli_install', label: '安装' },
-      { href: '#features', key: 'nav_cli_features', label: '能力' },
-      { href: '#commands', key: 'nav_cli_commands', label: '命令' },
-      { href: '#start', key: 'nav_cli_start', label: '快速开始' },
+      { href: `${BASE}#cli`, key: 'nav_cli', label: 'CLI' },
       { href: `${BASE}`, key: 'nav_cli_desktop', label: '桌面端' },
     ]
   : [
       { href: '#solution', key: 'nav_solution', label: '功能' },
       { href: '#demo', key: 'nav_demo', label: '演示' },
       { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
-      { href: `${BASE}cli/`, key: 'nav_cli', label: 'CLI' },
+      { href: '#cli', key: 'nav_cli', label: 'CLI' },
       { href: '#download', key: 'nav_download', label: '下载' },
     ];
 

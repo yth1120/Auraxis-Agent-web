@@ -85,6 +85,8 @@ export interface Translations {
   cli_meta_node: string;
   cli_meta_platforms: string;
   cli_meta_releases: string;
+  cli_shot_alt: string;
+  cli_shot_caption: string;
   cli_features_title: string;
   cli_f1_title: string;
   cli_f1_desc: string;
@@ -505,6 +507,8 @@ const zh: Translations = {
   cli_meta_node: 'Node 22.12+ 或使用内置运行时的原生二进制',
   cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
   cli_meta_releases: '下载原生二进制 ↗',
+  cli_shot_alt: 'Auraxis CLI 交互模式界面：执行时间轴、工具调用与状态行',
+  cli_shot_caption: '一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。',
   cli_features_title: '核心能力',
   cli_f1_title: '终端交互',
   cli_f1_desc: '流式文本与思考折叠、执行时间轴、输入联想与命令面板，都是为长时间跑任务设计的。',
@@ -968,6 +972,8 @@ const en: Translations = {
   cli_meta_node: 'Node 22.12+ — or use a native binary with the runtime embedded',
   cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
   cli_meta_releases: 'Download native binaries ↗',
+  cli_shot_alt: 'Auraxis CLI interactive mode: execution timeline, tool calls and status line',
+  cli_shot_caption: 'A real run: write a file, read it back — the timeline and durations come from the actual output.',
   cli_features_title: 'Core capabilities',
   cli_f1_title: 'Terminal interaction',
   cli_f1_desc: 'Streaming text with collapsible thinking, an execution timeline, input suggestions and a command palette — built for long-running tasks.',

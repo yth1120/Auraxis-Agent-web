@@ -10,6 +10,7 @@ import { SquareTerminal, ShieldCheck, Layers, Plug, Gauge, Cpu, Terminal } from 
 
 const BASE = import.meta.env.BASE_URL;
 const RELEASES = 'https://github.com/yth1120/Auraxis-CLI/releases/latest';
+const SHOT = `${BASE}screenshots/cli-session.png`;
 
 const COMMANDS = [
   '/model', '/permission', '/reasoning', '/sandbox', '/provider', '/api-family', '/vision-detail',
@@ -83,25 +84,48 @@ const STEPS = [
   <Header />
 
   <main class="relative z-10 pt-28">
-    <!-- Hero：定位 + 安装 -->
+    <!-- Hero：左安装命令 + 右终端截图 -->
     <section class="max-w-6xl mx-auto px-6 pb-12">
-      <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4" data-i18n="cli_kicker">Auraxis CLI</div>
-      <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.15] text-ink dark:text-ivory max-w-3xl" data-i18n="cli_page_title">
-        终端里的本地 Agent 工作台
-      </h1>
-      <p class="mt-5 text-brand-muted text-base sm:text-lg leading-relaxed max-w-3xl" data-i18n="cli_page_desc">
-        Auraxis CLI 是独立发布的命令行版本：不依赖桌面端，直接在你自己的终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批。模型、协议、沙箱与思考强度都可以按任务切换。
-      </p>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-12 items-center">
+        <div>
+          <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4" data-i18n="cli_kicker">Auraxis CLI</div>
+          <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.15] text-ink dark:text-ivory" data-i18n="cli_page_title">
+            终端里的本地 Agent 工作台
+          </h1>
+          <p class="mt-5 text-brand-muted text-base leading-relaxed" data-i18n="cli_page_desc">
+            Auraxis CLI 是独立发布的命令行版本：不依赖桌面端，直接在你自己的终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批。模型、协议、沙箱与思考强度都可以按任务切换。
+          </p>
 
-      <div class="mt-8 max-w-4xl">
-        <CliInstallStrip labelKey="cli_install_label" />
-      </div>
+          <div class="mt-7">
+            <CliInstallStrip labelKey="cli_install_label" />
+          </div>
 
-      <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-mono text-brand-faint">
-        <span data-i18n="cli_meta_node">Node 22.12+ 或使用内置运行时的原生二进制</span>
-        <span class="hidden sm:inline text-brand-hairline">|</span>
-        <span data-i18n="cli_meta_platforms">Windows / macOS / Linux · x64 / arm64 · glibc / musl</span>
-        <a href={RELEASES} target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-brand-ivory transition-colors" data-i18n="cli_meta_releases">下载原生二进制 ↗</a>
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs font-mono text-brand-faint">
+            <span data-i18n="cli_meta_node">Node 22.12+ 或原生二进制（内置运行时）</span>
+            <span class="text-brand-hairline">|</span>
+            <a href={RELEASES} target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-brand-ivory transition-colors" data-i18n="cli_meta_releases">下载原生二进制 ↗</a>
+          </div>
+          <p class="mt-2 text-[11px] font-mono text-brand-faint" data-i18n="cli_meta_platforms">
+            Windows / macOS / Linux · x64 / arm64 · glibc / musl
+          </p>
+        </div>
+
+        <div class="reveal" style="--reveal-delay: 240ms">
+          <figure class="terminal-dark-box border border-brand-border rounded-2xl overflow-hidden shadow-[0_24px_80px_-32px_rgba(0,0,0,0.65)]">
+            <img
+              src={SHOT}
+              alt="Auraxis CLI 交互模式：执行时间轴、工具调用与状态行"
+              data-i18n-alt="cli_shot_alt"
+              width="964"
+              height="684"
+              class="w-full h-auto block"
+              loading="eager"
+            />
+            <figcaption class="px-4 py-3 border-t border-brand-border/70 text-[11px] font-mono text-brand-muted" data-i18n="cli_shot_caption">
+              一次真实运行：写入文件 → 读回确认，执行时间轴与耗时都来自实际输出。
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 

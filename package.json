@@ -10,7 +10,9 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "audit:click": "node scripts/click-audit.mjs",
+    "audit:click:live": "node scripts/click-audit.mjs https://yth1120.github.io/Auraxis-Agent-web/"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

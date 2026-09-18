@@ -7,17 +7,34 @@ import GitHubIcon from './GitHubIcon.astro';
 const REPO_URL = 'https://github.com/yth1120/Auraxis-Agent';
 const BASE = import.meta.env.BASE_URL;
 
-// 子页面（如 /cli/）上的锚点要指回首页，否则会落在当前页找不到的锚点上
-const onHome = Astro.url.pathname.replace(/\/index\.html$/, '/') === BASE;
-const anchor = (id: string) => (onHome ? id : `${BASE}${id}`);
+// CLI 页是与主站并列的独立页：品牌名、导航与版本都以 CLI 为主体。
+const { variant = 'main' } = Astro.props as { variant?: 'main' | 'cli' };
+const isCli = variant === 'cli';
 
-const NAV_LINKS = [
-  { href: anchor('#solution'), key: 'nav_solution', label: '功能' },
-  { href: anchor('#demo'), key: 'nav_demo', label: '演示' },
-  { href: anchor('#tools'), key: 'nav_tools', label: '工具矩阵' },
-  { href: `${BASE}cli/`, key: 'nav_cli', label: 'CLI' },
-  { href: anchor('#download'), key: 'nav_download', label: '下载' },
-];
+const NAV_LINKS = isCli
+  ? [
+      { href: '#install', key: 'nav_cli_install', label: '安装' },
+      { href: '#features', key: 'nav_cli_features', label: '能力' },
+      { href: '#commands', key: 'nav_cli_commands', label: '命令' },
+      { href: '#start', key: 'nav_cli_start', label: '快速开始' },
+      { href: `${BASE}`, key: 'nav_cli_desktop', label: '桌面端' },
+    ]
+  : [
+      { href: '#solution', key: 'nav_solution', label: '功能' },
+      { href: '#demo', key: 'nav_demo', label: '演示' },
+      { href: '#tools', key: 'nav_tools', label: '工具矩阵' },
+      { href: `${BASE}cli/`, key: 'nav_cli', label: 'CLI' },
+      { href: '#download', key: 'nav_download', label: '下载' },
+    ];
+
+const brandName = isCli ? 'Auraxis CLI' : 'Auraxis Agent';
+const brandBadge = isCli ? 'v1.1.0' : 'v3.4.0';
+const brandHref = isCli ? '#top' : `${BASE}#top`;
+const repoHref = isCli ? 'https://github.com/yth1120/Auraxis-CLI' : REPO_URL;
+const ctaHref = isCli ? 'https://github.com/yth1120/Auraxis-CLI/releases/latest' : `${BASE}#download`;
+const ctaExternal = isCli;
+const ctaKey = isCli ? 'nav_cli_release' : 'nav_download';
+const ctaLabel = isCli ? 'CLI Releases' : '下载';
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 pointer-events-none px-2 sm:px-4 pt-2">
@@ -27,10 +44,10 @@ const NAV_LINKS = [
     style="--auraxis-topbar-width: min(72rem, calc(100vw - 1.25rem))"
     class="auraxis-topbar pointer-events-auto mx-auto w-full max-w-6xl flex items-center justify-between gap-2 relative rounded-full border border-brand-hairline dark:border-brand-border bg-brand-page/85 dark:bg-brand-black/85 backdrop-blur-xl px-2.5 sm:px-3 shadow-[0_8px_24px_-16px_rgba(17,18,22,0.32)] dark:shadow-[0_12px_32px_-16px_rgba(0,0,0,0.72)]"
   >
-    <a href="#top" class="flex items-center gap-2.5 flex-shrink-0" data-i18n-aria="nav_home" aria-label="Auraxis 首页">
+    <a href={brandHref} class="flex items-center gap-2.5 flex-shrink-0" data-i18n-aria="nav_home" aria-label="Auraxis 首页">
       <img src={`${BASE}auraxis-logo.png`} alt="Auraxis Logo" width="40" height="40" class="h-10 w-auto" />
-      <span class="hidden sm:inline font-semibold text-base tracking-tight text-ink dark:text-ivory">Auraxis Agent</span>
-      <span class="topbar-version hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">v3.4.0</span>
+      <span class="hidden sm:inline font-semibold text-base tracking-tight text-ink dark:text-ivory">{brandName}</span>
+      <span class="topbar-version hidden sm:inline-flex text-[10px] text-brand-faint font-mono border border-brand-hairline dark:border-brand-border px-1.5 py-0.5 rounded-full">{brandBadge}</span>
     </a>
 
     <!-- 居中导航 -->
@@ -50,14 +67,14 @@ const NAV_LINKS = [
       <LanguageToggle client:idle />
       <ThemeToggle client:idle />
 
-      <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-brand-hairline dark:border-brand-border text-xs font-medium text-brand-muted hover:text-ink dark:hover:text-ivory hover:bg-black/5 dark:hover:bg-white/5 transition-colors" aria-label="Auraxis GitHub">
+      <a href={repoHref} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-brand-hairline dark:border-brand-border text-xs font-medium text-brand-muted hover:text-ink dark:hover:text-ivory hover:bg-black/5 dark:hover:bg-white/5 transition-colors" aria-label="Auraxis GitHub">
         <GitHubIcon size={14} />
         <span>GitHub</span>
       </a>
 
-      <a href="#download" data-i18n-aria="nav_download" aria-label="下载" class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-3 h-8 inline-flex items-center gap-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
+      <a href={ctaHref} target={ctaExternal ? '_blank' : undefined} rel={ctaExternal ? 'noopener noreferrer' : undefined} data-i18n-aria={ctaKey} aria-label={ctaLabel} class="bg-ink dark:bg-ivory hover:bg-black/90 dark:hover:bg-white/90 text-ivory dark:text-ink font-medium text-xs px-3 h-8 inline-flex items-center gap-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40">
         <Download className="w-3.5 h-3.5" aria-hidden="true" />
-        <span class="hidden sm:inline" data-i18n="nav_download">下载</span>
+        <span class="hidden sm:inline" data-i18n={ctaKey}>{ctaLabel}</span>
       </a>
     </div>
   </div>

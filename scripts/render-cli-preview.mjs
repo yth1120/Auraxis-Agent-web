@@ -41,19 +41,18 @@ const BORDER = '#2A2E35';
 const C = { d: INK, i: MUTED, f: FAINT, a: ACCENT, s: SUCCESS, w: WARNING };
 
 /**
- * 每行由若干片段组成：col 指定起始列，end 指定右对齐结束列。
- * 内容全部使用 ASCII —— 渲染器只保证等宽字体对 ASCII 的字宽精确等于 CELL，
- * 混入 CJK 会因字体回退破坏列对齐（这也是终端界面本身最常见的样子）。
+ * 每行是片段数组；col 指定起始列，end 指定右对齐结束列（用于耗时列）。
+ * 文本与真实 TUI 一致，使用中文界面文案；框线字符由矢量线条绘制（见 DRAW）。
  */
 const LINES = [
-  [[{ t: 'model ', c: 'i' }, { t: 'deepseek-flash', c: 'd' }, { t: '  mode ', c: 'i' }, { t: 'auto', c: 'a' }, { t: '  thinking ', c: 'i' }, { t: 'high', c: 'd' }]],
-  [[{ t: 'path ', c: 'i' }, { t: '~/projects/demo', c: 'd' }, { t: '  branch ', c: 'i' }, { t: 'main', c: 'd' }, { t: 'session 00:00:07', end: 84, c: 'i' }]],
+  [[{ t: '模型 ', c: 'i' }, { t: 'deepseek-flash', c: 'd' }, { t: ' · 模式 ', c: 'i' }, { t: 'auto', c: 'a' }, { t: ' · 思考 ', c: 'i' }, { t: 'high', c: 'd' }]],
+  [[{ t: '路径 ', c: 'i' }, { t: '~/projects/demo', c: 'd' }, { t: ' · 分支 ', c: 'i' }, { t: 'main', c: 'd' }, { t: '会话 00:00:07', end: 84, c: 'i' }]],
   [],
-  [[{ t: '❯ ', c: 'a' }, { t: 'write ok into shot.txt, then read it back to confirm', c: 'd' }]],
+  [[{ t: '❯ ', c: 'a' }, { t: '在 shot.txt 写入 ok，然后读回来确认', c: 'd' }]],
   [],
-  [[{ t: '● ', c: 'w' }, { t: 'running', c: 'w' }, { t: '  · 4 steps · 1.3s', c: 'i' }]],
+  [[{ t: '● ', c: 'w' }, { t: '执行中', c: 'w' }, { t: ' · 4 步 · 1.3s', c: 'i' }]],
   [
-    [{ t: '╭─ ✓ ☰ ListFiles ', c: 'i' }, { t: 'path: .', c: 'f' }],
+    [{ t: '╭─ ✓ ▤ ListFiles ', c: 'i' }, { t: 'path: .', c: 'f' }],
     [{ t: '1ms', end: DURATION_END_COL, c: 'i' }],
   ],
   [[{ t: '│  ⎿ ', c: 'f' }, { t: '- demo', c: 'f' }]],
@@ -66,18 +65,21 @@ const LINES = [
     [{ t: '├─ ✓ ✎ Write ', c: 'i' }, { t: 'file_path: shot.txt', c: 'f' }],
     [{ t: '2ms', end: DURATION_END_COL, c: 'i' }],
   ],
-  [[{ t: '│  ⎿ ', c: 'f' }, { t: 'OK wrote shot.txt', c: 'f' }]],
+  [[{ t: '│  ⎿ ', c: 'f' }, { t: 'OK 已写入 shot.txt', c: 'f' }]],
   [
     [{ t: '╰─ ✓ ▤ Read ', c: 'i' }, { t: 'file_path: shot.txt', c: 'f' }],
     [{ t: '1ms', end: DURATION_END_COL, c: 'i' }],
   ],
   [[{ t: '   ⎿ ', c: 'f' }, { t: '1| ok', c: 'f' }]],
   [],
-  [[{ t: 'Done: wrote "ok" into shot.txt and read it back to confirm line 1.', c: 'd' }]],
+  [[{ t: '已完成：shot.txt 已写入 ok，读回确认第 1 行为 ok。', c: 'd' }]],
   [],
-  [[{ t: 'model ', c: 'i' }, { t: 'deepseek-flash', c: 'd' }, { t: '  mode ', c: 'i' }, { t: 'auto', c: 'a' }, { t: '  thinking ', c: 'i' }, { t: 'high', c: 'd' }]],
-  [[{ t: '✓ ', c: 's' }, { t: 'ready', c: 's' }, { t: ' · iter 4 · tools 4 · 14k in / 0.4k out', c: 'f' }]],
+  [[{ t: '模型 ', c: 'i' }, { t: 'deepseek-flash', c: 'd' }, { t: ' · 模式 ', c: 'i' }, { t: 'auto', c: 'a' }, { t: ' · 思考 ', c: 'i' }, { t: 'high', c: 'd' }]],
+  [[{ t: '✓ ', c: 's' }, { t: '就绪', c: 's' }, { t: ' · iter 4 · tools 4 · 14k in / 0.4k out', c: 'f' }]],
 ];
+
+/** 框线字符用几何线条绘制：Consolas 缺少这些字形，交给字体回退会错位。 */
+const DRAW = new Set(['╭', '├', '╰', '│', '─']);
 
 const HEIGHT = CONTENT_TOP + LINES.length * LINE_HEIGHT + 26;
 
@@ -110,25 +112,87 @@ function cellWidth(text) {
 
 const xOf = (col) => LEFT + (col - 1) * CELL;
 
-/**
- * 一行渲染成一个 <text>，内部用 <tspan> 串联各片段，让渲染器自己推进字符位置；
- * 这样既不会互相覆盖，颜色也能逐段设置。右对齐片段用空格补齐到目标列。
- */
+const MONO = 'Consolas, monospace';
+const CJK = "'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif";
+const BOX = "'Nimbus Mono PS', 'DejaVu Sans Mono', monospace";
+
+const boxTop = (baseline) => baseline - FONT_SIZE * 0.3;
+const boxMid = (baseline) => baseline - FONT_SIZE * 0.29;
+const boxBottom = (baseline) => baseline - 1;
+
+/** 单个单元格上绘制一段 1px 线条，用于框线字符。 */
+function edge(x1, y1, x2, y2, color) {
+  return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="${color}" stroke-width="1.4" stroke-linecap="round" fill="none"/>`;
+}
+
+function drawGlyph(ch, x, baseline, color) {
+  const mid = x + CELL / 2;
+  const top = boxTop(baseline);
+  const middle = boxMid(baseline);
+  const bottom = boxBottom(baseline);
+  switch (ch) {
+    case '─':
+      return edge(x, middle, x + CELL, middle, color);
+    case '│':
+      return edge(mid, top - 4, mid, bottom + 4, color);
+    case '├':
+      return edge(mid, top - 4, mid, bottom + 4, color) + edge(mid, middle, x + CELL, middle, color);
+    case '╭':
+      return `<path d="M${mid.toFixed(1)} ${bottom.toFixed(1)} L${mid.toFixed(1)} ${(middle + 3).toFixed(1)} Q${mid.toFixed(1)} ${middle.toFixed(1)} ${(mid + 3).toFixed(1)} ${middle.toFixed(1)} L${(x + CELL).toFixed(1)} ${middle.toFixed(1)}" stroke="${color}" stroke-width="1.4" stroke-linecap="round" fill="none"/>`;
+    case '╰':
+      return `<path d="M${mid.toFixed(1)} ${top.toFixed(1)} L${mid.toFixed(1)} ${(middle - 3).toFixed(1)} Q${mid.toFixed(1)} ${middle.toFixed(1)} ${(mid + 3).toFixed(1)} ${middle.toFixed(1)} L${(x + CELL).toFixed(1)} ${middle.toFixed(1)}" stroke="${color}" stroke-width="1.4" stroke-linecap="round" fill="none"/>`;
+    default:
+      return '';
+  }
+}
+
+/** 一行里的片段按列推进：CJK 段整段交给雅黑，其余交给等宽字体，框线字符走矢量线条。 */
 function renderLine(segments, baseline) {
-  const first = segments[0];
-  const startCol = first.col ?? 1;
-  const spans = [];
-  let cursor = startCol;
+  const out = [];
+  let cursor = segments[0].col ?? 1;
   for (const seg of segments) {
     const targetCol = seg.col ?? cursor;
-    const pad = Math.max(0, targetCol - cursor);
     const text = seg.end ? ' '.repeat(Math.max(0, seg.end - cellWidth(seg.t) - cursor + 1)) + seg.t : seg.t;
-    spans.push(
-      `<tspan fill="${C[seg.c] ?? INK}" xml:space="preserve">${escapeXml(' '.repeat(pad) + text)}</tspan>`,
-    );
+    let col = targetCol;
+    const color = C[seg.c] ?? INK;
+    let run = '';
+    let runCjk = null;
+    let runStart = targetCol;
+    const flush = () => {
+      if (!run) return;
+      out.push(
+        `<text x="${xOf(runStart).toFixed(1)}" y="${baseline.toFixed(1)}" fill="${color}" font-family="${runCjk ? CJK : MONO}" font-size="${FONT_SIZE}" xml:space="preserve">${escapeXml(run)}</text>`,
+      );
+      run = '';
+    };
+    for (const ch of text) {
+      if (DRAW.has(ch)) {
+        flush();
+        runCjk = null;
+        const x = xOf(col);
+        // 先用回退字体把字形画出来（保证字符位置不漂移），再叠加矢量线条。
+        out.push(
+          `<text x="${x.toFixed(1)}" y="${baseline.toFixed(1)}" fill="${BG}" font-family="${BOX}" font-size="${FONT_SIZE}" xml:space="preserve">${escapeXml(ch)}</text>`,
+        );
+        out.push(drawGlyph(ch, x, baseline, color));
+        col += 1;
+        continue;
+      }
+      const cjk = isWide(ch);
+      if (run && cjk !== runCjk) {
+        flush();
+      }
+      if (!run) {
+        runCjk = cjk;
+        runStart = col;
+      }
+      run += ch;
+      col += cjk ? 2 : 1;
+    }
+    flush();
     cursor = targetCol + cellWidth(text);
   }
-  return `<text x="${xOf(startCol).toFixed(1)}" y="${baseline.toFixed(1)}" font-family="'Nimbus Mono PS', 'DejaVu Sans Mono', Consolas, 'Courier New', monospace" font-size="${FONT_SIZE}" xml:space="preserve">${spans.join('')}</text>`;
+  return out.join('');
 }
 
 const body = [];

@@ -1,6 +1,6 @@
 ---
 import SmartDownloader from '../react/SmartDownloader';
-import { MonitorCheck, ListChecks, Terminal, Copy } from 'lucide-react';
+import { MonitorCheck, ListChecks } from 'lucide-react';
 import releases from '../data/releases.json';
 ---
 
@@ -54,46 +54,6 @@ import releases from '../data/releases.json';
         </a>
       </div>
 
-      <!-- 命令行版本：独立仓库与独立发布节奏 -->
-      <div class="mt-10 pt-8 border-t border-brand-border/60 max-w-3xl mx-auto">
-        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-          <div>
-            <h3 class="text-sm font-medium text-ivory flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-brand-accent" aria-hidden="true" />
-              <span data-i18n="download_cli_title">Auraxis CLI</span>
-            </h3>
-            <p class="text-[13px] text-brand-muted mt-2 leading-relaxed" data-i18n="download_cli_desc">
-              独立仓库的本地 Agent 命令行工作台，无需安装桌面端。npm 一键安装，或下载 8 个平台的原生二进制（含校验和）。
-            </p>
-          </div>
-          <a href="https://github.com/yth1120/Auraxis-CLI/releases/latest" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-mono text-brand-accent hover:text-brand-ivory transition-colors">
-            <span data-i18n="download_cli_release">CLI Releases ↗</span>
-          </a>
-        </div>
-
-        <!-- 显眼的一条命令：整块可复制 -->
-        <div class="mt-5 terminal-dark-box border border-brand-border rounded-xl px-4 sm:px-5 py-4 flex items-center justify-between gap-4 ring-1 ring-brand-accent/15">
-          <code class="text-sm sm:text-base font-mono text-brand-ivory flex items-baseline gap-2.5 min-w-0">
-            <span class="text-brand-accent select-none" aria-hidden="true">❯</span>
-            <span class="truncate">npm i -g @auraxis/cli</span>
-          </code>
-          <button
-            type="button"
-            data-copy-text="npm i -g @auraxis/cli"
-            class="flex-shrink-0 inline-flex items-center gap-1.5 text-[11px] font-mono text-brand-muted hover:text-brand-ivory transition-colors px-2.5 py-1.5 rounded-lg border border-brand-border hover:border-brand-accent/50 hover:bg-white/5"
-            data-i18n-aria="dev_copy_button"
-            data-i18n-title="dev_copy_title"
-            aria-label="复制命令"
-            title="点击复制"
-          >
-            <Copy className="w-3.5 h-3.5" aria-hidden="true" />
-            <span data-i18n="download_cli_copy">复制</span>
-          </button>
-        </div>
-        <p class="mt-2.5 text-[11px] font-mono text-brand-faint" data-i18n="download_cli_hint">
-          装完全局命令 auraxis；也可下载 8 个平台的原生二进制（含 SHA256 校验和），无需 Node。
-        </p>
-      </div>
     </div>
   </div>
 </section>

@@ -85,7 +85,7 @@ const STEPS = [
 
   <main class="relative z-10 pt-28">
     <!-- Hero：左安装命令 + 右终端截图 -->
-    <section class="max-w-6xl mx-auto px-6 pb-12">
+    <section id="install" class="max-w-6xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-12 items-center">
         <div>
           <div class="text-xs font-mono text-brand-accent tracking-[0.2em] uppercase mb-4" data-i18n="cli_kicker">Auraxis CLI</div>
@@ -99,15 +99,6 @@ const STEPS = [
           <div class="mt-7">
             <CliInstallStrip labelKey="cli_install_label" />
           </div>
-
-          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-xs font-mono text-brand-faint">
-            <span data-i18n="cli_meta_node">Node 22.12+ 或原生二进制（内置运行时）</span>
-            <span class="text-brand-hairline">|</span>
-            <a href={RELEASES} target="_blank" rel="noopener noreferrer" class="text-brand-accent hover:text-brand-ivory transition-colors" data-i18n="cli_meta_releases">下载原生二进制 ↗</a>
-          </div>
-          <p class="mt-2 text-[11px] font-mono text-brand-faint" data-i18n="cli_meta_platforms">
-            Windows / macOS / Linux · x64 / arm64 · glibc / musl
-          </p>
         </div>
 
         <div class="reveal" style="--reveal-delay: 240ms">
@@ -130,7 +121,7 @@ const STEPS = [
     </section>
 
     <!-- 能力 -->
-    <section class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
+    <section id="features" class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
       <h2 class="text-2xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="cli_features_title">核心能力</h2>
       <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {FEATURES.map(({ Icon, titleKey, descKey, title, desc }) => (
@@ -146,7 +137,7 @@ const STEPS = [
     </section>
 
     <!-- 用法示例 -->
-    <section class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
+    <section id="usage" class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
       <h2 class="text-2xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="cli_usage_title">常用用法</h2>
       <p class="mt-2 text-sm text-brand-muted" data-i18n="cli_usage_subtitle">交互模式下直接输入 / 开头的命令；无头模式用参数控制一次执行。</p>
       <div class="mt-7 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-3.5">
@@ -160,7 +151,7 @@ const STEPS = [
     </section>
 
     <!-- 命令速查 -->
-    <section class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
+    <section id="commands" class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
       <div class="flex items-baseline justify-between gap-4 flex-wrap">
         <h2 class="text-2xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="cli_slash_title">交互命令</h2>
         <span class="text-xs font-mono text-brand-faint" data-i18n="cli_slash_note">输入 / 即出现联想面板，↑↓ 选择</span>
@@ -174,7 +165,7 @@ const STEPS = [
     </section>
 
     <!-- 快速开始 + 下载 -->
-    <section class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
+    <section id="start" class="max-w-6xl mx-auto px-6 py-12 border-t border-brand-hairline dark:border-brand-border/70">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
           <h2 class="text-2xl font-semibold tracking-tight text-ink dark:text-ivory" data-i18n="cli_start_title">快速开始</h2>

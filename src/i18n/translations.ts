@@ -8,6 +8,18 @@ export interface Translations {
   nav_tools: string;
   nav_cli: string;
 
+  nav_cli_install: string;
+
+  nav_cli_features: string;
+
+  nav_cli_commands: string;
+
+  nav_cli_start: string;
+
+  nav_cli_desktop: string;
+
+  nav_cli_release: string;
+
   nav_download: string;
   nav_github_label: string;
   nav_solution: string;
@@ -70,18 +82,18 @@ export interface Translations {
   download_windows_tip: string;
   download_mac_tip: string;
   download_linux_tip: string;
-  download_cli_title: string;
-  download_cli_desc: string;
-  download_cli_release: string;
-  download_cli_copy: string;
-  download_cli_hint: string;
-  cli_teaser_title: string;
-  cli_teaser_desc: string;
-  cli_teaser_cta: string;
   cli_kicker: string;
   cli_page_title: string;
   cli_page_desc: string;
   cli_install_label: string;
+  cli_dl_runtime_label: string;
+  cli_dl_runtime: string;
+  cli_dl_platforms_label: string;
+  cli_dl_platforms: string;
+  cli_dl_license_label: string;
+  cli_dl_license: string;
+  cli_dl_readme: string;
+  cli_dl_note: string;
   cli_meta_node: string;
   cli_meta_platforms: string;
   cli_meta_releases: string;
@@ -427,6 +439,18 @@ const zh: Translations = {
   nav_tools: '工具矩阵',
   nav_cli: 'CLI',
 
+  nav_cli_install: '安装',
+
+  nav_cli_features: '能力',
+
+  nav_cli_commands: '命令',
+
+  nav_cli_start: '快速开始',
+
+  nav_cli_desktop: '桌面端',
+
+  nav_cli_release: 'CLI Releases',
+
   nav_download: '下载',
   nav_github_label: 'Auraxis Agent GitHub 仓库',
   nav_solution: '功能',
@@ -490,20 +514,19 @@ const zh: Translations = {
   download_windows_tip: '下载 Windows 版本',
   download_mac_tip: '下载 macOS 版本',
   download_linux_tip: '下载 Linux 版本',
-  download_cli_title: 'Auraxis CLI',
-  download_cli_desc:
-    '独立仓库的本地 Agent 命令行工作台，无需安装桌面端。npm 一键安装，或下载 8 个平台的原生二进制（含 SHA256 校验和）。',
-  download_cli_release: 'CLI Releases ↗',
-  download_cli_copy: '复制',
-  download_cli_hint: '装完全局命令 auraxis；也可下载 8 个平台的原生二进制（含 SHA256 校验和），无需 Node。',
-  cli_teaser_title: 'Auraxis CLI',
-  cli_teaser_desc: '独立的命令行版本：不装桌面端，也能在终端里跑完整的 ReAct 工具循环、Code Mode 与权限审批。',
-  cli_teaser_cta: '查看 CLI 详情',
   cli_kicker: 'Auraxis CLI',
   cli_page_title: '终端里的本地 Agent 工作台',
   cli_page_desc:
     'Auraxis CLI 是独立发布的命令行版本：不依赖桌面端，直接在你自己的终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批。模型、协议、沙箱与思考强度都可以按任务切换。',
   cli_install_label: '安装',
+  cli_dl_runtime_label: '运行环境',
+  cli_dl_runtime: 'Node 22.12+ 或原生二进制（内置运行时）',
+  cli_dl_platforms_label: '平台',
+  cli_dl_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
+  cli_dl_license_label: '许可',
+  cli_dl_license: 'MIT 开源 · 本地运行',
+  cli_dl_readme: '查看仓库 README ↗',
+  cli_dl_note: '附 SHA256SUMS.txt 校验和；npm 包名 @auraxis/cli，安装后命令为 auraxis。',
   cli_meta_node: 'Node 22.12+ 或使用内置运行时的原生二进制',
   cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
   cli_meta_releases: '下载原生二进制 ↗',
@@ -892,6 +915,18 @@ const en: Translations = {
   nav_tools: 'Tools',
   nav_cli: 'CLI',
 
+  nav_cli_install: 'Install',
+
+  nav_cli_features: 'Capabilities',
+
+  nav_cli_commands: 'Commands',
+
+  nav_cli_start: 'Quick start',
+
+  nav_cli_desktop: 'Desktop app',
+
+  nav_cli_release: 'CLI Releases',
+
   nav_download: 'Download',
   nav_github_label: 'Auraxis Agent GitHub Repository',
   nav_solution: 'Features',
@@ -955,20 +990,19 @@ const en: Translations = {
   download_windows_tip: 'Download for Windows',
   download_mac_tip: 'Download for macOS',
   download_linux_tip: 'Download for Linux',
-  download_cli_title: 'Auraxis CLI',
-  download_cli_desc:
-    'A standalone local agent workbench in its own repository — no desktop app required. Install from npm, or grab native binaries for 8 platforms with SHA256 checksums.',
-  download_cli_release: 'CLI Releases ↗',
-  download_cli_copy: 'Copy',
-  download_cli_hint: 'Installs the global `auraxis` command — or grab native binaries for 8 platforms (SHA256 checksums included), no Node required.',
-  cli_teaser_title: 'Auraxis CLI',
-  cli_teaser_desc: 'The standalone command line version: run the full ReAct tool loop, Code Mode and approval gates in your terminal — no desktop app required.',
-  cli_teaser_cta: 'Explore the CLI',
   cli_kicker: 'Auraxis CLI',
   cli_page_title: 'The local agent workbench for your terminal',
   cli_page_desc:
     'Auraxis CLI ships as its own package: no desktop app required. It runs the same ReAct tool loop, Code Mode and approval gates right in your terminal, with model, protocol, sandbox and reasoning effort switchable per task.',
   cli_install_label: 'Install',
+  cli_dl_runtime_label: 'Runtime',
+  cli_dl_runtime: 'Node 22.12+ or a native binary with the runtime embedded',
+  cli_dl_platforms_label: 'Platforms',
+  cli_dl_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
+  cli_dl_license_label: 'License',
+  cli_dl_license: 'MIT licensed · runs locally',
+  cli_dl_readme: 'Repository README ↗',
+  cli_dl_note: 'SHA256SUMS.txt included; the npm package is @auraxis/cli and installs the auraxis command.',
   cli_meta_node: 'Node 22.12+ — or use a native binary with the runtime embedded',
   cli_meta_platforms: 'Windows / macOS / Linux · x64 / arm64 · glibc / musl',
   cli_meta_releases: 'Download native binaries ↗',

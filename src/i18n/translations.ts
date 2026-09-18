@@ -18,6 +18,7 @@ export interface Translations {
   // Update banner
   banner_label: string;
   banner_text: string;
+  banner_install: string;
   banner_link: string;
   banner_close: string;
 
@@ -25,6 +26,10 @@ export interface Translations {
   hero_title_line1: string;
   hero_title_line2: string;
   hero_description: string;
+  hero_cli_label: string;
+  hero_cli_title: string;
+  hero_cli_copy: string;
+  hero_cli_hint: string;
   hero_cta_download: string;
   hero_cta_docs: string;
   hero_image_alt: string;
@@ -387,7 +392,8 @@ const zh: Translations = {
 
   banner_label: '重点更新横幅',
   banner_text:
-    'v3.4.0：DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · Chat / Work / Code 能力边界 · 会话内自动更新',
+    'v3.4.0 · 新增 Auraxis CLI（终端里的独立 Agent）· DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · 会话内自动更新',
+  banner_install: 'NEW Auraxis CLI',
   banner_link: '查看详情',
   banner_close: '关闭横幅',
 
@@ -395,6 +401,11 @@ const zh: Translations = {
   hero_title_line2: '桌面端智能体工作台',
   hero_description:
     'Auraxis Agent 是一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），个人开发、MIT 开源。它提供 Chat / Work / Code 三模式、统一的 ReAct 步进引擎、71 个内置工具、多 Agent 调度、文档生成与云连接器，以及原生沙箱隔离。',
+  hero_cli_label: '命令行版本',
+  hero_cli_title: 'Auraxis CLI',
+  hero_cli_copy: '复制',
+  hero_cli_hint:
+    '桌面端是工作台，CLI 是独立的本地 Agent：在终端里跑同一套 ReAct 工具循环、Code Mode 与权限审批，无需安装桌面端。',
   hero_cta_download: '下载',
   hero_cta_docs: '查看演示',
   hero_image_alt: 'Auraxis Agent 桌面端界面截图',
@@ -801,7 +812,8 @@ const en: Translations = {
 
   banner_label: 'Update banner',
   banner_text:
-    'v3.4.0: DeepSeek V4.1 Flash multimodal · resume any task · Chat / Work / Code capability gates · in-app auto-update',
+    'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',
+  banner_install: 'NEW Auraxis CLI',
   banner_link: 'View details',
   banner_close: 'Close banner',
 
@@ -809,6 +821,11 @@ const en: Translations = {
   hero_title_line2: 'Agentic Workbench',
   hero_description:
     'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
+  hero_cli_label: 'Command line version',
+  hero_cli_title: 'Auraxis CLI',
+  hero_cli_copy: 'Copy',
+  hero_cli_hint:
+    'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required.',
   hero_cta_download: 'Download',
   hero_cta_docs: 'View Demo',
   hero_image_alt: 'Auraxis Agent desktop UI screenshot',

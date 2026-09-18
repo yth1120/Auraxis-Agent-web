@@ -33,10 +33,11 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
         var L=localStorage.getItem('lang')||(navigator.language.startsWith('zh')?'zh':'en');
         var EN={
           nav_features:'Features',nav_demo:'Demo',nav_architecture:'Architecture',nav_tools:'Tools',nav_download:'Download',nav_github_label:'Auraxis Agent GitHub Repository',nav_solution:'Features',nav_compare:'Compare',nav_safety:'Security',nav_faq:'FAQ',
-          banner_label:'Update banner',banner_text:'v3.4.0: DeepSeek V4.1 Flash multimodal · resume any task · Chat / Work / Code capability gates · in-app auto-update',banner_link:'View details',banner_close:'Close banner',
+          banner_label:'Update banner',banner_text:'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',banner_install:'NEW Auraxis CLI',banner_link:'View details',banner_close:'Close banner',
           hero_title_line1:'Auraxis Agent',hero_title_line2:'Agentic Workbench',
           hero_description:'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
           hero_cta_download:'Download',hero_cta_docs:'View Demo',
+          hero_cli_label:'Command line version',hero_cli_title:'Auraxis CLI',hero_cli_copy:'Copy',hero_cli_hint:'The desktop app is the workbench; the CLI is a standalone local agent that runs in your terminal — no desktop app required.',
           hero_stat_tools:'71',hero_stat_tools_sub:'Built-in AI tools',hero_stat_perms:'3',hero_stat_perms_sub:'Approval policies (ask/plan/auto)',hero_stat_sandbox:'4',hero_stat_sandbox_sub:'Native sandbox backends',hero_stat_agents:'3',hero_stat_agents_sub:'Built-in agent types',hero_stat_sdk:'2',hero_stat_sdk_sub:'TS / Python SDKs',hero_stat_engine:'1',hero_stat_engine_sub:'Unified step engine',
           screenshot_caption:'Auraxis Agent — Desktop UI Preview',screenshot_note:'Screenshot from the project README; the actual UI may differ in the latest version.',
           download_title:'Download Auraxis Agent',download_subtitle:'v3.4.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
@@ -92,7 +93,9 @@ const OG_IMAGE_URL = new URL('auraxis-logo.png', SITE_URL).href;
           research_cacheaware_title:'Cache-Aware · Dynamic Tail',research_cacheaware_desc:'Cross-session memory is no longer unshifted to the head — it travels as a separate field near the current user message or snapshot tail.',
           research_dedup_title:'Byte-Exact · Deduplication',research_dedup_desc:'On replay, a byte-identical memory block is skipped, preventing the same retrieval from accumulating every round.',
           eco_title:'Extensions & Integration',eco_subtitle:'Auraxis Agent ships an MCP client, a CLI, SDKs and a plugin mechanism for scripts and external programs.',
-          eco_cli_title:'Headless CLI',eco_cli_desc:'Run a full ReAct loop headlessly: npm run cli -- --run "task", with configurable model, permissions, sandbox and JSON output.',
+          eco_cli_title:'Auraxis CLI',eco_cli_desc:'A standalone local agent workbench for the terminal: ReAct tool loop, Code Mode, MCP, approval prompts and session resume — no desktop app required. Install from npm or grab a native binary.',eco_cli_release:'GitHub Releases ↗',
+          download_cli_title:'Auraxis CLI',download_cli_desc:'A standalone local agent workbench in its own repository — no desktop app required. Install from npm, or grab native binaries for 8 platforms with SHA256 checksums.',download_cli_release:'CLI Releases ↗',download_cli_copy:'Copy',download_cli_hint:'Installs the global `auraxis` command — or grab native binaries for 8 platforms (SHA256 checksums included), no Node required.',
+          dev_link_cli:'Auraxis CLI — standalone local agent workbench (ReAct / Code Mode / MCP)',
           eco_ts_title:'TypeScript SDK',eco_ts_desc:'packages/auraxis-sdk talks to the desktop app over TCP JSON-RPC, ready to embed in your own toolchain.',
           eco_py_title:'Python SDK',eco_py_desc:'python/auraxis_sdk provides a symmetric API for driving sessions and tools from Python automation.',
           eco_plugin_title:'Plugin System',eco_plugin_desc:'Four extension points — commands / tools / hooks / ui — with dangerous-pattern scanning and capability confirmation before load.',

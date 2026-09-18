@@ -91,7 +91,7 @@ function SmartDownloaderInner() {
                 {t.download_loading}
               </span>
             ) : (
-              `Auraxis Agent ${release?.version ?? '3.2.0'}`
+              `Auraxis Agent ${release?.version ?? '3.4.0'}`
             )}
           </h3>
           {!isMobile && !loading && (

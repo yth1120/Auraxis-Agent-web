@@ -387,7 +387,7 @@ const zh: Translations = {
 
   banner_label: '重点更新横幅',
   banner_text:
-    '重点更新：多模态模型 · DeepSeek Harness MCP · 飞书 / Lark MCP · 技术栈与架构升级',
+    'v3.4.0：DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · Chat / Work / Code 能力边界 · 会话内自动更新',
   banner_link: '查看详情',
   banner_close: '关闭横幅',
 
@@ -417,7 +417,7 @@ const zh: Translations = {
 
   download_title: '下载 Auraxis Agent',
   download_subtitle:
-    'v3.2.0 · Electron 44 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
+    'v3.4.0 · Electron 44 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
   download_current_version: '当前稳定版本',
   download_detected: '检测到:',
   download_loading: '加载中...',
@@ -428,7 +428,7 @@ const zh: Translations = {
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: '内置 Node 24 运行时，无需额外安装',
   download_req3: 'Shell 工具建议使用 Git Bash 或 PowerShell',
-  download_changelog_title: 'v3.2.0 更新内容',
+  download_changelog_title: 'v3.4.0 更新内容',
   download_placeholder_note: '下载遇到问题？前往 GitHub Releases 获取全部安装包（含 Apple Silicon arm64）。',
   download_unavailable: '下载链接暂不可用：',
   download_windows_tip: '下载 Windows 版本',
@@ -801,7 +801,7 @@ const en: Translations = {
 
   banner_label: 'Update banner',
   banner_text:
-    'Highlights: multimodal model · DeepSeek Harness MCP · Feishu/Lark MCP · stack & architecture upgrades',
+    'v3.4.0: DeepSeek V4.1 Flash multimodal · resume any task · Chat / Work / Code capability gates · in-app auto-update',
   banner_link: 'View details',
   banner_close: 'Close banner',
 
@@ -831,7 +831,7 @@ const en: Translations = {
 
   download_title: 'Download Auraxis Agent',
   download_subtitle:
-    'v3.2.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
+    'v3.4.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
   download_current_version: 'Current Stable Version',
   download_detected: 'Detected:',
   download_loading: 'Loading...',
@@ -842,7 +842,7 @@ const en: Translations = {
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: 'Node 24 runtime embedded — no extra installs',
   download_req3: 'Git Bash or PowerShell recommended for shell tools',
-  download_changelog_title: "What's new in v3.2.0",
+  download_changelog_title: "What's new in v3.4.0",
   download_placeholder_note: 'Having trouble? Visit GitHub Releases for every installer, including the Apple Silicon arm64 DMG.',
   download_unavailable: 'Download not available: ',
   download_windows_tip: 'Download for Windows',

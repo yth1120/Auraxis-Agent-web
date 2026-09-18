@@ -1,37 +1,37 @@
 {
-  "version": "3.2.0",
-  "releaseDate": "2026-08-26",
+  "version": "3.4.0",
+  "releaseDate": "2026-09-18",
   "changelog": [
-    "新增 DeepSeek V4 Flash Vision Exp 多模态模型：支持 JPEG / PNG / GIF / WebP 图片与 ReadImage 路由，非视觉模型自动降级文本",
-    "接入 DeepSeek Harness MCP 一键预设：本地 Harness Web、Auraxis Key 注入、Windows npx.cmd 兼容",
-    "接入飞书 / Lark OpenAPI MCP：一键 stdio、域名选择、工具预设、App ID / Secret 加密存储与 tenant_access_token 测试",
-    "MCP 工具按 serverId 命名空间路由，修复跨服务误匹配；初始化超时提升至 180 秒，内置 Windows 命令 shim",
-    "完成 React 19 / Ant Design 6 / Zustand 5 / Electron 44 / Vite 8 / TypeScript 6+ / Vitest 4 / Node 22 升级与兼容修复；拆分大型模块、移除生产 any、加固 IPC / Agent / Store 类型",
-    "修复登录流程、Windows userData 与 Vite 开发源验证；稳定三平台 CI，245 个测试文件 / 1,802 用例通过"
+    "DeepSeek V4.1 Flash 成为默认模型：原生多模态（直接读图），思考开关显式可控；旧模型名自动路由到新模型",
+    "任务可随时续跑：撞到迭代上限只暂停，在输入框继续说话即可接着跑；迭代上限可在设置中调整（1–500）",
+    "Chat / Work / Code 三模式能力边界收紧：纯对话不发工具调用，Work 只动文档，Code 保留完整工具链",
+    "内置会话内自动更新：启动时静默检查 GitHub Release，新版本一键下载并重启安装",
+    "修复登录门与 preload 打包链路，新增 Responses API 适配器与更多真实 API 场景验收（图片输入 / 多轮工具链）",
+    "工程质量：278 个测试文件 / 2,144 用例全绿，静态环 0、lint 告警 0，三平台 CI 与发布产物校验通过"
   ],
   "downloads": {
     "windows": {
       "label": "Windows (NSIS 安装包)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis.Setup.3.2.0.exe",
-      "size": "215 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.4.0/Auraxis.Setup.3.4.0.exe",
+      "size": "180 MB",
       "arch": "x64"
     },
     "mac": {
       "label": "macOS (Intel DMG)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0.dmg",
-      "size": "265 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.4.0/Auraxis-3.4.0.dmg",
+      "size": "219 MB",
       "arch": "x64",
       "alt": {
         "label": "macOS (Apple Silicon DMG)",
-        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0-arm64.dmg",
-        "size": "261 MB",
+        "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.4.0/Auraxis-3.4.0-arm64.dmg",
+        "size": "215 MB",
         "arch": "arm64"
       }
     },
     "linux": {
       "label": "Linux (AppImage)",
-      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.2.0/Auraxis-3.2.0.AppImage",
-      "size": "262 MB",
+      "url": "https://github.com/yth1120/Auraxis-Agent/releases/download/v3.4.0/Auraxis-3.4.0.AppImage",
+      "size": "215 MB",
       "arch": "x64"
     },
     "mobile": {

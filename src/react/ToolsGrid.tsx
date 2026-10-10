@@ -56,6 +56,7 @@ function ToolsGridInner() {
     execution: t.tools_filter_execution,
     terminal: t.tools_filter_terminal,
     web: t.tools_filter_web,
+    browser: t.tools_filter_browser,
     planning: t.tools_filter_planning,
     agent: t.tools_filter_agent,
     background: t.tools_filter_background,

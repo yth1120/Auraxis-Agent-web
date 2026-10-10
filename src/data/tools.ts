@@ -2,10 +2,10 @@ import type { Tool, ToolType, ToolCategory } from '../types';
 import rawTools from './tools-data.json';
 
 /**
- * Auraxis 完整的 71 个内置工具数据集
+ * Auraxis 完整的 75 个内置工具数据集
  *
- * 数据事实源：桌面端 electron/tool-defs.ts（由提取流程生成 tools-data.json），
- * danger 分类对齐 electron/ipc/tool-handlers.ts 的 DANGEROUS_TOOLS（共 15 个）。
+ * 数据事实源：桌面端 electron/tool-defs/（按能力族分文件，由提取流程生成 tools-data.json），
+ * danger 分类对齐 electron/tool-capability.ts 的 DANGEROUS_TOOLS（共 42 个）。
  */
 
 interface RawTool {

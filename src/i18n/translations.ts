@@ -1,7 +1,8 @@
 export type Language = 'zh' | 'en';
 
 export interface Translations {
-  // Header  nav_demo: string;
+  // Header
+  nav_demo: string;
   nav_architecture: string;
   nav_tools: string;
   nav_cli: string;
@@ -93,6 +94,8 @@ export interface Translations {
   feature11_desc: string;
   feature12_title: string;
   feature12_desc: string;
+  feature13_title: string;
+  feature13_desc: string;
 
   // Architecture
   arch_title: string;
@@ -111,7 +114,8 @@ export interface Translations {
   arch_main_3: string;
   arch_main_4: string;
 
-  // Permission gate  perm_ask_title: string;
+  // Permission gate
+  perm_ask_title: string;
   perm_ask_desc: string;
   perm_ask_1: string;
   perm_ask_2: string;
@@ -247,8 +251,10 @@ export interface Translations {
   tools_filter_capability: string;
   tools_filter_verify: string;
   tools_filter_interaction: string;
+  tools_filter_browser: string;
   tools_badge_danger: string;
-  tools_badge_safe: string;  tools_empty: string;
+  tools_badge_safe: string;
+  tools_empty: string;
   tools_footnote: string;
   tools_legend: string;
 
@@ -265,7 +271,8 @@ export interface Translations {
   dev_link_cli: string;
   dev_step1_comment: string;
   dev_step2_comment: string;
-  dev_step3_comment: string;  dev_titlebar: string;
+  dev_step3_comment: string;
+  dev_titlebar: string;
   dev_titlebar_type: string;
   dev_copy_button: string;
   dev_copy_title: string;
@@ -280,17 +287,20 @@ export interface Translations {
   footer_contrib_1: string;
   footer_contrib_2: string;
   footer_contrib_3: string;
-  footer_contrib_4: string;  footer_support_1: string;
+  footer_contrib_4: string;
+  footer_support_1: string;
   footer_support_2: string;
   footer_support_3: string;
-  footer_copyright: string;  footer_license: string;
+  footer_copyright: string;
+  footer_license: string;
 
   // Theme
   theme_dark: string;
   theme_light: string;
 }
 
-const zh: Translations = {  nav_demo: '演示',
+const zh: Translations = {
+  nav_demo: '演示',
   nav_architecture: '系统架构',
   nav_tools: '工具矩阵',
   nav_cli: 'CLI',
@@ -304,13 +314,13 @@ const zh: Translations = {  nav_demo: '演示',
 
   banner_label: '重点更新横幅',
   banner_text:
-    'v3.4.0 · 新增 Auraxis CLI（终端里的独立 Agent）· DeepSeek V4.1 Flash 原生多模态 · 任务可随时续跑 · 会话内自动更新',
+    'v3.5.0 · 聊天区 Agent 执行流程视图（聚合 / 流式输出 / 就地审批）· 修复动态工具装载真回归 · eval:diff 回归门禁 · 界面打磨',
   banner_link: '查看详情',
 
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: '桌面端智能体工作台',
   hero_description:
-    'Auraxis Agent 是一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），个人开发、MIT 开源。它提供 Chat / Work / Code 三模式、统一的 ReAct 步进引擎、71 个内置工具、多 Agent 调度、文档生成与云连接器，以及原生沙箱隔离。',
+    'Auraxis Agent 是一个基于 Electron 的桌面端智能体工作台（编码 / 文档 / 自动化），个人开发、MIT 开源。它提供 Chat / Work / Code 三模式、统一的 ReAct 步进引擎、75 个内置工具、多 Agent 调度、文档生成与云连接器，以及原生沙箱隔离。',
   hero_cli_label: '命令行版本',
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: '复制',
@@ -324,7 +334,7 @@ const zh: Translations = {  nav_demo: '演示',
 
   download_title: '下载 Auraxis Agent',
   download_subtitle:
-    'v3.4.0 · Electron 44 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
+    'v3.5.0 · Electron 44 · MIT 开源。安装包托管在 GitHub Releases，点击下方按钮即可下载。',
   download_current_version: '当前稳定版本',
   download_detected: '检测到:',
   download_loading: '加载中...',
@@ -335,7 +345,7 @@ const zh: Translations = {  nav_demo: '演示',
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: '内置 Node 24 运行时，无需额外安装',
   download_req3: 'Shell 工具建议使用 Git Bash 或 PowerShell',
-  download_changelog_title: 'v3.4.0 更新内容',
+  download_changelog_title: 'v3.5.0 更新内容',
   download_placeholder_note: '下载遇到问题？前往 GitHub Releases 获取全部安装包（含 Apple Silicon arm64）。',
   download_unavailable: '下载链接暂不可用：',
   download_windows_tip: '下载 Windows 版本',
@@ -388,10 +398,13 @@ const zh: Translations = {  nav_demo: '演示',
     '三种产品形态共用同一套 ReAct 步进引擎，模式状态互不污染：Chat 会话时间线、Work 文档协作（代码只读硬边界 + 执行自主档位）、Code Mode worker 线程工具编排。',
   feature11_title: '文档生成与云连接器',
   feature11_desc:
-    'ReadDocument / WriteDocument 读写 Word、Excel、PPT、PDF（CJK 字体自动嵌入）；Slack / Google Drive / Notion 连接器在设置中配置，令牌经 safeStorage 加密保存。',
+    'ReadDocument / WriteDocument 读写 Word、Excel、PPT、PDF（CJK 字体自动嵌入），IngestDocument 把长文档分块写入项目记忆供后续检索；Slack / Google Drive / Notion 连接器在设置中配置，令牌经 safeStorage 加密保存。',
   feature12_title: '本地账户与分层设置',
   feature12_desc:
     '本地优先账户（scrypt 密码哈希）、分层 Instructions 面板（全局 → 项目根 → 嵌套目录 AGENTS.md）、连接器 / MCP / 插件 / 权限档案管理，以及内嵌真实测试覆盖率报告。',
+  feature13_title: 'Agent 执行流程视图',
+  feature13_desc:
+    '聊天区的执行过程按类型聚合（读取 4 个文件 / 检索 3 次 · 命中 14 处 / 运行命令 3 条），运行中的终端输出实时流式可见，权限审批卡就地决策，长任务只折叠已完成的条目。',
 
   arch_title: '双进程架构',
   arch_subtitle:
@@ -405,10 +418,11 @@ const zh: Translations = {  nav_demo: '演示',
   arch_ipc_bridge: 'Context Bridge',
   arch_ipc_protocol: 'domain:action 协议',
   arch_main_title: '主进程 (Main / Node.js Env)',
-  arch_main_1: '71 个工具执行器 + step-engine / agent-loop',
+  arch_main_1: '75 个工具执行器 + step-engine / agent-loop',
   arch_main_2: '多智能体调度器与三级偏差检测',
   arch_main_3: '原生沙箱（四后端）+ Worktree 隔离',
-  arch_main_4: '统一 JSONL 事件日志 + FTS5 全文搜索',  perm_ask_title: 'Ask · 询问模式',
+  arch_main_4: '统一 JSONL 事件日志 + FTS5 全文搜索',
+  perm_ask_title: 'Ask · 询问模式',
   perm_ask_desc: '默认模式。安全与效率的最佳平衡。',
   perm_ask_1: '只读工具（Read / Grep / Glob）自动放行',
   perm_ask_2: '危险工具弹窗确认，逐次可见',
@@ -426,7 +440,8 @@ const zh: Translations = {  nav_demo: '演示',
 
   sandbox_title: '原生沙箱，四后端隔离',
   sandbox_subtitle:
-    '命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。',  safety_title: '安全模型：权限与沙箱',
+    '命令级隔离 + Git worktree 分支级隔离，并发 Agent 之间互不污染工作区。',
+  safety_title: '安全模型：权限与沙箱',
   safety_subtitle:
     '每次危险调用都按固定顺序经过权限模式、沙箱门、审批与执行；路径边界、read-before-write、撤销快照与冲突检测作为兜底，覆盖工具调用的全生命周期。',
   safety_note:
@@ -569,9 +584,11 @@ const zh: Translations = {  nav_demo: '演示',
   tools_filter_capability: '能力加载',
   tools_filter_verify: '验证提交',
   tools_filter_interaction: '交互',
+  tools_filter_browser: '浏览器预览',
   tools_badge_danger: '危险',
-  tools_badge_safe: '安全',  tools_empty: '当前筛选条件下没有匹配的工具。',
-  tools_footnote: '工具定义与桌面端 electron/tool-defs.ts 保持同步。',
+  tools_badge_safe: '安全',
+  tools_empty: '当前筛选条件下没有匹配的工具。',
+  tools_footnote: '工具定义与桌面端 electron/tool-defs/ 目录保持同步，危险等级对齐 tool-capability.ts 的 DANGEROUS_TOOLS。',
   tools_legend: '工具安全等级图例',
 
   footer_nav: '页脚导航',
@@ -586,7 +603,8 @@ const zh: Translations = {  nav_demo: '演示',
   dev_link_cli: 'Auraxis CLI — 独立的本地 Agent 命令行工作台（ReAct / Code Mode / MCP）',
   dev_step1_comment: '// 1. 克隆底层核心仓库',
   dev_step2_comment: '// 2. 创建本地开发环境变量配置',
-  dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',  dev_titlebar: '快速克隆并启动开发',
+  dev_step3_comment: '// 3. 安装依赖并启动 Electron 联动调试开发',
+  dev_titlebar: '快速克隆并启动开发',
   dev_titlebar_type: 'TypeScript / Vite',
   dev_copy_button: '复制命令',
   dev_copy_title: '点击复制',
@@ -601,16 +619,19 @@ const zh: Translations = {  nav_demo: '演示',
   footer_contrib_1: '架构文档 (docs/README)',
   footer_contrib_2: '工程规范 (AGENTS.md)',
   footer_contrib_3: 'TypeScript SDK',
-  footer_contrib_4: 'Python SDK',  footer_support_1: '报告安全缺陷',
+  footer_contrib_4: 'Python SDK',
+  footer_support_1: '报告安全缺陷',
   footer_support_2: 'GitHub Issues',
   footer_support_3: '更新日志',
-  footer_copyright: '© 2026 Auraxis Core Contributors. 基于 MIT License 开源.',  footer_license: '软件许可证',
+  footer_copyright: '© 2026 Auraxis Core Contributors. 基于 MIT License 开源.',
+  footer_license: '软件许可证',
 
   theme_dark: '切换到深色模式',
   theme_light: '切换到浅色模式',
 };
 
-const en: Translations = {  nav_demo: 'Demo',
+const en: Translations = {
+  nav_demo: 'Demo',
   nav_architecture: 'Architecture',
   nav_tools: 'Tools',
   nav_cli: 'CLI',
@@ -624,13 +645,13 @@ const en: Translations = {  nav_demo: 'Demo',
 
   banner_label: 'Update banner',
   banner_text:
-    'v3.4.0 · NEW Auraxis CLI (a standalone agent in your terminal) · DeepSeek V4.1 Flash multimodal · resume any task · in-app auto-update',
+    'v3.5.0 · Agent Activity View in chat (aggregated, streaming, in-place approval) · dynamic tool-loading fix · eval:diff regression gate · UI polish',
   banner_link: 'View details',
 
   hero_title_line1: 'Auraxis Agent',
   hero_title_line2: 'Agentic Workbench',
   hero_description:
-    'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 71 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
+    'Auraxis Agent is a desktop agentic workbench built on Electron — a personal, MIT-licensed project. It provides Chat / Work / Code modes, a unified ReAct step engine, 75 built-in tools, multi-agent scheduling, document generation, cloud connectors and native sandbox isolation.',
   hero_cli_label: 'Command line version',
   hero_cli_title: 'Auraxis CLI',
   hero_cli_copy: 'Copy',
@@ -644,7 +665,7 @@ const en: Translations = {  nav_demo: 'Demo',
 
   download_title: 'Download Auraxis Agent',
   download_subtitle:
-    'v3.4.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
+    'v3.5.0 · Electron 44 · MIT License. Installers are hosted on GitHub Releases — pick your platform below.',
   download_current_version: 'Current Stable Version',
   download_detected: 'Detected:',
   download_loading: 'Loading...',
@@ -655,7 +676,7 @@ const en: Translations = {  nav_demo: 'Demo',
   download_req1: 'Windows 10+ (x64) · macOS 12+ · Linux (x64)',
   download_req2: 'Node 24 runtime embedded — no extra installs',
   download_req3: 'Git Bash or PowerShell recommended for shell tools',
-  download_changelog_title: "What's new in v3.4.0",
+  download_changelog_title: "What's new in v3.5.0",
   download_placeholder_note: 'Having trouble? Visit GitHub Releases for every installer, including the Apple Silicon arm64 DMG.',
   download_unavailable: 'Download not available: ',
   download_windows_tip: 'Download for Windows',
@@ -708,10 +729,13 @@ const en: Translations = {  nav_demo: 'Demo',
     'Three product forms share one ReAct step engine without state pollution: Chat session timeline, Work document collaboration (read-only code boundary + execution autonomy tiers) and Code Mode worker-thread tool orchestration.',
   feature11_title: 'Documents & Cloud Connectors',
   feature11_desc:
-    'ReadDocument / WriteDocument handle Word, Excel, PowerPoint and PDF (with automatic CJK font embedding); Slack / Google Drive / Notion connectors are configured in Settings with tokens encrypted via safeStorage.',
+    'ReadDocument / WriteDocument handle Word, Excel, PowerPoint and PDF (with automatic CJK font embedding), and IngestDocument chunks long documents into project memory for later retrieval; Slack / Google Drive / Notion connectors are configured in Settings with tokens encrypted via safeStorage.',
   feature12_title: 'Local Account & Layered Settings',
   feature12_desc:
     'Local-first account with scrypt password hashing, layered Instructions (global → project root → nested AGENTS.md), connector / MCP / plugin / permission-profile management, and a live test-coverage report in Settings.',
+  feature13_title: 'Agent Activity View',
+  feature13_desc:
+    'The chat execution flow aggregates consecutive operations by kind (read 4 files / 3 searches · 14 hits / 3 commands), streams terminal output live while a run is in flight, approves permissions in place, and folds only completed rows on long runs.',
   arch_title: 'Dual-Process Architecture',
   arch_subtitle:
     'How Auraxis Agent is structured: the main process handles tool execution and scheduling, the renderer process handles the UI, and they communicate over IPC.',
@@ -724,10 +748,11 @@ const en: Translations = {  nav_demo: 'Demo',
   arch_ipc_bridge: 'Context Bridge',
   arch_ipc_protocol: 'domain:action Protocol',
   arch_main_title: 'Main Process (Node.js Env)',
-  arch_main_1: '71 Tool Executors + step-engine / agent-loop',
+  arch_main_1: '75 Tool Executors + step-engine / agent-loop',
   arch_main_2: 'Multi-Agent Scheduler & Deviance Detection',
   arch_main_3: 'Native Sandbox (4 backends) + Worktree Isolation',
-  arch_main_4: 'Unified JSONL Event Log + FTS5 Search',  perm_ask_title: 'Ask · Default',
+  arch_main_4: 'Unified JSONL Event Log + FTS5 Search',
+  perm_ask_title: 'Ask · Default',
   perm_ask_desc: 'The default mode. Best balance of safety and velocity.',
   perm_ask_1: 'Read-only tools (Read / Grep / Glob) pass silently',
   perm_ask_2: 'Dangerous tools prompt for confirmation, call by call',
@@ -745,7 +770,8 @@ const en: Translations = {  nav_demo: 'Demo',
 
   sandbox_title: 'Native Sandbox, Four Backends',
   sandbox_subtitle:
-    'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',  safety_title: 'Security Model: Permissions & Sandbox',
+    'Command-level isolation plus Git worktree branch isolation — concurrent agents never pollute each other\u2019s workspace.',
+  safety_title: 'Security Model: Permissions & Sandbox',
   safety_subtitle:
     'Every dangerous call goes through permission profile → sandbox gate → approval → execution in a fixed order. Path boundaries, read-before-write, undo snapshots and conflict detection back it up across the whole tool-call lifecycle.',
   safety_note:
@@ -886,9 +912,11 @@ const en: Translations = {  nav_demo: 'Demo',
   tools_filter_capability: 'Capability',
   tools_filter_verify: 'Verify',
   tools_filter_interaction: 'Interaction',
+  tools_filter_browser: 'Browser',
   tools_badge_danger: 'Danger',
-  tools_badge_safe: 'Safe',  tools_empty: 'No tools match the current filter.',
-  tools_footnote: 'Tool definitions stay in sync with the desktop electron/tool-defs.ts.',
+  tools_badge_safe: 'Safe',
+  tools_empty: 'No tools match the current filter.',
+  tools_footnote: 'Tool definitions stay in sync with the desktop electron/tool-defs/ directory; danger levels follow DANGEROUS_TOOLS in tool-capability.ts.',
   tools_legend: 'Tool safety legend',
 
   footer_nav: 'Footer navigation',
@@ -903,7 +931,8 @@ const en: Translations = {  nav_demo: 'Demo',
   dev_link_cli: 'Auraxis CLI — standalone local agent workbench (ReAct / Code Mode / MCP)',
   dev_step1_comment: '// 1. Clone the core repository',
   dev_step2_comment: '// 2. Create local environment config',
-  dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',  dev_titlebar: 'Quick Clone & Start Development',
+  dev_step3_comment: '// 3. Install dependencies & launch Electron dev mode',
+  dev_titlebar: 'Quick Clone & Start Development',
   dev_titlebar_type: 'TypeScript / Vite',
   dev_copy_button: 'Copy command',
   dev_copy_title: 'Click to copy',
@@ -918,10 +947,12 @@ const en: Translations = {  nav_demo: 'Demo',
   footer_contrib_1: 'Architecture Docs',
   footer_contrib_2: 'Engineering Spec (AGENTS.md)',
   footer_contrib_3: 'TypeScript SDK',
-  footer_contrib_4: 'Python SDK',  footer_support_1: 'Report Security Issues',
+  footer_contrib_4: 'Python SDK',
+  footer_support_1: 'Report Security Issues',
   footer_support_2: 'GitHub Issues',
   footer_support_3: 'Changelog',
-  footer_copyright: '© 2026 Auraxis Core Contributors. Open source under MIT License.',  footer_license: 'License',
+  footer_copyright: '© 2026 Auraxis Core Contributors. Open source under MIT License.',
+  footer_license: 'License',
 
   theme_dark: 'Switch to Dark Mode',
   theme_light: 'Switch to Light Mode',

@@ -3,7 +3,7 @@
     "name": "RunCode",
     "description": "执行代码片段或 TypeScript 工具编排程序（隔离临时目录）",
     "category": "execution",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "language",
@@ -17,7 +17,7 @@
     "name": "RunWorkflow",
     "description": "运行脚本化多智能体工作流（预置或内联脚本）",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "name",
@@ -118,7 +118,7 @@
     "name": "StrReplaceEditor",
     "description": "单一用途文本编辑器：查看/新建/替换/插入",
     "category": "files",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "command",
@@ -180,6 +180,35 @@
     "descriptionEn": "Search the web using DuckDuckGo."
   },
   {
+    "name": "BrowserOpen",
+    "description": "在内置预览面板中打开 http/https 页面并等待加载完成",
+    "category": "browser",
+    "danger": true,
+    "concurrencySafe": false,
+    "params": [
+      "url"
+    ],
+    "descriptionEn": "Open an http/https URL in the in-app preview panel and wait for it to load. Use this when you need to see a running dev server, a staging page, or any web UI. Only http/https is allowed. Requires the preview panel to be available."
+  },
+  {
+    "name": "BrowserRead",
+    "description": "读取预览面板当前页面的可见文本（含标题与 URL）",
+    "category": "browser",
+    "danger": true,
+    "concurrencySafe": true,
+    "params": [],
+    "descriptionEn": "Read the visible text of the page currently open in the preview panel (plus its title and URL). Use after BrowserOpen to inspect content. Returns truncated text when the page is long."
+  },
+  {
+    "name": "BrowserScreenshot",
+    "description": "截取预览面板当前画面，作为图片返回",
+    "category": "browser",
+    "danger": true,
+    "concurrencySafe": true,
+    "params": [],
+    "descriptionEn": "Capture the preview panel as an image and return it to you. Use for visual checks (layout, styling, rendered charts) that text cannot answer."
+  },
+  {
     "name": "TodoWrite",
     "description": "创建并管理结构化任务清单跟踪进度",
     "category": "planning",
@@ -194,7 +223,7 @@
     "name": "Agent",
     "description": "启动子智能体自主处理复杂多步任务",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "description",
@@ -236,7 +265,7 @@
     "name": "CronDelete",
     "description": "按 ID 取消已调度的 cron 任务",
     "category": "background",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "jobId"
@@ -256,7 +285,7 @@
     "name": "ScheduleCreate",
     "description": "创建会话级定时跟进（延时/定点/周期）",
     "category": "background",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "prompt",
@@ -270,7 +299,7 @@
     "name": "ScheduleDelete",
     "description": "按 ID 取消已调度的跟进任务",
     "category": "background",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "id"
@@ -335,7 +364,7 @@
     "name": "NotebookEdit",
     "description": "读取或修改 Jupyter 笔记本（.ipynb）单元格",
     "category": "files",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "file_path",
@@ -449,7 +478,7 @@
     "name": "Pty",
     "description": "管理持久交互式终端会话（create/write/read/close 等）",
     "category": "execution",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "action",
@@ -466,7 +495,7 @@
     "name": "TerminalOpen",
     "description": "为当前任务打开持久终端会话",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "command",
@@ -479,7 +508,7 @@
     "name": "TerminalList",
     "description": "列出当前任务的终端会话",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": true,
     "params": [],
     "descriptionEn": "List the current task's open terminal sessions with their ids."
@@ -488,7 +517,7 @@
     "name": "TerminalRead",
     "description": "读取终端会话自上次读取以来的新输出",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": true,
     "params": [
       "session_id",
@@ -500,7 +529,7 @@
     "name": "TerminalSend",
     "description": "向终端会话发送输入（可回车提交）",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "session_id",
@@ -513,7 +542,7 @@
     "name": "TerminalSignal",
     "description": "向终端会话发送控制信号（SIGINT 等）",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "session_id",
@@ -525,7 +554,7 @@
     "name": "TerminalClose",
     "description": "关闭终端会话并释放 shell 进程",
     "category": "terminal",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "session_id"
@@ -545,7 +574,7 @@
     "name": "WriteSkill",
     "description": "创建或覆盖可复用的技能说明（Markdown）",
     "category": "capability",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "name",
@@ -566,7 +595,7 @@
     "name": "SendMessage",
     "description": "向后端子代理发送后续指令",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "agentId",
@@ -578,7 +607,7 @@
     "name": "InterruptAgent",
     "description": "按 ID 中断运行中的智能体或子代理",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "agentId",
@@ -610,7 +639,7 @@
     "name": "CreateGoal",
     "description": "为当前运行创建持久目标",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "objective",
@@ -622,7 +651,7 @@
     "name": "UpdateGoal",
     "description": "更新目标修订：编辑/暂停/恢复/完成/阻塞",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "goalId",
@@ -638,7 +667,7 @@
     "name": "MountPlugin",
     "description": "动态挂载插件，注册新工具供模型调用",
     "category": "capability",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "id",
@@ -653,7 +682,7 @@
     "name": "UnmountPlugin",
     "description": "移除已挂载插件并注销其全部工具",
     "category": "capability",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "id"
@@ -664,7 +693,7 @@
     "name": "Ralph",
     "description": "以全新子代理迭代执行目标（Ralph 循环）",
     "category": "agent",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "objective",
@@ -695,6 +724,17 @@
       "file_path"
     ],
     "descriptionEn": "Read a professional document file (.docx/.xlsx/.pptx/.pdf) and return its text content as plain text (xlsx also returns structured sheets). Use this instead of Read for binary document formats."
+  },
+  {
+    "name": "IngestDocument",
+    "description": "把长文档分块写入项目记忆，供后续检索；重复导入替换旧分块",
+    "category": "documents",
+    "danger": false,
+    "concurrencySafe": false,
+    "params": [
+      "file_path"
+    ],
+    "descriptionEn": "Chunk a long document (.docx/.xlsx/.pptx/.pdf) into project memory so its content becomes retrievable by later queries. Use this instead of ReadDocument when the file is long (roughly >10 pages or >50KB of text) and you need to answer questions about it: reading it whole would flood the context. Re-ingesting the same file replaces its previous chunks. Returns chunk count and file identity."
   },
   {
     "name": "WriteDocument",
@@ -850,7 +890,7 @@
     "name": "JobKill",
     "description": "按 ID 停止运行中的后台任务",
     "category": "background",
-    "danger": false,
+    "danger": true,
     "concurrencySafe": false,
     "params": [
       "job_id"

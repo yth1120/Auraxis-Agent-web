@@ -13,7 +13,7 @@ export type PermissionMode = 'ask' | 'plan' | 'auto';
 /** 工具安全等级 */
 export type ToolType = 'danger' | 'safe';
 
-/** 工具功能分类（按能力族划分，对应桌面端 71 个工具） */
+/** 工具功能分类（按能力族划分，对应桌面端 75 个工具） */
 export type ToolCategory =
   | 'files'
   | 'documents'
@@ -21,6 +21,7 @@ export type ToolCategory =
   | 'execution'
   | 'terminal'
   | 'web'
+  | 'browser'
   | 'planning'
   | 'agent'
   | 'background'

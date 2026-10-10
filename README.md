@@ -25,7 +25,7 @@
 Auraxis Agent 网站是 [Auraxis Agent](https://github.com/yth1120/Auraxis-Agent) 桌面端 Electron 应用的品牌官网，向开发者社区展示 Auraxis Agent 的核心能力：
 
 - **Chat / Work / Code 三模式** — 三种产品形态共用同一套 ReAct 步进引擎，模式状态互不污染
-- **71 个内置工具** — 15 个危险 + 56 个安全，按 13 大能力族分类
+- **75 个内置工具** — 42 个危险 + 33 个安全，按 14 大能力族分类
 - **多智能体调度** — 优先级队列、并发控制、三级偏差检测、计划审批流
 - **Code Mode** — worker 线程执行 TypeScript 工具编排，子调用回穿完整权限管线
 - **文档生成与云连接器** — Word / Excel / PPT / PDF 读写，Slack / Google Drive / Notion
@@ -147,15 +147,15 @@ Auraxis-Agent-web/
     │   ├── ThemeToggle.tsx   # 深色/浅色切换
     │   ├── LanguageToggle.tsx# 中/英语言切换
     │   ├── ArchitectureFlow.tsx  # 双进程架构交互图
-    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器（71 工具）
+    │   ├── ToolsGrid.tsx     # 工具矩阵交互筛选器（75 工具）
     │   └── SmartDownloader.tsx  # 智能下载按钮（自动平台检测）
     ├── i18n/
     │   ├── translations.ts   # ★ 中/英完整翻译表
     │   └── LanguageContext.tsx# React i18n Context Provider
     ├── data/
-    │   ├── tools-data.json   # ★ 71 个内置工具数据集（源自桌面端 tool-defs.ts）
+    │   ├── tools-data.json   # ★ 75 个内置工具数据集（源自桌面端 tool-defs/）
     │   ├── tools.ts          # 类型化工具数据访问层
-    │   └── releases.json     # 发布版本 & 下载资产（v3.4.0）
+    │   └── releases.json     # 发布版本 & 下载资产（v3.5.0）
     ├── types/
     │   └── index.ts          # ★ 全局 TypeScript 类型定义（与桌面端 contracts 同构）
     ├── utils/
@@ -194,14 +194,14 @@ Auraxis-Agent-web/
 ```
 ┌──────────────────┐    ┌─────────────────┐
 │ tools-data.json  │───▶│  ToolsGrid.tsx  │
-│ (71 tools)       │    │  (React Island) │
+│ (75 tools)       │    │  (React Island) │
 ├──────────────────┤    ├─────────────────┤
 │ releases.json    │───▶│ SmartDownloader │
-│ (v3.4.0 + DL)    │    │  (React Island) │
+│ (v3.5.0 + DL)    │    │  (React Island) │
 └──────────────────┘    └─────────────────┘
 ```
 
-- **工具数据**: 静态 JSON（源自桌面端 `electron/tool-defs.ts`，危险集合对齐 `DANGEROUS_TOOLS`）→ 本地筛选/搜索 UI
+- **工具数据**: 静态 JSON（源自桌面端 `electron/tool-defs/`，危险集合对齐 `tool-capability.ts` 的 `DANGEROUS_TOOLS`）→ 本地筛选/搜索 UI
 - **版本数据**: `src/data/releases.json` 与 `public/releases.json` 双写保持同步 → 自动平台检测下载按钮
 
 ---
@@ -252,13 +252,13 @@ Auraxis-Agent-web/
 
 ### 更新工具数据
 
-工具数据的事实源是桌面端 `electron/tool-defs.ts`。重新提取：
+工具数据的事实源是桌面端 `electron/tool-defs/`（按能力族分文件）。重新提取：
 
 ```bash
 # 从桌面端仓库读取 TOOL_DEFINITIONS，生成 tools-data.json
 # 字段: name / description(中文翻译) / descriptionEn(桌面端原文) / category / danger / concurrencySafe / params
 # params 对应桌面端 input_schema.properties 的顶层键名
-# danger 对齐 electron/ipc/tool-handlers.ts 的 DANGEROUS_TOOLS（当前 15 个）
+# danger 对齐 electron/tool-capability.ts 的 DANGEROUS_TOOLS（当前 42 个）
 ```
 
 ### 更新版本/下载数据
@@ -326,7 +326,7 @@ npx wrangler pages deploy ./dist --project-name=auraxis-website
 | 主题切换 | `ThemeToggle.tsx` | `client:idle` | 深色/浅色模式切换 |
 | 语言切换 | `LanguageToggle.tsx` | `client:idle` | 中/英双语切换 |
 | 架构流程图 | `ArchitectureFlow.tsx` | `client:idle` | 双进程交互架构可视化 |
-| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 71 工具筛选/搜索/参数展示 |
+| 工具矩阵 | `ToolsGrid.tsx` | `client:visible` | 75 工具筛选/搜索/参数展示 |
 | 智能下载 | `SmartDownloader.tsx` | `client:visible` | 自动检测平台，展示下载链接 |
 
 ---
@@ -337,8 +337,8 @@ npx wrangler pages deploy ./dist --project-name=auraxis-website
 
 | 概念 | 桌面端实现 | 网站数据源 |
 |------|-----------|-----------|
-| 71 个工具 | `electron/tool-defs.ts` | `src/data/tools-data.json` |
-| 危险工具集合 | `electron/ipc/tool-handlers.ts` (DANGEROUS_TOOLS) | `tools-data.json` 的 danger 字段 |
+| 75 个工具 | `electron/tool-defs/` | `src/data/tools-data.json` |
+| 危险工具集合 | `electron/tool-capability.ts` (DANGEROUS_TOOLS) | `tools-data.json` 的 danger 字段 |
 | 权限策略 | `electron/contracts/core.ts` / `permission.ts` | `types.ts PermissionMode` |
 | 发布版本 | 桌面端 `CHANGELOG.md` + GitHub Releases | `src/data/releases.json` |
 | 平台检测 | `electron/utils/` | `src/utils/platform.ts` |

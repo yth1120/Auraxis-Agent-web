@@ -4,20 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the **Auraxis Agent** marketing website — an Astro 4 single-page landing site for the Auraxis Agent desktop app (an Electron-based agentic workbench with a unified ReAct step engine, Chat / Work / Code modes, 71 built-in tools, multi-agent scheduling, Code Mode orchestration, document generation, cloud connectors, native sandboxing, MCP support, Eywa provenance memory, and 11 research/cache-alignment techniques). The site is a **pure static build** (no SSR, no backend API): bilingual (zh-CN / en), deployed to GitHub Pages by default and optionally to Cloudflare Pages as static hosting.
+This is the **Auraxis Agent** marketing website — an Astro 4 single-page landing site for the Auraxis Agent desktop app (an Electron-based agentic workbench with a unified ReAct step engine, Chat / Work / Code modes, 75 built-in tools, multi-agent scheduling, Code Mode orchestration, document generation, cloud connectors, native sandboxing, MCP support, Eywa provenance memory, and 11 research/cache-alignment techniques). The site is a **pure static build** (no SSR, no backend API): bilingual (zh-CN / en), deployed to GitHub Pages by default and optionally to Cloudflare Pages as static hosting.
 
 **Brand rule (strict):** Auraxis Black `#111216` (dark bg) / Cool neutral white `#FFFFFF` (light bg, no warm ivory) / Dark-mode text `#F3F3F0` + Aura gray-purple (light `#6A6884` / dark `#8C8AA8`) used ONLY as ~3% accent (focus / selected / status dots). No blue, no large purple areas, no primary gradients. Radius tiers: 5/6/8/12/14/9999 only. Zero-movement animation: no button hover shift/scale, no modal open/close animations — only functional rotation and data-driven motion.
 
 ## Commands
 
 ```bash
-npm run dev          # Start Astro dev server (equiv: npm start)
-npm run build        # Production build (static output to dist/)
-npm run preview      # Preview production build locally
-npm run check        # Run astro check (TypeScript diagnostics, no emit)
+npm run dev            # Start Astro dev server (equiv: npm start)
+npm run build          # Production build (static output to dist/)
+npm run preview        # Preview production build locally
+npm run check          # check:version + production build — the validation gate
+npm run check:version  # scripts/check-versions.mjs: both releases.json identical, download URLs on the current tag, no stale version strings in source
+npm run audit:click    # scripts/click-audit.mjs: serves dist/ and drives real Chrome over CDP to click every interactive control (needs Chrome installed, or CHROME_PATH set)
 ```
 
-No test suite is configured yet — `check` is the only validation step.
+No unit-test suite is configured. `npm run check` is the validation gate; `npx astro check` runs standalone TypeScript diagnostics when needed.
 
 ## Architecture
 
@@ -30,12 +32,12 @@ No test suite is configured yet — `check` is the only validation step.
 ### Data flow
 
 ```
-src/data/tools-data.json (71 tools) ──▶ ToolsGrid.tsx (React island)
-src/data/releases.json + public/releases.json (v3.4.0) ──▶ SmartDownloader.tsx
+src/data/tools-data.json (75 tools) ──▶ ToolsGrid.tsx (React island)
+src/data/releases.json + public/releases.json (v3.5.0) ──▶ SmartDownloader.tsx
 ```
 
-- **Tool definitions** (`src/data/tools-data.json` + typed accessor `src/data/tools.ts`): 71 tools extracted from the desktop app's `electron/tool-defs.ts`. Each tool has `danger` (15 tools, aligned with `DANGEROUS_TOOLS` in `electron/ipc/tool-handlers.ts`), `category` (files / documents / connectors / execution / terminal / web / planning / agent / background / session / capability / verify / interaction), `description` (Chinese) / `descriptionEn` (desktop original), `concurrencySafe`, and `params` (top-level `input_schema` property names).
-- **Release info** (`src/data/releases.json`, mirrored in `public/releases.json`): v3.4.0 with real changelog and per-platform download assets, consumed by the SmartDownloader React island.
+- **Tool definitions** (`src/data/tools-data.json` + typed accessor `src/data/tools.ts`): 75 tools extracted from the desktop app's `electron/tool-defs/` (one file per capability family). Each tool has `danger` (42 tools, aligned with `DANGEROUS_TOOLS` in `electron/tool-capability.ts` — the desktop's single source of truth for tool side effects), `category` (files / documents / connectors / execution / terminal / web / browser / planning / agent / background / session / capability / verify / interaction), `description` (Chinese) / `descriptionEn` (desktop original), `concurrencySafe`, and `params` (top-level `input_schema` property names).
+- **Release info** (`src/data/releases.json`, mirrored in `public/releases.json`): v3.5.0 with real changelog and per-platform download assets, consumed by the SmartDownloader React island.
 
 ### i18n system
 
@@ -43,7 +45,7 @@ src/data/releases.json + public/releases.json (v3.4.0) ──▶ SmartDownloader
 - React islands use `LanguageContext` / `useLanguage()` (`src/i18n/LanguageContext.tsx`). Each island wraps itself in `<LanguageProvider>` independently (no shared React root).
 - Static Astro content uses `data-i18n` attributes. A bootstrap script in `BaseLayout.astro` handles initial text replacement; a `CustomEvent` (`auraxis:lang-change`) synchronizes across islands and updates DOM `[data-i18n]` elements.
 - Language preference is persisted in `localStorage('lang')`, defaulting to browser `navigator.language`.
-- **When adding a translation key used by static Astro elements, also update the inline EN fallback map inside `BaseLayout.astro`.**
+- The English dictionary has a single source: `BaseLayout.astro` injects `JSON.stringify(TRANSLATIONS.en)` into the bootstrap script, so a new key only needs to be added once in `src/i18n/translations.ts`.
 
 ### Theme system
 
@@ -58,15 +60,17 @@ src/data/releases.json + public/releases.json (v3.4.0) ──▶ SmartDownloader
 | `src/pages/index.astro` | Single-page entry, composes all sections |
 | `src/layouts/BaseLayout.astro` | HTML shell, theme preload, i18n bootstrap, grid background |
 | `src/components/HeroSection.astro` | Hero + the release banner pill (version chip, highlight text, "View details" link) |
-| `src/components/SolutionSection.astro` | Core features (12 cards: engine / scheduler / Code Mode / permissions / sandbox / MCP / Eywa memory / DeepSeek / SDK / three modes / docs & connectors / account) |
+| `src/components/SolutionSection.astro` | Core features (13 cards: engine / scheduler / Code Mode / activity view / permissions / sandbox / MCP / Eywa memory / DeepSeek / SDK / three modes / docs & connectors / account) |
 | `src/components/SafetySection.astro` | Security model: approval policies / sandbox backends / runtime presets |
 | `src/components/ResearchSection.astro` | Technical core: paper-driven ledger (7 modules) + cache pipeline (4 steps) + full paper-source list, with arXiv links |
 | `src/components/EcosystemSection.astro` | Developer ecosystem cards (CLI / TS SDK / Python SDK / plugins) |
 | `src/components/FaqSection.astro` | FAQ using native `<details>` disclosure |
 | `src/types/index.ts` | All shared TypeScript types (mirrors desktop `electron/contracts/` semantics) |
-| `src/data/tools-data.json` | Canonical 71-tool dataset (source of truth: desktop `electron/tool-defs.ts`) |
+| `src/data/tools-data.json` | Canonical 75-tool dataset (source of truth: desktop `electron/tool-defs/`, danger flags from `electron/tool-capability.ts`) |
 | `src/data/tools.ts` | Typed accessor over the dataset (ALL_TOOLS / DANGER_TOOLS / SAFE_TOOLS / TOOL_CATEGORIES) |
-| `src/data/releases.json` | v3.4.0 release + download assets (keep in sync with `public/releases.json`) |
+| `src/data/releases.json` | v3.5.0 release + download assets — the site's single source of version (keep in sync with `public/releases.json`) |
+| `scripts/check-versions.mjs` | Version-consistency gate: the two `releases.json` must match, download URLs must carry the current tag, no other version strings may survive in source |
+| `scripts/click-audit.mjs` | End-to-end click audit over `dist/` with real Chrome (theme, language, copy, download buttons, anchors) |
 | `tailwind.config.mjs` | Brand design tokens (brand-black `#111216`, brand-accent light `#5C5A74` / dark `#8C8AA8`, brand-ivory `#F3F3F0`) |
 
 ### Styling conventions
@@ -91,8 +95,8 @@ src/data/releases.json + public/releases.json (v3.4.0) ──▶ SmartDownloader
 
 ## Updating data
 
-- **Tools**: re-extract from the desktop `electron/tool-defs.ts` (71 tools, 15 dangerous) and keep `danger` aligned with `DANGEROUS_TOOLS` in `electron/ipc/tool-handlers.ts`.
-- **Releases**: when the desktop app publishes a new version, update `src/data/releases.json` AND `public/releases.json` together, plus version badges in `Header.astro` / `Footer.astro` and `download_*` translations.
+- **Tools**: re-extract from the desktop `electron/tool-defs/` (75 tools, 42 dangerous) and keep `danger` aligned with `DANGEROUS_TOOLS` in `electron/tool-capability.ts`.
+- **Releases**: when the desktop app publishes a new version, update `src/data/releases.json` AND `public/releases.json` together, plus `download_*` translations and the hero banner text; then run `npm run check:version`, which fails on any surviving old version string. Version badges in `Header.astro` / `Footer.astro` and the meta description read from `releases.json` automatically.
 
 ## Deployment
 

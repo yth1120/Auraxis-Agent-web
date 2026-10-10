@@ -1,5 +1,5 @@
 ---
-import { RefreshCw, Workflow, Braces, ShieldCheck, Lock, Database, Puzzle, Sparkles, Code2, LayoutGrid, FileText, UserCircle } from 'lucide-react';
+import { RefreshCw, Workflow, Braces, ShieldCheck, Lock, Database, Puzzle, Sparkles, Code2, LayoutGrid, FileText, UserCircle, ListTree } from 'lucide-react';
 
 interface Pillar {
   icon: typeof RefreshCw;
@@ -30,6 +30,13 @@ const FEATURES: Pillar[] = [
     descKey: 'feature3_desc',
     title: 'Code Mode',
     desc: 'RunCode 将 TypeScript 程序放入 worker 线程执行，每个 tools.Name() 子调用回穿完整权限管线；并发安全工具最多 8 路重叠、变异工具串行、硬超时可强杀。',
+  },
+  {
+    icon: ListTree,
+    titleKey: 'feature13_title',
+    descKey: 'feature13_desc',
+    title: 'Agent 执行流程视图',
+    desc: '聊天区的执行过程按类型聚合（读取 4 个文件 / 检索 3 次 · 命中 14 处 / 运行命令 3 条），运行中的终端输出实时流式可见，权限审批卡就地决策，长任务只折叠已完成的条目。',
   },
   {
     icon: ShieldCheck,
